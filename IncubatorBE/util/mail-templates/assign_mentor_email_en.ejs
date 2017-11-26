@@ -1,0 +1,5 @@
+<H1>Hello</H1>
+<h2>Hi <%=mentor.firstName%> <%=mentor.surname%>, you are assigned to the following projects</h2>
+<%for(let i = 0; i < projects.length; i++){%>
+  <h3><%=projects[i].startupName%></h3>
+<%}%>
