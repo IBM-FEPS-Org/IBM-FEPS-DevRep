@@ -1,0 +1,91 @@
+<div class="news-events-details-container container" ng-controller="eventsDetailsController" ng-init="init()">
+    <div class="bannerMainContainer">
+        <div class="bannerContainer">
+            <div class="eventBannerBgContainer" style="background-image: url('../../../img/eventDetailsBG.jpg')">
+
+            </div>
+             <div class="mask"></div>
+        </div>
+    
+        <div class="eventNewsDetailsContainer">
+            <h4 class="subTitle newsTitle col-xs-12 col-sm-12 col-md-9 col-lg-9 col-xl-9">
+                {{ currentEvent.topic }}
+            </h4>
+            <div class="eventDetails col-xs-12 col-sm-12 col-md-3 col-lg-3 col-xl-3">
+                <div class="dateInfo pull-left">
+                    <span class="glyphicon glyphicon-calendar pull-right"></span>
+                    <h5 class="eventDate">{{ currentEvent.eventDate | date : "dd/MM/yyyy"  }}</h5>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+    <div class="belowSection">
+        <div class="eventsDetailsContianer">
+            <div class="row">
+                <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-xs-12 pull-right eventImgDiv">
+                    <img ng-src="{{eventImageSource}}" class="newsDetailsImg pull-right" />
+                    <div ng-show="!isEventDatePassed">
+                    	<button ng-show="!loggedIn" class="enroleBtn btn btn-success" ng-click="signUptoEnroll()">{{ 'newsEventsViewEnrollNowBtn' | translate }}</button>
+                    
+                    	<button ng-show="loggedIn && !isEnrolled" class="enroleBtn btn btn-success" ng-click="enroll()">{{ 'newsEventsViewEnrollNowBtn' | translate }}</button>
+                    
+                    	<button ng-show="loggedIn && isEnrolled" class="enroleBtn btn btn-success" ng-click="cancelEnrollment()">{{ 'newsEventsViewCancelEnrollNowBtn' | translate }}</button>
+                	</div>
+                </div>
+                <div class="col-xl-10 col-lg-10 col-md-10 col-sm-12 col-xs-12 pull-right">
+                     <div class="row speakerInfo">
+                         <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-xs-12 pull-right">
+                             <label>{{ 'Speaker' | translate }}:</label>
+                         </div>
+                         <div class="col-xl-10 col-lg-10 col-md-10 col-sm-12 col-xs-12 pull-right">
+                             <img ng-src="{{eventSpeakerPicSource}}" class="pull-right" />
+                             <span class="SpeakerName">{{currentEvent.speakers[0].name}}</span>
+                         </div>
+                     </div>
+                    <div class="row speakerInfo">
+                        <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-xs-12 pull-right">
+                            <label>{{ 'SpeakerBio' | translate }}:</label>
+                        </div>
+                        <div class="col-xl-10 col-lg-10 col-md-10 col-sm-12 col-xs-12 pull-right">
+                            <span class="SpeakerBio">{{currentEvent.speakers[0].bio}}</span>
+                        </div>
+                    </div>
+                    <div class="row speakerInfo">
+                        <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-xs-12 pull-right">
+                            <label>{{ 'eventTime' | translate }}:</label>
+                        </div>
+                        <div class="col-xl-10 col-lg-10 col-md-10 col-sm-12 col-xs-12 pull-right">
+                            <span class="Venue">{{currentEvent.eventDate | date:'yyyy-MM-dd'}}</span>
+                        </div>
+                    </div>
+                    <div class="row speakerInfo">
+                        <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-xs-12 pull-right">
+                            <label>{{ 'eventDateTime' | translate }}:</label>
+                        </div>
+                        <div class="col-xl-10 col-lg-10 col-md-10 col-sm-12 col-xs-12 pull-right">
+                            <span class="Venue">{{currentEvent.eventDate | date:'h:mma'}}</span>
+                        </div>
+                    </div>
+                    <div class="row speakerInfo">
+                        <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-xs-12 pull-right">
+                            <label>{{ 'Venue' | translate }}:</label>
+                        </div>
+                        <div class="col-xl-10 col-lg-10 col-md-10 col-sm-12 col-xs-12 pull-right">
+                            <span class="Venue">{{currentEvent.venue}}</span>
+                        </div>
+                    </div>
+                    <div class="row speakerInfo">
+                        <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-xs-12 pull-right">
+                            <label>{{ 'eventDesc' | translate }}:</label>
+                        </div>
+                        <div class="col-xl-10 col-lg-10 col-md-10 col-sm-12 col-xs-12 pull-right">
+                            <span class="newsContent">{{ currentEvent.details }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

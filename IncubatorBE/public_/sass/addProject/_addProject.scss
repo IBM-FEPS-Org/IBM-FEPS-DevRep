@@ -1,0 +1,186 @@
+/* Add Project page styles */
+
+.sectionTitle{
+    color: #72a63d;
+    padding: 10px;
+    border-bottom:1px $themeColor3 dotted;
+}
+
+#addProject{
+
+    .sectionRow{
+        margin:10px 0;
+        div input {
+            border: 1px $themeColor3 solid;
+            border-radius: 5px;
+            padding: 0 5px;
+            height: 25px;
+            margin: 10px 0;
+
+        }
+        div input[type="text"]{
+            width:150px;
+        }
+        div input[type="file"]{
+            width:250px;
+        }
+        div select{
+            width:150px;
+        }
+        div label{
+
+            color: $themeColor3;
+            font-size:16px
+        }
+        div textarea{
+            margin: 10px 0;
+            border: 1px $themeColor3 solid;
+            border-radius: 5px;
+            padding: 5px;
+            width:100%
+        }
+        h5{
+            font-size: 20px;
+            font-weight: bold;
+
+        }
+        a{
+            color: #5aa700;
+        }
+        .radioText{
+            width:60px;
+            text-align: center;
+            font-size: 16px;
+            line-height: 20px;
+            color: $themeColor3;
+        }
+        .radioDiv input{
+            margin: 0;
+        }
+        p.input-group{
+            input.form-control{
+                width:auto;
+                height: auto;
+                padding: 6px 5px;
+                border-radius: 4px;
+                border-top-right-radius: 0;
+                border-bottom-right-radius: 0;
+                float: left;
+                margin: 0;
+
+            }
+            span.input-group-btn{
+                float: left;
+                button{
+                    border-radius: 4px;
+                    border-top-left-radius: 0;
+                    border-bottom-left-radius: 0;
+                }
+            }
+        }
+        .btn{
+        	&.btn-success{
+        		margin:4px 0 0 20px;
+        	}
+        }
+    }
+
+    .membersGridContainer{
+        width: 50%;
+    }
+    .sectionRow2{
+        margin:10px 0;
+        div input {
+            border: 1px $themeColor3 solid;
+            border-radius: 5px;
+            padding: 0 5px;
+            height: 25px;
+            margin: 10px 0;
+        }
+        div label{
+
+            color: $themeColor3;
+            font-size:16px;
+            width:40%;
+        }
+        div textarea{
+            margin: 10px 0;
+            border: 1px $themeColor3 solid;
+            border-radius: 5px;
+            padding: 5px;
+            width:100%
+        }
+        .alert-danger{
+            margin-top: 10px;
+        }
+        div input[type="url"]{
+            width:250px
+        }
+    }
+
+
+
+
+    .btnsDiv{
+        button{
+            margin: 10px;
+        }
+    }
+}
+
+
+
+
+
+
+/* arabic Styles */
+
+
+.rtl {
+    #addProject {
+        .sectionRow {
+            p.input-group {
+                input.form-control {
+                    width: auto;
+                    height: auto;
+                    padding: 6px 5px;
+                    border-radius: 4px;
+                    border-top-left-radius: 0;
+                    border-bottom-left-radius: 0;
+                    float: right;
+
+                }
+                span.input-group-btn {
+                    float: right;
+                    button {
+                        border-radius: 4px;
+                        border-top-right-radius: 0;
+                        border-bottom-right-radius: 0;
+                    }
+                }
+            }
+            .btn{
+        	&.btn-success{
+        		margin:4px 20px 0 0;
+        	}
+        }
+        }
+    }
+}
+
+
+/*  Responsive Styles */
+
+
+@media (max-width: 992px) {
+    #addProject {
+        .sectionRow2 {
+            div {
+                label {
+                    width: 100%;
+                }
+            }
+
+        }
+    }
+}

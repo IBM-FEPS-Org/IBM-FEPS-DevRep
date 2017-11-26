@@ -1,0 +1,92 @@
+/*mentors List Mfarag En Styles*/
+.mentors-list-container{
+    .rowOfCardsContainer{
+        display: inline-block;
+        width: 100%;
+    }
+    .cardItem{
+        &.mentorCardConatianer{
+            margin: 10px 0;
+            .cardInner{
+            background: $themeColor3;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0px 0px 5px #8e8a8a;
+            color: $bg ;
+            padding: 7px;
+            display: table;
+                .mentorName{
+                    font-size: 20px!important;
+                }
+            .cardCollapsed{
+                &.cardContent {
+                    .well-lg{
+                        padding: 30px;
+                        background: none;
+                        border: none;
+                    
+                    .detailsItem {
+                        margin: 15px 0;
+                        a{
+                            color:  $bg ;
+                            &:hover{
+                                text-decoration: none;
+                            }
+                        }
+                        h4{
+                            margin: 0;
+                            a{
+                                text-decoration: underline;
+                            }
+                        }
+                        }}
+                    }}}}
+}
+.collapsExbandBtn {
+    display: table;
+    float: none;
+    margin: 15px auto;
+    width: auto;
+    text-align: center;
+    &.btn-default{
+        border: none;
+        background: none;
+        color: $themeColor3;
+    }
+    .collapsExpandIcon {
+        display: table-cell;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        vertical-align: middle;
+        background: rgba(255, 255, 255, 0.5);
+        
+        &:hover{
+            cursor:pointer;
+        }
+    }
+    .active{
+        &.glyphicon-chevron-down{
+            &:before{
+            content: "\e113"!important;
+            }}}
+}
+    .imgMask{
+        width: 100%;
+        height: 180px;
+        img.mentorImg {
+            width: 50%;
+            margin: 20px;
+        }
+    }
+
+    } 
+/*mentors List  Mfarag AR Styles*/
+.rtl{
+    .mentors-list-container{
+        
+    } 
+}
+
+
+

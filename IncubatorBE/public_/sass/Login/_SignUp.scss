@@ -1,0 +1,137 @@
+/* SignUp page  styles */
+
+
+.SignUpContainer{
+  
+
+  h2.mainTitle {
+    color: #fff;
+  }
+
+  .closeBtn{
+    width:30px;
+    height:30px;
+    background-image: url('../../img/icon-close.png');
+    background-size: 100%;
+    position: absolute;
+    top:25px;
+    right:25px;
+  }
+  .sectionRow{
+    margin: 20px 50px;
+  }
+
+  div input {
+    border: 1px $themeColor3 solid;
+    border-radius: 5px;
+    padding: 0 5px;
+    height: 25px;
+  }
+  div input[type="text"],div input[type="password"],div input[type="email"],div input[type="date"],div input[type="file"],div select{
+    width: 300px !important;
+    height: 33px;
+  }
+  div textarea{
+    margin: 10px 0;
+    border: 1px $themeColor3 solid;
+    border-radius: 5px;
+    padding: 5px;
+    width:300px;
+  }
+  div label {
+
+    color: $themeColor3;
+    font-size: 16px
+  }
+  .radioText{
+    width:60px;
+    text-align: center;
+    font-size: 16px;
+    line-height: 20px;
+    color: $themeColor3;
+  }
+  .radioDiv input{
+    margin: 0;
+  }
+  .alert{
+    padding: 5px 15px;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  .links{
+    padding: 5px ;
+    span{
+      color: #5aa700;
+      margin: 5px;
+      font-size: 16px;
+    }
+    a{
+      color: #5aa700;
+      margin: 5px;
+      font-size: 16px;
+      text-decoration: underline;
+    }
+
+  }
+  .btnsDiv{
+    button{
+      margin: 10px;
+    }
+  }
+  .profilePic{
+    border-radius: 50%;
+    border: 2px #74739d solid;
+  }
+  .uploader{
+    button{
+      margin: 0 0 0 10px;
+    }
+  }
+
+}
+
+.modal-content{
+  .SignUpContainer{
+    .sectionRow{
+      margin: 20px 0;
+      textarea{
+        margin: 0;
+      }
+    }
+  }
+}
+
+/* arabic style */
+
+.rtl{
+
+  #loginModal{
+
+    .closeBtn{
+      right:auto;
+      left:25px;
+
+    }
+
+  }
+  .SignUpContainer{
+    .uploader{
+      button{
+        margin: 0 10px 0 0;
+      }
+    }
+  }
+
+}
+
+/* responsive styles  */
+@media (max-width: 750px) {
+
+.SignUpContainer{
+    .sectionRow{
+
+      margin: 10px 0;
+    }
+  }
+}

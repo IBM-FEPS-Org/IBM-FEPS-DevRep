@@ -1,0 +1,143 @@
+<div class="manage-news-landing-page-container manage-cycle-container container" ng-controller="manageClinicController" data-ng-init="init()">
+    
+    <h2 class="mainTitle">{{ 'manageIssuessMainTitle' | translate }}</h2>
+   
+    <div class="tabsConatiner col-xs-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 pull-right">
+        <ng-include src="'components/adminSideMenu/adminSideMenu.view.html'" ng-controller="adminSideMenuController"></ng-include>
+    </div>
+    <div ng-show="noIssues" class="contentConatainer col-xs-9 col-sm-9 col-md-9 col-lg-9 col-xl-9 pull-right">
+	    <div ng-if="isAdmin" class="marginTop50 alert alert-danger text-center col-xs-9 col-sm-9 col-md-9 col-lg-9 col-xl-9 pull-right">
+	        {{ 'noIssuesMsg' | translate  }}
+	    </div>
+	    <div ng-if="!isAdmin" class="alert alert-danger SuccessMsgPopup text-center">{{ 'notAuthorized' | translate }} </div>
+    </div>
+   	<div ng-show="!noIssues" class="contentConatainer col-xs-9 col-sm-9 col-md-9 col-lg-9 col-xl-9 pull-right">
+        <uib-tabset active="activeTab" ng-show="isAdmin">
+	    	<uib-tab index="0">
+		    	<uib-tab-heading>
+			             {{ 'openIssues' | translate }}
+		        </uib-tab-heading>
+		        <div ng-show="unresolvedIssuesGridOptions.data.length == 0" class="alert alert-warning col-md-12  text-center">
+            		{{ 'noIssuesMsg' | translate  }}
+           		 </div>
+		        <div grid-data ng-show="unresolvedIssuesGridOptions.data.length > 0" grid-options="unresolvedIssuesGridOptions" grid-actions="gridActions" class="tableContainer">
+                  <table class="">
+                <thead>
+	                <tr class="tableRow MainRow">
+	                    <th class="tableCell sortable" sortable="name">
+	                        <label class="pull-right">{{'issueTitle' | translate}}</label>
+	                    </th>
+	                    <th class="tableCell sortable" sortable="date">
+	                        <label class="pull-right">{{'issueSummary' | translate}}</label>
+	                    </th>
+	                    <th class="tableCell sortable" sortable="email">
+	                        <label class="pull-right">{{'Submitter' | translate}}</label>
+	                    </th>
+	                    <th class="tableCell sortable" sortable="date">
+	                        <label class="pull-right">{{'issueDate' | translate}}</label>
+	                    </th>
+	                </tr>
+                </thead>
+                <tbody>
+                <tr class="tableRow" grid-item ng-class-odd="rowA" ng-class-even="rowB">
+                	<td class="tableCell" >
+	                        <a href="#"ng-bind="item.title" ng-click="openIssueDetails(item._id)"></a>
+	                </td>
+                    <td class="tableCell">{{item.summary}}</td>
+                    <td class="tableCell">
+                            	<a href="/fepsIncubator/viewProfile?username={{item.user.username}}" target="_blank">{{item.user.firstName}} {{item.user.surname}}</a>
+                    </td>
+                    <td class="tableCell">{{item.date | date:'yyyy-MM-dd'}}</td>
+                </tr>
+                </tbody>
+            </table>
+                  <form class="form-inline pull-right margin-bottom-basic">
+                <div class="form-group">
+                    <grid-pagination max-size="5"
+                                     boundary-links="true"
+                                     class="pagination-sm"
+                                     total-items="paginationOptions.totalItems"
+                                     ng-model="paginationOptions.currentPage"
+                                     ng-change="reloadGrid()"
+                                     items-per-page="paginationOptions.itemsPerPage"></grid-pagination>
+                </div>
+                <div class="form-group items-per-page">
+                    <label for="itemsOnPageSelect2">{{ 'manageUsersItemsPerPage' | translate }}</label>
+                    <select id="itemsOnPageSelect2" class="form-control input-sm"
+                            ng-init="paginationOptions.itemsPerPage = '5'" ng-model="paginationOptions.itemsPerPage"
+                            ng-change="reloadGrid()">
+                        <option selected>5</option>
+                        <option>10</option>
+                        <option>20</option>
+                        <option>30</option>
+                    </select>
+                </div>
+            </form>
+            </div>
+		    </uib-tab>
+		    <uib-tab index="1">
+	            <uib-tab-heading>
+	              		{{ 'resolved' | translate }}
+	            </uib-tab-heading>
+	            <div ng-show="resolvedIssuesGridOptions.data.length == 0" class="alert alert-warning col-md-12  text-center">
+            		{{ 'noIssuesMsg' | translate  }}
+           		 </div>
+	            <div grid-data ng-show="resolvedIssuesGridOptions.data.length > 0" grid-options="resolvedIssuesGridOptions" grid-actions="gridActions" class="tableContainer">
+                  <table class="">
+                <thead>
+                <tr class="tableRow MainRow">
+                    <th class="tableCell sortable" sortable="name">
+                        <label class="pull-right">{{'issueTitle' | translate}}</label>
+                    </th>
+                    <th class="tableCell sortable" sortable="date">
+                        <label class="pull-right">{{'issueSummary' | translate}}</label>
+                    </th>
+                    <th class="tableCell sortable" sortable="email">
+                        <label class="pull-right">{{'Submitter' | translate}}</label>
+                    </th>
+                    <th class="tableCell sortable" sortable="date">
+                        <label class="pull-right">{{'issueDate' | translate}}</label>
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr class="tableRow" grid-item ng-class-odd="rowA" ng-class-even="rowB">
+                    <td class="tableCell" >
+	                        <a href="#"ng-bind="item.title" ng-click="openIssueDetails(item._id)"></a>
+	                </td>
+                    <td class="tableCell">{{item.summary}}</td>
+                    <td class="tableCell">
+                            	<a href="/fepsIncubator/viewProfile?username={{item.user.username}}" target="_blank">{{item.user.firstName}} {{item.user.surname}}</a>
+                    </td>
+                    <td class="tableCell">{{item.date | date:'yyyy-MM-dd'}}</td>
+                </tr>
+                </tbody>
+            </table>
+                  <form class="form-inline pull-right margin-bottom-basic">
+                <div class="form-group">
+                    <grid-pagination max-size="5"
+                                     boundary-links="true"
+                                     class="pagination-sm"
+                                     total-items="paginationOptions.totalItems"
+                                     ng-model="paginationOptions.currentPage"
+                                     ng-change="reloadGrid()"
+                                     items-per-page="paginationOptions.itemsPerPage"></grid-pagination>
+                </div>
+                <div class="form-group items-per-page">
+                    <label for="itemsOnPageSelect2">{{ 'manageUsersItemsPerPage' | translate }}</label>
+                    <select id="itemsOnPageSelect2" class="form-control input-sm"
+                            ng-init="paginationOptions.itemsPerPage = '5'" ng-model="paginationOptions.itemsPerPage"
+                            ng-change="reloadGrid()">
+                        <option selected>5</option>
+                        <option>10</option>
+                        <option>20</option>
+                        <option>30</option>
+                    </select>
+                </div>
+            </form>
+            </div>
+	        </uib-tab>
+  		</uib-tabset>
+        <div ng-if="!isAdmin" class="alert alert-danger SuccessMsgPopup text-center">{{ 'notAuthorized' | translate }} </div>
+    </div>
+</div>

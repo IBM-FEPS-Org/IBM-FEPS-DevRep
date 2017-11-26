@@ -1,0 +1,180 @@
+<div class="SignUpContainer" ng-controller="userProfileController" data-ng-init="initView()">
+    <div class="container">
+        <h2 class="mainTitle text-center">{{'viewProfile' | translate}}</h2>
+        <form name="signUp">
+            <div class="row sectionRow">
+                <div class="col-lg-2 col-md-2 col-sm-12 col-sm-12 pull-right">
+                    <label> {{'firstName' | translate}} </label>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12 col-sm-12 pull-right">
+                    <label> {{currentUser.firstName}} </label>
+                </div>
+
+            </div>
+            <div class="row sectionRow">
+                <div class="col-lg-2 col-md-2 col-sm-12 col-sm-12 pull-right">
+                    <label> {{'Sur_Name' | translate}} </label>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12 col-sm-12 pull-right">
+                    <label> {{currentUser.surname}} </label>
+                </div>
+
+            </div>
+            <div class="row sectionRow">
+                <div class="col-lg-2 col-md-2 col-sm-12 col-sm-12 pull-right">
+                    <label> {{'Profile_Picture' | translate}} </label>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12 col-sm-12 pull-right">
+                    <img ng-if="!currentUser.profilePic.id" ng-src="../img/portraitHolder.png" />
+                    <img ng-if="currentUser.profilePic.id" ng-src="/attachements?id={{currentUser.profilePic.id}}&key={{currentUser.profilePic.key}}"/>
+                </div>
+            </div>
+            <div class="row sectionRow">
+                <div class="col-lg-2 col-md-2 col-sm-12 col-sm-12 pull-right">
+                    <label> {{'Email' | translate}} </label>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12 col-sm-12 pull-right">
+                    <label> {{currentUser.email}} </label>
+                </div>
+
+            </div>
+
+            <div class="row sectionRow">
+                <div class="col-lg-2 col-md-2 col-sm-12 col-sm-12 pull-right">
+                    <label> {{'Username' | translate}} </label>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12 col-sm-12 pull-right">
+                    <label> {{currentUser.username}} </label>
+                </div>
+
+            </div>
+            <div class="row sectionRow">
+                <div class="col-lg-2 col-md-2 col-sm-12 col-sm-12 pull-right">
+                    <label> {{'Phone_Number' | translate}} </label>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12 col-sm-12 pull-right">
+                    <label> {{currentUser.phone}} </label>
+                </div>
+
+            </div>
+            <div class="row sectionRow">
+                <div class="col-lg-2 col-md-2 col-sm-12 col-sm-12 pull-right">
+                    <label> {{'Birth_Date' | translate}}</label>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12 col-sm-12 pull-right">
+                    <label> {{currentUser.birthdate | date }}</label>
+                </div>
+
+            </div>
+            <div class="row sectionRow">
+                <div class="col-lg-2 col-md-2 col-sm-12 col-sm-12 pull-right">
+                    <label> {{'Gender' | translate}}</label>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12 col-sm-12 pull-right">
+
+                    <label> {{currentUser.gender | translate}}</label>
+                </div>
+
+            </div>
+            <div class="row sectionRow">
+                <div class="col-lg-2 col-md-2 col-sm-12 col-sm-12 pull-right">
+                    <label> {{'University' | translate}} </label>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12 col-sm-12 pull-right">
+                    <label> {{currentUser.university}} </label>
+                </div>
+
+            </div>
+            <div class="row sectionRow">
+                <div class="col-lg-2 col-md-2 col-sm-12 col-sm-12 pull-right">
+                    <label> {{'Faculty' | translate}} </label>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12 col-sm-12 pull-right">
+                    <label> {{currentUser.faculty}} </label>
+                </div>
+
+            </div>
+            <div class="row sectionRow">
+                <div class="col-lg-2 col-md-2 col-sm-12 col-sm-12 pull-right">
+                    <label> {{'Profession' | translate}}</label>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12 col-sm-12 pull-right">
+                    <label> {{currentUser.profession}}</label>
+                </div>
+
+            </div>
+            <div class="row sectionRow">
+                <div class="col-lg-2 col-md-2 col-sm-12 col-sm-12 pull-right">
+                    <label> {{'Major' | translate}}</label>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12 col-sm-12 pull-right">
+                    <label> {{currentUser.major}}</label>
+                </div>
+
+            </div>
+            <!--<div class="row sectionRow">
+                <div class="col-lg-2 col-md-2 col-sm-12 col-sm-12 pull-right">
+                    <label> {{'Sector' | translate}}</label>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12 col-sm-12 pull-right">
+                    <label> {{userSectorName}}</label>
+                </div>
+
+            </div>-->
+            <div class="row sectionRow">
+                <div class="col-lg-2 col-md-2 col-sm-12 col-sm-12 pull-right">
+                    <label> {{'Graduation_Year' | translate}} </label>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12 col-sm-12 pull-right">
+                    <label> {{currentUser.graduationYear | date }}</label>
+                </div>
+
+            </div>
+            <div class="row sectionRow">
+                <div class="col-lg-2 col-md-2 col-sm-12 col-sm-12 pull-right">
+                    <label> {{'Linked_In' | translate}} </label>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12 col-sm-12 pull-right">
+                    <label> {{currentUser.linkedIn}} </label>
+                </div>
+
+            </div>
+            <div ng-if="currentUser.areaOfExpertises" class="row sectionRow">
+                <div class="col-lg-2 col-md-2 col-sm-12 col-sm-12 pull-right">
+                    <label> {{'AreaOfExpertise' | translate}} </label>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12 col-sm-12 pull-right">
+                    <label> {{currentUser.areaOfExpertises}} </label>
+                </div>
+
+            </div>
+            <div ng-if="currentUser.biography" class="row sectionRow">
+                <div class="col-lg-2 col-md-2 col-sm-12 col-sm-12 pull-right">
+                    <label> {{'shortBio' | translate}} </label>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12 col-sm-12 pull-right">
+                    <label> {{currentUser.biography}} </label>
+                </div>
+
+            </div>
+            <div class="row sectionRow" ng-show="errorMessage == 'systemDown'">
+                <div class="alert alert-danger">
+                    <span>{{'loginFailed_SystemDown' | translate}}</span>
+                </div>
+            </div>
+            <div class="row sectionRow" ng-show="errorMessage == 'user_already_exists'">
+                <div class="alert alert-danger">
+                    <span>{{'user_already_exists' | translate}}</span>
+                </div>
+            </div>
+        </form>
+        <div class="row sectionRow btnsDiv">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <button ng-if="editEnabled" type="button" class="btn btn-success pull-left" ng-click="goToUpdateProfile()">{{'editProfile' |
+                    translate}}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+

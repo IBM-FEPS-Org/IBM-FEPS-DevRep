@@ -1,0 +1,28 @@
+<div class="news-events-container container" ng-controller="NewsEventsListController" ng-init="init()">
+    <h2 class="mainTitle">{{ 'newsListTitle' | translate }}</h2>
+    <div ng-repeat="news in newsList | orderBy: '-storyDate' track by $index">
+        <div class="eventContainer visionContainer col-md-12  col-lg-12  col-xl-12 col-sm-12 col-xs-12" >
+            <img ng-src="{{news.imageSource}}" class="newsPhoto col-xs-3 col-sm-3 col-md-3 col-lg-3 col-xl-3"/>
+            <div class="newsDtails col-xs-9 col-sm-9 col-md-9 col-lg-9 col-xl-9">
+                <span>{{ news.storyDate | date : "dd/MM/yyyy"  }}</span>
+                <h4 class="subTitle newsTitle">{{ news.headline }}</h4>
+                <p class="newsContent">{{news.details | limitTo: 300 }}{{news.details.length > 300 ? '...' : ''}}</p>
+               <span class="seeMoreBtnContainer"><button ng-click="viewNewsDetails(news)" class="moreBtn greenLink">{{ 'newsEventsListnewsdetailsSeeMore' | translate }}</button></span>
+            </div>
+        </div>
+    </div>
+    <div ng-if="isData" class="alert alert-danger SuccessMsgPopup text-center">{{ 'manageNewsNoData' | translate }} </div>
+    <h2 class="mainTitle">{{ 'eventsListTitle' | translate }}</h2>
+    <div ng-repeat="event in eventList | orderBy: '-value.eventDate' track by $index">
+        <div class="eventContainer visionContainer col-md-12  col-lg-12  col-xl-12 col-sm-12 col-xs-12" >
+            <img ng-src="{{event.imageSource}}" class="newsPhoto col-xs-3 col-sm-3 col-md-3 col-lg-3 col-xl-3"/>
+            <div class="newsDtails col-xs-9 col-sm-9 col-md-9 col-lg-9 col-xl-9">
+                <span>{{ event.value.eventDate | date : "dd/MM/yyyy"  }}</span>
+                <h4 class="subTitle newsTitle">{{ event.value.topic }}</h4>
+                <p class="newsContent">{{event.value.details | limitTo: 300 }}{{event.details.value.length > 300 ? '...' : ''}}</p>
+                <span class="seeMoreBtnContainer"><button ng-click="viewEventDetails(event.id)" class="moreBtn greenLink">{{ 'newsEventsListnewsdetailsSeeMore' | translate }}</button></span>
+            </div>
+        </div>
+    </div>
+    <div ng-if="isData2" class="alert alert-danger SuccessMsgPopup text-center">{{ 'manageNewsNoData' | translate }} </div>
+</div>

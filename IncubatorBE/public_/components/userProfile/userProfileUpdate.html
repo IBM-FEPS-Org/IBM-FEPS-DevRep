@@ -1,0 +1,334 @@
+<div class="SignUpContainer" ng-controller="userProfileController" data-ng-init="initUpdate()">
+    <div class="container">
+        <h2 class="mainTitle text-center">{{'updateProfile' | translate}}</h2>
+        <form name="signUp">
+            <div class="row sectionRow">
+                <div class="col-lg-2 col-md-2 col-sm-12 col-sm-12 pull-right">
+                    <label> {{'firstName' | translate}} </label>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12 col-sm-12 pull-right">
+                    <input type="text" name='firstName' ng-model="currentUser.firstName" required ng-trim="false"
+                           ng-pattern="/^[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z]+[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z-\s_\.]{1,50}$/"
+                           >
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-12 col-sm-12 pull-right"
+                     ng-show="signUp.firstName.$dirty && signUp.firstName.$invalid">
+                    <div class="alert alert-danger">
+                        <span ng-show="signUp.firstName.$error.required">{{'Fname_Error_Msg' | translate}}</span>
+                        <span ng-show="signUp.firstName.$error.pattern">{{'Name_Error_Msg' | translate}}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="row sectionRow">
+                <div class="col-lg-2 col-md-2 col-sm-12 col-sm-12 pull-right">
+                    <label> {{'Sur_Name' | translate}} </label>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12 col-sm-12 pull-right">
+                    <input type="text" name='surName' ng-model="currentUser.surname" required ng-trim="false"
+                           ng-pattern="/^[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z]+[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z-\s_\.]{1,50}$/"
+                           >
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-12 col-sm-12 pull-right"
+                     ng-show="signUp.surName.$dirty && signUp.surName.$invalid">
+                    <div class="alert alert-danger">
+                        <span ng-show="signUp.surName.$error.required">{{'Surname_Error_Msg' | translate}}</span>
+                        <span ng-show="signUp.surName.$error.pattern">{{'Name_Error_Msg' | translate}}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="row sectionRow">
+                <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 pull-right">
+                    <label>{{ 'editNewsSelectImg' | translate }}</label>
+                    <div class="clearfix"></div>
+					<span class="smallLabel">( {{ 'imageSizeLabel' | translate }} ) </span>
+                </div>
+                <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12 pull-right">
+                    <div class="uploader pull-right" ng-show="!profileImageUploaded">
+                        <input type="file" class="pull-right" ngf-select="noProfileImageSelected = false" ng-model="profileImageFile" name="profileImageFile" ngf-pattern="image/png,image/jpg,image/jpeg"
+                               accept="image/png,image/jpg,image/jpeg" ngf-max-size="500KB" ngf-min-height="100"
+                               ngf-resize="{width: 200, height: 200}" ng-disabled="viewMode == 3">
+
+                        <button class="btn btn-success" ng-disabled="noProfileImageSelected || signUp.profileImageFile.$invalid" type="button" ng-click="uploadProfileImage()">{{ 'uploadFile' | translate }}</button>
+                        <button class="btn btn-success" ng-show = "profileImageAttachment.id || !profileImageUploaded" type="button" ng-click="cancelEditImage()">{{ 'cancelBtn' | translate }}</button>
+                    </div>
+                    <div ng-show="profileImageUploaded">
+                        <img ng-src="{{imageSource}}">
+                        <button  class="btn btn-success" type="button" ng-click="profileImageUploaded = false" ng-disabled="viewMode == 3" >{{ 'editProfileImage' | translate }}</button>
+                    </div>
+                    <div class="alert alert-danger pull-left" ng-show="signUp.profileImageFile.$dirty && !signUp.profileImageFile.$invalid && !profileImageUploaded">
+                        <span>{{ 'addprojectUploadAttachment' | translate }}</span><br>
+                    </div>
+                    <div class="alert alert-danger pull-left" ng-show="signUp.profileImageFile.$dirty && signUp.profileImageFile.$invalid">
+                        <span ng-show="signUp.profileImageFile.$error.pattern">{{ 'ImageFileValid' | translate }}</span>
+                        <span ng-show="signUp.profileImageFile.$error.maxSize">{{ 'addprojectAttachmentLarge' | translate }}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="row sectionRow">
+                <div class="col-lg-2 col-md-2 col-sm-12 col-sm-12 pull-right">
+                    <label> {{'Email' | translate}} </label>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12 col-sm-12 pull-right">
+                    <input type="email" name='email' ng-model="currentUser.email" required ng-trim="false"
+                           ng-maxlength="50" >
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-12 col-sm-12 pull-right"
+                     ng-show="signUp.email.$dirty && signUp.email.$invalid">
+                    <div class="alert alert-danger">
+                        <span ng-show="signUp.email.$error.required">{{'Email_Error_Msg' | translate}}</span>
+                        <span ng-show="signUp.email.$error.email">{{'Email_Error_Validate_Msg' | translate}}</span>
+                        <span ng-show="signUp.surName.$error.maxlength">{{'Email_Error_Length_Msg' | translate}}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="row sectionRow">
+                <div class="col-lg-2 col-md-2 col-sm-12 col-sm-12 pull-right">
+                    <label> {{'Username' | translate}} </label>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12 col-sm-12 pull-right">
+                    <label> {{currentUser.username}} </label>
+                </div>
+            </div>
+            <div class="row sectionRow">
+                <div class="col-lg-2 col-md-2 col-sm-12 col-sm-12 pull-right">
+                    <label> {{'Password' | translate}} </label>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12 col-sm-12 pull-right">
+                    <button type="button" class="btn btn-success" ng-click="goToChangePassword()" >{{'changePassword' | translate }} </button>
+                </div>
+            </div>
+            <div class="row sectionRow">
+                <div class="col-lg-2 col-md-2 col-sm-12 col-sm-12 pull-right">
+                    <label> {{'Phone_Number' | translate}} </label>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12 col-sm-12 pull-right">
+                    <input type="text" name="phoneNum" ng-model="currentUser.phone"
+                           ng-pattern="/^\+?(?=.*\d)[0-9]{11,16}$/" required
+                           >
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-12 col-sm-12 pull-right"
+                     ng-show="signUp.phoneNum.$dirty && signUp.phoneNum.$invalid">
+                    <div class="alert alert-danger">
+                        <span ng-show="signUp.phoneNum.$error.required">{{'Phone_Error_Msg' | translate}}</span>
+                        <span ng-show="signUp.phoneNum.$error.pattern">{{'Phone_Error_Validate_Msg' | translate}}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="row sectionRow">
+                <div class="col-lg-2 col-md-2 col-sm-12 col-sm-12 pull-right">
+                    <label> {{'Birth_Date' | translate}}</label>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12 col-sm-12 pull-right">
+                    <p class="input-group pull-right width100">
+                        <input type="text" class="form-control" name="birthDate" ng-model="currentUser.birthdate"
+                               ng-required="true" is-open="DatePickerPopup.opened"
+                               datepicker-options="dateOptions" close-text="Close" uib-datepicker-popup="{{format}}"
+                               placeholder="DD-MMMM-YYYY" alt-input-formats="altInputFormats"/>
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="openDatePicker()"><i
+                                    class="glyphicon glyphicon-calendar"></i></button>
+                        </span>
+                    </p>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-12 col-sm-12 pull-right"
+                     ng-show="signUp.birthDate.$dirty && signUp.birthDate.$invalid">
+                    <div class="alert alert-danger">
+                        <span ng-show="signUp.birthDate.$error.required">{{'Birht_Error_Msg' | translate}}</span>
+                        <span ng-show="!signUp.birthDate.$valid">{{'Birth_validate_Msg ' | translate}}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="row sectionRow">
+                <div class="col-lg-2 col-md-2 col-sm-12 col-sm-12 pull-right">
+                    <label> {{'Gender' | translate}}</label>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12 col-sm-12 pull-right">
+
+                    <div class="pull-right radioDiv">
+                        <input type="radio" name="gender" class="pull-right" ng-model="currentUser.gender" value="m"
+                               required ng-checked="currentUser.gender === 'm'">
+                        <div class="radioText pull-right">{{'Male' | translate}}</div>
+                    </div>
+                    <div class="pull-right radioDiv">
+                        <input type="radio" name="gender" class="pull-right" ng-model="currentUser.gender" value="f"
+                               required ng-checked="currentUser.gender === 'f'">
+                        <div class="radioText pull-right">{{'Female' | translate}}</div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-12 col-sm-12 pull-right"
+                     ng-show="signUp.gender.$dirty && signUp.gender.$invalid">
+                    <div class="alert alert-danger">
+                        <span ng-show="signUp.gender.$error.required">{{'Gender_Error_Msg' | translate}}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="row sectionRow">
+                <div class="col-lg-2 col-md-2 col-sm-12 col-sm-12 pull-right">
+                    <label> {{'University' | translate}} </label>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12 col-sm-12 pull-right">
+                    <input type="text" name="university" ng-model="currentUser.university" required
+                           ng-pattern="/^[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z]+[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z-\s_\.]{1,50}$/"/>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-12 col-sm-12 pull-right"
+                     ng-show="signUp.university.$dirty && signUp.university.$invalid">
+                    <div class="alert alert-danger">
+                        <span ng-show="signUp.university.$error.required">{{'University_Error_Msg' | translate}}</span>
+                        <span ng-show="signUp.university.$error.pattern">{{'Name_Error_Msg' | translate}}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="row sectionRow">
+                <div class="col-lg-2 col-md-2 col-sm-12 col-sm-12 pull-right">
+                    <label> {{'Faculty' | translate}} </label>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12 col-sm-12 pull-right">
+                    <input type="text" name="faculty" ng-model="currentUser.faculty"
+                           ng-pattern="/^[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z]+[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z-\s_\.]{1,50}$/"/> 
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-12 col-sm-12 pull-right"
+                     ng-show="signUp.faculty.$dirty && signUp.faculty.$invalid">
+                    <div class="alert alert-danger">
+                        <span ng-show="signUp.faculty.$error.pattern">{{'Name_Error_Msg' | translate}}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="row sectionRow">
+                <div class="col-lg-2 col-md-2 col-sm-12 col-sm-12 pull-right">
+                    <label> {{'Profession' | translate}}</label>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12 col-sm-12 pull-right">
+                    <input type="text" name="profession" ng-model="currentUser.profession" required
+                           ng-pattern="/^[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z]+[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z-\s_\.]{1,50}$/"
+                           />
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-12 col-sm-12 pull-right"
+                     ng-show="signUp.profession.$dirty && signUp.profession.$invalid">
+                    <div class="alert alert-danger">
+                        <span ng-show="signUp.profession.$error.required">{{'Profession_Error_Msg' | translate}}</span>
+                        <span ng-show="signUp.profession.$error.pattern">{{'Name_Error_Msg' | translate}}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="row sectionRow">
+                <div class="col-lg-2 col-md-2 col-sm-12 col-sm-12 pull-right">
+                    <label> {{'Major' | translate}}</label>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12 col-sm-12 pull-right">
+                    <input type="text" name="major" ng-model="currentUser.major" required
+                           ng-pattern="/^[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z]+[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z-\s_\.]{1,50}$/"
+                           />
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-12 col-sm-12 pull-right"
+                     ng-show="signUp.major.$dirty && signUp.major.$invalid">
+                    <div class="alert alert-danger">
+                        <span ng-show="signUp.major.$error.required">{{'Major_Error_Msg' | translate}}</span>
+                        <span ng-show="signUp.major.$error.pattern">{{'Name_Error_Msg' | translate}}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="row sectionRow">
+                <div class="col-lg-2 col-md-2 col-sm-12 col-sm-12 pull-right">
+                    <label> {{'Graduation_Year' | translate}}</label>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12 col-sm-12 pull-right">
+                    <p class="input-group pull-right width100">
+                        <input type="text" class="form-control pull-right" ng-disabled="viewMode == 3"
+                               name="graduationDate" ng-model="currentUser.graduationYear"
+                               ng-required="true" is-open="DatePickerPopup2.opened" datepicker-options="dateOptions2"
+                               close-text="Close" uib-datepicker-popup="{{format}}"
+                               alt-input-formats="altInputFormats"/>
+                        <span class="input-group-btn pull-right">
+                            <button type="button" class="btn btn-default" ng-click="openDatePicker2()"><i
+                                    class="glyphicon glyphicon-calendar"></i></button>
+                        </span>
+                    </p>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-12 col-sm-12 pull-right"
+                     ng-show="signUp.graduationDate.$dirty && signUp.graduationDate.$invalid">
+                    <div class="alert alert-danger">
+                        <span ng-show="signUp.graduationDate.$error.required">{{'Graduation_Error_Msg' | translate}}</span>
+                        <span ng-show="!signUp.graduationDate.$valid">{{'Graduation_validate_Msg' | translate}}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="row sectionRow">
+                <div class="col-lg-2 col-md-2 col-sm-12 col-sm-12 pull-right">
+                    <label> {{'Linked_In' | translate}} </label>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12 col-sm-12 pull-right">
+                    <input type="text" name="linkedIn" ng-model="currentUser.linkedIn"
+                           ng-pattern="/^(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?$/"
+                           ng-required="isMentor"/>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-12 col-sm-12 pull-right"
+                     ng-show="signUp.linkedIn.$dirty && signUp.linkedIn.$invalid">
+                    <div class="alert alert-danger">
+                        <span ng-show="signUp.linkedIn.$error.pattern">{{'LinkedIn_Error_Msg' | translate}}</span>
+                    </div>
+                </div>
+            </div>
+			<div ng-show="showMore">
+            <div class="row sectionRow">
+                <div class="col-lg-2 col-md-2 col-sm-12 col-sm-12 pull-right">
+                    <label> {{'AreaOfExpertise' | translate}}</label>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12 col-sm-12 pull-right">
+                     <textarea name='areaOfExpertises' ng-model="currentUser.areaOfExpertises"
+                     ng-required="isMentor" ng-pattern="/^(?=.*[0-9])*(?=.*[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z]|[0-9]+[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z]+|[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z]+[0-9]+)[0-9\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z!@#$&quot;{}=\-\\//?:;><%*,.\s()'_+^&\[\]]{10,1000}$/">
+
+                    </textarea>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-12 col-sm-12 pull-right"
+                     ng-show="signUp.areaOfExpertises.$dirty && signUp.areaOfExpertises.$invalid">
+                    <div class="alert alert-danger">
+                        <span ng-show="signUp.areaOfExpertises.$error.required">{{'areaOfExp_Error_Msg' | translate}}</span>
+                        <span ng-show="signUp.areaOfExpertises.$error.pattern">{{'areaOfExpInvalid_Error_Msg' | translate}}</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row sectionRow">
+                <div class="col-lg-2 col-md-2 col-sm-12 col-sm-12 pull-right">
+                    <label> {{'shortBio' | translate}}</label>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12 col-sm-12 pull-right">
+                    <textarea name='biography' ng-model="currentUser.biography" 
+                    ng-required="isMentor" ng-pattern="/^(?=.*[0-9])*(?=.*[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z]|[0-9]+[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z]+|[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z]+[0-9]+)[0-9\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z!@#$&quot;{}=\-\\//?:;><%*,.\s()'_+^&\[\]]{10,1000}$/">
+
+                    </textarea>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-12 col-sm-12 pull-right"
+                     ng-show="signUp.biography.$dirty && signUp.biography.$invalid">
+                    <div class="alert alert-danger">
+                        <span ng-show="signUp.biography.$error.required">{{'bio_Error_Msg' | translate}}</span>
+                        <span ng-show="signUp.biography.$error.pattern">{{'bioInvalid_Error_Msg' | translate}}</span>
+                    </div>
+                </div>
+
+            </div>
+            </div>
+            <div class="row sectionRow" ng-show="errorMessage">
+                <div class="alert alert-danger">
+                    <span>{{errorMessage}}</span>
+                </div>
+            </div>
+            <div class="row sectionRow" ng-show="successMessage">
+                <div class="alert alert-success">
+                    <span>{{successCode}}</span>
+                </div>
+            </div>
+        </form>
+        <div class="row sectionRow btnsDiv">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <button type="button" class="btn btn-default pull-left" ng-click="cancelEditProfile()">{{'cancelBtn' |
+                    translate}}
+                </button>
+                <button type="button" class="btn btn-success pull-left" ng-click="updateProfile()">{{'updateButton' |
+                    translate}}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+

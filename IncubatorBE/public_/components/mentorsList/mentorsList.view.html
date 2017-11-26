@@ -1,0 +1,52 @@
+<div class="mentors-list-container container" ng-controller="MentorsListController" ng-init="init()">
+    <h2 class="mainTitle">{{ 'mentorsListMainTitle' | translate }}</h2>
+    <div class="mentorsCardsConatianer oneAtAtime">
+        <div class="rowOfCardsContainer" >
+            <div class="cardItem mentorCardConatianer col-xs-12 col-sm-12 col-md-3 col-lg-3 col-xl-3 pull-right" ng-repeat='mentor in mentorList'  track by $index>
+                <div class="cardInner">
+                     <div class="cardHeader">
+                         <div class="imgMask">
+                             <img class="mentorImg" ng-src='{{mentor.imageSource}}' />
+                         </div>
+                         <h3 class="mentorName">{{mentor.firstName}}</h3>
+                         <h6 class="mentorTitle">{{mentor.title}}</h6>
+                     </div>
+                     <div class="cardCollapsed cardContent "  uib-collapse="!isCollapsed">
+                            <div class="well well-lg">
+                                <div class="detailsItem" ng-hide="isUser">
+                                    <h4 class="detaiLable">{{'Email' | translate}}</h4>
+                                    <a class="detailItem detailLink" href="mailto:{{mentor.email}}?Subject=FEPS:20%" target="_top">{{mentor.email}}</a>
+                                </div>
+                                <div class="detailsItem" ng-hide="isUser">
+                                    <h4 class="detaiLable">{{'Phone_Number' | translate}}</h4>
+                                    <a class="detailItem detailLink" href="tel:{{mentor.phone}}" target="_top">{{mentor.phone}}</a>
+                                </div>
+                                <div class="detailsItem">
+                                    <h4 class="detaiLable">{{ 'Areas_of_expertise' | translate }}</h4>
+                                    <div class="areaOfExperties">
+                                        <span class="area">{{mentor.areaOfExpertises}}</span>
+                                    </div>
+                                </div>
+                                <div class="detailsItem">
+                                    <h4 class="detaiLable">{{ 'Short_Bio' | translate }}</h4>
+                                    <p class="shortBio">
+                                        {{mentor.biography}}
+                                    </p>
+                                    <h4 class="detaiLable">
+                                        <a class="detailItem detailLink" href="{{mentor.linkedIn}}" target="_blank">{{ 'Linkedin' | translate }}</a>
+                                    </h4>
+
+                                </div>
+                            </div>
+                    </div>
+                    <div type="button" class="btn btn-default collapsExbandBtn" ng-click=' selectCard($event); isCollapsed = !isCollapsed'>
+                           <div class="collapsExpandIcon glyphicon glyphicon-chevron-down"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="cardItem mentorCardConatianer col-xs-12 col-sm-6 col-md-4 col-lg-4 col-xl-4" ng-repeat='mentor in mentorList  track by $index'>
+    </div>
+	  <div ng-if="isData" class="alert alert-danger SuccessMsgPopup text-center">{{'noMentors' | translate}} </div>
+</div>
