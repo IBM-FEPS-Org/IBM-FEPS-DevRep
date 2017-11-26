@@ -1,0 +1,48 @@
+<div class="manage-news-landing-page-container manage-cycle-container container" ng-controller="adminPageController">
+    <h2 class="mainTitle">{{adminRole.name}}</h2>
+    <div class="tabsConatiner col-xs-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 pull-right">
+        <ng-include src="'components/adminSideMenu/adminSideMenu.view.html'" ng-controller="adminSideMenuController"></ng-include>
+    </div>
+    <div class="contentConatainer col-xs-9 col-sm-9 col-md-9 col-lg-9 col-xl-9 pull-right">
+        <div class="row">
+            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-xs-3 text-center pull-right ">
+
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-xs-3 text-center pull-right " ng-show="adminRole.id == 4 || adminRole.id == 1">
+                <a href="fepsIncubator/manageCycle">
+                    <img src="../../img/icon-manageCycle.png" alt="manage cycle" />
+                    <h4>{{'adminManageCycle' | translate}}</h4>
+                </a>
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-xs-3 text-center pull-right " ng-show="adminRole.id == 4 || adminRole.id == 7 || adminRole.id == 1">
+                <a href="fepsIncubator/manageProjects">
+                    <img src="../../img/icon-manage-projects.png" alt="manage projects" />
+                    <h4>{{'adminManageProjects' | translate}}</h4>
+                </a>
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-xs-3 text-center pull-right ">
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-xs-3 text-center pull-right">
+
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-xs-3 text-center pull-right" ng-show="adminRole.id == 2 || adminRole.id == 1">
+                <a href="fepsIncubator/manageNews">
+                    <img src="../../img/icon-manage-news.png" alt="manage news" />
+                    <h4>{{'adminManageNews' | translate}}</h4>
+                </a>
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-xs-3 text-center pull-right" ng-show="adminRole.id == 1">
+                <a href="fepsIncubator/manageUsers">
+                    <img src="../../img/icon-manage-users.png" alt="manage users" />
+                    <h4>{{'adminManageUsers' | translate}}</h4>
+                </a>
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-xs-3 text-center pull-right ">
+
+            </div>
+        </div>
+    </div>
+</div>

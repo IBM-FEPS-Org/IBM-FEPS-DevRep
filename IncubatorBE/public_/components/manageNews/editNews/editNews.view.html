@@ -1,0 +1,118 @@
+<div class="edit-news-container manage-cycle-container container" ng-controller="EditNewsController" data-ng-init="init()">
+	<h2 class="mainTitle">{{'newsTitle' | translate}}</h2>
+
+	<!-- Side Nav -->
+	<div class="tabsConatiner col-xs-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 pull-right">
+		<ng-include src="'components/adminSideMenu/adminSideMenu.view.html'" ng-controller="adminSideMenuController"></ng-include>
+	</div>
+	<!-- Content -->
+	<div class="contentConatainer col-xs-9 col-sm-9 col-md-9 col-lg-9 col-xl-9 pull-right">
+		<form name = "addNews">
+		   <div class="editNewsContainer col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 pull-right">
+			   <div class="row sectionRow">
+				   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 pull-right">
+					   <label class="pull-right"> {{'newsActiveInActive' | translate}} </label>
+					   <span class="pull-right">  &nbsp;&nbsp; </span>
+					   <input type="checkbox" class="pull-right" ng-model="news.active">
+				   </div>
+			   </div>
+			   <div class="row sectionRow">
+				   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 pull-right">
+					   <label> {{'newsURL' | translate}} </label>
+				   </div>
+				   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 pull-right">
+						<input type="url" class="editNewsTitle width100" name="eventUrl" placeholder="" value="" ng-model="news.eventURL"/>
+				   </div>
+				   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 pull-right" ng-show="addNews.eventUrl.$dirty && addNews.eventUrl.$invalid">
+						<div class="alert alert-danger">
+							<span ng-show="addNews.eventUrl.$error.url">{{'eventUrl_Error_Msg' | translate}}</span>
+						</div>
+				   </div>
+			   </div>
+			   <div class="row sectionRow">
+				   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 pull-right">
+						<label> {{'editNewsImg' | translate}}* </label>
+				   </div>
+				   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 pull-right">
+					   <div type="file" ngf-before-model-change="hasImage = !hasImage" class="btn btn-success pull-right" ngf-select ng-model="news.image" name="image" ngf-pattern="'image/*'"
+							accept="image/*" ngf-max-size="500KB" ngf-min-height="100"
+							ngf-resize="{width: 200, height: 200}" ng-required='!hasImage'>{{'selectImg' | translate}}</div>
+						<div class="clearfix" ng-show="hasImage" 	></div>
+						<br ng-show="hasImage" />
+						<div class="clearfix" ng-show="hasImage" ></div>
+						<img ng-show="!hasImage" ngf-thumbnail="news.image">
+						<img ng-show="hasImage" alt="" src="/attachements?id={{news.imageFile.id}}&key={{news.imageFile.key}}">
+					   <div class="clearfix"></div>
+				   </div>
+				   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 pull-right">
+					   <div class="alert alert-danger" ng-show="addNews.image.$dirty && addNews.image.$invalid">
+						   <span ng-show="addNews.image.$error.required">{{'editNewsImageRequired' | translate}}</span>
+						   <span ng-show="addNews.image.$error.pattern">{{'editNewsImageAllowed' | translate}}</span>
+						   <span ng-show="addNews.image.$error.maxSize">{{'editNewsimageInvalid' | translate}}</span>
+					   </div>
+				   </div>
+			   </div>
+			   <div class="row sectionRow">
+				   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 pull-right">
+					   <label> {{'editNewsMainTitle' | translate}}* </label>
+				   </div>
+				   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 pull-right">
+					   <input type="text" class="editNewsTitle width100" placeholder="{{ 'editNewseditTitlePlaceHolder' | translate }}"
+						value="{{news.headline}}" ng-model="news.headline" name ='title' required ng-trim="false"
+						ng-pattern="/^(?=.*[0-9])*(?=.*[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z]|[0-9]+[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z]+|[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z]+[0-9]+)[0-9\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z!@#${}=\-\\//?:><%*,.'\s()_+^&\[\]]{5,100}$/">
+				   </div>
+				   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 pull-right">
+						<div class="alert alert-danger" ng-show="addNews.title.$dirty && addNews.title.$invalid">
+							<span ng-show="addNews.title.$error.required">{{'headline_Error_Msg' | translate}}</span>
+							<span ng-show="addNews.title.$error.pattern">{{'headlineInvalid_Error_Msg' | translate}}</span>
+						</div>
+				   </div>
+			   </div>
+			   <div class="row sectionRow">
+				   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 pull-right">
+					   <label> {{'editNewsDate' | translate}}* </label>
+				   </div>
+				   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 pull-right">
+					   <p class="input-group width100">
+						   <input type="text" class="form-control" placeholder="DD-MMMM-YYYY" uib-datepicker-popup="{{format}}" name="date" ng-model="news.storyDate" is-open="DatePickerPopup.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
+						   <span class="input-group-btn">
+								<button type="button" class="btn btn-default" ng-click="openDatePicker()"><i class="glyphicon glyphicon-calendar"></i></button>
+						  </span>
+					   </p>
+				   </div>
+				   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 pull-right" >
+					   <div class="alert alert-danger" ng-show="addNews.date.$dirty && addNews.date.$invalid">
+
+						   <span ng-show="addNews.date.$error.required">{{'dateRequired_Error_Msg' | translate}}</span>
+						   <span ng-show="!addNews.date.$error.required">
+						  	 <span ng-show="addNews.date.$invalid">{{'date_Error_Msg' | translate}}</span>
+						   </span>
+					   </div>
+				   </div>
+			   </div>
+
+			   <div class="row sectionRow">
+				   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 pull-right">
+					   <label> {{'editNewsDetails' | translate}}* </label>
+				   </div>
+				   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 pull-right">
+					   <textarea class="editNewsBody col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12" placeholder="{{ 'editNewseditNewsBodyPlaceHolder' | translate }}"
+							data-gramm="false" ng-model="news.details" name='details' required
+							ng-pattern="/^(?=.*[0-9])*(?=.*[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z]|[0-9]+[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z]+|[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z]+[0-9]+)[0-9\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z!@#${}=\-\\//?:><%*,.\s()_'+^&\[\]]{5,3000}$/">
+							{{news.details}}</textarea>
+				   </div>
+				   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12  pull-right" ng-show="addNews.details.$dirty && addNews.details.$invalid">
+						<div class="alert alert-danger">
+							<span ng-show="addNews.details.$error.required">{{'details_Error_Msg' | translate}}</span>
+							<span ng-show="addNews.details.$error.pattern">{{'newsDetailsInvalid_Error_Msg' | translate}}</span>
+						</div>
+				   </div>
+			   </div>
+		   </div>
+	   </form>
+		<div class="actionBtnsContainer col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 pull-right">
+			<div class="okBtn filledBtn" ng-click="submitNews()">{{ 'editNewsUpdateBtn' | translate }}</div>
+			<div class="cancelBtn outLineBtn" ng-click="doCancel()">{{ 'editNewsCancelBtn' | translate }}</div>
+		</div>
+	</div>
+</div>

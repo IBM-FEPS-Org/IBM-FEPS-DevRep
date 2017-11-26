@@ -1,0 +1,94 @@
+/*advisory-board list Mfarag En Styles*/
+.advisory-board-list-container{
+    text-align: center;
+    font-family: $ff;
+    .adviserBoardMember{
+        min-height: 150px;
+        height: auto;
+        margin-bottom: 50px;
+        img.memberPhoto{
+        max-width: 146px;
+        max-height: 146px;
+        width: 100%;
+        border-radius: 50%;
+        border: 8px solid $themeColor1;
+        }
+    .adviserBoardMemberDtails{
+        text-align:left;
+        color: $gryLightColor;
+        display: flow-root;
+        .memberBio{
+            font-family: $ffLight;
+            display: inline;
+        }
+        .seeMoreBtnContainer{
+            display: inline-block;
+        }
+    }
+        &.ManagerContainer{
+            height: auto;
+            margin-bottom: 50px;
+            .memberName{
+                margin-top: 10px;
+            }
+            .adviserBoardMemberDtails{
+                text-align: center;
+            }
+        }
+    }
+}
+
+/*advisory-board details Mfarag En Styles*/
+.advisory-board-details-container{
+    padding:35px 20px;
+    .memberPhotoContainer{
+        img.memberPhoto{
+            max-width: 146px;
+            max-height: 146px;
+            width:100%;
+            border-radius: 50%;
+            border: 8px solid $themeColor1;
+            }
+    }
+    .adviserBoardMemberDtails{
+        text-align:left;
+        color: $gryLightColor;
+        display: flow-root;
+        .memberBio{
+            font-family: $ffLight;
+            display: block;
+        }
+    }
+}
+
+
+.rtl{
+    /*advisory-board list Mfarag AR Styles*/
+    .advisory-board-list-container{
+        .adviserBoardMember{
+            .memberPhotoContainer{
+                float: right;
+            }
+            .adviserBoardMemberDtails{
+                float: right;
+                text-align: right;
+            }
+            &.ManagerContainer{
+               .adviserBoardMemberDtails{
+                float: none;
+                text-align: center;
+            } 
+            }
+        }
+    }
+    /*advisory-board details Mfarag AR Styles*/
+    .advisory-board-details-container{
+            .memberPhotoContainer{
+                float: right;
+            }
+            .adviserBoardMemberDtails{
+                float: right;
+                text-align: right;
+            }
+        }
+}

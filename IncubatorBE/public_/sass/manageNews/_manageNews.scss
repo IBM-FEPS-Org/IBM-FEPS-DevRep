@@ -1,0 +1,201 @@
+/*manage news landingpage Mfarag En Styles*/
+
+.manage-news-landing-page-container{
+    .tableContainer{
+        .tableRow{
+
+            &.MainRow{
+                .tableCell{
+                    text-align: center;
+                    border: none;
+                    white-space: nowrap;
+                }
+            }
+        }
+        margin: 20px 0;
+    .titleCell{
+        width: calc(16.66666667% - 12px);
+        } 
+        .tableCell{
+            min-height: 55px;
+            display:table-cell;
+            line-height: 35px;
+            .newsImg{
+                width: 40px;
+                height: 40px;
+                border-radius: 5px;
+            }
+            &.priorityCell{
+                cursor: pointer;
+                &:hover{
+                    opacity: 0.5;
+                }
+            }
+            &.actionCell{
+                line-height: 16px;
+                padding-top: 16px;
+            }
+        }
+
+    }
+    .createNewsBtn {
+        margin: 0px 20px 20px 20px;
+        padding: 15px 30px;
+        background: $greenColor;
+        border-radius: 9px;
+        display: block;
+        clear: both;
+        float: right;
+        color: $bg;
+        cursor: pointer;
+        &:hover{
+            opacity: 0.5;
+        }
+    }
+}
+
+
+.inputStyle{
+    margin: 10px 0;
+          border-radius: 15px;
+          color: $gryLightColor;
+            border-color: $themeColor3Dark;
+            transition: color 1S ease;
+            transition: border-color 1S ease;
+            outline: none;
+            &:focus{
+                color: $themeColor3Dark;
+                border-color: $themeColor4;
+            }
+}
+
+/*edit News Mfarag En Styles*/
+.edit-news-container{
+    .uploadImagBtnContainer{
+        
+        .hoverAction{
+              opacity: 0;
+              width: 87%;
+              height: 100%;
+              padding: 0px 15px;
+              background: rgba(150, 32, 100, .60);
+              position: absolute;
+              color: #fff;
+              font-size: 68px;
+              text-align: center;
+            transition:  2S all ease;
+            .glyphicon{    
+                position: absolute;
+                vertical-align: middle;
+                width: auto;
+                top: 30px;
+                left: 31%;
+                z-index: 0;
+            }
+            input[type="file"] {
+                width: 100%;
+                height: 100%;
+                opacity: 0;
+                z-index: 9;
+                position: absolute;
+                cursor: pointer;
+            }
+            }
+        &:hover{
+            .hoverAction{
+                opacity: 1;
+                cursor: pointer;
+            }
+        }
+        .newsPhoto {
+            width: 100%;
+        }
+
+        .uploadImagLable{
+            font-size: 17px;
+            text-align: left;
+        }
+    }
+    .editNewsContainer{
+        margin-bottom: 55px;
+        position: relative;
+        .editNewsTitle{
+            @extend .inputStyle;
+            padding: 5px;
+            height: 35px;
+            border: 1px solid;
+            border-radius: 5px;
+            margin: 10px 0 10px 0;
+        }
+        .jobSearchBtn{
+            margin: 10px;
+        }
+        .editNewsBody{
+            resize: none; 
+            height: 330px;
+            @extend .inputStyle;
+          
+        }
+        .editNewsBodySum{
+            resize: none;
+            height: 100px;
+            @extend .inputStyle;
+        }
+        .sectionRow{
+            position: relative;
+        }
+
+    }
+    .actionBtnsContainer{
+        margin: 10px 0;
+        div{
+            display: inline-block;
+            width: auto;
+            padding: 6px 30px;
+            margin: 10px;
+            border: 1px solid $greenColor;
+            border-radius: 6px;
+            cursor: pointer;
+            &:hover{
+                opacity: 0.5;
+            }
+            &.outLineBtn{
+                color: $greenColor;
+                background: $bg;
+            }
+            &.filledBtn{
+                background: $greenColor;
+                color: $bg;
+            }
+        }
+    }
+}
+
+
+.rtl{
+    
+    /*manage news landingpage Mfarag Ar Styles*/
+    .manage-news-landing-page-container{
+        .createNewsBtn{
+            float: left;
+        }
+    }
+    /*edit News Mfarag En Styles*/
+    .edit-news-container{
+        .uploadImagBtnContainer{
+            float: right;
+        }
+        .editNewsContainer{
+            .editNewsTitle{
+                float: right;
+            }
+        }
+            .actionBtnsContainer{
+            float: left !important;
+                div{
+                    float: left;
+                }
+        }
+    }
+}
+

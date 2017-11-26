@@ -1,0 +1,16 @@
+<div class=" text-center" id="confirmationModal">
+	
+	<p class="text-center " ng-show="confirmMsg=='deleteNews'">{{'manageNewsTableLableActionDeleteMsg' | translate}}</p>
+	<p class="text-center " ng-show="confirmMsg=='signout'">{{'LogoutMessage' | translate}}</p>
+	<p class="text-center " ng-show="confirmMsg=='moveCyclePhase'">{{'MoveCyclePhaseMessage' | translate}}</p>
+	<p class="text-center " ng-show="confirmMsg=='removeProject'">{{'removeProjectSuccessMsg' | translate}}</p>
+	<p class="text-center " ng-show="confirmMsg=='deleteEvent'">{{'deleteEventSuccessMsg' | translate}}</p>
+	<p class="text-center " ng-show="confirmMsg=='deleteIssue'">{{'deleteIssueMsg' | translate}}</p>
+	<p class="text-center " ng-show="confirmMsg=='deleteJobModal'">{{'deleteJobMsg' | translate}}</p>
+	<div class="row sectionRow">
+		<div class="col-lg-12 col-lg-12 col-lg-12 col-lg-12 links">
+			<button type="button" ng-click="yesFn()" class="btn btn-success" >{{ 'yes' | translate }}</button>
+			<button type="button" ng-click="cancel()" class="btn btn-success" >{{ 'no' | translate }}</button>
+		</div>
+	</div>
+</div>

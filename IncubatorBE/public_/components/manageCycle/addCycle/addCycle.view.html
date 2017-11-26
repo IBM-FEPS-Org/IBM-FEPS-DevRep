@@ -1,0 +1,23 @@
+
+      <div class="addCycleContainer" ng-controller="AddCycleController">
+        <h2 class="mainTitle">{{ 'manageCycleMainTitle' | translate }}</h2>
+          <p class="manageCycleData">
+                {{ 'manageCycleAddCycleParagraph' | translate }}
+          </p>
+          <div class="addCycleBtn" ng-click="addCycle = !addCycle">{{ 'manageCycleAddCycleBtn' | translate }}</div>
+          <div class="addCycleContent" ng-show="addCycle">
+            <p class="manageCycleData">
+                {{ 'manageCycleAddCycleContentParagraph' | translate }}
+            </p>
+              <div class="cycleFlowContainer">
+              <div class="cycleFlowinner">
+                  <div class="CycleBtn">{{ 'manageCycleAddCycleStart' | translate }}</div>
+                  <div class="CycleMove">{{ 'manageCycleAddCycleMove' | translate }}</div>
+                  <div class="CycleBtn disabled">{{ 'manageCycleAddCyclePhase1' | translate }}</div>
+                  <div class="CycleMove disabled">{{ 'manageCycleAddCycleMove' | translate }}</div>
+                  <div class="CycleBtn disabled">{{ 'manageCycleAddCyclePhase1' | translate }}</div>
+                  <div class="CycleMove disabled">{{ 'manageCycleAddCycleMove' | translate }}</div>
+              </div>
+            </div>
+          </div>
+        </div>

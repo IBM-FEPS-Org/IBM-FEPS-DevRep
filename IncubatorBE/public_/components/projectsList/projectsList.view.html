@@ -1,0 +1,60 @@
+<div class="container" ng-controller="ProjectsListController" data-ng-init="init()">
+    <h2 class="mainTitle">{{ 'ProjectsListMainTitle' | translate }}</h2>
+    <div ng-show="noAcceptedProjects" class="alert alert-danger text-center">
+        {{ 'noAcceptedProjectsMsg' | translate  }}
+    </div>
+    <div ng-show="!noAcceptedProjects" class="contentConatainer col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 pull-right">
+        
+        <div  grid-data id='test' grid-options="gridOptions" grid-actions="gridActions" class="tableContainer">
+            <table class="">
+                <thead>
+                <tr class="tableRow MainRow">
+                    <th class="tableCell" sortable="username" class="sortable">
+                        {{ 'manageProjectsProjectName' | translate }}
+                    </th>
+                    <th class="tableCell">
+                         {{ 'manageProjectsProjectMentor' | translate }}
+                    </th>
+                    <th class="tableCell">
+                         {{ 'founderName' | translate }}
+                    </th>
+                    
+                </tr>
+                </thead>
+                <tbody>
+                <!--<tr class="tableRow" grid-item ng-class-odd="rowA" ng-class-even="rowB" ng-repeat="item in filtered | startFrom:(paginationOptions.currentPage-1)*paginationOptions.itemsPerPage | limitTo:paginationOptions.itemsPerPage track by $index">-->
+                <tr class="tableRow" grid-item ng-class-odd="rowA" ng-class-even="rowB">
+                   
+                    <td class="tableCell" ng-bind="item.startupName"></td>
+                    <td class="tableCell" ng-bind="item.mentors[0].username"></td>
+                    <td class="tableCell" >{{item.members[0].firstName}} {{" "}} {{item.members[0].secondName}} {{" "}} {{item.members[0].surName}}</td>
+                </tr>
+                </tbody>
+            </table>
+            <form class="form-inline pull-right margin-bottom-basic paginationContainer">
+                <div class="form-group pull-right">
+                    <grid-pagination max-size="5"
+                                     boundary-links="true"
+                                     class="pagination-sm "
+                                     total-items="paginationOptions.totalItems"
+                                     ng-model="paginationOptions.currentPage"
+                                     ng-change="reloadGrid()"
+                                     items-per-page="paginationOptions.itemsPerPage"></grid-pagination>
+                </div>
+                <div class="form-group items-per-page pull-left">
+                    <label for="itemsOnPageSelect2">{{ 'itemsPerPage' | translate }}</label>
+                    <select id="itemsOnPageSelect2" class="form-control input-sm"
+                            ng-init="paginationOptions.itemsPerPage = '5'" ng-model="paginationOptions.itemsPerPage"
+                            ng-change="reloadGrid()">
+                        <option selected>5</option>
+                        <option>10</option>
+                        <option>20</option>
+                        <option>30</option>
+                    </select>
+                </div>
+            </form>
+        </div>
+       
+    </div>
+    <div class="clearfix"></div>
+</div>

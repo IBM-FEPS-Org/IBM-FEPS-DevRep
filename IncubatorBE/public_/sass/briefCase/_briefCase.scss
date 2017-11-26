@@ -1,0 +1,342 @@
+
+/*brief case events page Mfarag En Styles*/
+.event-detailsFrom-briefCase-container{
+    color: $gryLightColor;
+        img{
+            top:42px;
+        }
+    .eventSpeakerContainer{
+        display: inline-block;
+        min-height: 150px;
+        height: auto;
+        width: 100%;
+        margin: 15px 0px;
+        .speakerDtails{
+            .speakerTitle{
+                padding-top:0;
+                padding-bottom: 5px;
+                margin: 0;                
+            }
+        }
+         .speakerBio{
+               font-family: $ffLight;
+           }
+    }  
+    
+   .eventContainer {
+        @extend .eventSpeakerContainer;
+       .eventDetailsContainer {
+            padding: 0;
+           div{
+               padding: 0;
+           }
+           .eventDataLabel{
+                font-size: 17px;
+                color: #4c4c4c;
+           }
+        }
+       .newsDtails{
+           
+           .eventDetailedInfo{
+               padding: 0;
+               font-family: $ffLight;
+           }
+       }
+    }
+   .backtoBriefCase{
+    text-align: right;
+    margin: 10px 0;
+    padding: 0px 30px;
+    height: auto;
+    display: inline-block;
+    color: $greenColor;
+    cursor: pointer;
+        }  
+}
+.floatRight{
+   float: right;
+
+}
+/*brief case events page Mfarag Ar Styles*/
+.rtl{
+    .event-detailsFrom-briefCase-container{
+        img{
+            @extend .floatRight;
+        }
+        .eventContainer{
+            .newsDtails{
+               @extend .floatRight;
+            }
+        }
+        .speakerDtails{
+            @extend .floatRight;
+        }
+        .eventDetailsContainer{
+                @extend .floatRight;
+            span{
+                @extend .floatRight;
+                direction: rtl;
+            }
+        }
+        .backtoBriefCase{
+            text-align: left;
+            @extend .floatRight;
+        }
+    }
+}
+.removeDefaultBtnOptions{
+    background: transparent;
+    border: none;
+    box-shadow: none;
+}
+/*collapse container styles En mFarag*/
+.collapseItem {
+    
+    .collapsExbandBtn{
+        color: $themeColor3Dark;
+        @extend .removeDefaultBtnOptions;
+        &:active{
+            @extend .removeDefaultBtnOptions;
+        }
+        &:visited{
+            @extend .removeDefaultBtnOptions;
+        }
+        &:focus{
+            @extend .removeDefaultBtnOptions;
+        }
+        &:hover{
+            @extend .removeDefaultBtnOptions;
+        }
+        h3{
+            pointer-events: none;
+            display: inline-block;
+            margin: 0;
+            line-height: 42px;
+        }
+        .collapsExpandIcon {
+          pointer-events: none;
+          padding: 10px;
+          border-radius: 50%;
+          border: solid 4px;
+          font-size: 1em;
+          margin-left: 10px;
+            &:before{
+                content: "\e080";
+            }
+        }
+        }
+        &.active{
+            .collapsExpandIcon {
+                 &:before{
+                     content: "\e114"!important;
+                    }
+            }
+        }
+    .collapseBody{
+        &.projectSummary{
+            position: relative;
+        }
+        .well{
+            background: transparent;
+            border: none;
+            padding: 0 5px;
+            width: 75%;
+            margin: 0  0 0 75px;
+            @extend .removeDefaultBtnOptions;
+            .collapseContentHeader {
+                display: inline-block;
+                height: auto;
+                width: 100%;
+                font-size: 14px;
+                .projectTitle{
+                    display: inline-block;
+                    //margin: 0;
+                    padding: 0;
+                    color: $greenColor;
+                    font-size: 19px;
+                    line-height: 42px;
+                    margin: 0 10px;
+                }
+                .projectCtrlsIcons{
+                    font-size: 18px;
+                    margin: 4px 0;
+                    .statusIcon{
+                        padding: 7px;
+                        border: 5px solid $themeColor5;
+                        border-radius: 50%;
+                        cursor: pointer;
+                    }
+                }
+            }
+            .projectStatusLabel {
+                color: $themeColor3Light;
+                padding: 10px 0;
+                margin: 5px 0;
+            }
+            .projectStatus {
+                padding: 10px 20px;
+                background: $lightGry;
+                color: $themeColor3Light;
+                border-radius: 5px;
+                border: 1px solid $themeColor3Light;
+                margin: 5px 0;
+                height: 40px;
+            }
+            .projectStatusContainer {
+                display: inline-block;
+                margin: 10px 0;
+                width: 100%;
+                height: auto;
+            }
+            .projectSummary{
+                display: block;
+                clear: both;
+                color: $gryLightColor;
+                font-family: $ffLight;
+            }
+        }
+    }}
+
+.floatRightClass{
+    float: right;
+}
+    /*table styles general*/
+    .tableContainer {
+                padding: 18px;
+                background: $tableBGColor;
+                display: inline-block;
+                width: 100%;
+                border-radius: 10px;
+                table{
+                  width:100%
+                }
+                .tableRow{
+                    &.MainRow{
+                        background:  $tableMainRowBGColor;
+                        font-size: 16px;
+                        margin: 0;
+                        .tableCell{
+
+
+                            color: $bg;
+
+                          font-size: 12px;
+                            &.sortable{
+                                 background: url('../../img/icon-sorting-arrows.png') no-repeat center right;
+                                 background-size: 15px;
+                            }
+                            &.statusCell{
+                                color: $bg;
+                                text-align: start;
+
+                            }
+                            &.actionCell{
+                                color: $bg;
+                                text-align: end;
+                            }
+                        }
+                    }
+                    &.rowA{
+                      background:$tableRowABGColor;   
+                    }
+                    &.rowB{
+                      background:$tableRowBBGColor;   
+                    }
+                    margin-top: 8px;
+                    border-radius: 25px;
+                    .tableCell{
+                            border-left: 1px solid #fff;
+                            border-right: 1px solid #fff;
+                            margin: 0 1px;
+                            padding: 8px 10px;
+                            min-height: 35px;
+                            text-align: center;
+                            color: $themeColor3Dark;
+                            max-width: 200px;
+                            @extend .wrapword;
+                        &.statusCell{
+                            width: calc(50% - 9px);
+                            color: $greenColor;
+                            text-align: start;
+                        } 
+                        &.withOneBorderEnd {
+                                border-right: none;
+                            }
+                        &.withOneBorderStart {
+                                border-left: none;
+                            }
+                        &.actionCell{
+                           
+
+                        }
+                      .actionBtn{
+                        margin: 0 4px;
+                      }
+                    }
+                }
+                &.withTwoCells{
+                    .tableRow{
+                        .tableCell{
+                             text-align: start;
+                            &.statusCell{
+                               
+                                width:calc(58.33333333% - 4px);
+                            }
+                        }
+                    }
+                }
+            }
+    /*collapse container styles Ar  mFarag*/
+    .rtl{
+        .collapseItem {
+            .collapsExbandBtn{
+                .collapsExpandIcon {
+                    margin-left: 0px;
+                    margin-right: 10px;
+                    &:before{
+                        content: "\e079";
+                    }
+                }
+            }
+            .collapseContentHeader{
+                .projectTitle {
+                        @extend .floatRightClass;
+                }
+            }
+            .projectStatusContainer{
+                .projectStatus{
+                     @extend .floatRightClass;
+                }
+                .projectStatusLabel{
+                     @extend .floatRightClass;
+                }
+            }
+            .well{
+              margin: 0 75px 0 0;
+            }
+
+        }
+
+        /*table arabic styles*/
+
+
+        .tableContainer{
+            .tableRow {
+                .tableCell{
+                    font-size: 12px;
+                    &.sortable{
+                        background: url('../../img/icon-sorting-arrows.png') no-repeat center left;
+                        background-size: 15px;
+                    }
+                    &.withOneBorderEnd {
+                         border-left: none;
+                         border-right: 1px solid $bg;
+                    }
+                    &.withOneBorderStart {
+                         border-right: none;
+                         border-left: 1px solid $bg;
+                    }
+                }
+            }
+        }
+    }

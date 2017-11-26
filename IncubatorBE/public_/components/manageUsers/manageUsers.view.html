@@ -1,0 +1,132 @@
+<div class="manage-news-landing-page-container manage-cycle-container container" ng-controller="ManageUsersController"
+     data-ng-init="init()">
+
+    <h2 class="mainTitle">{{ 'manageUsersMainTitle' | translate }}</h2>
+    <!-- Side Nav -->
+    <div class="tabsConatiner col-xs-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 pull-right">
+        <ng-include src="'components/adminSideMenu/adminSideMenu.view.html'"
+                    ng-controller="adminSideMenuController"></ng-include>
+    </div>
+    <!-- Content -->
+    <div class="contentConatainer col-xs-9 col-sm-9 col-md-9 col-lg-9 col-xl-9 pull-right">
+
+        <div ng-if="isAdmin" grid-data id='test' grid-options="gridOptions" grid-actions="gridActions" class="tableContainer">
+            <table class="">
+                <thead>
+                <tr class="tableRow">
+                    <td>
+                        <label class="pull-right">{{ 'manageUsersSearchBy' | translate }}</label>
+                    </td>
+                    <td>
+                        <select ng-init="selectedSearch = searchList[0].id"
+                                ng-options="searchType.id as searchType.name for searchType in searchList"
+                                ng-model="selectedSearch" ng-change="updateSearchBy(selectedSearch)"></select>
+                    </td>
+                    <td colspan="2">
+                        <input ng-show="selectedSearch ==2" type="text" class="form-control order-search-box"
+                               placeholder="{{ 'manageUsersSearch' | translate }}"
+                               ng-change="gridActions.filter()"
+                               ng-model="firstName"
+                               id = "firstName"
+                               filter-by="firstName"
+                               filter-type="text">
+                        <input ng-show="selectedSearch ==3" type="text" class="form-control order-search-box"
+                               placeholder="{{ 'manageUsersSearch' | translate }}"
+                               ng-change="gridActions.filter()"
+                               ng-model="surname"
+                               filter-by="surname"
+                               filter-type="text">
+                        <input ng-show="selectedSearch ==4" type="text" class="form-control order-search-box"
+                               placeholder="{{ 'manageUsersSearch' | translate }}"
+                               ng-change="gridActions.filter()"
+                               ng-model="username"
+                               filter-by="username"
+                               filter-type="text">
+                        <input ng-show="selectedSearch ==5" type="text" class="form-control order-search-box"
+                               placeholder="{{ 'manageUsersSearch' | translate }}"
+                               ng-change="gridActions.filter()"
+                               ng-model="email"
+                               filter-by="email"
+                               filter-type="text">
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <span> &nbsp;&nbsp;&nbsp;&nbsp;  </span>
+                    </td>
+                    <td colspan="2">
+                        <span> &nbsp;&nbsp;&nbsp;&nbsp;  </span>
+                    </td>
+                </tr>
+                <tr class="tableRow MainRow">
+                    <!--<th sortable="_id" class="sortable">
+                        ID #
+                    </th>-->
+                    <th class="tableCell sortable" sortable="firstName">
+                        <label class="pull-right">{{ 'First_Name' | translate }}</label>
+                    </th>
+                    <th class="tableCell sortable" sortable="surname">
+                        <label class="pull-right">{{ 'Last_name' | translate }}</label>
+                    </th>
+                    <th class="tableCell sortable" sortable="username">
+                        <label class="pull-right">{{ 'manageUsersUsername' | translate }}</label>
+                    </th>
+                    <th class="tableCell sortable" sortable='email'>
+                        {{ 'manageUsersEmail' | translate }}
+                    </th>
+                    <th class="tableCell sortable" sortable='groups[0].name'>
+                        {{ 'manageUsersRole' | translate }}
+                    </th>
+                    <!--<th class="tableCell">
+                        {{ 'manageUsersActive' | translate }}
+                    </th>-->
+                </tr>
+                </thead>
+                <tbody>
+                <tr class="tableRow" grid-item ng-class-odd="rowA" ng-class-even="rowB">
+                    <!--<td ng-bind="item._id"></td>-->
+                    <td class="tableCell" >
+                        <a href="#"ng-bind="item.firstName" ng-click="openProfile(item)"></a>
+                    </td>
+                    <td class="tableCell" >
+                        <a href="#" ng-bind="item.surname" ng-click="openProfile(item)"></a>
+                    </td>
+                    <td class="tableCell" >
+                        <a href="#" ng-bind="item.username" ng-click="openProfile(item)"></a>
+                    </td>
+                    <td class="tableCell" ng-bind="item.email"></td>
+                    <td class="tableCell" >
+                        <a href="#" ng-bind="item.groups[0].name | checkRole" ng-click="openAssignRole(item)"></a>
+                    </td>
+                    <!--<td class="tableCell" >
+                        <span class="actionBtn btn" ng-click="activeInactiveUser(item)"> {{ item.active==true? "Active" : "InActive" }}</span>
+                    </td>-->
+                </tr>
+                </tbody>
+            </table>
+            <form class="form-inline pull-right margin-bottom-basic">
+                <div class="form-group">
+                    <grid-pagination max-size="5"
+                                     boundary-links="true"
+                                     class="pagination-sm"
+                                     total-items="paginationOptions.totalItems"
+                                     ng-model="paginationOptions.currentPage"
+                                     ng-change="reloadGrid()"
+                                     items-per-page="paginationOptions.itemsPerPage"></grid-pagination>
+                </div>
+                <div class="form-group items-per-page">
+                    <label for="itemsOnPageSelect2">{{ 'manageUsersItemsPerPage' | translate }}</label>
+                    <select id="itemsOnPageSelect2" class="form-control input-sm"
+                            ng-init="paginationOptions.itemsPerPage = '5'" ng-model="paginationOptions.itemsPerPage"
+                            ng-change="reloadGrid()">
+                        <option selected>5</option>
+                        <option>10</option>
+                        <option>20</option>
+                        <option>30</option>
+                    </select>
+                </div>
+            </form>
+        </div>
+        <div ng-if="!isAdmin" class="alert alert-danger SuccessMsgPopup text-center">{{ 'notAuthorized' | translate }} </div>
+    </div>
+</div>

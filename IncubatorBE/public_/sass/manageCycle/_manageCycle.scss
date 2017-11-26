@@ -1,0 +1,180 @@
+/*manage cycle Mfarag En Styles*/
+
+.manage-cycle-container{
+    //padding: 0;
+    .tabsConatiner {
+        //background: #bab9c7;
+        padding-top: 30px;
+        .collapseItem {
+            padding: 0;
+            .collapsExpandIcon{
+                margin: 10px 0px;
+                cursor: pointer;
+                border: none;
+                padding: 0;
+                display: inline-block;
+                &:before{
+                    content: "\e250";
+                    color: $themeColor1;
+                }
+
+            }
+            .active{
+                .collapsExpandIcon{
+                    &:before{
+                        content: "\e252" !important;
+                    }
+                }
+            }
+
+            .collapsHeaderTitle{
+                display: inline;
+                font-size: 19px;
+                &.active{
+                    a{
+                        color: #972064!important;
+                    }
+
+                }
+            }
+            .collapseBody{
+                .well{
+                    height: auto;
+                    display: inline-block;
+                    margin-bottom: 15px;
+                .subTitle{
+                    margin-top:0;
+                    font-size: 16px;
+                    color: $themeColor3;
+                    padding: 0 25px;
+                    cursor: pointer;
+                    &.active{
+                        color: $themeColor1;
+                    }
+                }
+                }
+            }
+        }
+    }
+    .contentConatainer{
+        padding: 50px 20px;
+        .manageCycleData{
+            font-family: $ffLight;
+            color: $gryLightColor;
+        }
+        .addCycleBtn {
+            margin: auto;
+            padding: 10px 25px;
+            width: auto;
+            background: $themeColor3;
+            display: table;
+            border-radius: 6px;
+            color: $bg;
+            cursor: pointer;
+            &:hover{
+                opacity: 0.8;
+            }
+        }
+         .addCycleContent{
+            margin: 20px 0px;
+        .cycleFlowContainer{
+            display: table;
+            border-spacing: 25px 10px;
+              text-align: center;
+              margin: auto;
+            .cycleFlowinner{
+                display: inline-block;
+                div{
+                    display: inline-block;
+                    vertical-align: middle;
+
+                    text-align: center;
+                    color: $bg;
+                    &.CycleBtn{
+                        border-radius: 50%;
+                        background: $themeColor1;
+                        width: 80px;
+                        height: 80px;
+                        line-height: 80px;
+                    }
+                    &.CycleMove{
+                          background-image: url(/img/CycleArrowEn.png);
+                          background-size: 80%;
+                          background-position: center center;
+                          background-repeat: no-repeat;
+                          color: #000;
+                          width: 50px;
+                          height: 80px;
+                          line-height: 50px;
+                          color: #83be41;
+                        &.disabled{
+                            color: #6e6a6a;
+                            background-image: url(/img/CycleArrowEnDis.png);
+                            background-size: 80%;
+                            background-position: center center;
+                            background-repeat: no-repeat;
+                        }
+                    }
+                    &:hover{
+                        cursor: pointer;
+                        opacity: 0.8;
+                    }
+                    &.disabled{
+                        opacity: 0.5;
+                        cursor: not-allowed;
+                    }
+                }
+            }
+            .cycleFlowinnerSecondLevel {
+                div {
+                    display: inline-block;
+                    vertical-align: middle;
+                    text-align: center;
+                    width: 80px;
+                    height: 50px;
+                    line-height: 50px;
+                    color: #0f0f0f;
+                    &.div50{
+                        width: 50px;
+                    }
+                }
+
+            }
+        }
+
+    }}
+    
+}
+/*manage cycle Mfarag Ar Styles*/
+.rtl{
+    .manage-cycle-container{
+        .tabsConatiner {
+            .collapseItem {
+                .collapsExbandBtn{
+                    }
+                .collapsExpandIcon{
+                    &:before{
+                        content: "\e251";
+                    }}
+            }}
+            .addCycleContent{
+            .cycleFlowContainer{
+                .cycleFlowinner{
+                    div{
+                        &.CycleMove{
+                             background-image: url(/img/CycleArrow.png);
+                            &.disabled{
+                                background-image: url(/img/CycleArrowDis.png);
+                            }
+
+                        }
+
+                    }
+                }
+            }
+
+        }
+    }
+}
+
+

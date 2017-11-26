@@ -1,0 +1,127 @@
+<div id="addIssue" ng-controller="addIssueController" data-ng-init="init()">
+	<div class="addProjectContainer container">
+        <h2 class="mainTitle text-center">{{ 'IssueHeader' | translate }}</h2>
+        <form name="addIssueForm">
+            <section>
+               <div class="row sectionRow">
+	                <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 pull-right">
+	                    <label>{{ 'submitterName' | translate }}</label>
+	                </div>
+	                <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 pull-right">
+	                    {{issue.user.firstName}} {{" "}} {{issue.user.surName}}
+	                </div>
+            	</div>
+            	
+            	<div class="row sectionRow">
+	                <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 pull-right">
+	                    <label>{{ 'issueDate' | translate }}</label>
+	                </div>
+	                <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 pull-right">
+	                    {{issue.date | date:'yyyy-MM-dd'}}
+	                </div>
+            	</div>
+            	
+            	<div class="row sectionRow">
+	                <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 pull-right">
+	                    <label>{{ 'issueStatus' | translate }}</label>
+	                </div>
+	                <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 pull-right">
+	                    {{issue.status}}
+	                </div>
+            	</div>
+            	
+            	<div class="row sectionRow">
+                    <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 pull-right">
+                        <label>{{ 'issueTitle' | translate }}*</label>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-9 col-xs-9 pull-right">
+                        <input type="text" class="editNewsTitle width100"
+							   ng-disabled="viewMode == 3" value="{{issue.title}}" ng-model="issue.title" name ='title' required ng-trim="false"
+							   ng-pattern="/^(?=.*[0-9])*(?=.*[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z]|[0-9]+[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z]+|[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z]+[0-9]+)[0-9\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z!@#$&quot;{}=\-\\//?:;><%*,.\s()'_+^&\[\]]{5,100}$/">
+                        <div class="alert alert-danger pull-left" ng-show="addIssueForm.title.$dirty && addIssueForm.title.$invalid">
+                            <span ng-show="addIssueForm.title.$error.required">{{ 'addIssueTitleRequired' | translate }}</span>
+                            <span ng-show="addIssueForm.title.$error.pattern">{{'issueTitleInvalid_Error_Msg' | translate}}</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row sectionRow">
+					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 pull-right">
+						<label> {{'issueSummary' | translate}}* </label>
+					</div>
+					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 pull-right">
+					   <textarea class="editNewsBody col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12"
+								 ng-disabled="viewMode == 3" data-gramm="false" ng-model="issue.summary" name='summary' required
+								 ng-pattern="/^(?=.*[0-9])*(?=.*[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z]|[0-9]+[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z]+|[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z]+[0-9]+)[0-9\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z!@#$&quot;{}=\-\\//?:;><%*,.\s()_'+^&\[\]]{5,300}$/">
+							{{issue.summary}}</textarea>
+					</div>
+					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12  pull-right" ng-show="addIssueForm.summary.$dirty && addIssueForm.summary.$invalid">
+						<div class="alert alert-danger">
+							<span ng-show="addIssueForm.summary.$error.required">{{'addIssueSummaryRequired' | translate}}</span>
+							<span ng-show="addIssueForm.summary.$error.pattern">{{'issueSummaryInvalid_Error_Msg' | translate}}</span>
+						</div>
+					</div>
+				</div>
+				
+				
+				<div class="row sectionRow">
+					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 pull-right">
+						<label> {{'issueDescription' | translate}}* </label>
+					</div>
+					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 pull-right">
+					   <textarea class="editNewsBody col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12"
+								 ng-disabled="viewMode == 3" data-gramm="false" ng-model="issue.description" name='description' required
+								 ng-pattern="/^(?=.*[0-9])*(?=.*[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z]|[0-9]+[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z]+|[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z]+[0-9]+)[0-9\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z!@#$&quot;{}=\-\\//?:;><%*,.\s()_'+^&\[\]]{5,3000}$/">
+							{{issue.description}}</textarea>
+					</div>
+					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12  pull-right" ng-show="addIssueForm.description.$dirty && addIssueForm.description.$invalid">
+						<div class="alert alert-danger">
+							<span ng-show="addIssueForm.description.$error.required">{{'addIssueDescriptionRequired' | translate}}</span>
+							<span ng-show="addIssueForm.description.$error.pattern">{{'issueDescriptionInvalid_Error_Msg' | translate}}</span>
+						</div>
+					</div>
+				</div>
+            	
+			</section>
+            <br />
+            <section ng-show="showResponse">
+                <h4 class="sectionTitle">
+                   {{ 'issue_response' | translate }}
+                </h4>
+                <div class="row sectionRow">
+                    <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 pull-right">
+                        <label>{{ 'issueResponse' | translate }}*</label>
+                    </div>
+                    <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 pull-right">
+                        <textarea rows="4" cols="50" name="response" ng-disabled="!editResponse"  ng-model="issue.response" ng-required="editResponse" ng-trim="false">
+                        </textarea>
+                    </div>
+                     <div class="col-lg-4 col-md-4 col-sm-4 col-sm-4 pull-left">
+		                <div class="alert alert-danger" ng-show="addIssueForm.response.$dirty && addIssueForm.response.$invalid">
+		                    <span ng-show="addIssueForm.response.$error.required">{{ 'addIssueResponseRequired ' | translate }}</span>
+		                </div>
+	            	</div>
+
+                </div>
+            </section>
+            <div class="row btnsDiv" ng-show="viewMode == 1">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <button type="button" class="btn btn-default pull-left" ng-click="cancelsaveIssue()"> {{'cancelBtn' | translate }} </button>
+                    <button type="button" class="btn btn-success pull-left" ng-click="saveIssue()"> {{'submitBtn' | translate }} </button>
+                </div>
+            </div>
+            <div class="row btnsDiv" ng-show="viewMode == 2">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <button type="button" class="btn btn-default pull-left" ng-click="cancelsaveIssue()"> {{'cancelBtn' | translate }} </button>
+                    <button type="button" class="btn btn-success pull-left" ng-click="saveIssue()"> {{'edit' | translate }}</button>
+                </div>
+            </div>
+            <div class="row btnsDiv" ng-show="editResponse">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <button type="button" class="btn btn-default pull-left" ng-click="cancelsaveIssue()"> {{'cancelBtn' | translate }} </button>
+                    <button type="button" class="btn btn-success pull-left" ng-click="saveIssue()"> {{'resolveIssue' | translate }} </button>
+                </div>
+            </div>
+        </form>
+   </div>
+</div>
