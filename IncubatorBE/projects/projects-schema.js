@@ -1,4 +1,7 @@
 module.exports = {
+		"SubmissionDate" : {
+            notEmpty: true
+        },
         "feedback" : {
             optional: true,
             isLength: {

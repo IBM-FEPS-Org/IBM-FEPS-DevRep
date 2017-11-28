@@ -37,7 +37,7 @@ fepsApp.controller('signupController', function ($scope, $rootScope, $location, 
             //add uploaded file object
             if ($scope.profileImageAttachment.id)
                 $scope.newUser.profilePic = $scope.profileImageAttachment;
-
+            		$scope.newUser.joinDate = new Date(moment());
             loginService.signUp($scope.newUser)
                 .then(function (result) {
                     console.log(result.data.code);

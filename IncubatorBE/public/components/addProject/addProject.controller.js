@@ -457,7 +457,7 @@ fepsApp.controller('addProjectController', function ($scope,$translate,$uibModal
     	    field.$setDirty();
 		});
 
-    	if($scope.members.length<3 || $scope.members.length>6){
+    	if($scope.members.length<2 || $scope.members.length>6){
     		$scope.membersNumbersValid = false;
     	}else{
     		$scope.membersNumbersValid = true;
@@ -545,6 +545,7 @@ fepsApp.controller('addProjectController', function ($scope,$translate,$uibModal
 		$scope.project.members = $scope.members;
 		$scope.project.score = 0;
 		$scope.project.feedback ="";
+		$scope.project.submissionDate = new Date(moment());
 		$scope.project.afiliationAttachment = $scope.afiliationAttachment;
 		$scope.project.prototypeAttachment = $scope.prototypeAttachment;
 		$scope.project.incubationAttachments = $scope.incubationAttachments;
@@ -581,33 +582,33 @@ fepsApp.controller('addProjectController', function ($scope,$translate,$uibModal
     	});
     }
 
-    $scope.updateProject = function(){
-    	$scope.project.members = $scope.members;
-    	$scope.project.afiliationAttachment = $scope.afiliationAttachment;
-    	$scope.project.prototypeAttachment = $scope.prototypeAttachment;
-    	$scope.project.incubationAttachments = $scope.incubationAttachments;
-		projectService.updateProject($scope.project)
-    	.then(function (result) {
-        	$localStorage.currentUser.token = result.headers('authorization');
-    		var modalInstance = $uibModal.open(
-                    {
-                        ariaDescribedBy: 'addProject',
-                        template: '<p class="alert alert-success SuccessMsgPopup text-center">{{"projectUpdatedSuccessMsg" | translate}}</p>',
-                        controller: function ($uibModalInstance) {
-                            $timeout(function () {
-                                $location.path('fepsIncubator/home');
-                                $uibModalInstance.close('close');
-                            }, 3000);
-                        },
-                        size: 'md',
-                        keyboard: true
-           });
-    	},function (response) {
-    		if(response.statusText == ""){
-    			$scope.errorMessage = "systemDown";
-        		console.log("update project failed");
-    		}
-    	});
+    $scope.updateProject = function() {
+		    	$scope.project.members = $scope.members;
+		    	$scope.project.afiliationAttachment = $scope.afiliationAttachment;
+		    	$scope.project.prototypeAttachment = $scope.prototypeAttachment;
+		    	$scope.project.incubationAttachments = $scope.incubationAttachments;
+				projectService.updateProject($scope.project)
+		    	.then(function (result) {
+		        	$localStorage.currentUser.token = result.headers('authorization');
+		    		var modalInstance = $uibModal.open(
+		                    {
+		                        ariaDescribedBy: 'addProject',
+		                        template: '<p class="alert alert-success SuccessMsgPopup text-center">{{"projectUpdatedSuccessMsg" | translate}}</p>',
+		                        controller: function ($uibModalInstance) {
+		                            $timeout(function () {
+		                                $location.path('fepsIncubator/home');
+		                                $uibModalInstance.close('close');
+		                            }, 3000);
+		                        },
+		                        size: 'md',
+		                        keyboard: true
+		           });
+		    	},function (response) {
+		    		if(response.statusText == ""){
+		    			$scope.errorMessage = "systemDown";
+		        		console.log("update project failed");
+		    		}
+		    	});
     }
 	$scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
 	$scope.format = $scope.formats[0];

@@ -2,12 +2,12 @@ module.exports = {
   "cloudantNoSQLDB": {
   "dbName" : "my_sample_db",
   "credentials": {
-	  "username": "897b7f83-4faa-4b83-a4d6-aa2dac953322-bluemix",
-	  "password": "1d34bfcbf04ff8c5f42e86bb5492def5cd4c18012f9089d742fd743fa279d4e1",
-	  "host": "897b7f83-4faa-4b83-a4d6-aa2dac953322-bluemix.cloudant.com",
+	  "username": "1619e347-5334-4a7f-9faa-ec556fc63129-bluemix",
+	  "password": "88d31f4b3cfdff874ebc6b0478380fa496720c1995a699f65e3585ec41ed3b14",
+	  "host": "1619e347-5334-4a7f-9faa-ec556fc63129-bluemix.cloudant.com",
 	  "port": 443,
-	  "url": "https://897b7f83-4faa-4b83-a4d6-aa2dac953322-bluemix:1d34bfcbf04ff8c5f42e86bb5492def5cd4c18012f9089d742fd743fa279d4e1@897b7f83-4faa-4b83-a4d6-aa2dac953322-bluemix.cloudant.com"
-      },
+	  "url": "https://1619e347-5334-4a7f-9faa-ec556fc63129-bluemix:88d31f4b3cfdff874ebc6b0478380fa496720c1995a699f65e3585ec41ed3b14@1619e347-5334-4a7f-9faa-ec556fc63129-bluemix.cloudant.com"
+   },
     "syslog_drain_url": null,
     "volume_mounts": [],
     "label": "cloudantNoSQLDB",

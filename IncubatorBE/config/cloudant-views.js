@@ -10,7 +10,7 @@ function getNotAttachedAttachs(doc) {
 //view name : users-view
 function getUsers(doc) {
 	 if(doc.type == "users" && doc.groups[0].id != 1) {
-		    emit(doc.username,{"_id":doc._id,"_rev":doc._rev,"username":doc.username,"linkedIn":doc.linkedIn,"biography": doc.biography, "areaOfExpertises" : doc.areaOfExpertises,"email":doc.email,"profilePic" :doc. profilePic, "firstName":doc.firstName,"surname":doc.surname,"groups":doc.groups});
+		    emit(doc.username,{"_id":doc._id,"_rev":doc._rev,"joinDate":doc.joinDate,"username":doc.username,"linkedIn":doc.linkedIn,"biography": doc.biography, "areaOfExpertises" : doc.areaOfExpertises,"email":doc.email,"profilePic" :doc. profilePic, "firstName":doc.firstName,"surname":doc.surname,"groups":doc.groups});
 	 }
 }
 
@@ -18,7 +18,7 @@ function getUsers(doc) {
 //view name : projects-view
 function getProjects(doc) {
 	  if(doc.type == "projects") {
-	    emit(doc.startupName,{"_id":doc._id,"_rev":doc._rev,"startupName":doc.startupName,"status":doc.status,"mentors":doc.mentors,"feedback":doc.feedback,"score":doc.score,"cycle":doc.cycle});
+	    emit(doc.startupName,{"_id":doc._id,"_rev":doc._rev,"submissionDate":doc.submissionDate,"startupName":doc.startupName,"status":doc.status,"mentors":doc.mentors,"feedback":doc.feedback,"score":doc.score,"cycle":doc.cycle});
 	  }
 }
 
@@ -32,9 +32,10 @@ function getNews(doc) {
 
 //design document view name : eventsDoc
 //view name : events-view
+
 function eventsDoc(doc) {
 	  if(doc.type == "events") {
-	    emit(doc.topic,{"_id":doc._id,"_rev":doc._rev,"pendingEnrollments": doc.pendingEnrollments, "acceptedEnrollments" : doc.acceptedEnrollments, "rejectedEnrollments" : doc.rejectedEnrollments, "eventDate":doc.eventDate,"topic":doc.topic,"description":doc.description,"details":doc.details,"active":doc.active,"eventPhotoAttach":doc.eventPhotoAttach, "speakers" : doc.speakers, "venue" : doc.venue});
+	    emit(doc.topic,{"_id":doc._id,"_rev":doc._rev,"pendingEnrollments": doc.pendingEnrollments, "acceptedEnrollments" : doc.acceptedEnrollments, "rejectedEnrollments" : doc.rejectedEnrollments, "eventStartDate":doc.eventStartDate,"eventEndDate":doc.eventEndDate,"topic":doc.topic,"description":doc.description,"details":doc.details,"active":doc.active,"eventPhotoAttach":doc.eventPhotoAttach, "speakers" : doc.speakers, "venue" : doc.venue});
 	  }
 }
 
@@ -397,5 +398,9 @@ function clinicIssueDoc(doc) {
 //  {
 //    "id": 9,
 //    "name": "Member"
-//  }
+//  },
+//	{
+	//	"id": 10,
+	//	"name": "Co-Founder"
+//	}
 //]

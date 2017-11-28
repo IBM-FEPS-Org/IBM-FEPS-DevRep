@@ -76,18 +76,20 @@ var appLabelsAr = {
 			aboutusMember2:"د. نسمه علي صالح",
 			aboutusMemeberRole2:"نائب مدير الحاضنة و المشرف الأكاديمي علي أنشطة الحاضنة",
 			aboutusMember3:"ا. مها خليل",
-			aboutusMemeberRole3:"المنسق الأكاديمي للورش التوعية لريادية الأعمال بالحاضنة",
+			aboutusMemeberRole3:"مدير برنامج التوعية",
 			aboutusMember4:"ا. هاني حسين الزمر ",
 			aboutusMemeberRole4:"المنسق الأكاديمي لبرامج عيادة الأعمال بالحاضنة",
 
 			aboutusMember5:"ابراهيم محجوب",
-			aboutusMemeberRole5:"مدير برنامج الحاضنه",
+			aboutusMemeberRole5:"مدير برنامج الاحتضان",
 			aboutusMember6:"منه خالد",
-			aboutusMemeberRole6:"موظف إداري",
+			aboutusMemeberRole6:"مدير مكتب الحاضنة",
 			aboutusMember7:"نهي ناجي",
 			aboutusMemeberRole7:"موظف الاتصالات",
 			aboutusMember8:"نوران عادلي",
-			aboutusMemeberRole8:"أخصائي برنامج الحاضنه",
+			aboutusMemeberRole8:"أخصائي برنامج الاحتضان",
+			aboutusMember9:"عياد فارس",
+			aboutusMemeberRole9:"موظف اداري",
 
 
     
@@ -240,7 +242,7 @@ var appLabelsAr = {
 		addprojectAttachmentNameValid:"مسموح فقط فى أسم الملف أن يحتوى على حروف وأرقام أنجليزية والرموز (-) ,(_)",
 		addprojectAttachmentRequired:"إثبات الانتماء مطلوب",
 		addprojectAttachmentLarge:"الحد الأقصى للملف 1000 كيلوبايت",
-		addProjectMemberValidation:"يجب أن يكون أعضاء المشروع على الأقل ٣، كحد أقصى ٦",
+		addProjectMemberValidation:"يجب أن يكون أعضاء المشروع على الأقل ٢، كحد أقصى ٦",
 		addProjectStartNameRequired:"اسم المشروع مطلوب",
 		addProjectFoundingDateRequired:"تاريخ تأسيس المشروع مطلوب",
 		action:"عمل",
@@ -290,6 +292,7 @@ var appLabelsAr = {
 		
 	//add Member
 		addMemberSearchBy:"البحث عن طريق اسم المستخدم",
+		addMemberSelectRole:"الوظيفة",
 		addMemberSearchMsg:"الرجاء إدخال اسم المستخدم  الذي تبحث عنه",
 		addMemberNotExist:"المستخدم غير موجود أو غير مؤهل لإضافته إلى المشروع",
 		addMemberAlreadyAdded:"تمت إضافة هذا المستخدم من قبل",
@@ -413,6 +416,7 @@ var appLabelsAr = {
 		manageProjectsProjectAction:"إجراء",
 		manageProjectsProjectActionAccept:"قبول",
 		manageProjectsProjectActionReject:"رفض",
+		manageProjectsProjectSubmissionDate: "تاريخ التقديم",
 		ProjectsListMainTitle:"المشاريع المقبولة",
     	noActiveCycle:"لا توجد دورة نشطة",
     	noProjects:"لا توجد مشاريع متاحه.",
@@ -434,11 +438,15 @@ var appLabelsAr = {
 		manageUsersSearch:"بحث...",
 		assignBtn:"تعيين",
 		manageUsersSearchBy:"البحث عن طريق",
+		manageUsersName: "الاسم",
 		manageUsersUsername:"اسم المستخدم",
 		manageUsersEmail:"البريد الإلكتروني",
+		manageUsersJoinDate:"تاريخ الانضمام",
 		manageUsersRole:"وظيفة",
 		manageUsersActive:"فعال",
 		manageUsersItemsPerPage:"العناصر لكل صفحة",
+		manageUsersTableLableActionDeleteMsg: "هل انت متأكد انك تريد حذف هذا المستخدم؟",
+
 		
 		/*manage Events */
 		manageEventsMainTitle:"ادارة الفاعليات",

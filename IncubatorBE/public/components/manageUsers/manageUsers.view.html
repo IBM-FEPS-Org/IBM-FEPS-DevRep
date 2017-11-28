@@ -26,27 +26,27 @@
                         <input ng-show="selectedSearch ==2" type="text" class="form-control order-search-box"
                                placeholder="{{ 'manageUsersSearch' | translate }}"
                                ng-change="gridActions.filter()"
-                               ng-model="firstName"
-                               id = "firstName"
-                               filter-by="firstName"
+                               ng-model="Name"
+                               id = "Name"
+                               filter-by="Name"
                                filter-type="text">
                         <input ng-show="selectedSearch ==3" type="text" class="form-control order-search-box"
-                               placeholder="{{ 'manageUsersSearch' | translate }}"
-                               ng-change="gridActions.filter()"
-                               ng-model="surname"
-                               filter-by="surname"
-                               filter-type="text">
-                        <input ng-show="selectedSearch ==4" type="text" class="form-control order-search-box"
                                placeholder="{{ 'manageUsersSearch' | translate }}"
                                ng-change="gridActions.filter()"
                                ng-model="username"
                                filter-by="username"
                                filter-type="text">
-                        <input ng-show="selectedSearch ==5" type="text" class="form-control order-search-box"
+                        <input ng-show="selectedSearch ==4" type="text" class="form-control order-search-box"
                                placeholder="{{ 'manageUsersSearch' | translate }}"
                                ng-change="gridActions.filter()"
                                ng-model="email"
                                filter-by="email"
+                               filter-type="text">
+                        <input ng-show="selectedSearch ==5" type="text" class="form-control order-search-box"
+                               placeholder="{{ 'manageUsersSearch' | translate }}"
+                               ng-change="gridActions.filter()"
+                               ng-model="joinDate"
+                               filter-by="joinDate"
                                filter-type="text">
                     </td>
                 </tr>
@@ -62,17 +62,17 @@
                     <!--<th sortable="_id" class="sortable">
                         ID #
                     </th>-->
-                    <th class="tableCell sortable" sortable="firstName">
-                        <label class="pull-right">{{ 'First_Name' | translate }}</label>
-                    </th>
-                    <th class="tableCell sortable" sortable="surname">
-                        <label class="pull-right">{{ 'Last_name' | translate }}</label>
+                    <th class="tableCell sortable" sortable="Name">
+                        <label>{{ 'manageUsersName' | translate }}</label>
                     </th>
                     <th class="tableCell sortable" sortable="username">
-                        <label class="pull-right">{{ 'manageUsersUsername' | translate }}</label>
+                        <label>{{ 'manageUsersUsername' | translate }}</label>
                     </th>
-                    <th class="tableCell sortable" sortable='email'>
-                        {{ 'manageUsersEmail' | translate }}
+                    <th class="tableCell sortable" sortable="email">
+                        <label>{{ 'manageUsersEmail' | translate }}</label>
+                    </th>
+                    <th class="tableCell sortable" sortable='joinDate'>
+                        <label>{{ 'manageUsersJoinDate' | translate }}</label>
                     </th>
                     <th class="tableCell sortable" sortable='groups[0].name'>
                         {{ 'manageUsersRole' | translate }}
@@ -83,18 +83,18 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr class="tableRow" grid-item ng-class-odd="rowA" ng-class-even="rowB">
+                <tr class="tableRow" ng-class-odd="rowA" ng-class-even="rowB" ng-repeat="item in filtered | startFrom:(paginationOptions.currentPage-1)*paginationOptions.itemsPerPage | limitTo:paginationOptions.itemsPerPage track by $index">
                     <!--<td ng-bind="item._id"></td>-->
                     <td class="tableCell" >
-                        <a href="#"ng-bind="item.firstName" ng-click="openProfile(item)"></a>
-                    </td>
-                    <td class="tableCell" >
-                        <a href="#" ng-bind="item.surname" ng-click="openProfile(item)"></a>
+                        <a href="#" ng-bind="item.Name" ng-click="openProfile(item)"></a>
                     </td>
                     <td class="tableCell" >
                         <a href="#" ng-bind="item.username" ng-click="openProfile(item)"></a>
                     </td>
-                    <td class="tableCell" ng-bind="item.email"></td>
+                    <td class="tableCell" >
+                        <a href="#" ng-bind="item.email" ng-click="openProfile(item)"></a>
+                    </td>
+                    <td class="tableCell" ng-bind="item.joinDate | date:'yyyy-MM-dd h:mma'"></td>
                     <td class="tableCell" >
                         <a href="#" ng-bind="item.groups[0].name | checkRole" ng-click="openAssignRole(item)"></a>
                     </td>

@@ -16,19 +16,19 @@ fepsApp.controller('ManageUsersController', function ($scope, $rootScope, $trans
 
         {
             "id": 2,
-            "name": "First Name"
+            "name": "Name"
         },
         {
             "id": 3,
-            "name": "Last Name"
-        },
-        {
-            "id": 4,
             "name": "Username"
         },
         {
-            "id": 5,
+            "id": 4,
             "name": "Email"
+        },
+        {
+            "id": 5,
+            "name": "Join Date"
         }
     ];
 
@@ -70,13 +70,13 @@ fepsApp.controller('ManageUsersController', function ($scope, $rootScope, $trans
 
     $scope.updateSearchBy = function (selectedSearch) {
         $scope.selectedSearch = selectedSearch;
-        var element = document.getElementById('firstName');
+        var element = document.getElementById('Name');
 		element.value = "";
 		
-		if($scope.gridOptions.grid.firstName)$scope.gridOptions.grid.firstName = "";
-		if($scope.gridOptions.grid.surname)$scope.gridOptions.grid.surname = "";
+		if($scope.gridOptions.grid.Name)$scope.gridOptions.grid.Name = "";
 		if($scope.gridOptions.grid.username)$scope.gridOptions.grid.username = "";
 		if($scope.gridOptions.grid.email)$scope.gridOptions.grid.email = "";
+		if($scope.gridOptions.grid.joinDate)$scope.gridOptions.grid.joinDate = "";
 		
 		$scope.gridOptions.grid.reloadGrid();
 		
@@ -107,8 +107,17 @@ fepsApp.controller('ManageUsersController', function ($scope, $rootScope, $trans
     var _getUsers = function () {
         usSpinnerService.spin('spinner');
         userProfileService.getAllUsers().then(function (success) {
+        		
+        		for (var i=0;i<success.data.data.length;i++)
+    			{
+        			var Name = success.data.data[i].firstName +" " +success.data.data[i].surname;
+//        			console.log(Name);
+        			success.data.data[i].Name = Name;
+//        			console.log(success.data.data[i].Name);
+    			}
             $scope.gridOptions.data = success.data.data;
             usSpinnerService.stop('spinner');
+            
         }, function (err) {
             $log.error(err);
             usSpinnerService.stop('spinner');

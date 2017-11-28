@@ -35,6 +35,9 @@
                     <th class="tableCell">
                         {{ 'manageProjectsProjectMentor' | translate }}
                     </th>
+                    <th class="tableCell sortable" sortable='submissionDate'>
+                        {{ 'manageProjectsProjectSubmissionDate' | translate }}
+                    </th>
                     <th ng-show="showFeedback" class="tableCell">
                         {{ 'manageProjectsProjectFeedback' | translate }}
                     </th>
@@ -59,6 +62,7 @@
                     <td class="tableCell">
                         <a href="#" ng-bind="item.mentors[0].username" ng-click="openProfile(item.mentors[0].username)"> Mentor</a>
                     </td>
+                    <td class="tableCell" ng-bind="item.submissionDate | date:'yyyy-MM-dd h:mma'"></td>
                     <td ng-show="showFeedback" class="tableCell">
                         <a href="#"  ng-click="openFeedback(item)"> {{ 'manageProjectsProjectShowFeedback' | translate }}</a>
                     </td>

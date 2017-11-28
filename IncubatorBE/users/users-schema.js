@@ -4,6 +4,9 @@ module.exports = {
 	"active" : {
 		//notEmpty: true
 	},
+	"joinDate":{
+		notEmpty: true
+	},
 	"firstName" : {
 		notEmpty: true,
 		matches: {

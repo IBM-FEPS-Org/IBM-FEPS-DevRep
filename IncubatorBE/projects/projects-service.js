@@ -189,8 +189,22 @@ exports.createProject = function(projectObj, projectFounder){
                   }];
                   members[i].groups = [{"id" : 6, "name" : CONSTANTS.groups.founder}];
                 }else{
-                  members[i].projects = [project];
-                  members[i].groups = [{"id" : 9, "name" : CONSTANTS.groups.member}];
+                  members[i].projects = [{
+                      _id: projectCreated.id,
+                      startupName : projectObj.startupName,
+                      role : CONSTANTS.projects.roles.member,
+                      cycle : cycle._id
+                    }];
+                  members[i].groups = [{"id" : 9, "name" :CONSTANTS.groups.member}];
+                  /*if(projectObj.members[i].role == "Co-Founder")
+                	  {
+                	  	members[i].groups = [{"id" : 10, "name" : projectObj.members[i].role}];
+                	  }
+                  else if(projectObj.members[i].role == "Member")
+		        	  {
+		        	  	members[i].groups = [{"id" : 9, "name" :CONSTANTS.groups.member}];
+		        	  }*/
+                  
                 }
               }
               ModelUtil.bulkUpdates(members).then(()=>{
@@ -241,11 +255,12 @@ exports.deleteProject = function(_id,_rev, user){
         let errorMessage = new ErrorMessage(ErrorMessage.VALIDATION_ERROR, messages.errorMessages.update_project_after_admission);
         return reject(errorMessage);
       }
-
+/*
       if( groups.includes(CONSTANTS.groups.super_admin) && (cycle.currentPhase !== CONSTANTS.cycles.revision || cycle.currentPhase !== CONSTANTS.cycles.admission)){
-        let errorMessage = new ErrorMessage(ErrorMessage.VALIDATION_ERROR, messages.errorMessages.update_project_after_admission);
+    	  console.log("rejected");
+    	    let errorMessage = new ErrorMessage(ErrorMessage.VALIDATION_ERROR, messages.errorMessages.update_project_after_admission);
         return reject(errorMessage);
-      }
+      }*/
 
       for (var i = 0; i < freshProject.members.length; i++) {
         //Only owner founder and super admin can delete project
