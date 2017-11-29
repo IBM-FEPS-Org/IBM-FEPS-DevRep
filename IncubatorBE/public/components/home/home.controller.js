@@ -13,7 +13,7 @@ fepsApp.controller('homeController', function ($scope,$translate,$filter,$window
          $scope.currentUser = $localStorage.currentUser;
          if($scope.currentUser){
              $scope.user = $localStorage.currentUser;
-             $scope.isUser = ($localStorage.currentUser.groups[0].id == 8 || $localStorage.currentUser.groups[0].id == 6 || $localStorage.currentUser.groups[0].id == 9) ? true : false;
+             $scope.isUser = ($localStorage.currentUser.groups[0].id == 8 || $localStorage.currentUser.groups[0].id == 6 || $localStorage.currentUser.groups[0].id == 9 || $localStorage.currentUser.groups[0].id == 10) ? true : false;
              
              sharedDataService.getCurrentCycle().then(function (response) {
                  if(response.data.data){
@@ -67,7 +67,7 @@ fepsApp.controller('homeController', function ($scope,$translate,$filter,$window
         $scope.currentUser = $localStorage.currentUser;
         if($scope.currentUser){
             $scope.user = $localStorage.currentUser;
-            $scope.isUser = ($localStorage.currentUser.groups[0].id == 8 || $localStorage.currentUser.groups[0].id == 6 || $localStorage.currentUser.groups[0].id == 9) ? true : false;
+            $scope.isUser = ($localStorage.currentUser.groups[0].id == 8 || $localStorage.currentUser.groups[0].id == 6 || $localStorage.currentUser.groups[0].id == 9 || $localStorage.currentUser.groups[0].id == 10) ? true : false;
             
             sharedDataService.getCurrentCycle().then(function (response) {
                 if(response.data.data){

@@ -200,6 +200,7 @@ fepsApp.controller('addProjectController', function ($scope,$translate,$uibModal
                                      || $localStorage.currentUser.groups[0].id == 4
                                      || $localStorage.currentUser.groups[0].id == 6
                                      || $localStorage.currentUser.groups[0].id == 9
+                                     || $localStorage.currentUser.groups[0].id == 10
                                      || $localStorage.currentUser.groups[0].id == 7)){
                              $scope.showIncubationAttchaments = true;
                              if($localStorage.currentUser.groups[0].id == 6){

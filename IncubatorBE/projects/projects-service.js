@@ -192,18 +192,18 @@ exports.createProject = function(projectObj, projectFounder){
                   members[i].projects = [{
                       _id: projectCreated.id,
                       startupName : projectObj.startupName,
-                      role : CONSTANTS.projects.roles.member,
+                      role : projectObj.members[i].role,
                       cycle : cycle._id
                     }];
-                  members[i].groups = [{"id" : 9, "name" :CONSTANTS.groups.member}];
-                  /*if(projectObj.members[i].role == "Co-Founder")
+                  //members[i].groups = [{"id" : 9, "name" :CONSTANTS.groups.member}];
+                  if(projectObj.members[i].role == "Co-Founder")
                 	  {
                 	  	members[i].groups = [{"id" : 10, "name" : projectObj.members[i].role}];
                 	  }
                   else if(projectObj.members[i].role == "Member")
 		        	  {
 		        	  	members[i].groups = [{"id" : 9, "name" :CONSTANTS.groups.member}];
-		        	  }*/
+		        	  }
                   
                 }
               }
@@ -667,12 +667,12 @@ function attachProjectToMembers(members, projectObj, projectFounder, cycle){
     }
     pino.debug({fnction : __filename+ ">" + funcName, project : projectObj}, "project created successfully");
     //Update users with the users
-    let project = {
+    /*let project = {
       _id: projectObj._id,
       startupName : projectObj.startupName,
       role : CONSTANTS.projects.roles.member,
       cycle: cycle._id
-    };
+    };*/
     for(let i = 0, total = members.length; i < total; i++){
       if(members[i]._id === projectFounder._id){
         members[i].projects = [{
@@ -682,9 +682,23 @@ function attachProjectToMembers(members, projectObj, projectFounder, cycle){
           cycle: cycle._id
         }];
         members[i].groups = [{"id" : 6, "name" : CONSTANTS.groups.founder}];
-      }else{
-        members[i].projects = [project];
-        members[i].groups = [{"id" : 9, "name" : CONSTANTS.groups.member}];
+      }
+      else{
+        members[i].projects = [{
+            _id: projectObj._id,
+            startupName : projectObj.startupName,
+            role : members[i].role,
+            cycle: cycle._id
+          }];
+        if(members[i].role == CONSTANTS.projects.roles.member)
+        	{
+        		members[i].groups = [{"id" : 9, "name" :members[i].role}];
+        	}
+        else if(members[i].role == CONSTANTS.projects.roles.cofounder)
+	    	{
+	    		members[i].groups = [{"id" : 10, "name" :members[i].role}];
+	    	}
+        
       }
     }
     ModelUtil.bulkUpdates(members).then(()=>{

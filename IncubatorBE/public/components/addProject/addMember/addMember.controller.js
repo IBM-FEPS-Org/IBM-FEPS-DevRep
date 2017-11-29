@@ -11,37 +11,64 @@ fepsApp.controller('addMemberController', function ($scope,$translate,$uibModalI
     
     $scope.addedUser;
     
+    $scope.roles = [
+        {
+            "id": 1,
+            "Role": "Co-Founder"
+        },
+        {
+            "id": 2,
+            "Role": "Member"
+        }
+    ];
+    
     $scope.projectMembers = $uibModalInstance.projectMembers;
     $scope.deletedMembers = $uibModalInstance.deletedMembers;
     $scope.$watch('searchInput', function(newValue, oldValue) {
     	$scope.noUsersFound = false;
     });
+	$scope.addedUser = null;
+    $scope.selectedRole = "";
+    $scope.updateRole = function (selected) 
+    {
+        $scope.selectedRole = $scope.roles[selected-1].Role;
+		if($scope.addedUser)
+		{
+			$scope.addedUser.role = $scope.roles[selected-1].Role;
+		}
+    }
     
     $scope.searchUsers = function(){
-    	$scope.addedUser = null;
+    
     	angular.forEach($scope.addMemebrForm.$error.required, function(field) {
     		field.$setDirty();
 		});
     	
     	if($scope.addMemebrForm.$valid){
     		var foundInDeleted = -1;
-    		if($scope.deletedMembers.length >0){
-    			for(var i=0;i<$scope.deletedMembers.length;i++){
-        			if($scope.deletedMembers[i].username == $scope.searchInput){
+    		if($scope.deletedMembers.length >0)
+    		{
+    			for(var i=0;i<$scope.deletedMembers.length;i++)
+    			{
+        			if($scope.deletedMembers[i].username == $scope.searchInput)
+        			{
         				foundInDeleted = i;
         				break;
         			}
         		}
     		}
-    		if(foundInDeleted != -1){
-    			$scope.addedUser = {
-        				firstName : $scope.deletedMembers[foundInDeleted].firstName,
-        				surName: $scope.deletedMembers[foundInDeleted].surname,
-        				_id : $scope.deletedMembers[foundInDeleted]._id,
-        				username: $scope.deletedMembers[foundInDeleted].username,
-            			email : $scope.deletedMembers[foundInDeleted].email,
-            			role : "member"
-				};
+    		if(foundInDeleted != -1)
+    		{
+    			
+    			$scope.addedUser = 
+    			{
+    				firstName : $scope.deletedMembers[foundInDeleted].firstName,
+    				surName: $scope.deletedMembers[foundInDeleted].surname,
+    				_id : $scope.deletedMembers[foundInDeleted]._id,
+    				username: $scope.deletedMembers[foundInDeleted].username,
+        			email : $scope.deletedMembers[foundInDeleted].email,
+        			role : $scope.selectedRole
+			};
     			$scope.deletedMembers.splice(i,1);
     			return;
     		}
@@ -64,7 +91,7 @@ fepsApp.controller('addMemberController', function ($scope,$translate,$uibModalI
                             				_id : result.data.data._id,
                             				username: result.data.data.username,
                                 			email : result.data.data.email,
-                                			role : "member"
+                                			role : $scope.selectedRole
                     				};
                     				$scope.noUsersFound = false;
                 				}
@@ -96,10 +123,11 @@ fepsApp.controller('addMemberController', function ($scope,$translate,$uibModalI
     }
     
     $scope.addMemebrtoProject= function(){
-    	sharedDataService.broadcastEvent("addMembertoProject", {addedMemebr: $scope.addedUser});
-    	$scope.addedUser = null;
-    	$scope.searchInput = null;
-    	$scope.addMemebrForm.$setPristine();
+	    	
+	    	sharedDataService.broadcastEvent("addMembertoProject", {addedMemebr: $scope.addedUser});
+	    	$scope.addedUser = null;
+	    	$scope.searchInput = null;
+	    	$scope.addMemebrForm.$setPristine();
     }
     
     

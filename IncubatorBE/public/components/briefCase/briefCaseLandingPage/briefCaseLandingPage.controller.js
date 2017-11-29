@@ -21,7 +21,7 @@ fepsApp.controller('BriefCaseLandingPageController', function ($scope,$translate
 		
 		sharedDataService.getCurrentCycle().then(function (response) {
 			if(response.data.data){
-				$scope.isUser = ($localStorage.currentUser.groups[0].id == 8 || $localStorage.currentUser.groups[0].id == 6 || $localStorage.currentUser.groups[0].id == 9) ? true : false;
+				$scope.isUser = ($localStorage.currentUser.groups[0].id == 10 || $localStorage.currentUser.groups[0].id == 8 || $localStorage.currentUser.groups[0].id == 6 || $localStorage.currentUser.groups[0].id == 9) ? true : false;
 				$scope.cycle = response.data.data[0];
 				if($scope.cycle.currentPhase == "Admission"){
                     $scope.isAdmission = true;
@@ -30,7 +30,8 @@ fepsApp.controller('BriefCaseLandingPageController', function ($scope,$translate
                 }
 				
 	        	if($localStorage.currentUser.projects && $localStorage.currentUser.projects[0].cycle == $scope.cycle._id){
-	        			$scope.currentRole = $localStorage.currentUser.projects[0].role;
+	        		
+	        		$scope.currentRole = $localStorage.currentUser.projects[0].role;
 		        		usSpinnerService.spin('spinner');
 		        		projectService.getProject($localStorage.currentUser.projects[0]._id)
 		            	.then(function (result) {

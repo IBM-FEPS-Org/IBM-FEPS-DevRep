@@ -55,7 +55,8 @@
     "founder" : "Founder",
     "registered_user" : "Registered user",
     "mentor" : "Mentor",
-    "member" : "Member"
+    "member" : "Member",
+    "cofounder": "Co-Founder"
 
   },
   "cycles":{
@@ -67,7 +68,8 @@
   "projects" : {
     "roles" : {
       "member" : "Member",
-      "founder" : "Founder"
+      "founder" : "Founder",
+      "cofounder" : "Co-Founder"
     },
     "status" : {
       "Initial" : 1,

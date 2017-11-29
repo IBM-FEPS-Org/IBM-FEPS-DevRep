@@ -12,7 +12,8 @@ module.exports ={
     {"id": 6, "name" : GROUPS.founder},
     {"id": 7, "name" : GROUPS.mentor},
     {"id": 8, "name" : GROUPS.registered_user},
-    {"id": 9, "name" : GROUPS.member}
+    {"id": 9, "name" : GROUPS.member},
+    {"id": 10, "name" : GROUPS.cofounder}
   ]
 };
 

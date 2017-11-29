@@ -8,7 +8,7 @@ fepsApp.controller('headerController', function($scope,$location,$rootScope,$uib
 		var currentUser = $localStorage.currentUser;
 		if(currentUser){
 			$scope.user = $localStorage.currentUser;
-			$scope.isUser = ($localStorage.currentUser.groups[0].id == 8 || $localStorage.currentUser.groups[0].id == 6 || $localStorage.currentUser.groups[0].id == 9) ? true : false;
+			$scope.isUser = ($localStorage.currentUser.groups[0].id == 8 || $localStorage.currentUser.groups[0].id == 6 || $localStorage.currentUser.groups[0].id == 9 || $localStorage.currentUser.groups[0].id == 10) ? true : false;
 		}else{
 			$scope.user = null;
 		}
@@ -27,7 +27,7 @@ fepsApp.controller('headerController', function($scope,$location,$rootScope,$uib
 			else{
 				$scope.user.imageSource = "../../img/portraitHolder.png";
 			}
-			$scope.isUser = ($localStorage.currentUser.groups[0].id == 8 || $localStorage.currentUser.groups[0].id == 6 || $localStorage.currentUser.groups[0].id == 9) ? true : false;
+			$scope.isUser = ($localStorage.currentUser.groups[0].id == 8 || $localStorage.currentUser.groups[0].id == 6 || $localStorage.currentUser.groups[0].id == 9 || $localStorage.currentUser.groups[0].id == 10) ? true : false;
 		}else{
 			$scope.user = null;
 		} 

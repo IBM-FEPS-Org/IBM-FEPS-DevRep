@@ -10,7 +10,21 @@
 	                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 pull-right">
 	                    <input type="text" name="username" ng-model="searchInput" required/>
                         <button type="button" ng-click="searchUsers()">{{ 'assignMentorSearch' | translate }}</button>
+                        
 	                </div>
+	                
+	            </div>
+	            <div class="row sectionRow">
+	                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 pull-right">
+	                    <label>{{ 'addMemberSelectRole' | translate }}</label>
+	                </div>
+	                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 pull-right">
+                        <select  ng-init="selected = roles[1].id;selectedRole =roles[1].Role"
+                        		    ng-options="role.id as role.Role for role in roles"
+                        		    ng-model = "selected"
+                                 ng-change="updateRole(selected)"></select>
+	                </div>
+	                
 	            </div>
 	        </section>
         </form>
