@@ -48,12 +48,13 @@ fepsApp.controller('assignRoleController', function ($scope, $rootScope, $transl
     $scope.noProfileImageSelected = true;
     $scope.viewMode = 1;
 
-    $log.info(">>>>>>" + JSON.stringify($scope.user));
     if ($scope.user.profilePic) {
         $scope.profileImageUploaded = true;
         $scope.profileImageFile = $scope.user.profilePic;
         $scope.imageSource = "/attachements?id=" + $scope.user.profilePic.id
             + "&key=" + $scope.user.profilePic.key;
+        
+        $scope.profileImageAttachment = $scope.user.profilePic;
     }
     else {
         $scope.profileImageUploaded = true;

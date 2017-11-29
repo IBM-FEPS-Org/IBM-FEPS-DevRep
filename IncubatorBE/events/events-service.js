@@ -5,6 +5,7 @@ const messages = require('../fepsApp-BE').messages;
 const ErrorMessage = require('../fepsApp-BE').ErrorMessage;
 const Message = require('../fepsApp-BE').Message;
 const ModelUtil = require('../fepsApp-BE').ModelUtil;
+const MailUtil = require('../fepsApp-BE').mailUtil;
 const CONSTANTS = require('../fepsApp-BE').constants;
 const ObjectUtil = require('../fepsApp-BE').objectUtil;
 const attachementService = require('../attachments/attachment-service');

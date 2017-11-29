@@ -1,5 +1,5 @@
 {
-  "app_url" : "http://localhost:3000/fepsIncubator/resetPassword",
+  "app_url" : "https://uatincubatorapp.eu-gb.mybluemix.net/fepsIncubator/resetPassword",
   "mail" : {
     "contact" : "contact",
     "forget_password" : "forget_password",
