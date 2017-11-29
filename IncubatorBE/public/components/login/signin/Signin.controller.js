@@ -22,7 +22,7 @@ fepsApp.controller('signinController', function($scope,$rootScope,$uibModalInsta
             		sharedDataService.broadcastEvent("checkCurrentUser", []);
                 	$uibModalInstance.close('close');
                 	
-                	if($localStorage.currentUser.groups[0].id == 8 || $localStorage.currentUser.groups[0].id == 6||$localStorage.currentUser.groups[0].id == 9 || $localStorage.currentUser.groups[0].id == 10){
+                	if($localStorage.currentUser.groups[0].id == 10 || $localStorage.currentUser.groups[0].id == 8 || $localStorage.currentUser.groups[0].id == 6||$localStorage.currentUser.groups[0].id == 9 ){
                 		$location.path( 'fepsIncubator/briefCaseLanding');
                 		$localStorage.isAdminstrator = false;
 

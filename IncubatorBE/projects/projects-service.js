@@ -690,6 +690,8 @@ function attachProjectToMembers(members, projectObj, projectFounder, cycle){
             role : members[i].role,
             cycle: cycle._id
           }];
+        console.log("editing");
+        console.log(members[i].role);
         if(members[i].role == CONSTANTS.projects.roles.member)
         	{
         		members[i].groups = [{"id" : 9, "name" :members[i].role}];

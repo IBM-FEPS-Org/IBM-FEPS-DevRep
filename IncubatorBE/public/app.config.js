@@ -14,7 +14,7 @@ fepsApp.config(function($routeProvider,$locationProvider,$translateProvider,appL
 
 				$location.path( 'fepsIncubator/'+view);
 			}
-			else if($localStorage.currentUser.groups[0].id == 8 || $localStorage.currentUser.groups[0].id == 6 || $localStorage.currentUser.groups[0].id == 9){
+			else if($localStorage.currentUser.groups[0].id == 8 || $localStorage.currentUser.groups[0].id == 6 || $localStorage.currentUser.groups[0].id == 9 || $localStorage.currentUser.groups[0].id == 10){
 				if(privillageLevel == "admin"){
 					$location.path( 'fepsIncubator/home');
 				}else{
