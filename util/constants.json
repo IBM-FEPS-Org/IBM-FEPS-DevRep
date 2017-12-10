@@ -1,0 +1,89 @@
+{
+  "app_url" : "https://uatincubatorapp.eu-gb.mybluemix.net/fepsIncubator/resetPassword",
+  "mail" : {
+    "contact" : "contact",
+    "forget_password" : "forget_password",
+    "assign_mentor" : "assign_mentor",
+    "assign_mentor_email" : "assign_mentor_email",
+    "project_status" : "project_status",
+    "feedback_score" : "feedback_score",
+    "change_role" : "change_role",
+    "cycle_created" : "cycle_created",
+    "cycle_changed" : "cycle_changed",
+    "clinic_issue" : "clinic_issue",
+    "event_status" : "event_status"
+  },
+  "mailTemplates" : {
+    "contact" : "contact",
+    "forget_password" : "forget_password",
+    "assign_mentor" : "assign_mentor",
+    "assign_mentor_email" : "assign_mentor_email",
+    "project_status" : "project_status",
+    "feedback_score" : "feedback_score",
+    "change_role" : "change_role",
+    "cycle_created" : "cycle_created",
+    "cycle_changed" : "cycle_changed",
+    "clinic_issue" : "clinic_issue",
+    "event_status" : "event_status"
+  },
+  "language" : {
+    "ar" : "ar",
+    "en" : "en"
+  },
+  "documents" : {
+    "type" : {
+      "users" : "users",
+      "views" : "views",
+      "projects" : "projects",
+      "news" : "news",
+      "groups" : "groups",
+      "sectors" : "sectors",
+      "cycles":"cycles",
+      "attachments" : "attachments",
+      "project_status" : "project_status",
+      "events" : "events",
+      "recruitments" : "recruitments",
+      "clinicIssue" : "clinicIssue"
+    }
+  },
+  "groups" : {
+    "super_admin" : "Super Admin",
+    "it_admin" : "IT Admin",
+    "supervisor_event" : "Supervisor Event",
+    "supervisor_project" : "Supervisor Project",
+    "supervisor_clinic" : "Supervisor clinic",
+    "founder" : "Founder",
+    "registered_user" : "Registered user",
+    "mentor" : "Mentor",
+    "member" : "Member",
+    "cofounder": "Co-Founder"
+
+  },
+  "cycles":{
+    "admission" : "Admission",
+    "revision" : "Revision",
+    "incubation" : "Incubation",
+    "closure" : "Closure"
+  },
+  "projects" : {
+    "roles" : {
+      "member" : "Member",
+      "founder" : "Founder",
+      "cofounder" : "Co-Founder"
+    },
+    "status" : {
+      "Initial" : 1,
+      "Assigned" : 2,
+      "Reviewed" : 3,
+      "Rejected" : 4,
+      "Accepted" : 5
+    }
+  },
+  "events" : {
+    "requestStatus" : {
+        "accepted" : 1,
+        "rejected" : 2,
+        "inProgress" : 3
+    }
+  }
+}
