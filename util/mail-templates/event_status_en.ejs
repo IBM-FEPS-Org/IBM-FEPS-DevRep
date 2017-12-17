@@ -1,5 +1,19 @@
 <h1>
-  Hello Mr <%=user.firstName%> <%=user.middleName%>
+  <%
+  	if(user.gender === "m")
+  	{%>
+  	   Hello Mr <%=user.firstName%> <%=user.middleName%>
+  		
+  	<%}
+  %>
+  <%
+  	if(user.gender === "f")
+  	{%>
+  	   Hello Ms <%=user.firstName%> <%=user.middleName%>
+  		
+  	<%}
+  %>
+ 
 </h1>
 <%if(status === 1){%>
   <h2>You are accepted in event: <%=event.topic%></h2>
