@@ -210,6 +210,10 @@
                 table{
                   width:100%
                 }
+               	#chart
+               	{
+               		width:100%;
+               	}
                 .tableRow{
                     &.MainRow{
                         background:  $tableMainRowBGColor;

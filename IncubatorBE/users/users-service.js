@@ -12,8 +12,10 @@ const ModelUtil = require('../fepsApp-BE').ModelUtil;
 const ObjectUtil = require('../fepsApp-BE').objectUtil;
 const utils = require('../fepsApp-BE').utils;
 const projectService = require('../projects/projects-service');
+const eventsService = require('../events/events-service');
 const attachementService = require('../attachments/attachment-service');
 const cycleService = require('../cycles/cycle-service');
+const clinicServices = require('../clinicIssues/clinicIssues-service.js');
 const MailUtil = require('../fepsApp-BE').mailUtil;
 const cacheOperations = require('../fepsApp-BE').cacheOperations;
 exports.getUserByUsername = function(username){
@@ -35,11 +37,12 @@ exports.getUserByUsername = function(username){
   });
 };
 
-exports.getUsersByGroups = function(groups){
+exports.getUsersByGroups = function(groups)
+{
 	return new Promise((resolve, reject)=>{
     const funcName = "getUsersByGroups";
 		let query = {
-			type : CONSTANTS.documents.type.users,
+			"type": "users",
 			"groups" :  {
 				"$elemMatch": { "id":  {"$in": groups}}
 			}
@@ -137,6 +140,22 @@ exports.createUser = function(userObj){
       ModelUtil.insertDoc(userObj).then((createdUser)=>{
         let message = new Message(Message.USER_CREATED, createdUser, messages.businessMessages.user_register_success);
         pino.debug({fnction : __filename+ ">" + funcName, user : createdUser}, "User created successfully");
+        let emailData = {"user" : userObj};
+        let emails;
+        emails = userObj.email;
+        MailUtil.sendEmail(CONSTANTS.mail.welcome_email, CONSTANTS.mailTemplates.welcome_email, "Welcome to FEPS BI", emailData, CONSTANTS.language.en, emails).then((info)=>
+        {
+            let message = new Message(Message.EMAIL_SENT, null, messages.businessMessages.email_sent_success);
+            pino.info(message);
+            
+        }, (err)=>
+        {
+            let errorMessage = new ErrorMessage(ErrorMessage.EMAIL_ERROR, err);
+            pino.error(errorMessage);
+        });
+        
+        
+        
         if(userObj.profilePic){
           attachementService.attachAttachments([userObj.profilePic], true).then(()=>{
             resolve(message);
@@ -177,6 +196,7 @@ exports.updateUser = function(userObj){
 
 	      //Check the returned users are different user not the same user
 	      ModelUtil.findByQuery(query).then((users)=>{
+	    	  
 	        if(users.length >1){
 	          let errorMessages = [];
 	          let usernameErrorExist, phoneErrorExist, emailErrorExist;
@@ -208,10 +228,9 @@ exports.updateUser = function(userObj){
           freshUser = ObjectUtil.copySameTypeObject(userObj, freshUser);
           let updateUser;
           ModelUtil.insertDoc(freshUser).then((updatedUser)=>{
-            if(freshUser.groups[0].name = CONSTANTS.groups.super_admin){
+            if(freshUser.groups[0].name == CONSTANTS.groups.super_admin){
               cacheOperations.refreshSuperadmins();
             }
-
             updateUser = updatedUser;
 	          let message = new Message(Message.UPDATE_OBJECT, updatedUser, messages.businessMessages.user_update_success);
 	          pino.debug({fnction : __filename+ ">" + funcName, user : updatedUser}, "User updated successfully");
@@ -219,63 +238,825 @@ exports.updateUser = function(userObj){
             return updateRelatedProjects(freshUser, userObj);
 
 	        }, (err)=>{
-	          return utils.rejectMessage(ErrorMessage.DATABASE_ERROR,  err, funcName, reject);
+	          reject(err);
 	        }).then(()=>{
             let message = new Message(Message.UPDATE_OBJECT, updateUser, messages.businessMessages.user_update_success);
             if(newPic && oldPic && oldPic.id !== newPic.id){
               attachementService.removeAttachement(oldPic.id, oldPic.rev).then((response)=>{
                 attachementService.attachAttachments([newPic], true).then(()=>{
-                  resolve(message);
+                	resolve(message);
                 },(err)=>{
                   reject(err);
                 });
               }, (err)=>{
-                reject(err)
+                reject(err);
               });
-            }else{
+            }
+            else if(newPic)
+        	{
+            	attachementService.attachAttachments([newPic], true).then(()=>{
+                	resolve(message);
+                },(err)=>{
+                  reject(err);
+                });
+        	}
+            else{
               resolve(message);
             }
             updateRelatedEvents(freshUser).then((result)=>{
               pino.info('Events are updated');
             }, (err)=>{
-              pino.error(err);
+            	reject(err);
             });
           });
-
         }, (err)=>{
-          return utils.rejectMessage(ErrorMessage.DATABASE_ERROR,  err, funcName, reject);
+        	reject(err);
         });
-
 	  },(err)=>{
-	        return utils.rejectMessage(ErrorMessage.DATABASE_ERROR,  err, funcName, reject);
+		  reject(err);
 	      });
-	    });
-	  };
+    });
+  };
 
 
-exports.deleteUser = function(_id, _rev){
-  return new Promise((resolve, reject)=>{
-    const funcName = "deleteUser";
-    pino.debug({fnction : __filename+ ">" + funcName}, "delete user");
-    pino.debug({fnction : __filename+ ">" + funcName, _id : _id, _rev : _rev});
-    ModelUtil.findById(_id).then((document)=>{
-      ModelUtil.deleteDoc(_id, _rev).then((result)=>{
-        let message = new Message(Message.OBJECT_REMOVED, result, messages.businessMessages.user_removed);
-        pino.debug({fnction : __filename+ ">" + funcName, result :result}, "user is removed");
-        if(document.profilePic){
-          attachementService.removeAttachement(document.profilePic.id, document.profilePic.rev).then((response)=>{
-            resolve(message);
-          }, (err)=>{
-            reject(err)
-          });
-        }else{
-          resolve(message);
-        }
-        resolve(message);
-      },(err)=>{
-        return utils.rejectMessage(ErrorMessage.DATABASE_ERROR,  err, funcName, reject);
-      });
-    }, (err)=>{
+const oldDeleteUser = function(_id, _rev){
+  return new Promise((resolve, reject)=>
+  {
+    const funcName = "oldDeleteUser";
+    		
+	    ModelUtil.deleteDoc(_id, _rev).then((result)=>
+	    {
+	    	    let message = new Message(Message.OBJECT_REMOVED, result, messages.businessMessages.user_removed);
+	        pino.debug({fnction : __filename+ ">" + funcName, result :result}, "user is removed");
+	        resolve(message);
+	    }
+	    ,(err)=>
+	    {
+		     reject(err);
+		});
+	    resolve();
+  },(err)=>
+  {
+	     reject(err);
+  });
+};
+
+exports.deleteUser = function (id,rev,user)
+{
+	return new Promise((resolve, reject)=>{
+	      //remove password fields if exist
+	      const funcName = "deleteUser";
+	      var promises = [];
+	      ModelUtil.findById(id).then((document)=>
+	      {
+	    	  
+	    	  	  
+		    	  pino.debug({fnction : __filename+ ">" + funcName}, "Deleting user");
+		    	  if(document.profilePic)
+	    		  {
+		    		  
+		    		  promises.push(attachementService.removeAttachement(document.profilePic.id, document.profilePic.rev));
+		    		  attachementService.removeAttachement(document.profilePic.id, document.profilePic.rev).then(()=>{
+		    	            
+		    			  	resolve();
+		              }, (err)=>{
+		                reject(err);
+		              });
+	    		  }
+		    	  
+		    	  if(document.enrollments)
+		    	  {
+		    		  for(let i = 0; i < document.enrollments.length; i ++)
+		    		  {
+		    			  promises.push(eventsService.unenroll(id,document.enrollments[i].eventId));
+		    			  eventsService.unenroll(id,document.enrollments[i].eventId).then((response)=>
+    			  		  {
+		    	            resolve();
+		    	          }, (err)=>{
+		    	            reject(err);
+		    	          });
+		    		  }
+
+		    	  }
+		    	  if(document.clinicIssues)
+		    	  {
+		    		  for(let i = 0; i < document.clinicIssues.length; i ++)
+		    		  {
+		    			  promises.push(clinicServices.deleteClinicIssue(document.clinicIssues[i]));
+		    			  clinicServices.deleteClinicIssue(document.clinicIssues[i]).then((response)=>
+	    			  		  {
+			    	            resolve();
+			    	          }, (err)=>{
+			    	            reject(err);
+			    	          });
+		    		  }
+		    	  }
+		    	  if(document.projects)
+		    	  {
+		    		  
+		    		  ModelUtil.findById(document.projects[0]._id).then((project)=>
+		    		  {
+		    		      let message = new Message(Message.GETTING_DATA, project, "");
+		    		      pino.debug({fnction : __filename+ ">" + funcName, result :project}, "getting project by id");
+		    		      
+		    		      if(project.members[0]._id == id)
+		    		    	  {
+		    		    	  		promises.push(projectService.deleteProject(project._id,project._rev,user));
+		    		    	  		projectService.deleteProject(project._id,project._rev,user).then(()=>
+		    		    	  		{
+		        					ModelUtil.findById(id).then((result)=>
+		        					{
+			        					ModelUtil.deleteDoc(result._id,result._rev).then(()=>
+		        					    {
+		        					    	
+		        					        resolve();
+		        					    }
+		        					    ,(err)=>
+		        					    {
+		        						     reject(err);
+		        						});
+			        					
+		        					 },(err)=>
+			    		    	  		 {
+			    		    	  			 
+			        		            reject(err);
+			        		         });
+		        					resolve();
+		        		         }
+		    		    	  		 ,(err)=>
+		    		    	  		 {
+		    		    	  			 
+		        		            reject(err);
+		        		         });
+		    		    	  }
+	        			  
+		    		      
+		    		      resolve(message);
+		    		   }
+		    		   ,(err)=>{
+		    			   reject(err);
+		    		    });
+		    		  	
+		    	  }
+
+		    	  resolve();
+		    	  
+		    	  
+
+	  },(err)=>
+	  {
+	  		reject(err);
+	  });   
+	  
+    	  
+	  
+	});
+
+	
+};
+
+
+exports.deleteUserr = function (id,rev,user)
+{
+	return new Promise((resolve, reject)=>{
+	      //remove password fields if exist
+	      const funcName = "deleteUserr";
+	      var promises = [];
+	      ModelUtil.findById(id).then((document)=>
+	      {
+		    	  pino.debug({fnction : __filename+ ">" + funcName}, "Deleting user");
+		    	  if(document.profilePic)
+	    		  {
+		    		  
+		    		  attachementService.removeAttachement(document.profilePic.id, document.profilePic.rev).then(()=>
+		    		  {
+		    			  
+		    			  
+		    			  if(document.projects)
+				    	  {
+				    		  
+				    		  ModelUtil.findById(document.projects[0]._id).then((project)=>
+				    		  {
+				    			  
+				    		      let message = new Message(Message.GETTING_DATA, project, "");
+				    		      pino.debug({fnction : __filename+ ">" + funcName, result :project}, "getting project by id");
+				    		      
+				    		      if(project.members[0]._id == id)
+				    		    	  {
+				    		    	  		projectService.deleteProject(project._id,project._rev,user).then(()=>
+				    		    	  		{
+				        					
+				        					if(document.enrollments)
+					        			    	{
+				        						eventsService.unenrollAll(id).then(()=>
+				        						{
+				        							if(document.clinicIssues)
+					        	  			    		{	
+				        								clinicServices.deleteAllClinicIssue(id).then(()=>
+				        								{
+				        									
+				        									ModelUtil.findById(id).then((result)=>
+				        		          					{
+				        		          						
+				        		                				ModelUtil.deleteDoc(result._id,result._rev).then(()=>
+				        		          					    {
+				        		          					    	
+				        		          					        resolve();
+				        		          					    }
+				        		          					    ,(err)=>
+				        		          					    {
+				        		          						     reject(err);
+				        		          						});
+				        		                					
+				        		          					 },(err)=>
+				        		            		    	  		 {
+				        		            		    	  			 
+				        		                		            reject(err);
+				        		                		         });
+				        								},(err)=>{
+		        				    	            				reject(err);
+			        				    	          		});
+					        	  			    		}
+				        							else
+			        								{
+				        								ModelUtil.findById(id).then((result)=>
+			        		          					{
+			        		          						
+			        		                				ModelUtil.deleteDoc(result._id,result._rev).then(()=>
+			        		          					    {
+			        		          					    	
+			        		          					        resolve();
+			        		          					    }
+			        		          					    ,(err)=>
+			        		          					    {
+			        		          						     reject(err);
+			        		          						});
+			        		                					
+			        		          					 },(err)=>
+			        		            		    	  		 {
+			        		            		    	  			 
+			        		                		            reject(err);
+			        		                		         });
+			        								}
+				        						},(err)=>{
+		        				    	            		reject(err);
+		        				    	          	});
+				        						
+				        						
+					        			    	}    	
+				        					else if(document.clinicIssues)
+				        	  			    	{
+				        						clinicServices.deleteAllClinicIssue(id).then(()=>
+		        								{
+		        									
+		        									ModelUtil.findById(id).then((result)=>
+		        		          					{
+		        		          						ModelUtil.deleteDoc(result._id,result._rev).then(()=>
+		        		          					    {
+		        		          					    	resolve();
+		        		          					    }
+		        		          					    ,(err)=>
+		        		          					    {
+		        		          						     reject(err);
+		        		          						});
+		        		                					
+		        		          					 },(err)=>
+		        		            		    	  		 {
+		        		            		    	  			 
+		        		                		            reject(err);
+		        		                		         });
+		        								},(err)=>{
+        				    	            				reject(err);
+	        				    	          		});
+				        	  			    	}
+				        					else
+				        					{
+				        							ModelUtil.findById(id).then((result)=>
+					          					{
+					          						ModelUtil.deleteDoc(result._id,result._rev).then(()=>
+					          					    {
+					          					    	resolve();
+					          					    }
+					          					    ,(err)=>
+					          					    {
+					          						     reject(err);
+					          						});
+					                					
+					          					 },(err)=>
+					            		    	  		 {
+					            		    	  			 
+					                		            reject(err);
+					                		         });
+				        					}
+				        					
+				        					resolve();
+				        		         }
+				    		    	  		 ,(err)=>
+				    		    	  		 {
+				    		    	  			 
+				        		            reject(err);
+				        		         });
+				    		    	  }
+				    		      else
+				    		    	  {
+				    		    	  	  for(let i = 0; i < project.members.length; i ++)
+						    		  {
+				    		    	  		  if(project.members[i]._id == id)
+			    		    	  			  {
+				    		    	  			  project.members.splice(i,1);
+				    		    	  			  break;
+			    		    	  			  }
+						    		  }
+				    		    	  	  ModelUtil.updateDoc(project).then(()=>{
+				    		    	  		  if(document.enrollments)
+					        			    	{
+				        						eventsService.unenrollAll(id).then(()=>
+				        						{
+				        							if(document.clinicIssues)
+					        	  			    		{	
+				        								clinicServices.deleteAllClinicIssue(id).then(()=>
+				        								{
+				        									ModelUtil.findById(id).then((result)=>
+				        		          					{
+				        		                				ModelUtil.deleteDoc(result._id,result._rev).then(()=>
+				        		          					    {
+				        		          					        resolve();
+				        		          					    }
+				        		          					    ,(err)=>
+				        		          					    {
+				        		          						     reject(err);
+				        		          						});
+				        		                					
+				        		          					 },(err)=>
+				        		            		    	  		 {
+				        		            		    	  			 
+				        		                		            reject(err);
+				        		                		         });
+				        								},(err)=>{
+		        				    	            				reject(err);
+			        				    	          		});
+					        	  			    		}
+				        							else
+						        					{
+						        							ModelUtil.findById(id).then((result)=>
+							          					{
+							          						ModelUtil.deleteDoc(result._id,result._rev).then(()=>
+							          					    {
+							          					    	
+							          					        resolve();
+							          					    }
+							          					    ,(err)=>
+							          					    {
+							          						     reject(err);
+							          						});
+							                					
+							          					 },(err)=>
+							            		    	  		 {
+							            		    	  			 
+							                		            reject(err);
+							                		         });
+						        					}
+				        						},(err)=>{
+		        				    	            		reject(err);
+		        				    	          	});
+				        						
+				        						
+					        			    	}    	
+				        					else if(document.clinicIssues)
+				        	  			    	{
+				        						clinicServices.deleteAllClinicIssue(id).then(()=>
+		        								{
+		        									ModelUtil.findById(id).then((result)=>
+		        		          					{
+		        		          						ModelUtil.deleteDoc(result._id,result._rev).then(()=>
+		        		          					    {
+		        		          					        resolve();
+		        		          					    }
+		        		          					    ,(err)=>
+		        		          					    {
+		        		          						     reject(err);
+		        		          						});
+		        		                					
+		        		          					 },(err)=>
+		        		            		    	  		 {
+		        		            		    	  			 
+		        		                		            reject(err);
+		        		                		         });
+		        								},(err)=>{
+      				    	            				reject(err);
+	        				    	          		});
+				        	  			    	}
+				        					else
+				        					{
+				        							ModelUtil.findById(id).then((result)=>
+					          					{
+					          						
+					                				ModelUtil.deleteDoc(result._id,result._rev).then(()=>
+					          					    {
+					          					        resolve();
+					          					    }
+					          					    ,(err)=>
+					          					    {
+					          						     reject(err);
+					          						});
+					                					
+					          					 },(err)=>
+					            		    	  		 {
+					            		    	  			 
+					                		            reject(err);
+					                		         });
+				        					}
+				    		    	  		  resolve();
+				    		    	  	  },(err)=>
+			    		    	  		 {
+			    		    	  			 
+			        		            reject(err);
+			        		         });
+				    		    	  }
+			        			  
+				    		      resolve(message);
+				    		   }
+				    		   ,(err)=>{
+				    			   reject(err);
+				    		    });	
+				    	  }
+		    			  else
+	    				  {
+		    				  	ModelUtil.findById(id).then((result)=>
+	        					{
+	        						
+		        					ModelUtil.deleteDoc(result._id,result._rev).then(()=>
+	        					    {
+	        					    	resolve();
+	        					    }
+	        					    ,(err)=>
+	        					    {
+	        						     reject(err);
+	        						});
+		        					
+	        					 },(err)=>
+		    		    	  		 {
+		    		    	  			 
+		        		            reject(err);
+		        		         });
+	    				  }
+		    			  resolve();
+		    			  
+		          }, (err)=>{
+		              reject(err);
+		          });
+	    		  }
+		    	  else if(document.projects)
+		    	  {
+		    		  
+		    		  ModelUtil.findById(document.projects[0]._id).then((project)=>
+		    		  {
+		    		      let message = new Message(Message.GETTING_DATA, project, "");
+		    		      pino.debug({fnction : __filename+ ">" + funcName, result :project}, "getting project by id");
+		    		      
+		    		      if(project.members[0]._id == id)
+		    		    	  {
+		    		    	  		projectService.deleteProject(project._id,project._rev,user).then(()=>
+		    		    	  		{
+		        					if(document.enrollments)
+			        			    	{
+		        						eventsService.unenrollAll(id).then(()=>
+		        						{
+		        							if(document.clinicIssues)
+			        	  			    		{	
+		        								clinicServices.deleteAllClinicIssue(id).then(()=>
+		        								{
+		        									ModelUtil.findById(id).then((result)=>
+		        		          					{
+		        		          						ModelUtil.deleteDoc(result._id,result._rev).then(()=>
+		        		          					    {
+		        		          					    	resolve();
+		        		          					    }
+		        		          					    ,(err)=>
+		        		          					    {
+		        		          						     reject(err);
+		        		          						});
+		        		                					
+		        		          					 },(err)=>
+		        		            		    	  		 {
+		        		            		    	  			 
+		        		                		            reject(err);
+		        		                		         });
+		        								},(err)=>{
+        				    	            				reject(err);
+	        				    	          		});
+			        	  			    		}
+		        							else
+				        					{
+				        							ModelUtil.findById(id).then((result)=>
+				        							{
+					          						
+					                					ModelUtil.deleteDoc(result._id,result._rev).then(()=>
+					                					{
+					                						resolve();
+					                					}
+					          					    ,(err)=>
+					          					    {
+					          						     reject(err);
+					          						});
+					                					
+					          					 },(err)=>
+					            		    	  		 {
+					            		    	  			 
+					                		            reject(err);
+					                		         });
+				        					}
+		        						},(err)=>{
+        				    	            		reject(err);
+        				    	          	});
+		        						
+		        						
+			        			    	}    	
+		        					else if(document.clinicIssues)
+		        	  			    	{
+		        						clinicServices.deleteAllClinicIssue(id).then(()=>
+        								{
+        									ModelUtil.findById(id).then((result)=>
+        		          					{
+        		          						
+    		                					ModelUtil.deleteDoc(result._id,result._rev).then(()=>
+        		          					    {
+        		          					    	resolve();
+        		          					    }
+        		          					    ,(err)=>
+        		          					    {
+        		          						     reject(err);
+        		          						});
+        		                					
+        		          					 },(err)=>
+        		            		    	  		 {
+        		            		    	  			 
+        		                		            reject(err);
+        		                		         });
+        								},(err)=>{
+				    	            				reject(err);
+    				    	          		});
+		        	  			    	}
+		        					else
+		        					{
+		        							ModelUtil.findById(id).then((result)=>
+			          					{
+			          						ModelUtil.deleteDoc(result._id,result._rev).then(()=>
+			          					    {
+			          					    	resolve();
+			          					    }
+			          					    ,(err)=>
+			          					    {
+			          						    reject(err);
+			          						});
+			                					
+			          					 },(err)=>
+			            		    	  		 {
+			            		    	  			 
+			                		            reject(err);
+			                		         });
+		        					}
+		        					
+		        					resolve();
+		        		         }
+		    		    	  		 ,(err)=>
+		    		    	  		 {
+		    		    	  			 
+		        		            reject(err);
+		        		         });
+		    		    	  }
+		    		      else
+		    		    	  {
+		    		    	  	  for(let i = 0; i < project.members.length; i ++)
+				    		  {
+		    		    	  		  if(project.members[i]._id == id)
+	    		    	  			  {
+		    		    	  			  project.members.splice(i,1);
+		    		    	  			  break;
+	    		    	  			  }
+				    		  }
+		    		    	  	  ModelUtil.updateDoc(project).then(()=>{
+		    		    	  		  	
+		    		    	  		  if(document.enrollments)
+			        			    	{
+		        						eventsService.unenrollAll(id).then(()=>
+		        						{
+		        							if(document.clinicIssues)
+			        	  			    		{	
+		        								clinicServices.deleteAllClinicIssue(id).then(()=>
+		        								{
+		        									
+		        									ModelUtil.findById(id).then((result)=>
+		        		          					{
+		        		          						
+		        		                				ModelUtil.deleteDoc(result._id,result._rev).then(()=>
+		        		          					    {
+		        		          					    		
+		        		          					        resolve();
+		        		          					    }
+		        		          					    ,(err)=>
+		        		          					    {
+		        		          						     reject(err);
+		        		          						});
+		        		                					
+		        		          					 },(err)=>
+		        		            		    	  		 {
+		        		            		    	  			 
+		        		                		            reject(err);
+		        		                		         });
+		        								},(err)=>{
+        				    	            				reject(err);
+	        				    	          		});
+			        	  			    		}
+		        							else
+				        					{
+				        							ModelUtil.findById(id).then((result)=>
+					          					{
+					          						
+					                					ModelUtil.deleteDoc(result._id,result._rev).then(()=>
+						          					    {
+						          					    	resolve();
+						          					    }
+						          					    ,(err)=>
+						          					    {
+						          						     reject(err);
+						          						});
+					                					
+					          					 },(err)=>
+					            		    	  		 {
+					            		    	  			 
+					                		            reject(err);
+					                		         });
+				        					}
+		        							
+		        						},(err)=>{
+        				    	            		reject(err);
+        				    	          	});
+		        						
+		        						
+			        			    	}    	
+		        					else if(document.clinicIssues)
+		        	  			    	{
+		        						clinicServices.deleteAllClinicIssue(id).then(()=>
+        								{
+        									
+        									ModelUtil.findById(id).then((result)=>
+        		          					{
+        		          						ModelUtil.deleteDoc(result._id,result._rev).then(()=>
+        		          					    {
+        		          					    	resolve();
+        		          					    }
+        		          					    ,(err)=>
+        		          					    {
+        		          						     reject(err);
+        		          						});
+        		                					
+        		          					 },(err)=>
+        		            		    	  		 {
+        		            		    	  			 
+        		                		            reject(err);
+        		                		         });
+        								},(err)=>{
+				    	            				reject(err);
+    				    	          		});
+		        	  			    	}
+		        					else
+		        					{
+		        							ModelUtil.findById(id).then((result)=>
+			          					{
+			          						ModelUtil.deleteDoc(result._id,result._rev).then(()=>
+			          					    {
+			          					    	resolve();
+			          					    }
+			          					    ,(err)=>
+			          					    {
+			          						     reject(err);
+			          						});
+			                					
+			          					 },(err)=>
+			            		    	  		 {
+			            		    	  			 
+			                		            reject(err);
+			                		         });
+		        					}
+		    		    	  		  resolve();
+		    		    	  	  },(err)=>
+	    		    	  		 {
+	    		    	  			 
+	        		            reject(err);
+	        		         });
+		    		    	  }
+	        			  
+		    		      resolve(message);
+		    		   }
+		    		   ,(err)=>{
+		    			   reject(err);
+		    		    });	
+		    	  }
+		    	  else if(document.enrollments)
+		    	  {
+						eventsService.unenrollAll(id).then(()=>
+						{
+							if(document.clinicIssues)
+	    	  			    		{	
+									clinicServices.deleteAllClinicIssue(id).then(()=>
+									{
+										ModelUtil.findById(id).then((result)=>
+			          					{
+			          						ModelUtil.deleteDoc(result._id,result._rev).then(()=>
+			          					    {
+			          					    	resolve();
+			          					    }
+			          					    ,(err)=>
+			          					    {
+			          						     reject(err);
+			          						});
+			                					
+			          					 },(err)=>
+			            		    	  		 {
+			            		    	  			 
+			                		            reject(err);
+			                		         });
+									},(err)=>{
+			    	            				reject(err);
+				    	          		});
+	    	  			    		}
+							else
+							{
+								  	ModelUtil.findById(id).then((result)=>
+								  	{
+										ModelUtil.deleteDoc(result._id,result._rev).then(()=>
+										{
+											resolve();
+									    }
+									    ,(err)=>
+									    {
+										     reject(err);
+										});
+							
+									 },(err)=>
+								  		 {
+								  			 
+								        reject(err);
+								     });
+							}
+							
+						},(err)=>{
+		    	            		reject(err);
+		    	          	});
+						
+						
+    			  }
+		    	  else if(document.clinicIssues)
+		    	  {
+		    		clinicServices.deleteAllClinicIssue(id).then(()=>
+					{
+						
+						ModelUtil.findById(id).then((result)=>
+    					{
+    						
+    						ModelUtil.deleteDoc(result._id,result._rev).then(()=>
+    					    {
+    					    	resolve();
+    					    }
+    					    ,(err)=>
+    					    {
+    						     reject(err);
+    						});
+          					
+    					 },(err)=>
+    					 {
+      		    	  			 
+          		            reject(err);
+          		     });
+					},(err)=>{
+            				reject(err);
+    	          		});
+			    	
+		    	  }
+		    	  else
+		    	  {
+		    		  	ModelUtil.findById(id).then((result)=>
+					{
+						ModelUtil.deleteDoc(result._id,result._rev).then(()=>
+					    {
+					    	resolve();
+					    }
+					    ,(err)=>
+					    {
+						    reject(err);
+						});
+				
+					 },(err)=>
+		    	  		 {
+		    	  			 
+	  		            reject(err);
+	  		         });
+		    	  }
+
+		    	  resolve();
+		    	  
+		    	  
 
     });
 
@@ -367,7 +1148,7 @@ exports.assignProjectsToMentor = function(userObj){
         userObj.projects[i].cycle = cycle.data[0]._id;
       }
 
-
+    
     ModelUtil.findById(userObj._id).then((freshUser)=>{
       //user must be mentor to assign projects to him
       if(!freshUser.groups || freshUser.groups.length == 0 || freshUser.groups[0].name !== CONSTANTS.groups.mentor){
@@ -394,30 +1175,16 @@ exports.assignProjectsToMentor = function(userObj){
         let deassignProjectPromises = [];
         Promise.all(promises).then((freshProjects)=>{
           let emailData = {"projects" : freshProjects, mentor : freshUser};
-          //Notify superadmin
-          const superadmins = cache.get(CONSTANTS.groups.super_admin);
           let emails;
-          emails = ObjectUtil.getArrayValuesFromJsons(superadmins, 'email').toString();
-          MailUtil.sendEmail(CONSTANTS.mail.assign_mentor, CONSTANTS.mailTemplates.assign_mentor, "Projects are assigned to mentor", emailData, CONSTANTS.language.en, emails).then((info)=>{
-            let message = new Message(Message.EMAIL_SENT, null, messages.businessMessages.email_sent_success);
-            pino.info(message);
-          }, (err)=>{
-            let errorMessage = new ErrorMessage(ErrorMessage.EMAIL_ERROR, err);
-            pino.error(errorMessage);
-          });
-
-          //Notify Mentor
-
           emails = freshUser.email;
-          MailUtil.sendEmail(CONSTANTS.mail.assign_mentor_email, CONSTANTS.mailTemplates.assign_mentor_email, "Your are assigned to projects", emailData, CONSTANTS.language.en, emails).then((info)=>{
+         MailUtil.sendEmail(CONSTANTS.mail.assign_mentor_email, CONSTANTS.mailTemplates.assign_mentor_email, "Projects Assigned To You", emailData, CONSTANTS.language.en, emails).then((info)=>{
             let message = new Message(Message.EMAIL_SENT, null, messages.businessMessages.email_sent_success);
             pino.info(message);
           }, (err)=>{
             let errorMessage = new ErrorMessage(ErrorMessage.EMAIL_ERROR, err);
             pino.error(errorMessage);
-          });
-
-          for (var i = 0; i < freshProjects.length; i++) {
+                });
+      for (var i = 0; i < freshProjects.length; i++) {
             //deassign project from its old mentors
             // this condition freshProjects[i].mentors[0]._id !== userObj._id, just to make sure the current mentor is not the old mentor
             if(freshProjects[i].mentors && freshProjects[i].mentors[0]._id !== userObj._id && freshProjects[i].mentors.length > 0){
@@ -456,6 +1223,45 @@ exports.assignProjectsToMentor = function(userObj){
   });
 }
 
+
+exports.assignRoleNewCycle = function(userObj){
+	  return new Promise((resolve, reject)=>{
+	    ModelUtil.findById(userObj._id).then((freshUser)=>{
+
+	      const oldPic = freshUser.profilePic;
+	      const newPic = userObj.profilePic;
+
+	      if(newPic && oldPic && oldPic.id !== newPic.id){
+	        attachementService.removeAttachement(oldPic.id, oldPic.rev).then((response)=>{
+	          attachementService.attachAttachments([newPic], true).then(()=>{
+	            // resolve(message);
+	            pino.info('image updated');
+	          },(err)=>{
+	            pino.error(err);
+	          });
+	        }, (err)=>{
+	          pino.error(err);
+	        });
+	      }
+
+	      ObjectUtil.copySameTypeObject(userObj, freshUser);
+
+
+	      ModelUtil.insertDoc(freshUser).then((result)=>
+	      {
+	        let message =  new Message(Message.UPDATE_OBJECT, result, messages.businessMessages.user_update_success);
+	        resolve(message);
+	        
+	      }, (err)=>{
+	        return utils.rejectMessage(ErrorMessage.DATABASE_ERROR,  err, funcName, reject);
+	      });
+
+	    }, (err)=>{
+	      return utils.rejectMessage(ErrorMessage.DATABASE_ERROR,  err, funcName, reject);
+	    });
+	  });
+}
+
 exports.assignRole = function(userObj){
   return new Promise((resolve, reject)=>{
     ModelUtil.findById(userObj._id).then((freshUser)=>{
@@ -487,16 +1293,28 @@ exports.assignRole = function(userObj){
 
         for (var i = 0; i < superadmins.length; i++) {
           let emails;
-          emails = superadmins[i].email;
+         /* emails = superadmins[i].email;
           let emailData = {user : freshUser, admin : superadmins[i]};
-          MailUtil.sendEmail(CONSTANTS.mail.change_role, CONSTANTS.mailTemplates.change_role, "Role of user  " + freshUser.firstName + " has been changed", emailData, CONSTANTS.language.en, emails).then((info)=>{
+          MailUtil.sendEmail(CONSTANTS.mail.change_role, CONSTANTS.mailTemplates.change_role, "Role Changed", emailData, CONSTANTS.language.en, emails).then((info)=>{
+            let message = new Message(Message.EMAIL_SENT, null, messages.businessMessages.email_sent_success);
+            pino.info(message);
+          }, (err)=>{
+            let errorMessage = new ErrorMessage(ErrorMessage.EMAIL_ERROR, err);
+            pino.error(errorMessage);
+          });*/
+          emails = freshUser.email;
+          let emailData = {user : freshUser};
+          MailUtil.sendEmail(CONSTANTS.mail.change_role_email, CONSTANTS.mailTemplates.change_role_email, "Role Changed", emailData, CONSTANTS.language.en, emails).then((info)=>{
             let message = new Message(Message.EMAIL_SENT, null, messages.businessMessages.email_sent_success);
             pino.info(message);
           }, (err)=>{
             let errorMessage = new ErrorMessage(ErrorMessage.EMAIL_ERROR, err);
             pino.error(errorMessage);
           });
+          
         }
+        
+        
 
         resolve(message);
       }, (err)=>{

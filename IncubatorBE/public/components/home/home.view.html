@@ -1,5 +1,50 @@
 <div id="home" ng-controller="homeController" ng-init="init()">
-	<div uib-carousel active="active" interval="myInterval" no-wrap="noWrapSlides">
+	
+<!-- 	<div class="admissionBanner" ng-show="isAdmission">
+		
+			<div class="admissionBannerImage image-circle">
+				<img ng-src="{{ 'admissionImg' | translate }}" style="padding-bottom:0;"/>
+				<div class="container">
+					<div class="row">
+						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 hidden-xs hidden-sm">
+							<div class="banner-top-section-inner text-right">
+								<p>
+								  {{ 'admissionText1' | translate }}
+								  <br/>
+								  <br/>
+								  {{ 'admissionText2' | translate }}
+								  <br/>
+								  <br/>
+								  {{ 'admissionText3' | translate }}
+								  <br/>
+								  <br/>
+								  {{ 'admissionText4' | translate }}
+								</p>
+								<div  class="admissionBannerLink">
+									<button ng-click="applyNow()">{{ 'ideaTitle' | translate }}</button>
+								</div>
+							
+							</div>
+						</div>
+						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 hidden-lg hidden-md">
+							<div class="top-section-inner-sm">
+								<button ng-click="applyNow()">{{ 'ideaTitle' | translate }}</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div  class="admissionBannerLink">
+				<button ng-click="applyNow()">{{ 'ideaTitle' | translate }}</button>
+			</div>
+		
+	</div>
+	 -->
+	
+	
+	
+	<div class="carousel" uib-carousel active="active" interval="myInterval" no-wrap="noWrapSlides">
 		<div uib-slide ng-repeat="slide in slides track by $index" index="$index" >
 			<img class="image-circle" ng-src="{{slide.image}}" style="margin:auto;" />
 			<div class="container">
@@ -126,7 +171,7 @@
 			 </div>
 		 </div>
 		 <div uib-carousel active="activeNew" interval="newsInterval" no-wrap="noWrapNews">
-			 <div uib-slide ng-repeat="news in newsList | filter: {active: true } track by $index" index="$index" >
+			 <div uib-slide ng-repeat="news in eventsList track by $index" index="$index" >
 				<div class="container">
 					<div class="row">
 						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -140,7 +185,7 @@
 									</div>
 									<div class="col-lg-10 col-md-10 col-sm-12 col-xs-12 pull-right newsDesc">
 										<p class="text-left">
-											{{news.details | limitTo: 150 }}{{news.details.length > 150 ? '...' : ''}}
+											{{news.value.details | limitTo: 150 }}{{news.details.length > 150 ? '...' : ''}}
 											<a ng-click="viewNewsDetails(news)" >{{ 'readMore' | translate }}</a>
 										</p>
 									</div>
@@ -239,8 +284,6 @@
 		position: absolute;
 	}
 	@media (max-width: 992px) {
-		.header-lg{
-			top:52px;
-		}
+		
 	}
 </style>

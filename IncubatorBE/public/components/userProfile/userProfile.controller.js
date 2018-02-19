@@ -55,7 +55,8 @@ fepsApp.controller('userProfileController', function ($scope, $window, $rootScop
         });
         
         var error = $scope.signUp.$error;
-        angular.forEach(error, function(field){
+        angular.forEach(error, function(field)
+        {
         	console.log(field);
         });
         
@@ -72,7 +73,9 @@ fepsApp.controller('userProfileController', function ($scope, $window, $rootScop
             	if(success.data.length > 0 &&success.data[0].type == "Error"){
             		$scope.errorMessage = success.data[0].message.en;
             		usSpinnerService.stop('spinner');
-            	}else{
+            	}
+            	else
+            	{
             	    $localStorage.currentUser._id = success.data.data.id;
                     $localStorage.currentUser._rev = success.data.data.rev;
                     
@@ -123,11 +126,15 @@ fepsApp.controller('userProfileController', function ($scope, $window, $rootScop
     $scope.uploadProfileImage = function () {
 
         usSpinnerService.spin('spinner');
-        sharedDataService.addFile($scope.profileImageFile).then(
-            function (result) {
+        sharedDataService.addFile($scope.profileImageFile).then
+        (
+            function (result) 
+            {
+            	console.log("stopping");
                 usSpinnerService.stop('spinner');
                 $scope.profileImageUploaded = true;
-                $scope.profileImageAttachment = {
+                $scope.profileImageAttachment = 
+                {
                     key: result.data.attachements[0].key,
                     id: result.data._id,
                     rev: result.data._rev
@@ -165,6 +172,7 @@ fepsApp.controller('userProfileController', function ($scope, $window, $rootScop
         if (param.username) {
             $scope.editEnabled = false;
             userProfileService.getUserByUsername($routeParams.username).then(function (success) {
+            	
                 $scope.currentUser = success.data.data;
                 $scope.currentUser.birthdate = ($scope.currentUser.birthdate) ? new Date($scope.currentUser.birthdate) : "";
                 $scope.currentUser.graduationYear = ($scope.currentUser.graduationYear) ? new Date($scope.currentUser.graduationYear) : "";

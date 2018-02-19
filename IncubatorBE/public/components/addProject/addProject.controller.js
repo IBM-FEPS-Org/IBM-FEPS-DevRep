@@ -42,6 +42,8 @@ fepsApp.controller('addProjectController', function ($scope,$translate,$uibModal
 	$scope.viewMode = 1;
 
 	$scope.showFeedBack = false;
+	$scope.showComment = false;
+	$scope.showScore = false;
 	$scope.disableFeedBack =false;
 	$scope.disableComment =false;
 	
@@ -131,13 +133,15 @@ fepsApp.controller('addProjectController', function ($scope,$translate,$uibModal
 								rev:$scope.project.afiliationAttachment.rev
 						};
             		}
-            		if($scope.project.prototypeAttachment && $scope.project.prototypeAttachment.id){
+            		if($scope.project.prototypeAttachment && $scope.project.prototypeAttachment.id)
+            		{
             			$scope.prototypeUploaded = true;
 						$scope.prototypeAttachment = {
 								key : $scope.project.prototypeAttachment.key,
 								id:$scope.project.prototypeAttachment.id,
 								rev:$scope.project.prototypeAttachment.rev
 						};
+						$scope.prototypeFile = $scope.project.prototypeAttachment.key;
             		}
             		if($scope.project.incubationAttachments && $scope.project.incubationAttachments.length>0){
             		    $scope.incubationAttachments = $scope.project.incubationAttachments;
@@ -147,7 +151,9 @@ fepsApp.controller('addProjectController', function ($scope,$translate,$uibModal
             			if($scope.cycle.currentPhase == "Admission" && $localStorage.currentUser.projects[0].role == "Founder"){
                 			$scope.viewMode = 2;
                 			$scope.affiliationRequired = false;
-                		}else{
+                		}
+            			else
+                		{
                 			$scope.viewMode = 3;
                 			$scope.affiliationRequired = false;
                 		}
@@ -163,35 +169,41 @@ fepsApp.controller('addProjectController', function ($scope,$translate,$uibModal
                 	}
 
                 	//check to view feed back and score sections
-                    if($scope.cycle.currentPhase == "Revision" &&
-                            ($localStorage.currentUser.groups[0].id == 1
+                    if($scope.cycle.currentPhase == "Revision" && ($localStorage.currentUser.groups[0].id == 1
                              || $localStorage.currentUser.groups[0].id == 4
-                             || $localStorage.currentUser.groups[0].id == 7)){
+                             || $localStorage.currentUser.groups[0].id == 6
+                             || $localStorage.currentUser.groups[0].id == 9
+                             || $localStorage.currentUser.groups[0].id == 10
+                             || $localStorage.currentUser.groups[0].id == 7))
+                    {
                            $scope.showFeedBack = true;
                            var role = $localStorage.currentUser.groups[0].id;
                            var projectStatus = $scope.project.status;
-                           console.log(projectStatus); 
-                           if(role == 1 || role == 4){
+//                           console.log(projectStatus); 
+                           if(role == 1 || role == 4 || role == 7)
+                           {
                                $scope.disableComment = false;
-                               if($scope.project.score && $scope.project.score != ""){
-                                   $scope.disableFeedBack = true; 
-                               }else{
-                                   $scope.disableFeedBack = false; 
-                               }
-                           }else{
+		                       $scope.showComment = true;
+		                       $scope.showScore = true;
+                               
+                           }
+                           else
+                           {
                                $scope.disableComment = true;
-                               if(projectStatus == 2){
+                               
+                               if(projectStatus == 2)
+                               {
                                    $scope.disableFeedBack = false;
-                               }else{
+                               }
+                               else
+                               {
                                    $scope.disableFeedBack = true; 
                                }
                            }
-                           
-                           
-                         
-                               
                             
-                    }else{
+                    }
+                    else
+                    {
                            $scope.showFeedBack = false;
                     }
                     //check to view incubation attachment sections
@@ -215,7 +227,7 @@ fepsApp.controller('addProjectController', function ($scope,$translate,$uibModal
                     }
 
             	},function (response) {
-            		console.log(response);
+//            		console.log(response);
             		if(response.statusText == ""){
             			$scope.errorMessage = "systemDown";
                 		console.log("get project failed");
@@ -279,7 +291,8 @@ fepsApp.controller('addProjectController', function ($scope,$translate,$uibModal
         }
     }
 
-    $scope.uploadPrototypeFile = function(){
+    $scope.uploadPrototypeFile = function()
+    {
         var english = /^[A-Za-z0-9-\s_\.]*$/;
         if (english.test($scope.prototypeFile.name)){
             $scope.prototypeFileNameNotValid = false;
@@ -431,6 +444,12 @@ fepsApp.controller('addProjectController', function ($scope,$translate,$uibModal
     {
     	$scope.members.push(data.addedMemebr);
     });
+    
+    $scope.openProfile = function (username) 
+    {
+        $location.path('fepsIncubator/viewProfile').search({'username':username});
+    }
+    
 
     $scope.deleteMember= function(memebrDeletedIndex){
         var modalInstance = $uibModal.open(
@@ -526,7 +545,7 @@ fepsApp.controller('addProjectController', function ($scope,$translate,$uibModal
                         template: '<p class="alert alert-success SuccessMsgPopup text-center">{{"projectFeedBackAddedSuccessMsg" | translate}}</p>',
                         controller: function ($uibModalInstance) {
                             $timeout(function () {
-                                $location.path('fepsIncubator/adminPage');
+                                $location.path('fepsIncubator/manageProjects');
                                 $uibModalInstance.close('close');
                             }, 3000);
                         },

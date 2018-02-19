@@ -12,21 +12,60 @@
 			<div class="editNewsContainer col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 pull-right">
 				<div class="row sectionRow">
 					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 pull-right">
-						<label> {{'eventDate' | translate}}* </label>
+						<label> {{'eventStartDate' | translate}}* </label>
 					</div>
 					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 pull-right">
 						<p class="input-group width100">
-							<input type="text" class="form-control" ng-disabled="viewMode == 3" placeholder="DD-MMMM-YYYY" uib-datepicker-popup="{{format}}" name="date" ng-model="newEvent.eventDate" is-open="DatePickerPopup.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
+							<input type="text" class="form-control" ng-disabled="viewMode == 3" placeholder="DD-MMMM-YYYY" uib-datepicker-popup="{{format}}" id="startDate" name="startDate" ng-model="newEvent.eventStartDate" is-open="DatePickerPopup.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
 							<span class="input-group-btn">
 								<button type="button" class="btn btn-default" ng-click="openDatePicker()"><i class="glyphicon glyphicon-calendar"></i></button>
 						  </span>
 						</p>
 					</div>
 					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 pull-right" >
-						<div class="alert alert-danger" ng-show="addEvent.date.$dirty && addEvent.date.$invalid">
-							<span ng-show="addEvent.date.$error.required">{{'eventDateRequired_Error_Msg' | translate}}</span>
-							<span ng-show="!addEvent.date.$error.required">
-						  	 <span ng-show="addEvent.date.$invalid">{{'eventDate_Error_Msg' | translate}}</span>
+						<div class="alert alert-danger" ng-show="addEvent.startDate.$dirty && addEvent.startDate.$invalid">
+							<span ng-show="addEvent.startDate.$error.required">{{'eventStartDateRequired_Error_Msg' | translate}}</span>
+							<span ng-show="!addEvent.startDate.$error.required">
+						  	 <span ng-show="addEvent.startDate.$invalid">{{'eventStartDate_Error_Msg' | translate}}</span>
+						   </span>
+						</div>
+					</div>
+				</div>
+				<div class="row sectionRow">
+					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 pull-right">
+						<label> {{'eventStartTime' | translate}}* </label>
+					</div>
+					<div uib-timepicker hour-step="1" minute-step="15" ng-required="true" name="startTime" style="padding-left: 15px"
+						ng-model="newEvent.eventStartDate" ng-disabled="viewMode == 3"  show-meridian="true">
+					</div>
+					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 pull-right" >
+						<div class="alert alert-danger" ng-show="addEvent.startTime.$dirty && addEvent.startTime.$invalid">
+							<span ng-show="addEvent.startTime.$error.required">{{'eventStartTimeRequired_Error_Msg' | translate}}</span>
+							<span ng-show="!addEvent.startTime.$error.required">
+						  	 <span ng-show="addEvent.startTime.$invalid">{{'eventStartTime_Error_Msg' | translate}}</span>
+						   </span>
+						</div>
+					</div>
+					
+				</div>
+				
+				<div class="row sectionRow">
+					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 pull-right">
+						<label> {{'eventEndDate' | translate}}* </label>
+					</div>
+					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 pull-right">
+						<p class="input-group width100">
+							<input type="text" class="form-control" ng-disabled="viewMode == 3" placeholder="DD-MMMM-YYYY" uib-datepicker-popup="{{format}}" name="endDate" ng-model="newEvent.eventEndDate" is-open="DatePickerPopup2.opened" datepicker-options="{'showWeeks': false, 'minDate': newEvent.eventStartDate}" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
+							<span class="input-group-btn">
+								<button type="button" class="btn btn-default" ng-click="openDatePicker2()"><i class="glyphicon glyphicon-calendar"></i></button>
+						  </span>
+						</p>
+					</div>
+					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 pull-right" >
+						<div class="alert alert-danger" ng-show="addEvent.endDate.$dirty && addEvent.endDate.$invalid">
+							<span ng-show="addEvent.endDate.$error.required">{{'eventEndDateRequired_Error_Msg' | translate}}</span>
+							<span ng-show="!addEvent.endDate.$error.required">
+						  	 <span ng-show="addEvent.endDate.$invalid">{{'eventEndDate_Error_Msg' | translate}}</span>
 						   </span>
 						</div>
 					</div>
@@ -34,22 +73,120 @@
 				
 				<div class="row sectionRow">
 					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 pull-right">
-						<label> {{'eventDateTime' | translate}}* </label>
+						<label> {{'eventEndTime' | translate}}* </label>
 					</div>
-					<div uib-timepicker hour-step="1" minute-step="15" ng-required="true" name="time" style="padding-left: 15px"
-						ng-model="newEvent.eventDate" ng-disabled="viewMode == 3"  show-meridian="true">
+					<div uib-timepicker hour-step="1" minute-step="15" ng-required="true" name="endTime" style="padding-left: 15px"
+						ng-model="newEvent.eventEndDate" ng-disabled="viewMode == 3"  show-meridian="true">
 					</div>
 					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 pull-right" >
-						<div class="alert alert-danger" ng-show="addEvent.time.$dirty && addEvent.time.$invalid">
-							<span ng-show="addEvent.time.$error.required">{{'eventTimeRequired_Error_Msg' | translate}}</span>
-							<span ng-show="!addEvent.time.$error.required">
-						  	 <span ng-show="addEvent.time.$invalid">{{'eventTime_Error_Msg' | translate}}</span>
+						<div class="alert alert-danger" ng-show="addEvent.endTime.$dirty && addEvent.endTime.$invalid">
+							<span ng-show="addEvent.endTime.$error.required">{{'eventEndTimeRequired_Error_Msg' | translate}}</span>
+							<span ng-show="addEvent.endTime.$error"> error </span>
+							<span ng-show="!addEvent.endTime.$error.required">
+						  	 <span ng-show="addEvent.endTime.$invalid">{{'eventEndTime_Error_Msg' | translate}}</span>
 						   </span>
 						</div>
 					</div>
 					
 				</div>
 				
+				<div class="row sectionRow">
+					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 pull-right">
+						<label> {{'eventEnrollmentDeadlineDate' | translate}}* </label>
+					</div>
+					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 pull-right">
+						<p class="input-group width100">
+							<input id ="deadline" type="text" class="form-control" ng-disabled="viewMode == 3" placeholder="DD-MMMM-YYYY" uib-datepicker-popup="{{format}}" name="deadlineDate" ng-model="newEvent.eventEnrollDeadline" is-open="DatePickerPopup3.opened" datepicker-options="{'showWeeks': false,'minDate': minDate
+							 ,'maxDate': newEvent.eventStartDate}" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
+							<span class="input-group-btn">
+								<button type="button" class="btn btn-default" ng-click="openDatePicker3()"><i class="glyphicon glyphicon-calendar"></i></button>
+						  </span>
+						</p>
+					</div>
+					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 pull-right" >
+						<div class="alert alert-danger" ng-show="addEvent.deadlineDate.$dirty && addEvent.deadlineDate.$invalid">
+							<span ng-show="addEvent.deadlineDate.$error.required">{{'eventDeadlineDateRequired_Error_Msg' | translate}}</span>
+							<span ng-show="!addEvent.deadlineDate.$error.required">
+						  	 <span ng-show="addEvent.deadlineDate.$invalid">{{'eventDeadlineDate_Error_Msg' | translate}}</span>
+						   </span>
+						</div>
+					</div>
+				</div>
+				
+				<div class="row sectionRow">
+					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 pull-right">
+						<label> {{'eventEnrollmentDeadlineTime' | translate}}* </label>
+					</div>
+					<div uib-timepicker hour-step="1" minute-step="15" ng-required="true" name="deadlineTime" style="padding-left: 15px"
+						ng-model="newEvent.eventEnrollDeadline" ng-disabled="viewMode == 3"  show-meridian="true">
+					</div>
+					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 pull-right" >
+						<div class="alert alert-danger" ng-show="addEvent.deadlineTime.$dirty && addEvent.deadlineTime.$invalid">
+							<span ng-show="addEvent.deadlineTime.$error.required">{{'eventDeadlineTimeRequired_Error_Msg' | translate}}</span>
+							<span ng-show="!addEvent.deadlineTime.$error.required">
+						  	 <span ng-show="addEvent.deadlineTime.$invalid">{{'eventDeadlineTime_Error_Msg' | translate}}</span>
+						   </span>
+						</div>
+					</div>
+					
+				</div>
+				
+				<div class="row sectionRow">
+					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 pull-right">
+						<label> {{'eventNoOfPlaces' | translate}}</label>
+					</div>
+					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 pull-right">
+						<input type="text" class="editNewsTitle width100" placeholder="{{ 'eventNoOfPlaces' | translate }}"
+							   ng-disabled="viewMode == 3" value="{{event.NoOfPlaces}}" ng-model="newEvent.NoOfPlaces" name ='NoOfPlaces' ng-trim="false"
+							   ng-pattern="/^[0-9]*$/">
+					</div>
+					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 pull-right">
+						<div class="alert alert-danger" ng-show="addEvent.NoOfPlaces.$dirty && addEvent.NoOfPlaces.$invalid">
+							<span ng-show="addEvent.NoOfPlaces.$error.pattern">{{'eventNoOfPlacesInvalid_Error_Msg' | translate}}</span>
+						</div>
+					</div>
+				</div>
+				
+				
+				<div class="row sectionRow">
+					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 pull-right">
+						<label> {{'eventFee' | translate}}</label>
+					</div>
+					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 pull-right">
+						<input type="text" class="editNewsTitle width100" placeholder="{{ 'eventFee' | translate }}"
+							   ng-disabled="viewMode == 3" value="{{event.fees}}" ng-model="newEvent.fees" name ='fees' ng-trim="false"
+							   ng-pattern="/^[0-9]*$/">
+					</div>
+					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 pull-right">
+						<div class="alert alert-danger" ng-show="addEvent.fees.$dirty && addEvent.fees.$invalid">
+							<span ng-show="addEvent.fees.$error.pattern">{{'eventFees_Error_Msg' | translate}}</span>
+						</div>
+					</div>
+				</div>
+				
+				<br />
+				
+				<div class="row sectionRow">
+	                <div class="col-lg-4 col-md-4 col-sm-12 col-sm-12 pull-right">
+	                    <label> {{'eventCertificate' | translate}}*</label>
+	                </div>
+	                <div class="col-lg-8 col-md-8 col-sm-12 col-sm-12 pull-right">
+	
+	                    <div class="pull-right radioDiv" style="margin-right: 40px">
+	                        <input type="radio" name="certificate" class="pull-right" ng-model="newEvent.certificate" value="true"
+	                               >
+	                        <div class="radioText pull-right">{{'eventCertificateYes' | translate}}</div>
+	                    </div>
+	                    <div class="pull-right radioDiv">
+	                        <input type="radio" name="certificate" class="pull-right" ng-model="newEvent.certificate" value="false"
+	                               checked>
+	                        <div class="radioText pull-right">{{'eventCertificateNo' | translate}}</div>
+	                    </div>
+	                </div>
+	            </div>
+				
+				<br />
+
 				<div class="row sectionRow">
 					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 pull-right">
 						<label> {{'eventTopic' | translate}}* </label>
@@ -66,6 +203,24 @@
 						</div>
 					</div>
 				</div>
+				
+				<div class="row sectionRow">
+					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 pull-right">
+						<label> {{'eventVenue' | translate}}* </label>
+					</div>
+					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 pull-right">
+						<input type="text" class="editNewsTitle width100" placeholder="{{ 'eventVenue' | translate }}"
+							   ng-disabled="viewMode == 3" value="{{event.venue}}" ng-model="newEvent.venue" name ='venue' required ng-trim="false"
+							   ng-pattern="/^(?=.*[0-9])*(?=.*[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z]|[0-9]+[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z]+|[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z]+[0-9]+)[0-9\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z!@#$&quot;{}=\-\\//?:;><%*,.\s()'_+^&\[\]]{5,100}$/">
+					</div>
+					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 pull-right">
+						<div class="alert alert-danger" ng-show="addEvent.venue.$dirty && addEvent.venue.$invalid">
+							<span ng-show="addEvent.venue.$error.required">{{'eventVenue_Error_Msg' | translate}}</span>
+							<span ng-show="addEvent.venue.$error.pattern">{{'eventVenueInvalid_Error_Msg' | translate}}</span>
+						</div>
+					</div>
+				</div>
+				
 				<div class="row sectionRow">
 					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 pull-right">
 						<label> {{'eventDescription' | translate}}* </label>
@@ -115,87 +270,97 @@
 						</div>
 					</div>
 				</div>
+				<br/>
 				<div class="row sectionRow">
-					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 pull-right">
-						<label> {{'eventVenue' | translate}}* </label>
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 pull-right">
+                        <label>{{ 'addEventAgenda' | translate }}</label>
+                        <div class="clearfix"></div>
+						<span class="smallLabel">( {{ 'imageSizeLabel' | translate }} ) </span>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 pull-right">
+	                    <div class="uploader" ng-show="!agendaUploaded">
+		                    <input type="file" class="pull-right" ngf-select="noAgendaSelected = false" ng-model="agendaFile" name="agendaFile" ngf-pattern="'image/*,application/pdf,.zip,.rar'"
+		             				accept="image/*,application/pdf,.zip,.rar" ngf-max-size="500KB" ngf-min-height="100"
+								    ngf-resize="{quality: 0.8}" ng-disabled="viewMode == 3" >
+		                    <button class="btn btn-success"  ng-disabled="noAgendaSelected" type="button" ng-click="uploadAgendaFile()">{{ 'uploadFile' | translate }}</button>
+		                    <button class="btn btn-success" ng-show = "agendaAttachment.id" type="button" ng-click="agendaUploaded = true">{{ 'cancelBtn' | translate }}</button>
+                            
+	                    </div>
+	                    <div ng-show="agendaUploaded">
+	                    	<a target="_self" href= "/attachements?id={{agendaAttachment.id}}&key={{agendaAttachment.key}}" download>{{agendaAttachment.key}}</a>
+	                    	<button  class="btn btn-success" ng-hide="viewMode == 3" type="button" ng-click="agendaUploaded = false" ng-disabled="viewMode == 3">{{ 'editAttachment' | translate }}</button>
+	                    </div>
+                	</div>
+                </div>
+                 <div class="alert alert-danger pull-left" ng-show="addEvent.agendaFile.$dirty && !addEvent.agendaFile.$invalid && !agendaUploaded">
+                     <span>{{ 'addAgendaUploadAttachment' | translate }}</span><br>
+                 </div>
+			                           
+                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pull-right">
+                 
+	                   <div class="alert alert-danger  text-center" ng-show="addEvent.agendaFile.$dirty && addEvent.agendaFile.$invalid">
+	                       <span ng-show="addEvent.agendaFile.$error.pattern">{{ 'addAgendaAttachmentValid' | translate }}</span>
+	                       <span ng-show="addEvent.agendaFile.$error.maxSize">{{ 'addAgendaFileLarge' | translate }}</span>
+	                   </div>
+              	</div>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pull-right" ng-show="agendaFileNameNotValid">
+		               <div class="alert alert-danger text-center">
+		                   <span>{{'addAgendaAttachmentNameValid' | translate}}</span>
+		               </div>
+       			</div>
+                <br/>
+				
+				
+			<div class="row sectionRow">
+               <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                   <h5>{{ 'eventSpeakers' | translate }} </h5>
+                   <div class="clearfix"></div>
+                   <a href="#" ng-click="openAddSpeaker()" ng-hide="viewMode == 3" >{{ 'addSpeaker' | translate }}</a>
+               </div>
+            </div>
+            <button class="btn btn-success" type="button" data-toggle="collapse" data-target="#speakers">View/Hide Speakers</button>
+            <div  id="speakers" class="collapse">
+            	<div ng-repeat="item in speakers">
+            	
+            		<div class="row sectionRow">
+						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 pull-right">
+							<label> {{'eventSpeakerName' | translate}}: </label>
+						</div>
+						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 pull-right">{{item.name}}</div>
 					</div>
-					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 pull-right">
-						<input type="text" class="editNewsTitle width100" placeholder="{{ 'eventVenue' | translate }}"
-							   ng-disabled="viewMode == 3" value="{{event.venue}}" ng-model="newEvent.venue" name ='Venue' required ng-trim="false"
-							   ng-pattern="/^(?=.*[0-9])*(?=.*[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z]|[0-9]+[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z]+|[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z]+[0-9]+)[0-9\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z!@#$&quot;{}=\-\\//?:;><%*,.'\s()_+^&\[\]]{5,100}$/">
+					<br/>
+            		<div class="row sectionRow">
+						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 pull-right">
+							<label> {{'eventSpeakerBio' | translate}}: </label>
+							
+						</div>
+						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 pull-right">{{item.bio}}</div>
 					</div>
-					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 pull-right">
-						<div class="alert alert-danger" ng-show="addEvent.Venue.$dirty && addEvent.Venue.$invalid">
-							<span ng-show="addEvent.Venue.$error.required">{{'eventVenue_Error_Msg' | translate}}</span>
-							<span ng-show="addEvent.Venue.$error.pattern">{{'eventVenueInvalid_Error_Msg' | translate}}</span>
+					<br/>
+					<div class="row sectionRow" ng-show="item.eventSpeakerPicUploaded">
+						<span us-spinner="{radius:30, width:8, length: 16}"  spinner-start-active="spinneractive" spinner-key="EventSpeakerProfilePicSpinner"></span>
+						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 pull-right">
+							<label>{{ 'eventSpeakerProfilePic' | translate }}:</label>
+							<div ng-show="item.eventSpeakerPicUploaded">
+								<img ng-src="{{item.eventSpeakerPicSource}}">
+							</div>
 						</div>
 					</div>
-				</div>
+					<br/>
+					<div ng-hide="viewMode == 3">
+						<button type="button" ng-click="deleteSpeaker($index)" class="actionBtn dangerBtn btn" >{{ 'delete' | translate }}</button>
+						<button type="button" ng-click="editSpeaker($index)" class="actionBtn greenBtn btn" >{{ 'edit' | translate }}</button>
+					
+					</div>
+					
+					
+					<br/>
+					<hr>
 
-				<div class="row sectionRow">
-					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 pull-right">
-						<label> {{'eventSpeakerName' | translate}}* </label>
-					</div>
-					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 pull-right">
-						<input type="text" ng-disabled="viewMode == 3" class="editNewsTitle width100" placeholder="{{ 'eventSpeakerName' | translate }}"
-							   value="{{event.speakers[0].name}}" ng-model="newEvent.speakers[0].name" name ='eventSpeakerName' required ng-trim="false"
-							   ng-pattern="/^(?=.*[0-9])*(?=.*[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z]|[0-9]+[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z]+|[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z]+[0-9]+)[0-9\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z!@#$&quot;{}=\-\\//?:;><%*,.'\s()_+^&\[\]]{5,100}$/">
-					</div>
-					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 pull-right">
-						<div class="alert alert-danger" ng-show="addEvent.eventSpeakerName.$dirty && addEvent.eventSpeakerName.$invalid">
-							<span ng-show="addEvent.eventSpeakerName.$error.required">{{'eventSpeakerName_Error_Msg' | translate}}</span>
-							<span ng-show="addEvent.eventSpeakerName.$error.pattern">{{'eventSpeakerNameInvalid_Error_Msg' | translate}}</span>
-						</div>
-					</div>
-				</div>
-				<div class="row sectionRow">
-					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 pull-right">
-						<label> {{'eventSpeakerBio' | translate}}* </label>
-					</div>
-					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 pull-right">
-						<input type="text" ng-disabled="viewMode == 3" class="editNewsTitle width100" placeholder="{{ 'eventSpeakerBio' | translate }}"
-							   value="{{event.speakers[0].bio}}" ng-model="newEvent.speakers[0].bio" name ='eventSpeakerBio' required ng-trim="false"
-							   ng-pattern="/^(?=.*[0-9])*(?=.*[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z]|[0-9]+[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z]+|[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z]+[0-9]+)[0-9\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z!@#$&quot;{}=\-\\//?:;><%*,.'\s()_+^&\[\]]{5,100}$/">
-					</div>
-					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 pull-right">
-						<div class="alert alert-danger" ng-show="addEvent.eventSpeakerBio.$dirty && addEvent.eventSpeakerBio.$invalid">
-							<span ng-show="addEvent.eventSpeakerBio.$error.required">{{'eventSpeakerBio_Error_Msg' | translate}}</span>
-							<span ng-show="addEvent.eventSpeakerBio.$error.pattern">{{'eventSpeakerBioInvalid_Error_Msg' | translate}}</span>
-						</div>
-					</div>
-				</div>
-				<div class="row sectionRow">
-					<span us-spinner="{radius:30, width:8, length: 16}"  spinner-start-active="spinneractive" spinner-key="EventSpeakerProfilePicSpinner"></span>
-					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 pull-right">
-						<label>{{ 'eventSpeakerProfilePic' | translate }}*</label>
-						<div class="clearfix"></div>
-						<span class="smallLabel" ng-hide="viewMode == 3">( {{ 'imageSizeLabel' | translate }} ) </span>
-					</div>
-					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 pull-right">
-						<div class="uploader pull-right" ng-show="!eventSpeakerPicUploaded">
-							<input type="file" class="pull-right" ngf-select="profileImageSelected = false" ng-model="profilePic" name="eventSpeackerPic" ngf-pattern="image/png,image/jpg,image/jpeg"
-								   accept="image/png,image/jpg,image/jpeg" ngf-max-size="500KB" ngf-min-height="100" required
-								   ngf-resize="{width: 200, height: 200}" >
+            	</div>
+            
+            </div>
 
-							<button class="btn btn-success" ng-disabled="profileImageSelected || addEvent.eventSpeackerPic.$invalid" type="button" ng-click="uploadSpeakerProfilePic()">{{ 'uploadFile' | translate }}</button>
-							<button class="btn btn-success" type="button" ng-click="cancelEditProfilePic()">{{ 'cancelBtn' | translate }}</button>
-						</div>
-						<div ng-show="eventSpeakerPicUploaded">
-							<img ng-src="{{eventSpeakerPicSource}}">
-							<button  class="btn btn-success" type="button" ng-hide="viewMode == 3" ng-click="eventSpeakerPicUploaded = false"  >{{ 'editProfileImage' | translate }}</button>
-						</div>
-						<div class="alert alert-danger pull-left" ng-show="addEvent.eventSpeackerPic.$dirty && !addEvent.eventSpeackerPic.$invalid && !eventSpeakerPicUploaded">
-							<span>{{ 'addprojectUploadAttachment' | translate }}</span><br>
-						</div>
-					</div>
-					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 pull-right">
-						<div class="alert alert-danger" ng-show="addEvent.eventSpeackerPic.$dirty && addEvent.eventSpeackerPic.$invalid">
-							<span ng-show="addEvent.eventSpeackerPic.$error.pattern">{{ 'ImageFileValid' | translate }}</span>
-							<span ng-show="addEvent.eventSpeackerPic.$error.maxSize">{{ 'addprojectAttachmentLarge' | translate }}</span>
-							<span ng-show="addEvent.eventSpeackerPic.$error.required">{{ 'ImageFileRequired' | translate }}</span>
-						</div>
-					</div>
-				</div>
 			</div>
 		</form>
 		<div class="actionBtnsContainer col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 pull-right" ng-hide="viewMode == 3">

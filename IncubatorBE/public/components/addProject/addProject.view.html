@@ -87,7 +87,7 @@
                     </thead>
                     <tbody>
                         <tr class="tableRow" ng-class-even="rowB" ng-class-odd="rowA" ng-repeat="item in filtered | startFrom:(paginationOptions.currentPage-1)*paginationOptions.itemsPerPage | limitTo:paginationOptions.itemsPerPage track by $index">
-                            <td class="tableCell">{{item.username}}</td>
+                            <td class="tableCell"> <a href="#" ng-bind="item.username" ng-click="openProfile(item.username)"></a></td>
                             <td class="tableCell">{{item.firstName}}{{" "}}{{item.surName}}</td>
                             <td class="tableCell">{{item.email}}</td>
                             <td class="tableCell">{{item.role}}</td>
@@ -282,27 +282,28 @@
                 </div>
                 <div class="row sectionRow2" >
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pull-right">
-                        <label>{{ 'showcase' | translate }}*</label>
+                        <label>{{ 'showcase' | translate }}</label>
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 pull-right">
-                        <input type="url" name="showcase" ng-disabled="viewMode == 3" ng-model="project.showcase" required>
+                        <input type="url" name="showcase" ng-disabled="viewMode == 3" ng-model="project.showcase">
                     </div>
                     <div class="alert alert-danger col-lg-6 col-md-6 col-sm-12 col-xs-12 pull-right" ng-show="addProjectForm.showcase.$dirty && addProjectForm.showcase.$invalid">
-                        <span ng-show="addProjectForm.showcase.$error.required">{{ 'showcaseRequired' | translate }}</span>
-                        <span ng-show="addProjectForm.showcase.$error.url">{{ 'showcasevalidate' | translate }}</span>
+                      <span ng-show="addProjectForm.showcase.$error.url">{{ 'showcasevalidate' | translate }}</span>
                     </div>
                 </div>
                 <div class="row sectionRow">
                     <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 pull-right">
-                        <label>{{ 'addProjectPrototype' | translate }}</label>
+                        <label>{{ 'addProjectPrototype' | translate }}*</label>
                         <div class="clearfix"></div>
 						<span class="smallLabel">( {{ 'imageSizeLabel' | translate }} ) </span>
+						<br/>
+						<span class="smallLabel">( {{ 'addProjectPrototypeDescription' | translate }} ) </span>
                     </div>
                     <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 pull-right">
 	                    <div class="uploader" ng-show="!prototypeUploaded">
 		                    <input type="file" class="pull-right" ngf-select="noPrototypeSelected = false" ng-model="prototypeFile" name="prototypeFile" ngf-pattern="'image/*,application/pdf,.zip,.rar'"
 		             				accept="image/*,application/pdf,.zip,.rar" ngf-max-size="500KB" ngf-min-height="100"
-								    ngf-resize="{quality: 0.8}" ng-disabled="viewMode == 3">
+								    ngf-resize="{quality: 0.8}" ng-disabled="viewMode == 3" required>
 		                    <button class="btn btn-success"  ng-disabled="noPrototypeSelected" type="button" ng-click="uploadPrototypeFile()">{{ 'uploadFile' | translate }}</button>
 		                    <button class="btn btn-success" ng-show = "prototypeAttachment.id" type="button" ng-click="prototypeUploaded = true">{{ 'cancelBtn' | translate }}</button>
                             <div class="alert alert-danger pull-left" ng-show="addProjectForm.prototypeFile.$dirty && !addProjectForm.prototypeFile.$invalid && !prototypeUploaded">
@@ -311,6 +312,7 @@
                             <div class="alert alert-danger pull-left" ng-show="addProjectForm.prototypeFile.$dirty && addProjectForm.prototypeFile.$invalid">
                                 <span ng-show="addProjectForm.prototypeFile.$error.pattern">{{ 'addprojectAttachmentValid' | translate }}</span>
                                 <span ng-show="addProjectForm.prototypeFile.$error.maxSize">{{ 'addprojectFileLarge' | translate }}</span>
+                            	   <span ng-show="addProjectForm.prototypeFile.$error.required">{{ 'addProjectPrototypeRequired' | translate }}</span>
                             </div>
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pull-right" ng-show="prototypeFileNameNotValid">
 				                <div class="alert alert-danger text-center">
@@ -414,7 +416,7 @@
 	            	</div>
 
                 </div>
-                <div class="row sectionRow">
+                <div class="row sectionRow" ng-show="showScore">
                     <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 pull-right">
                         <label>{{ 'addProjectScore' | translate }}*</label>
                     </div>
@@ -426,7 +428,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="row sectionRow">
+                <div class="row sectionRow" ng-show="showComment">
                     <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 pull-right">
                         <label>{{ 'addProjectComment' | translate }}</label>
                     </div>

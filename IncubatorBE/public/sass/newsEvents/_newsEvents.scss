@@ -100,7 +100,8 @@
 
 
 
-    .belowSection {
+    .belowSection
+    {
         background-color: $bg;
         padding: 20px 35px;
         font-family: $ffLight;
@@ -108,19 +109,27 @@
         min-height: 45vh;
         font-size: 16px;
         height: auto;
-        .newsEventsParagraphsContainer{
-            .newsContent{
+        .newsEventsParagraphsContainer
+        {
+            .newsContent
+            {
                 text-align: justify;
-                img{
+                img
+                {
                   margin:0 0 0 20px;
                 }
             }
 
 
         }
-        .eventsDetailsContianer{
-            .newsContent{
+        .eventsDetailsContianer
+       	{
+            .newsContent
+            {
                 text-align: justify;
+                white-space: pre-wrap;
+                margin-bottom: 0;
+                margin-top: 0;
             }
             .eventImgDiv{
                 img{
@@ -135,9 +144,14 @@
                     font-weight: bold;
                     font-size: 18px;
                 }
-                label,span{
+                label{
                     line-height: 60px;
                 }
+               span
+               	{
+               		display: block;
+               		margin-top: 20px;
+               	}
                 img{
                     width:60px;
                     height:60px;

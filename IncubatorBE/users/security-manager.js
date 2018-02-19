@@ -38,9 +38,19 @@ exports.updateUser = function(userObj){
 
 
 
-exports.deleteUser = function(_id, _rev){
+exports.deleteUser = function(_id, _rev,user){
   return new Promise((resolve, reject)=>{
-    usersService.deleteUser(_id, _rev).then((result)=>{
+    usersService.deleteUserr(_id, _rev,user).then((result)=>{
+      resolve(result);
+    },(err)=>{
+      reject(err);
+    });
+  });
+};
+
+exports.oldDeleteUser = function(_id, _rev){
+  return new Promise((resolve, reject)=>{
+    usersService.oldDeleteUser(_id, _rev).then((result)=>{
       resolve(result);
     },(err)=>{
       reject(err);

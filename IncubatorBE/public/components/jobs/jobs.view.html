@@ -1,10 +1,19 @@
 <div id="howToApply" class="howToApply-container container" ng-controller="jobsController" ng-init="init()">
+    
+    <!-- <div style="margin-top: 50px" class="alert alert-warning col-md-12  text-center">
+         {{ 'UnderConstrucion' | translate  }}
+    </div> -->
     <h2 class="mainTitle">
         {{'jobsTitle' | translate}}
     </h2>
     <div ng-show="!currentUser">
     	<div class="alert alert-warning col-md-12  text-center">
             	{{ 'signUptoViewJobsMsg' | translate  }} ,<a href="#" ng-click="gotoSignUp()">{{"signUptoEnrollbtn" | translate}}</a> 
+        </div>
+    </div>
+    <div ng-show="(jobsList.length == 0 || !jobsList) && currentUser">
+    	<div class="alert alert-warning col-md-12  text-center">
+            	{{ 'noJobsToShow' | translate  }}
         </div>
     </div>
     <div ng-repeat="job in jobsList | orderBy: '-createDate' track by $index" ng-show="currentUser">

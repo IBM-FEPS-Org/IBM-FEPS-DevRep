@@ -30,6 +30,17 @@ exports.deleteClinicIssue = function(_id){
   });
 }
 
+exports.deleteAllClinicIssue = function(userId){
+	  return new Promise((resolve, reject)=>{
+	    clinicIssuesService.deleteAllClinicIssue(userId).then((result)=>{
+	      resolve(result);
+	    },(err)=>{
+	      reject(err);
+	    });
+	  });
+	}
+
+
 exports.updateClinicIssue = function(clinicIssueObj){
   return new Promise((resolve, reject)=>{
     clinicIssuesService.updateClinicIssue(clinicIssueObj).then((message)=>{

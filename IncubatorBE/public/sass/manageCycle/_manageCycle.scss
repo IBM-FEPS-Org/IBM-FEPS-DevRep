@@ -1,5 +1,22 @@
 /*manage cycle Mfarag En Styles*/
 
+
+ .downloadBtn
+{
+       margin: auto;
+       padding: 10px 25px;
+       width: auto;
+       background: #972064;
+       display: table;
+       border-radius: 6px;
+       color: $bg;
+       cursor: pointer;
+       &:hover
+       {
+           opacity: 0.8;
+       }
+}
+
 .manage-cycle-container{
     //padding: 0;
     .tabsConatiner {

@@ -46,7 +46,8 @@ fepsApp.controller('assignMentorController', function ($scope, $translate, $uibM
     $scope.AssignMentortoProjects = function () {
 
         //check if current mentor is already the assigned mentor
-        if(angular.isArray($uibModalInstance.selectedProjects[0].mentors)){
+        if(angular.isArray($uibModalInstance.selectedProjects[0].mentors))
+        {
             var projectMentor = $uibModalInstance.selectedProjects[0].mentors[0]._id;
             var selectedMentor = $scope.searchresult._id;
             if (projectMentor === selectedMentor) {
@@ -70,7 +71,8 @@ fepsApp.controller('assignMentorController', function ($scope, $translate, $uibM
         };
 
 
-        userProfileService.assignMentor(mentorProjectsObject).then(function (success) {
+        userProfileService.assignMentor(mentorProjectsObject).then(function (success)
+        {
             usSpinnerService.stop('spinner');
             if (success.data.code == 'Object_updated') {
                 var msg = ($rootScope.currentLanguage == 'en') ? success.data.message.en : success.data.message.ar;

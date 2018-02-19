@@ -18,8 +18,8 @@
 }
 
 h4.subTitle {
-    padding: 10px 0;
-    font-size: 30px;
+//     padding: 10px 0;
+    font-size: 24px;
     font-weight: bold;
 }
 h4.subTitle.vision {
@@ -46,8 +46,14 @@ img.memberImg {
     height: 146px;
 }
 
+.center
+{		
+	width: 100%;
+	
+}	
+
 .teamMemberContainer {
-    margin: 40px 0px;
+    margin: 30px 0px;
 }
 .teamMemberContainer.yellow {
     color: $themeColor3;

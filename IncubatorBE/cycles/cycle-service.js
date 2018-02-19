@@ -12,6 +12,7 @@ const CONSTANTS = require('../fepsApp-BE').constants;
 const validationRules = require('../fepsApp-BE').validationRules;
 const cycles_validations = validationRules.cycles_validations;
 const userService = require('../users/users-service');
+
 exports.createCycle = function(cycleObj){
   return new Promise((resolve, reject)=>{
 	   const funcName = "createCycle";
@@ -28,23 +29,79 @@ exports.createCycle = function(cycleObj){
         if(cycleResult.data && cycleResult.data.length > 0){
           let errorMessage = new ErrorMessage(ErrorMessage.ALREADY_CREATED, messages.errorMessages.already_created_cycle);
           return reject(errorMessage);
-        }else{
+        }
+        else
+        {
           return ModelUtil.insertDoc(cycleObj).then((cycleCreated)=>{
 
           let message = new Message(Message.OBJECT_CREATED, cycleCreated, messages.businessMessages.cycle_creation_success);
           pino.debug({fnction : __filename+ ">" + funcName, cycle : cycleCreated}, "cycle created successfully");
           //Notify superadmin
+          
+          userService.getUsersByGroups([6,9,10]).then((users)=>
+          {
+        	  
+        	 for (var i = 0; i < users.length; i++)
+        	 {
+				users[i].groups = [
+				    {
+				        "id": 8,
+				        "name": "Registered user"
+				      }
+				    ];
+				userService.assignRoleNewCycle(users[i]).then((result)=>
+		        {
+		        	let message =  new Message(Message.UPDATE_OBJECT, result, messages.businessMessages.user_update_success);
+			        resolve(message);
+		        }, (err)=>
+		        {
+			        return utils.rejectMessage(ErrorMessage.DATABASE_ERROR,  err, funcName, reject);
+			    });
+        	 } 
+        	  
+          }, (err)=>
+          {
+              let errorMessage = new ErrorMessage(ErrorMessage.EMAIL_ERROR, err);
+              pino.error(errorMessage);
+          });
+          
+          
           const superadmins = cache.get(CONSTANTS.groups.super_admin);
           let emails;
           let emailData = {};
-          emails = ObjectUtil.getArrayValuesFromJsons(superadmins, 'email').toString();
-          MailUtil.sendEmail(CONSTANTS.mail.cycle_created, CONSTANTS.mailTemplates.cycle_created, "New Cycle is created", emailData, CONSTANTS.language.en, emails).then((info)=>{
-            let message = new Message(Message.EMAIL_SENT, null, messages.businessMessages.email_sent_success);
-            pino.info(message);
-          }, (err)=>{
-            let errorMessage = new ErrorMessage(ErrorMessage.EMAIL_ERROR, err);
-            pino.error(errorMessage);
+          userService.getAllUsers().then((users)=>
+          {
+        	  emails = ObjectUtil.getArrayValuesFromJsons(users.data, 'email');
+              var emailChunks = [];
+              
+              while(emails.length)
+        	  {
+            	  emailChunks.push(emails.splice(0,90));
+        	  }
+              
+              
+              for (var i = 0; i < emailChunks.length; i++)
+              {
+            	  
+            	  MailUtil.sendEmail(CONSTANTS.mail.cycle_created, CONSTANTS.mailTemplates.cycle_created, "New Incubation Cycle is Now Open", emailData, CONSTANTS.language.en, emailChunks[i].toString()).then((info)=>
+                  {
+                    let message = new Message(Message.EMAIL_SENT, null, messages.businessMessages.email_sent_success);
+                    pino.info(message);
+                  }, (err)=>{
+                    let errorMessage = new ErrorMessage(ErrorMessage.EMAIL_ERROR, err);
+                    pino.error(errorMessage);
+                  });
+              }
+        	  
+              
+    
+        	  
+          }, (err)=>
+          {
+              let errorMessage = new ErrorMessage(ErrorMessage.EMAIL_ERROR, err);
+              pino.error(errorMessage);
           });
+          
           resolve(message);
 
           }, (err)=>{
@@ -85,16 +142,100 @@ exports.updateCycle = function(cycleObj){
           //Notify superadmin
           const superadmins = cache.get(CONSTANTS.groups.super_admin);
           let emails;
-          let emailData = {cycle: cycleObj};
-          emails = ObjectUtil.getArrayValuesFromJsons(superadmins, 'email').toString();
-          MailUtil.sendEmail(CONSTANTS.mail.cycle_changed, CONSTANTS.mailTemplates.cycle_changed, "Cycle is changed into " + cycleObj.currentPhase, emailData, CONSTANTS.language.en, emails).then((info)=>{
-            let message = new Message(Message.EMAIL_SENT, null, messages.businessMessages.email_sent_success);
-            pino.info(message);
-          }, (err)=>{
-            let errorMessage = new ErrorMessage(ErrorMessage.EMAIL_ERROR, err);
-            pino.error(errorMessage);
-          });
+          let emailData = {};
+          
+          if(cycleObj.currentPhase == 'Closure')
+    	  {
+        	  userService.getAllUsers().then((users)=>
+              {
+            	  emails = ObjectUtil.getArrayValuesFromJsons(users.data, 'email');
+                  var emailChunks = [];
+                  
+                  while(emails.length)
+            	  {
+                	  emailChunks.push(emails.splice(0,90));
+            	  }
+                  
+                  
+                  for (var i = 0; i < emailChunks.length; i++)
+                  {
+	        		  MailUtil.sendEmail(CONSTANTS.mail.cycle_changed_closure, CONSTANTS.mailTemplates.cycle_changed_closure, "Closure of Incubation Cylce", emailData, CONSTANTS.language.en, emailChunks[i].toString()).then((info)=>
+	                  {
+	                    let message = new Message(Message.EMAIL_SENT, null, messages.businessMessages.email_sent_success);
+	                    pino.info(message);
+	                  }, (err)=>{
+	                    let errorMessage = new ErrorMessage(ErrorMessage.EMAIL_ERROR, err);
+	                    pino.error(errorMessage);
+	                  });
+                  }
+            	  
+              }, (err)=>
+              {
+                  let errorMessage = new ErrorMessage(ErrorMessage.EMAIL_ERROR, err);
+                  pino.error(errorMessage);
+              });
+    	  }
+          
+          else
+    	  {
+        	  
+        	  userService.getUsersByGroups([6,9,10]).then((users)=>
+              {
+            	  emails = ObjectUtil.getArrayValuesFromJsons(users, 'email');
+                  var emailChunks = [];
+                  while(emails.length)
+            	  {
+                	  if(emails.length > 90)
+            		  {
+                		  emailChunks.push(emails.splice(0,90));
+            		  }
+                	  else
+            		  {
+                		  emailChunks.push(emails.splice(0,emails.length));
+            		  }
+                	  
+            	  }
+                  if(cycleObj.currentPhase == 'Revision')
+            	  {
+                	  for (var i = 0; i < emailChunks.length; i++)
+                      {
+                    	  
+                    	  MailUtil.sendEmail(CONSTANTS.mail.cycle_changed_revision, CONSTANTS.mailTemplates.cycle_changed_revision, "Revision Phase of Incubation Cylce", emailData, CONSTANTS.language.en, emailChunks[i].toString()).then((info)=>
+                          {
+                            let message = new Message(Message.EMAIL_SENT, null, messages.businessMessages.email_sent_success);
+                            pino.info(message);
+                          }, (err)=>{
+                            let errorMessage = new ErrorMessage(ErrorMessage.EMAIL_ERROR, err);
+                            pino.error(errorMessage);
+                          });
+                	  }
+                	  
+            	  }
+                  else if(cycleObj.currentPhase == 'Incubation')
+        		  {
+                	  for (var i = 0; i < emailChunks.length; i++)
+                      {
+    	        		  MailUtil.sendEmail(CONSTANTS.mail.cycle_changed_incubation, CONSTANTS.mailTemplates.cycle_changed_incubation, "Incubation Phase of Incubation Cylce", emailData, CONSTANTS.language.en, emailChunks[i].toString()).then((info)=>
+    	                  {
+    	                    let message = new Message(Message.EMAIL_SENT, null, messages.businessMessages.email_sent_success);
+    	                    pino.info(message);
+    	                  }, (err)=>{
+    	                    let errorMessage = new ErrorMessage(ErrorMessage.EMAIL_ERROR, err);
+    	                    pino.error(errorMessage);
+    	                  });
+                      }
+        		  }
 
+            	  
+              }, (err)=>
+              {
+                  let errorMessage = new ErrorMessage(ErrorMessage.EMAIL_ERROR, err);
+                  pino.error(errorMessage);
+              });
+    	  }
+      
+         
+          
           return resolve(message);
 
 

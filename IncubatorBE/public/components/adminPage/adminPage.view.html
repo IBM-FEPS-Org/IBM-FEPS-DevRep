@@ -5,7 +5,7 @@
     </div>
     <div class="contentConatainer col-xs-9 col-sm-9 col-md-9 col-lg-9 col-xl-9 pull-right">
         <div class="row">
-            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-xs-3 text-center pull-right ">
+            <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-xs-1 text-center pull-right ">
 
             </div>
             <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-xs-3 text-center pull-right " ng-show="adminRole.id == 4 || adminRole.id == 1">
@@ -20,12 +20,18 @@
                     <h4>{{'adminManageProjects' | translate}}</h4>
                 </a>
             </div>
-            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-xs-3 text-center pull-right ">
+              <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-xs-3 text-center pull-right" ng-show="adminRole.id == 2 || adminRole.id == 1">
+                <a href="fepsIncubator/manageUsers">
+                    <img src="../../img/icon-manage-users.png" alt="manage users" />
+                    <h4>{{'adminManageUsers' | translate}}</h4>
+                </a>
+            </div>
+            <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-xs-2 text-center pull-right ">
 
             </div>
         </div>
         <div class="row">
-            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-xs-3 text-center pull-right">
+             <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-xs-1 text-center pull-right ">
 
             </div>
             <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-xs-3 text-center pull-right" ng-show="adminRole.id == 2 || adminRole.id == 1">
@@ -34,15 +40,43 @@
                     <h4>{{'adminManageNews' | translate}}</h4>
                 </a>
             </div>
-            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-xs-3 text-center pull-right" ng-show="adminRole.id == 1">
-                <a href="fepsIncubator/manageUsers">
-                    <img src="../../img/icon-manage-users.png" alt="manage users" />
-                    <h4>{{'adminManageUsers' | translate}}</h4>
+            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-xs-3 text-center pull-right" ng-show="adminRole.id == 2 || adminRole.id == 1 || adminRole.id == 3">
+                <a href="fepsIncubator/manageEvents">
+                    <img src="../../img/icon-manageEvents.png" alt="manage events" />
+                    <h4>{{ 'ManageEventsMainTitleadmin' | translate }}</h4>
                 </a>
             </div>
-            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-xs-3 text-center pull-right ">
+            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-xs-3 text-center pull-right" ng-show="adminRole.id == 2 || adminRole.id == 1">
+                <a href="fepsIncubator/manageJobs">
+                    <img src="../../img/icon-manageJobs.png" alt="manage jobs" />
+                    <h4>{{ 'ManageRecruitementMainTitle' | translate }}</h4>
+                </a>
+            </div>
+            <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-xs-2 text-center pull-right ">
 
             </div>
         </div>
+         <div class="row">
+             <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-xs-1 text-center pull-right ">
+
+            </div>
+            
+            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-xs-3 text-center pull-right">
+                
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-xs-3 text-center pull-right" ng-show="adminRole.id == 5 || adminRole.id == 1">
+                <a href="fepsIncubator/manageClinic">
+                    <img src="../../img/icon-manageClinic.png" alt="manage clinic" />
+                    <h4>{{ 'ManageClinicMainTitle' | translate }}</h4>
+                </a>
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-xs-3 text-center pull-right">
+                
+            </div>
+            <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-xs-2 text-center pull-right ">
+
+            </div>
+        </div>
+        
     </div>
 </div>

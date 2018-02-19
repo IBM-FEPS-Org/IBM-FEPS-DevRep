@@ -14,7 +14,7 @@
             <div class="eventDetails col-xs-12 col-sm-12 col-md-3 col-lg-3 col-xl-3">
                 <div class="dateInfo pull-left">
                     <span class="glyphicon glyphicon-calendar pull-right"></span>
-                    <h5 class="eventDate">{{ currentEvent.eventDate | date : "dd/MM/yyyy"  }}</h5>
+                    <h5 class="eventDate">{{ currentEvent.eventStartDate | date : "dd/MM/yyyy"  }}</h5>
                 </div>
 
             </div>
@@ -35,55 +35,137 @@
                 	</div>
                 </div>
                 <div class="col-xl-10 col-lg-10 col-md-10 col-sm-12 col-xs-12 pull-right">
-                     <div class="row speakerInfo">
-                         <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-xs-12 pull-right">
-                             <label>{{ 'Speaker' | translate }}:</label>
-                         </div>
-                         <div class="col-xl-10 col-lg-10 col-md-10 col-sm-12 col-xs-12 pull-right">
-                             <img ng-src="{{eventSpeakerPicSource}}" class="pull-right" />
-                             <span class="SpeakerName">{{currentEvent.speakers[0].name}}</span>
-                         </div>
-                     </div>
+                
                     <div class="row speakerInfo">
-                        <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-xs-12 pull-right">
-                            <label>{{ 'SpeakerBio' | translate }}:</label>
+                        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 col-xs-12 pull-right">
+                            <label style="color:red" ng-show="!hasFees">{{ 'eventEnrollmentDeadlineDate' | translate }}:</label>
+                        	<label style="color:red" ng-show="hasFees">{{ 'eventPaymentDeadlineDate' | translate }}:</label>
                         </div>
-                        <div class="col-xl-10 col-lg-10 col-md-10 col-sm-12 col-xs-12 pull-right">
-                            <span class="SpeakerBio">{{currentEvent.speakers[0].bio}}</span>
+                        <div class="col-xl-9 col-lg-9 col-md-9 col-sm-12 col-xs-12 pull-right">
+                            <span class="Venue" style="font-weight: 800">{{currentEvent.eventEnrollDeadline | date: "MMMM d, y"}}</span>
                         </div>
                     </div>
+                    
                     <div class="row speakerInfo">
-                        <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-xs-12 pull-right">
-                            <label>{{ 'eventTime' | translate }}:</label>
+                        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 col-xs-12 pull-right">
+                            <label style="color:red" ng-show="!hasFees">{{ 'eventEnrollmentDeadlineTime' | translate }}:</label>
+                            <label style="color:red" ng-show="hasFees">{{ 'eventPaymentDeadlineTime' | translate }}:</label>
                         </div>
-                        <div class="col-xl-10 col-lg-10 col-md-10 col-sm-12 col-xs-12 pull-right">
-                            <span class="Venue">{{currentEvent.eventDate | date:'yyyy-MM-dd'}}</span>
+                         <div class="col-xl-9 col-lg-9 col-md-9 col-sm-12 col-xs-12 pull-right">
+                            <span class="Venue" style="font-weight: 800">{{currentEvent.eventEnrollDeadline | date:'h:mm a'}}</span>
                         </div>
                     </div>
-                    <div class="row speakerInfo">
-                        <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-xs-12 pull-right">
-                            <label>{{ 'eventDateTime' | translate }}:</label>
+                    
+                    <div class="row speakerInfo" ng-show="hasFees">
+                        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 col-xs-12 pull-right">
+                            <label style="color:red">{{ 'eventFee' | translate }}:</label>
                         </div>
-                        <div class="col-xl-10 col-lg-10 col-md-10 col-sm-12 col-xs-12 pull-right">
-                            <span class="Venue">{{currentEvent.eventDate | date:'h:mma'}}</span>
-                        </div>
-                    </div>
-                    <div class="row speakerInfo">
-                        <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-xs-12 pull-right">
-                            <label>{{ 'Venue' | translate }}:</label>
-                        </div>
-                        <div class="col-xl-10 col-lg-10 col-md-10 col-sm-12 col-xs-12 pull-right">
-                            <span class="Venue">{{currentEvent.venue}}</span>
+                        <div class="col-xl-9 col-lg-9 col-md-9 col-sm-12 col-xs-12 pull-right">
+                            <span class="Venue" style="font-weight: 800">{{currentEvent.fees}}</span>
                         </div>
                     </div>
+                    
+                     <div class="row speakerInfo" ng-show="providesCertificate">
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12" style="text-align: center;">
+                            <label style="color:red;">**{{ 'eventProvideCertificate' | translate }}**</label>
+                        </div>
+                    </div>
+                    
+                    
                     <div class="row speakerInfo">
-                        <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-xs-12 pull-right">
+                        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 col-xs-12 pull-right">
+                            <label>{{ 'startDate' | translate }}:</label>
+                        </div>
+                        <div class="col-xl-9 col-lg-9 col-md-9 col-sm-12 col-xs-12 pull-right">
+                            <span class="Venue">{{currentEvent.eventStartDate | date: "MMMM d, y"}}</span>
+                        </div>
+                    </div>
+                    
+                    <div class="row speakerInfo">
+                        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 col-xs-12 pull-right">
+                            <label>{{ 'eventStartTime' | translate }}:</label>
+                        </div>
+                        <div class="col-xl-9 col-lg-9 col-md-9 col-sm-12 col-xs-12 pull-right">
+                            <span class="Venue">{{currentEvent.eventStartDate | date:'h:mm a'}}</span>
+                        </div>
+                    </div>
+                    
+                    <div class="row speakerInfo">
+                        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 col-xs-12 pull-right">
+                            <label>{{ 'endDate' | translate }}:</label>
+                        </div>
+                        <div class="col-xl-9 col-lg-9 col-md-9 col-sm-12 col-xs-12 pull-right">
+                            <span class="Venue">{{currentEvent.eventEndDate | date: "MMMM d, y"}}</span>
+                        </div>
+                    </div>
+                    
+                    <div class="row speakerInfo">
+                        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 col-xs-12 pull-right">
+                            <label>{{ 'eventEndTime' | translate }}:</label>
+                        </div>
+                        <div class="col-xl-9 col-lg-9 col-md-9 col-sm-12 col-xs-12 pull-right">
+                            <span class="Venue">{{currentEvent.eventEndDate | date:'h:mm a'}}</span>
+                        </div>
+                    </div>
+                    
+                    <div class="row speakerInfo">
+                        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 col-xs-12 pull-right">
                             <label>{{ 'eventDesc' | translate }}:</label>
                         </div>
-                        <div class="col-xl-10 col-lg-10 col-md-10 col-sm-12 col-xs-12 pull-right">
+                        <div class="col-xl-9 col-lg-9 col-md-9 col-sm-12 col-xs-12 pull-right">
                             <span class="newsContent">{{ currentEvent.details }}</span>
                         </div>
                     </div>
+                    
+                    <div class="row speakerInfo" ng-show="agendaUploaded">
+                        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 col-xs-12 pull-right">
+                            <label>{{ 'addEventAgenda' | translate }}:</label>
+                        </div>
+                        <div class="col-xl-9 col-lg-9 col-md-9 col-sm-12 col-xs-12 pull-right">
+                            <span class="newsContent">
+                            	<a target="_self" href= "/attachements?id={{agendaAttachment.id}}&key={{agendaAttachment.key}}" download>{{agendaAttachment.key}}</a>
+							</span>
+                        </div>
+                    </div>
+
+                    <button  class="btn btn-success" type="button" data-toggle="collapse" data-target="#speakers" ng-if="currentEvent.speakers.length > 0" >View/Hide Speakers</button>
+            <div  id="speakers" class="collapse" ng-show="currentEvent.speakers.length > 0">
+            	<div ng-repeat="item in currentEvent.speakers">
+            	
+            		<div class="row sectionRow">
+						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 pull-right">
+							<label> {{'eventSpeakerName' | translate}}: </label>
+						</div>
+						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 pull-right">{{item.name}}</div>
+					</div>
+					<br/>
+            		<div class="row sectionRow">
+						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 pull-right">
+							<label> {{'eventSpeakerBio' | translate}}: </label>
+							
+						</div>
+						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 pull-right">
+							 <span class="newsContent">{{item.bio}}</span>
+						</div>
+					</div>
+					<br/>
+					<div class="row sectionRow" ng-show="item.eventSpeakerPicUploaded">
+						<span us-spinner="{radius:30, width:8, length: 16}"  spinner-start-active="spinneractive" spinner-key="EventSpeakerProfilePicSpinner"></span>
+						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 pull-right">
+							<label>{{ 'eventSpeakerProfilePic' | translate }}:</label>
+							<div ng-show="item.eventSpeakerPicUploaded">
+								<img ng-src="{{item.eventSpeakerPicSource}}">
+							</div>
+						</div>
+					</div>
+					<br/>
+					
+					
+					<br/>
+					<hr>
+
+            	</div>
+
                 </div>
             </div>
         </div>

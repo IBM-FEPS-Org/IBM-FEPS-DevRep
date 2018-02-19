@@ -63,12 +63,13 @@ fepsApp.factory('loginService', function ($http, envService, $localStorage) {
         });
     }
 
-    loginService.forgetPassword = function (email) {
+    loginService.forgetPassword = function (email,language) {
         return $http({
             method: 'POST',
             url: apiUrl + '/forget-password',
             data: {
-                "email": email
+                "email": email,
+                "language": language
             },
             headers: {
                 "Content-Type": "application/json",

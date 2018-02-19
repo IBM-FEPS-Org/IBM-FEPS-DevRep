@@ -51,7 +51,10 @@
             <h3 class="collapsHeaderTitle">{{ 'briefCaseLandingRequestStatusTitle' | translate }}</h3>
         </div>
         <div class="collapseBody"  uib-collapse="!isCollapsed2">
-			<div grid-data grid-options="enrollmentsGridOptions" grid-actions="gridActions" class="tableContainer">
+        		<div ng-show="enrollmentsGridOptions.data.length == 0 || !enrollmentsGridOptions.data" class="alert alert-warning col-md-12  text-center">
+            	{{ 'noEnrollmentsMsg' | translate  }}
+            </div>
+			<div ng-show="enrollmentsGridOptions.data.length > 0"  grid-data grid-options="enrollmentsGridOptions" grid-actions="gridActions" class="tableContainer">
 	            <table class="">
 	                <thead>
 	                <tr class="tableRow MainRow">
@@ -59,13 +62,10 @@
 	                        <label class="pull-right">{{ 'topic' | translate }}</label>
 	                    </th>
 	                    <th class="tableCell sortable" sortable="date">
-	                        <label class="pull-right">Event Date</label>
+	                        <label class="pull-right">{{ 'eventStartDate' | translate}}</label>
 	                    </th>
-	                    <th class="tableCell sortable" sortable="venue">
-	                        <label class="pull-right">{{ 'venue' | translate }}</label>
-	                    </th>
-	                    <th class="tableCell sortable" sortable='guestSpeaker'>
-	                    	<label class="pull-right">{{ 'guestSpeaker' | translate }}</label>
+	                    <th class="tableCell sortable" sortable="date">
+	                        <label class="pull-right">{{ 'eventEndDate' | translate}}</label>
 	                    </th>
 	                    
 	                    <th class="tableCell sortable" sortable='enrollmentsSize'>
@@ -86,9 +86,8 @@
 	                    <td class="tableCell" >
 	                        <a href="#"ng-bind="item.topic" ng-click="openEventDetails(item.eventId)"></a>
 	                    </td>
-	                    <td class="tableCell" >{{ item.eventDate | date:'yyyy-MM-dd' }}</td>
-	                    <td class="tableCell" ng-bind="item.venue" ></td>
-	                    <td class="tableCell" ng-bind="item.guestSpeaker"></td>
+	                    <td class="tableCell" >{{ item.eventStartDate | date:'yyyy-MM-dd' }}</td>
+	                    <td class="tableCell" >{{ item.eventEndDate | date:'yyyy-MM-dd' }}</td>
 	                    
 	                    <td class="tableCell">{{item.date | date:'yyyy-MM-dd'}}</td>
 	                    
@@ -135,7 +134,7 @@
             <h3 class="collapsHeaderTitle">{{ 'briefCaseLandingBusinessClinicStatusTitle' | translate }}</h3>
         </div>
         <div class="collapseBody"  uib-collapse="!isCollapsed3">
-            <div ng-show="issuesGridOptions.data.length == 0" class="alert alert-warning col-md-12  text-center">
+            <div ng-show="issuesGridOptions.data.length == 0 || !issuesGridOptions.data" class="alert alert-warning col-md-12  text-center">
             	{{ 'noIssuesMsg' | translate  }} ,<a href="fepsIncubator/addIssue">{{'addIssue' | translate}}</a> 
             </div>
             
@@ -154,7 +153,7 @@
 	                        <label class="pull-right">{{ 'issueDate' | translate }}</label>
 	                    </th>
 	                    <th class="tableCell sortable" sortable="summary">
-	                        <label class="pull-right">{{ 'issueSummary' | translate }}</label>
+	                        <label class="pull-right">{{ 'companyName' | translate }}</label>
 	                    </th>
 	                    <th class="tableCell sortable" sortable='status'>
 	                    	<label class="pull-right">{{ 'issueStatus' | translate }}</label>
@@ -170,10 +169,10 @@
 	                        <a href="#"ng-bind="item.title" ng-click="openIssueDetails(item.id)"></a>
 	                    </td>
 	                    <td class="tableCell" >{{ item.date | date:'yyyy-MM-dd' }}</td>
-	                    <td class="tableCell" ng-bind="item.summary" ></td>
+	                    <td class="tableCell" ng-bind="item.companyName" ></td>
 	                   	<td class="tableCell" ng-bind="item.status" ></td>
 	                    <td class="tableCell">
-	                         <button class="enroleBtn btn btn-success" ng-click="openRemoveIssueModal(item.id,$index)">
+	                         <button class="actionBtn dangerBtn btn" ng-click="openRemoveIssueModal(item.id,$index)">
 	                          {{ 'delete' | translate }}
 	                         </button>
 	                    </td>

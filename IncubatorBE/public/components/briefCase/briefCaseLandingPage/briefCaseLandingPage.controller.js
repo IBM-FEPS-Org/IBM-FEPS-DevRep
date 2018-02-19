@@ -63,20 +63,27 @@ fepsApp.controller('BriefCaseLandingPageController', function ($scope,$translate
 		if($localStorage.currentUser.clinicIssues && $localStorage.currentUser.clinicIssues.length > 0){
 			$scope.issuesGridOptions.data = $localStorage.currentUser.clinicIssues;
 			var issuesIds = "";
-			for(var i=0;i<$localStorage.currentUser.clinicIssues.length;i++){
+			
+			for(var i=0;i<$localStorage.currentUser.clinicIssues.length;i++)
+			{
 				issuesIds = issuesIds +$localStorage.currentUser.clinicIssues[i]+","
 			}
+			
 			issuesIds = issuesIds.substring(0, issuesIds.length - 1);
 	
 			businessClinicService.getIssuesbyID(issuesIds).then(function (success) {
 	            var issuesDetails = success.data.data;
 	            for(var x=0;x<$scope.issuesGridOptions.data.length;x++){
-	            	for(var i=0;i<issuesDetails.length;i++){
-	            		if($scope.issuesGridOptions.data[x] == issuesDetails[i]._id){
+	            	for(var i=0;i<issuesDetails.length;i++)
+	            	{
+	            		if($scope.issuesGridOptions.data[x] == issuesDetails[i]._id)
+	            		{
+	            			console.log($scope.issuesGridOptions.data[x]);
+	            			console.log(issuesDetails[i]);
 	            			$scope.issuesGridOptions.data[x] = {};
 	            			$scope.issuesGridOptions.data[x].id = issuesDetails[i]._id;
 	            			$scope.issuesGridOptions.data[x].title = issuesDetails[i].title;
-	    	            	$scope.issuesGridOptions.data[x].summary = issuesDetails[i].summary;
+	    	            	$scope.issuesGridOptions.data[x].companyName = issuesDetails[i].companyName;
 	    	            	$scope.issuesGridOptions.data[x].date = issuesDetails[i].date;
 	    	            	$scope.issuesGridOptions.data[x].status = issuesDetails[i].status;
 	            		}
@@ -144,6 +151,7 @@ fepsApp.controller('BriefCaseLandingPageController', function ($scope,$translate
 	        $localStorage.currentUser = refreshUserResult.data.user;
             $localStorage.currentUser.token = refreshUserResult.data.token;
             $scope.enrollmentsGridOptions.data = $localStorage.currentUser.enrollments;
+            $scope.enrollments = $localStorage.currentUser.enrollments;
             if($localStorage.currentUser.enrollments){
     			var eventIds = "";
     			for(var i=0;i<$localStorage.currentUser.enrollments.length;i++){
@@ -156,9 +164,8 @@ fepsApp.controller('BriefCaseLandingPageController', function ($scope,$translate
     	            	for(var x=0;x<enrollmentDetails.length;x++){
     	            		if($scope.enrollmentsGridOptions.data[x].eventId == enrollmentDetails[i]._id){
     	            			$scope.enrollmentsGridOptions.data[x].topic = enrollmentDetails[i].topic;
-    	    	            	$scope.enrollmentsGridOptions.data[x].venue = enrollmentDetails[i].venue;
-    	    	            	$scope.enrollmentsGridOptions.data[x].eventDate = enrollmentDetails[i].eventDate;
-    	    	            	$scope.enrollmentsGridOptions.data[x].guestSpeaker = enrollmentDetails[i].speakers[0].name;
+    	    	            	$scope.enrollmentsGridOptions.data[x].eventStartDate = enrollmentDetails[i].eventStartDate;
+    	    	            	$scope.enrollmentsGridOptions.data[x].eventEndDate = enrollmentDetails[i].eventEndDate;
     	    	            	$scope.enrollmentsGridOptions.data[x].isEventDatePassed = $scope.enrollmentsGridOptions.data[x].eventDate < new Date().getTime();
     	            		}
     	            	}

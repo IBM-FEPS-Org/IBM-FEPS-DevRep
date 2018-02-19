@@ -84,6 +84,7 @@ fepsApp.controller('manageEventsController', function ($scope,$translate,$uibMod
 			manageEventsService.deleteEvent($scope.eventsGridOptions.data[$scope.deletedEventIndex].id)
 	    	.then(function (result) {
 	    		$scope.eventsGridOptions.data.splice($scope.deletedEventIndex,1);
+	    		$scope.getEvents();
 	    		if($scope.eventsGridOptions.data.length == 0){
 	    			$scope.noEvents = true;
 	    		}else{

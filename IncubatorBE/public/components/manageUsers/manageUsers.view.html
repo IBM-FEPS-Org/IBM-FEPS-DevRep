@@ -22,6 +22,7 @@
                                 ng-options="searchType.id as searchType.name for searchType in searchList"
                                 ng-model="selectedSearch" ng-change="updateSearchBy(selectedSearch)"></select>
                     </td>
+                    
                     <td colspan="2">
                         <input ng-show="selectedSearch ==2" type="text" class="form-control order-search-box"
                                placeholder="{{ 'manageUsersSearch' | translate }}"
@@ -75,7 +76,10 @@
                         <label>{{ 'manageUsersJoinDate' | translate }}</label>
                     </th>
                     <th class="tableCell sortable" sortable='groups[0].name'>
-                        {{ 'manageUsersRole' | translate }}
+                        <label>{{ 'manageUsersRole' | translate }}</label>
+                    </th>
+                    <th  class="tableCell">
+                             <label>{{ 'manageNewsTableLableAction' | translate }}</label>
                     </th>
                     <!--<th class="tableCell">
                         {{ 'manageUsersActive' | translate }}
@@ -83,7 +87,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr class="tableRow" ng-class-odd="rowA" ng-class-even="rowB" ng-repeat="item in filtered | startFrom:(paginationOptions.currentPage-1)*paginationOptions.itemsPerPage | limitTo:paginationOptions.itemsPerPage track by $index">
+                <tr class="tableRow" ng-class-odd="rowA" ng-class-even="rowB" ng-repeat="item in filtered | startFrom:(paginationOptions.currentPage-1)*paginationOptions.itemsPerPage | limitTo:paginationOptions.itemsPerPage track by item.username">
                     <!--<td ng-bind="item._id"></td>-->
                     <td class="tableCell" >
                         <a href="#" ng-bind="item.Name" ng-click="openProfile(item)"></a>
@@ -97,6 +101,9 @@
                     <td class="tableCell" ng-bind="item.joinDate | date:'yyyy-MM-dd h:mma'"></td>
                     <td class="tableCell" >
                         <a href="#" ng-bind="item.groups[0].name | checkRole" ng-click="openAssignRole(item)"></a>
+                    </td>
+                    <td class="tableCell">
+                         <div class="actionBtn btn dangerBtn"  ng-click="deleteUser(item.username)">{{ 'manageNewsTableLableActionDelete' | translate }}</div>
                     </td>
                     <!--<td class="tableCell" >
                         <span class="actionBtn btn" ng-click="activeInactiveUser(item)"> {{ item.active==true? "Active" : "InActive" }}</span>
@@ -124,6 +131,8 @@
                         <option>20</option>
                         <option>30</option>
                     </select>
+                    
+                    <label id="totalNoOfUsers"></label>
                 </div>
             </form>
         </div>

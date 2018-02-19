@@ -5,10 +5,12 @@ const messages = require('../fepsApp-BE').messages;
 const ErrorMessage = require('../fepsApp-BE').ErrorMessage;
 const Message = require('../fepsApp-BE').Message;
 const ModelUtil = require('../fepsApp-BE').ModelUtil;
+const MailUtil = require('../fepsApp-BE').mailUtil;
 const CONSTANTS = require('../fepsApp-BE').constants;
 const ObjectUtil = require('../fepsApp-BE').objectUtil;
 const attachementService = require('../attachments/attachment-service');
 const utils = require('../fepsApp-BE').utils;
+const userService = require('../users/users-service');
 
 exports.createEvent = function(event){
   return new Promise((resolve, reject)=>{
@@ -22,9 +24,17 @@ exports.createEvent = function(event){
       if(event.eventPhotoAttach){
         attachIds.push(event.eventPhotoAttach.id);
       }
-      if(event.speakers){
-        for (var i = 0; i < event.speakers.length && event.speakers[i].profilePic; i++) {
-          attachIds.push(event.speakers[i].profilePic.id);
+      if(event.agendaAttachment){
+          attachIds.push(event.agendaAttachment.id);
+        }
+      if(event.speakers)
+      {
+        for (var i = 0; i < event.speakers.length; i++) 
+        {
+        	if (event.speakers[i].profilePic.id  && event.speakers[i].profilePic) 
+	      	{
+        		attachIds.push(event.speakers[i].profilePic.id);
+	      	}
         }
       }
 
@@ -33,6 +43,46 @@ exports.createEvent = function(event){
       }, (err)=>{
         return utils.rejectMessage(ErrorMessage.DATABASE_ERROR,  err, funcName, reject);
       });
+      
+      let emails;
+      let emailData = {"event":event,"id":result.id};
+      console.log(result);
+      userService.getAllUsers().then((users)=>
+      {
+    	  emails = ObjectUtil.getArrayValuesFromJsons(users.data, 'email');
+          var emailChunks = [];
+          
+          while(emails.length)
+    	  {
+        	  emailChunks.push(emails.splice(0,90));
+    	  }
+          
+          
+          for (var i = 0; i < emailChunks.length; i++)
+          {
+		    	  
+		    	  MailUtil.sendEmail(CONSTANTS.mail.new_event, CONSTANTS.mailTemplates.new_event, "New Event:"+event.topic +"Posted On Our Website", emailData, CONSTANTS.language.en, emailChunks[i].toString()).then((info)=>
+	          {
+	            let message = new Message(Message.EMAIL_SENT, null, messages.businessMessages.email_sent_success);
+	            pino.info(message);
+	            
+	          }, (err)=>{
+	            let errorMessage = new ErrorMessage(ErrorMessage.EMAIL_ERROR, err);
+	            pino.error(errorMessage);
+	          });
+          }
+    	  
+          resolve();
+
+    	  
+      }, (err)=>
+      {
+          let errorMessage = new ErrorMessage(ErrorMessage.EMAIL_ERROR, err);
+          pino.error(errorMessage);
+      });
+      
+      
+      
       resolve(message);
     }, (err)=>{
       return utils.rejectMessage(ErrorMessage.DATABASE_ERROR,  err, funcName, reject);
@@ -49,8 +99,13 @@ exports.deleteEvent = function(id, rev){
         let message = new Message(Message.OBJECT_REMOVED, result, messages.businessMessages.event_removed_success);
         pino.debug({fnction : __filename+ ">" + funcName, result :result}, "remove event");
         let attachs = [];
-        if(freshEvent.eventPhotoAttach){
+        if(freshEvent.eventPhotoAttach)
+        {
           attachs.push(freshEvent.eventPhotoAttach);
+        }
+        if(freshEvent.agendaAttachment)
+        {
+            attachs.push(freshEvent.agendaAttachment);
         }
         if(freshEvent.speakers){
           for (var i = 0; i < freshEvent.speakers.length; i++) {
@@ -163,30 +218,68 @@ exports.getAllEvents = function(){
 exports.updateEvent = function(eventObj){
   return new Promise((resolve, reject)=>{
     ModelUtil.findById(eventObj._id).then((freshEvent)=>{
-      let attachs = [];
-      if(eventObj.eventPhotoAttach && freshEvent.eventPhotoAttach && eventObj.eventPhotoAttach.id != freshEvent.eventPhotoAttach.id){
-        attachs.push(freshEvent.eventPhotoAttach);
-      }
+      let newAttachs = [];
       let oldAttachs = [];
+      if(eventObj.eventPhotoAttach && freshEvent.eventPhotoAttach && eventObj.eventPhotoAttach.id != freshEvent.eventPhotoAttach.id){
+    	  oldAttachs.push(freshEvent.eventPhotoAttach);
+        newAttachs.push(eventObj.eventPhotoAttach);
+      }
+      if(eventObj.agendaAttachment && freshEvent.agendaAttachment && eventObj.agendaAttachment.id != freshEvent.agendaAttachment.id){
+    	  oldAttachs.push(freshEvent.agendaAttachment);
+          newAttachs.push(eventObj.agendaAttachment);
+      }
+      else if (eventObj.agendaAttachment && eventObj.agendaAttachment.id && !freshEvent.agendaAttachment) 
+      {
+    	  newAttachs.push(eventObj.agendaAttachment);
+      }
+      
+     
       for(let i = 0; i < freshEvent.speakers.length; i++){
         oldAttachs.push(freshEvent.speakers[i].profilePic);
       }
 
-      let newAttachs = [];
+      
       for(let i = 0; i < eventObj.speakers.length; i++){
-        newAttachs.push(eventObj.speakers[i].profilePic);
+    	  if (eventObj.speakers[i].profilePic.id) 
+    	  {
+    		  newAttachs.push(eventObj.speakers[i].profilePic);
+    	  }
+        
       }
 
-      let {newItems, excludedItems} = ObjectUtil.getTwoArraysDifferentiation(freshEvent, eventObj, 'id');
-
+      let {newItems, excludedItems} = ObjectUtil.getTwoArraysDifferentiation(oldAttachs, newAttachs, 'id');
+      
+      
       let promises = [];
-      promises.push(attachementService.removeAttachements(excludedItems.concat(attachs)));
-      promises.push(attachementService.attachAttachments(newItems, true));
-      ModelUtil.insertDoc(eventObj).then((result)=>{
-        Promise.all(promises).then((results)=>{
-          let message = new Message(Message.UPDATE_OBJECT, results, messages.businessMessages.event_updated_success);
-          resolve(message);
-        });
+      
+      if(newItems[0] != '')
+      {
+    	  promises.push(attachementService.removeAttachements(newItems));
+      }
+      if(excludedItems.length != 0)
+      {
+
+    	  promises.push(attachementService.attachAttachments(excludedItems, true));
+      }
+      
+      
+      ModelUtil.insertDoc(eventObj).then((result)=>
+      {
+    	 
+    	  if(promises != [])
+    	  {
+    		  Promise.all(promises).then((results)=>{
+                  let message = new Message(Message.UPDATE_OBJECT, results, messages.businessMessages.event_updated_success);
+                  resolve(message);
+                }, (err)=>{
+    	            reject(err);
+    	       });
+    	  }
+    	  else
+    	  {
+    		  resolve();
+    	  }
+    	  
       }, (err)=>{
         return utils.rejectMessage(ErrorMessage.DATABASE_ERROR,  err, funcName, reject);
       });
@@ -357,13 +450,13 @@ exports.updateEnrollStatus = function(userId, eventId, status){
           event : event,
           status : status
         };
-        MailUtil.sendEmail(CONSTANTS.mail.event_status, CONSTANTS.mailTemplates.event_status, "Event acceptance", emailData, CONSTANTS.language.en, emails).then((info)=>{
+        /*MailUtil.sendEmail(CONSTANTS.mail.event_status, CONSTANTS.mailTemplates.event_status, "Event acceptance", emailData, CONSTANTS.language.en, emails).then((info)=>{
           let message = new Message(Message.EMAIL_SENT, null, messages.businessMessages.email_sent_success);
           pino.info(message);
         }, (err)=>{
           let errorMessage = new ErrorMessage(ErrorMessage.EMAIL_ERROR, err);
           pino.error(errorMessage);
-        });
+        });*/
       }, (err)=>{
         console.log(err);
       });
@@ -408,11 +501,15 @@ function deattachFiles(freshEvent){
     if(freshEvent.eventPhotoAttach){
       attachs.push(freshEvent.eventPhotoAttach);
     }
+    if(freshEvent.agendaAttachment){
+        attachs.push(freshEvent.agendaAttachment);
+      }
     if(freshEvent.speakers){
       for (var i = 0; i < freshEvent.speakers.length; i++) {
         attachs.push(freshEvent.speakers[i].profilePic);
       }
     }
+    
     attachementService.removeAttachements(attachs).then((attachsResult)=>{
       pino.debug({fnction : __filename+ ">" + funcName, result :attachsResult}, "remove attachs");
       resolve(attachsResult);

@@ -117,6 +117,47 @@ exports.deleteClinicIssue = function(_id){
   });
 };
 
+exports.deleteAllClinicIssue = function(userId)
+{
+	  return new Promise((resolve, reject)=>{
+	    const funcName = "deleteAllClinicIssue";
+	    pino.debug({fnction : __filename+ ">" + funcName}, "deleteAllClinicIssue");
+	    pino.debug({fnction : __filename+ ">" + funcName, userId : userId});
+	    ModelUtil.findById(userId).then((user)=>
+	    {
+		    	for(var i = 0; i < user.clinicIssues.length; i++)
+	    		{
+	    			ModelUtil.findById(user.clinicIssues[i]).then((document)=>
+	    			{
+	    			      ModelUtil.deleteDoc(document._id, document._rev).then((result)=>
+	    			      {
+	    			        
+	    			        let message = new Message(Message.OBJECT_REMOVED, result, messages.businessMessages.clinic_issue_remove_success);
+	    			        resolve(message);
+
+	    			      },(err)=>{
+	    			        let errorMessage = new ErrorMessage(ErrorMessage.DATABASE_ERROR, err);
+	    			        pino.error({fnction : __filename+ ">" + funcName, err : errorMessage});
+	    			        reject(errorMessage);
+	    			      });
+    			    }, (err)=>{
+    			      let errorMessage = new ErrorMessage(ErrorMessage.DATABASE_ERROR, err);
+    			      pino.error({fnction : __filename+ ">" + funcName, err : errorMessage});
+    			      reject(errorMessage);
+    			    });
+	    			
+	    		}
+	    }
+	    ,(err)=>
+	    {
+	      let errorMessage = new ErrorMessage(ErrorMessage.DATABASE_ERROR, err);
+	      pino.error({fnction : __filename+ ">" + funcName, err : errorMessage});
+	      reject(errorMessage);
+	    });
+	  });
+}
+
+
 exports.updateClinicIssue = function(clinicIssueObj){
   const funcName = "updateClinicIssue";
   return new Promise((resolve, reject)=>{
@@ -129,14 +170,17 @@ exports.updateClinicIssue = function(clinicIssueObj){
         pino.debug({fnction : __filename+ ">" + funcName, data: freshClinicIssueObjResult});
         //Check status, if closed, then send email to the issue owner
         
-        if(clinicIssueObj.status == 2 || clinicIssueObj.status == "resolved" || clinicIssueObj.status == 'closed'){
-          let emailData = {
-            issue : clinicIssueObj
-          };
-
+        if(clinicIssueObj.status == 2 || clinicIssueObj.status == "Administered" || clinicIssueObj.status == 'closed'){
+          
           ModelUtil.findById(clinicIssueObj.user._id).then((freshUser)=>{
+        	  let emailData =
+        	  {
+		            issue : clinicIssueObj,
+		            user: freshUser
+	          };
             let emails = freshUser.email;
-            MailUtil.sendEmail(CONSTANTS.mail.clinic_issue, CONSTANTS.mailTemplates.clinic_issue, "Your issue has been resolved", emailData, CONSTANTS.language.en, emails).then((info)=>{
+            console.log(freshUser);
+            MailUtil.sendEmail(CONSTANTS.mail.clinic_issue, CONSTANTS.mailTemplates.clinic_issue, "Submitted Issue has been Administered", emailData, CONSTANTS.language.en, emails).then((info)=>{
               let message = new Message(Message.EMAIL_SENT, null, messages.businessMessages.email_sent_success);
               pino.info(message);
             }, (err)=>{

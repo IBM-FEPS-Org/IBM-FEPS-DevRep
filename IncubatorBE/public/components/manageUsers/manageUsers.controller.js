@@ -1,11 +1,13 @@
-fepsApp.controller('ManageUsersController', function ($scope, $rootScope, $translate, $uibModal, userProfileService, $log, sharedDataService, $localStorage, $route, $location, usSpinnerService) {
+fepsApp.controller('ManageUsersController', function ($scope, $rootScope, $translate, $uibModal ,manageUsersService ,userProfileService, $log, sharedDataService, $localStorage, $route,$timeout, $location, usSpinnerService) {
 
 
     $scope.selected4 = true;
 
     $scope.rowA = "rowA";
     $scope.rowB = "rowB";
-
+    
+    $scope.deletedUserName = null;
+    
     $scope.gridActions = {};
     
     $scope.searchList = [
@@ -85,6 +87,58 @@ fepsApp.controller('ManageUsersController', function ($scope, $rootScope, $trans
         $location.path('fepsIncubator/viewProfile').search({'username':user.username});
     }
 
+    $scope.deleteUser = function(username)
+    {
+		$scope.deletedUserName = username;
+		  var modalInstance = $uibModal.open(
+					{
+						ariaDescribedBy:'deleteUser',
+						templateUrl:'components/shared/confirmation.view.html',
+						controller : 'confirmationController',
+						size: 'md',
+						scope: $scope,
+						keyboard: true
+					});
+		  modalInstance.modal="deleteUser";
+
+    }
+    
+
+    $rootScope.$on("deleteUser", function (event) 
+    	{
+    		if($scope.deletedUserName != null)
+		{
+    			$scope.deletedUserIndex = -1;
+    			var filteredObj = $scope.gridOptions.data.find(function(item, i)
+    			{
+    				  if(item.username === $scope.deletedUserName)
+    				  {
+    					$scope.deletedUserIndex = i;
+    				    return i;
+    				  }
+    			});
+    			
+    			manageUsersService.deleteUser($scope.gridOptions.data[$scope.deletedUserIndex]).then((result)=>
+			{
+				usSpinnerService.spin('spinner');
+	            $timeout(function () {
+	                $rootScope.$broadcast('updateUsersList');
+	            }, 3000);
+
+				
+			}
+			,(err)=>
+			{
+	    			reject(err);
+	    		});
+		}
+    		
+        
+    });
+    
+   
+    
+    
     $scope.activeInactiveUser = function (item) {
 
 
@@ -103,11 +157,13 @@ fepsApp.controller('ManageUsersController', function ($scope, $rootScope, $trans
     $rootScope.$on("updateUsersList", function (event) {
         _getUsers();
     });
+    
 
-    var _getUsers = function () {
+    var _getUsers = function ()
+    {
         usSpinnerService.spin('spinner');
         userProfileService.getAllUsers().then(function (success) {
-        		
+        		document.getElementById("totalNoOfUsers").innerHTML = "Total No. Of Users: " + success.data.data.length;
         		for (var i=0;i<success.data.data.length;i++)
     			{
         			var Name = success.data.data[i].firstName +" " +success.data.data[i].surname;
@@ -121,7 +177,7 @@ fepsApp.controller('ManageUsersController', function ($scope, $rootScope, $trans
         }, function (err) {
             $log.error(err);
             usSpinnerService.stop('spinner');
-        })
+        });
     }
 
     var _getGroupsLookup = function () {

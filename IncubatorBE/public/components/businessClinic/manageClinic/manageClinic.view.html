@@ -28,7 +28,7 @@
 	                        <label class="pull-right">{{'issueTitle' | translate}}</label>
 	                    </th>
 	                    <th class="tableCell sortable" sortable="date">
-	                        <label class="pull-right">{{'issueSummary' | translate}}</label>
+	                        <label class="pull-right">{{'companyName' | translate}}</label>
 	                    </th>
 	                    <th class="tableCell sortable" sortable="email">
 	                        <label class="pull-right">{{'Submitter' | translate}}</label>
@@ -43,7 +43,7 @@
                 	<td class="tableCell" >
 	                        <a href="#"ng-bind="item.title" ng-click="openIssueDetails(item._id)"></a>
 	                </td>
-                    <td class="tableCell">{{item.summary}}</td>
+                    <td class="tableCell">{{item.companyName}}</td>
                     <td class="tableCell">
                             	<a href="/fepsIncubator/viewProfile?username={{item.user.username}}" target="_blank">{{item.user.firstName}} {{item.user.surname}}</a>
                     </td>
@@ -77,7 +77,7 @@
 		    </uib-tab>
 		    <uib-tab index="1">
 	            <uib-tab-heading>
-	              		{{ 'resolved' | translate }}
+	              		{{ 'administered' | translate }}
 	            </uib-tab-heading>
 	            <div ng-show="resolvedIssuesGridOptions.data.length == 0" class="alert alert-warning col-md-12  text-center">
             		{{ 'noIssuesMsg' | translate  }}
@@ -90,7 +90,7 @@
                         <label class="pull-right">{{'issueTitle' | translate}}</label>
                     </th>
                     <th class="tableCell sortable" sortable="date">
-                        <label class="pull-right">{{'issueSummary' | translate}}</label>
+                        <label class="pull-right">{{'companyName' | translate}}</label>
                     </th>
                     <th class="tableCell sortable" sortable="email">
                         <label class="pull-right">{{'Submitter' | translate}}</label>
@@ -105,7 +105,7 @@
                     <td class="tableCell" >
 	                        <a href="#"ng-bind="item.title" ng-click="openIssueDetails(item._id)"></a>
 	                </td>
-                    <td class="tableCell">{{item.summary}}</td>
+                    <td class="tableCell">{{item.companyName}}</td>
                     <td class="tableCell">
                             	<a href="/fepsIncubator/viewProfile?username={{item.user.username}}" target="_blank">{{item.user.firstName}} {{item.user.surname}}</a>
                     </td>

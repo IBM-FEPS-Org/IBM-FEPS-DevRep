@@ -18,7 +18,7 @@ function getUsers(doc) {
 //view name : projects-view
 function getProjects(doc) {
 	  if(doc.type == "projects") {
-	    emit(doc.startupName,{"_id":doc._id,"_rev":doc._rev,"submissionDate":doc.submissionDate,"startupName":doc.startupName,"status":doc.status,"mentors":doc.mentors,"feedback":doc.feedback,"score":doc.score,"cycle":doc.cycle});
+	    emit(doc.startupName,{"_id":doc._id,"_rev":doc._rev,"submissionDate":doc.submissionDate,"sector": doc.sector,"startupName":doc.startupName,"members":doc.members[0].username ,"status":doc.status,"mentors":doc.mentors,"feedback":doc.feedback,"score":doc.score,"cycle":doc.cycle});
 	  }
 }
 
@@ -35,7 +35,7 @@ function getNews(doc) {
 
 function eventsDoc(doc) {
 	  if(doc.type == "events") {
-	    emit(doc.topic,{"_id":doc._id,"_rev":doc._rev,"pendingEnrollments": doc.pendingEnrollments, "acceptedEnrollments" : doc.acceptedEnrollments, "rejectedEnrollments" : doc.rejectedEnrollments, "eventStartDate":doc.eventStartDate,"eventEndDate":doc.eventEndDate,"topic":doc.topic,"description":doc.description,"details":doc.details,"active":doc.active,"eventPhotoAttach":doc.eventPhotoAttach, "speakers" : doc.speakers, "venue" : doc.venue});
+	    emit(doc.topic,{"_id":doc._id,"_rev":doc._rev,"NoOfPlaces":doc.NoOfPlaces,"pendingEnrollments": doc.pendingEnrollments, "acceptedEnrollments" : doc.acceptedEnrollments, "rejectedEnrollments" : doc.rejectedEnrollments, "eventStartDate":doc.eventStartDate,"eventEndDate":doc.eventEndDate,"eventEnrollDeadline": doc.eventEnrollDeadline,"topic":doc.topic,"description":doc.description,"details":doc.details,"active":doc.active,"eventPhotoAttach":doc.eventPhotoAttach,"agendaAttachment": doc.agendaAttachment, "speakers" : doc.speakers});
 	  }
 }
 

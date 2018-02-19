@@ -82,6 +82,18 @@ exports.unenroll = function(userId, eventId){
   });
 }
 
+exports.unenrollAll = function(userId)
+{
+	  return new Promise((resolve, reject)=>{
+	    eventsService.unenrollAll(userId).then((message)=>{
+	      resolve(message);
+	    }, (errorMessage)=>{
+	      reject(errorMessage);
+	    });
+	  });
+}
+
+
 exports.updateEnrollStatus = function(userId, eventId, status){
   return new Promise((resolve, reject)=>{
     eventsService.updateEnrollStatus(userId, eventId, status).then((message)=>{

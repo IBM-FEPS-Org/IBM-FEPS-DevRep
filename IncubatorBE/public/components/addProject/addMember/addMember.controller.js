@@ -9,7 +9,7 @@ fepsApp.controller('addMemberController', function ($scope,$translate,$uibModalI
     
     $scope.userDuplicate = false;
     
-    $scope.addedUser;
+    $scope.addedUser = {};
     
     $scope.roles = [
         {
@@ -27,8 +27,8 @@ fepsApp.controller('addMemberController', function ($scope,$translate,$uibModalI
     $scope.$watch('searchInput', function(newValue, oldValue) {
     	$scope.noUsersFound = false;
     });
-	$scope.addedUser = null;
     $scope.selectedRole = "";
+    $scope.addedUser.role = $scope.roles[1].Role;
     $scope.updateRole = function (selected) 
     {
         $scope.selectedRole = $scope.roles[selected-1].Role;

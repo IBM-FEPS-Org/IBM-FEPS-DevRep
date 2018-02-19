@@ -22,16 +22,12 @@
                     <th class="tableCell sortable" sortable="value.topic">
                         <label class="pull-right">{{ 'topic' | translate }}</label>
                     </th>
-                    <th class="tableCell sortable" sortable="value.eventDate">
-                        <label class="pull-right">{{ 'date' | translate }}</label>
+                    <th class="tableCell sortable" sortable="value.eventStartDate">
+                        <label class="pull-right">{{ 'startDate' | translate }}</label>
                     </th>
-                    <th class="tableCell sortable" sortable="value.venue">
-                        <label class="pull-right">{{ 'venue' | translate }}</label>
+                    <th class="tableCell sortable" sortable="value.eventEndDate">
+                        <label class="pull-right">{{ 'endDate' | translate }}</label>
                     </th>
-                    <th class="tableCell sortable" sortable='value.speakers[0].name'>
-                    	<label class="pull-right">{{ 'guestSpeaker' | translate }}</label>
-                    </th>
-                    
                     <th class="tableCell sortable" sortable='value.acceptedEnrollments.length'>
                     	<label class="pull-right">{{ 'enrollmentsSize' | translate }}</label>
                     </th>
@@ -50,9 +46,8 @@
                     <td class="tableCell" >
                         <a href="#" ng-bind="item.value.topic" ng-click="openEventDetails(item.value._id)" ></a>
                     </td>
-                    <td class="tableCell">{{item.value.eventDate| date:'yyyy-MM-dd h:mma'}}</td>
-                    <td class="tableCell">{{item.value.venue}}</td>
-                    <td class="tableCell">{{item.value.speakers[0].name}}</td>
+                    <td class="tableCell">{{item.value.eventStartDate| date:'yyyy-MM-dd'}}</td>
+                    <td class="tableCell">{{item.value.eventEndDate| date:'yyyy-MM-dd'}}</td>
                     <td class="tableCell">
                     	<a href="#" ng-click="viewEnrollmentRequests(item,0)">{{item.value.acceptedEnrollments.length}}</a>
                     </td>																   

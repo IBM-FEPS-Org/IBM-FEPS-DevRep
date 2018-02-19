@@ -88,6 +88,49 @@ body {
   margin-top: 50px;
 }
 
+.admissionBanner {
+  width: 100%;
+  z-index: 100;
+  text-align: center;
+}
+
+.admissionBanner .admissionBannerLink {
+  width: 100%;
+  text-align: center;
+  margin: 0;
+  padding-bottom: 2%;
+}
+
+.admissionBanner .admissionBannerLink button {
+  background-color: #e94136;
+  color: white;
+  border: 5px solid;
+  border-color: #e94136;
+  border-radius: 5px;
+  font: bold 18px Cairo;
+}
+
+.banner-top-section-inner {
+  width: 94%;
+  background: rgba(255, 255, 255, 0.8);
+  margin: 0px;
+  padding: 17px;
+  color: #181648;
+  font: normal 18px/20px Cairo;
+  position: absolute;
+  bottom: 80px;
+  left: 30px;
+}
+
+.banner-top-section-inner a {
+  text-decoration: underline;
+}
+
+.admissionBanner img {
+  width: 100%;
+  height: 50%;
+}
+
 .header-lg {
   height: 190px;
   position: relative;
@@ -798,6 +841,12 @@ input.searchInput {
   #home {
     margin-top: 0;
   }
+  .top-section {
+    height: 15em;
+  }
+  .carousel, .image-circle {
+    height: 15em;
+  }
   .bottom-section .searchEventsDiv {
     width: 100%;
   }
@@ -828,8 +877,7 @@ input.searchInput {
 }
 
 h4.subTitle {
-  padding: 10px 0;
-  font-size: 30px;
+  font-size: 24px;
   font-weight: bold;
 }
 
@@ -861,8 +909,12 @@ img.memberImg {
   height: 146px;
 }
 
+.center {
+  width: 100%;
+}
+
 .teamMemberContainer {
-  margin: 40px 0px;
+  margin: 30px 0px;
 }
 
 .teamMemberContainer.yellow {
@@ -1032,6 +1084,9 @@ img.memberImg {
 
 .news-events-details-container .belowSection .eventsDetailsContianer .newsContent {
   text-align: justify;
+  white-space: pre-wrap;
+  margin-bottom: 0;
+  margin-top: 0;
 }
 
 .news-events-details-container .belowSection .eventsDetailsContianer .eventImgDiv img {
@@ -1046,8 +1101,13 @@ img.memberImg {
   font-size: 18px;
 }
 
-.news-events-details-container .belowSection .eventsDetailsContianer .speakerInfo label, .news-events-details-container .belowSection .eventsDetailsContianer .speakerInfo span {
+.news-events-details-container .belowSection .eventsDetailsContianer .speakerInfo label {
   line-height: 60px;
+}
+
+.news-events-details-container .belowSection .eventsDetailsContianer .speakerInfo span {
+  display: block;
+  margin-top: 20px;
 }
 
 .news-events-details-container .belowSection .eventsDetailsContianer .speakerInfo img {
@@ -1144,6 +1204,7 @@ img.memberImg {
 }
 
 .advisory-board-list-container .adviserBoardMember {
+  display: inline;
   min-height: 150px;
   height: auto;
   margin-bottom: 50px;
@@ -1152,6 +1213,7 @@ img.memberImg {
 .advisory-board-list-container .adviserBoardMember img.memberPhoto {
   max-width: 146px;
   max-height: 146px;
+  min-height: 146px;
   width: 100%;
   border-radius: 50%;
   border: 8px solid #972064;
@@ -1187,24 +1249,40 @@ img.memberImg {
 
 /*advisory-board details Mfarag En Styles*/
 .advisory-board-details-container {
-  padding: 35px 20px;
+  width: 100%;
 }
 
 .advisory-board-details-container .memberPhotoContainer img.memberPhoto {
   max-width: 146px;
   max-height: 146px;
+  min-height: 146px;
+  width: 100%;
+  border-radius: 50%;
+  border: 8px solid #972064;
+}
+
+.advisory-board-details-container .memberPhotoContainerDetails {
+  text-align: center;
+}
+
+.advisory-board-details-container .memberPhotoContainerDetails img.memberPhoto {
+  max-width: 146px;
+  max-height: 146px;
+  min-height: 146px;
   width: 100%;
   border-radius: 50%;
   border: 8px solid #972064;
 }
 
 .advisory-board-details-container .adviserBoardMemberDtails {
+  white-space: pre-wrap;
   text-align: left;
   color: #6e6a6a;
   display: flow-root;
 }
 
 .advisory-board-details-container .adviserBoardMemberDtails .memberBio {
+  white-space: pre-wrap;
   font-family: CairoLight;
   display: block;
 }
@@ -1454,7 +1532,7 @@ img.memberImg {
 }
 
 .mentors-list-container .cardItem.mentorCardConatianer .cardInner .mentorName {
-  font-size: 20px !important;
+  font-size: 19px !important;
 }
 
 .mentors-list-container .cardItem.mentorCardConatianer .cardInner .cardCollapsed.cardContent .well-lg {
@@ -1520,8 +1598,9 @@ img.memberImg {
 }
 
 .mentors-list-container .imgMask img.mentorImg {
-  width: 50%;
-  margin: 20px;
+  width: 60%;
+  height: 60%;
+  margin-top: 60px;
 }
 
 /*mentors List  Mfarag AR Styles*/
@@ -1948,6 +2027,10 @@ img.memberImg {
   width: 100%;
 }
 
+.tableContainer #chart {
+  width: 100%;
+}
+
 .tableContainer .tableRow {
   margin-top: 8px;
   border-radius: 25px;
@@ -2064,6 +2147,10 @@ img.memberImg {
 /*manage news landingpage Mfarag En Styles*/
 .manage-news-landing-page-container .tableContainer {
   margin: 20px 0;
+}
+
+.manage-news-landing-page-container .tableContainer #chart {
+  width: 100%;
 }
 
 .manage-news-landing-page-container .tableContainer .tableRow.MainRow .tableCell {
@@ -2263,6 +2350,21 @@ img.memberImg {
 }
 
 /*manage cycle Mfarag En Styles*/
+.downloadBtn {
+  margin: auto;
+  padding: 10px 25px;
+  width: auto;
+  background: #972064;
+  display: table;
+  border-radius: 6px;
+  color: #fff;
+  cursor: pointer;
+}
+
+.downloadBtn:hover {
+  opacity: 0.8;
+}
+
 .manage-cycle-container .tabsConatiner {
   padding-top: 30px;
 }
@@ -2548,26 +2650,34 @@ img.memberImg {
   .header-lg {
     height: auto;
   }
+  .header-lg .userDetailsDiv {
+    width: 100%;
+  }
+  .header-lg .userDetailsDiv img {
+    width: 50px;
+    height: 50px;
+  }
   .header-lg .navbar {
-    min-height: 80px;
+    min-height: 60px;
   }
   .header-lg .navbar .navbar-header {
-    min-height: 80px;
+    min-height: 60px;
   }
   .navbar-collapse {
     margin-top: 0;
   }
-  .login {
-    bottom: -5px;
-    margin: 10px 0;
+  .login .btn {
+    margin-top: 0;
   }
   .footer1 img {
     width: 100%;
   }
   .rtl .login {
+    top: 0.5em;
     bottom: 0px;
   }
   .ltr .login {
+    top: 0.5em;
     bottom: 0px;
   }
 }

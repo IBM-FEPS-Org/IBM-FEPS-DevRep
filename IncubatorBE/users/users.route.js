@@ -105,10 +105,10 @@ router.post('/', (req, res, next)=>{
 });
 
 router.delete('/:id', auth, (req, res)=>{
-  const _rev = req.query._rev;
+  const _rev = req.query.rev;
   const id = req.params.id;
   pino.debug({requestMin : req}, "removing user");
-  securityManager.deleteUser(id, _rev).then((message)=>{
+  securityManager.deleteUser(id, _rev, req.user).then((message)=>{
     pino.debug({requestMin : req}, "remove user");
     res.send(message);
   },(err)=>{
@@ -116,6 +116,19 @@ router.delete('/:id', auth, (req, res)=>{
     res.send(err);
   });
 });
+
+router.delete('/', auth, (req, res)=>{
+	  const _rev = req.query.rev;
+	  const id = req.query.id;
+	  pino.debug({requestMin : req}, "removing user");
+	  securityManager.oldDeleteUser(id, _rev).then((message)=>{
+	    pino.debug({requestMin : req}, "remove user");
+	    res.send(message);
+	  },(err)=>{
+	    pino.error({requestMin : req, err : err}, "remove user");
+	    res.send(err);
+	  });
+	});
 
 router.put('/', auth,(req, res, next)=>{
 

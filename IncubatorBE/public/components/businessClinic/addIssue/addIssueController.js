@@ -22,7 +22,7 @@ fepsApp.controller('addIssueController', function ($scope,$translate,$uibModal,$
 			businessClinicService.getIssuesbyID([param.issueId])
 			.then(function (result){
 				$scope.issue = result.data.data[0];
-				if($scope.issue.status == 'resolved'){
+				if($scope.issue.status == 'Administered'){
 					$scope.viewMode = 3;
 					$scope.showResponse = true;
 					$scope.editResponse = false;
@@ -84,7 +84,7 @@ fepsApp.controller('addIssueController', function ($scope,$translate,$uibModal,$
     }
     
     $scope.resolveIssue = function(){
-    	$scope.issue.status = 'resolved';
+    	$scope.issue.status = 'Administered';
     	businessClinicService.editIssue($scope.issue).then(function (result){	
     		$localStorage.currentUser.token = result.headers('authorization');
     	    sharedDataService.refreshUser().then(function(refreshUserResult){

@@ -1,13 +1,14 @@
 module.exports = {
   "cloudantNoSQLDB": {
-  "dbName" : "my_sample_db",
-  "credentials": {
-	  "username": "1619e347-5334-4a7f-9faa-ec556fc63129-bluemix",
-	  "password": "88d31f4b3cfdff874ebc6b0478380fa496720c1995a699f65e3585ec41ed3b14",
-	  "host": "1619e347-5334-4a7f-9faa-ec556fc63129-bluemix.cloudant.com",
-	  "port": 443,
-	  "url": "https://1619e347-5334-4a7f-9faa-ec556fc63129-bluemix:88d31f4b3cfdff874ebc6b0478380fa496720c1995a699f65e3585ec41ed3b14@1619e347-5334-4a7f-9faa-ec556fc63129-bluemix.cloudant.com"
-   },
+	  "dbName" : "my_sample_db",
+	  "credentials":
+	  {
+		  "username": "b1b9fe3e-73c7-4d89-98fe-cae3ee8a0e14-bluemix",
+		  "password": "9a169df71b71d5181f8209d85ad886889ce0b3fdef3250aa141725956705ea1b",
+		  "host": "b1b9fe3e-73c7-4d89-98fe-cae3ee8a0e14-bluemix.cloudant.com",
+		  "port": 443,
+		  "url": "https://b1b9fe3e-73c7-4d89-98fe-cae3ee8a0e14-bluemix:9a169df71b71d5181f8209d85ad886889ce0b3fdef3250aa141725956705ea1b@b1b9fe3e-73c7-4d89-98fe-cae3ee8a0e14-bluemix.cloudant.com"
+	  },
     "syslog_drain_url": null,
     "volume_mounts": [],
     "label": "cloudantNoSQLDB",
@@ -23,10 +24,10 @@ module.exports = {
   },
   "mails" : {
     "support" : {
-      "email" : "feps.inc@gmail.com",
-      "password" : "!@#$1qaz",
-      "host" : "smtp.gmail.com",
-      "port" : "465"
+    	 "email" : "incubator@feps.edu.eg",
+         "password" : "FEPS.BI-team18",
+	    "host" : "smtp.gmail.com",
+	    "port" : "465"
     }
   }
 };
@@ -50,11 +51,15 @@ module.exports = {
 */
 
 /*UAT credentials
-"username": "1619e347-5334-4a7f-9faa-ec556fc63129-bluemix",
-"password": "88d31f4b3cfdff874ebc6b0478380fa496720c1995a699f65e3585ec41ed3b14",
-"host": "1619e347-5334-4a7f-9faa-ec556fc63129-bluemix.cloudant.com",
-"port": 443,
-"url": "https://1619e347-5334-4a7f-9faa-ec556fc63129-bluemix:88d31f4b3cfdff874ebc6b0478380fa496720c1995a699f65e3585ec41ed3b14@1619e347-5334-4a7f-9faa-ec556fc63129-bluemix.cloudant.com"
+
+{
+  "username": "b1b9fe3e-73c7-4d89-98fe-cae3ee8a0e14-bluemix",
+  "password": "9a169df71b71d5181f8209d85ad886889ce0b3fdef3250aa141725956705ea1b",
+  "host": "b1b9fe3e-73c7-4d89-98fe-cae3ee8a0e14-bluemix.cloudant.com",
+  "port": 443,
+  "url": "https://b1b9fe3e-73c7-4d89-98fe-cae3ee8a0e14-bluemix:9a169df71b71d5181f8209d85ad886889ce0b3fdef3250aa141725956705ea1b@b1b9fe3e-73c7-4d89-98fe-cae3ee8a0e14-bluemix.cloudant.com"
+}
+
 */
 
 /*prod credentials

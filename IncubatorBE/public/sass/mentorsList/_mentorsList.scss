@@ -16,7 +16,7 @@
             padding: 7px;
             display: table;
                 .mentorName{
-                    font-size: 20px!important;
+                    font-size: 19px!important;
                 }
             .cardCollapsed{
                 &.cardContent {
@@ -74,9 +74,11 @@
     .imgMask{
         width: 100%;
         height: 180px;
-        img.mentorImg {
-            width: 50%;
-            margin: 20px;
+        img.mentorImg 
+        {
+            width: 60%;
+            height: 60%;
+            margin-top: 60px;
         }
     }
 

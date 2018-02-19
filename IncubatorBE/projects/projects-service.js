@@ -14,6 +14,7 @@ const attachementService = require('../attachments/attachment-service');
 const userService = require('../users/users-service');
 const ObjectUtil = require('../fepsApp-BE').objectUtil;
 const MailUtil = require('../fepsApp-BE').mailUtil;
+
 exports.getProjects = function(){
 
     return new Promise(function(resolve,reject) {
@@ -189,6 +190,7 @@ exports.createProject = function(projectObj, projectFounder){
                   }];
                   members[i].groups = [{"id" : 6, "name" : CONSTANTS.groups.founder}];
                 }else{
+                	
                   members[i].projects = [{
                       _id: projectCreated.id,
                       startupName : projectObj.startupName,
@@ -267,9 +269,11 @@ exports.deleteProject = function(_id,_rev, user){
         if(groups.includes(CONSTANTS.groups.super_admin) || freshProject.members[i]._id === user._id){
           return deleteProjectDataInMemebers(_id, user).then(()=>{
             return ModelUtil.findById(_id).then((freshProject)=>{
-              ModelUtil.deleteDoc(_id, _rev).then((result)=>{
-                //remove project attachments
-                removeProjectAttachments(null, freshProject).then((result)=>{
+            	
+              ModelUtil.deleteDoc(_id, _rev).then((result)=>
+              {
+            	  //remove project attachments
+            	  removeProjectAttachments2(freshProject).then((result)=>{
                   let message = new Message(Message.OBJECT_REMOVED, result, messages.businessMessages.project_removed_success);
                   pino.debug({fnction : __filename+ ">" + funcName, result :result}, "project is removed");
                   resolve(message);
@@ -461,6 +465,31 @@ function removeProjectAttachments(projectObj, freshProject){
   });
 }
 
+function removeProjectAttachments2(projectObj){
+	  return new Promise((resolve, reject)=>{
+	    const funcName = "removeProjectAttachments";
+	    let promises = [];
+	    //remove old attachments
+	    // in case remove old attachments without adding
+	    if( (!projectObj) && (projectObj.afiliationAttachment && projectObj.afiliationAttachment.id))
+	    {
+	      promises.push(attachementService.removeAttachement(projectObj.afiliationAttachment.id, projectObj.afiliationAttachment.rev));
+	    }
+
+	    // in case remove old attachments without adding
+	    if( (!projectObj) && (projectObj.prototypeAttachment && projectObj.prototypeAttachment.id))
+	    {
+	      promises.push(attachementService.removeAttachement(projectObj.prototypeAttachment.id, projectObj.prototypeAttachment.rev));
+	    }
+
+	    Promise.all(promises).then((results)=>{
+	      resolve(results);
+	    }, (err)=>{
+	      reject(err);
+	    });
+	  });
+	}
+
 exports.getMemberProjects = function(_id){
   return Promise((resolve, reject)=>{
     const funcName = "getMemberProjects";
@@ -549,12 +578,14 @@ exports.updateProjectStatus = function(projectObj){
       return utils.rejectMessage(ErrorMessage.DATABASE_ERROR,  err, funcName, reject);
     }).then((updatedProject)=>{
       let message = new Message(Message.UPDATE_OBJECT, updatedProject, "");
-      let emailData = {"project" : myFreshProject};
+      
+      
+      let emailData = {"project" : myFreshProject,"user": myFreshProject.members[0]};
       //Notify superadmin
       const superadmins = cache.get(CONSTANTS.groups.super_admin);
       let emails;
-      emails = ObjectUtil.getArrayValuesFromJsons(superadmins, 'email').toString();
-      MailUtil.sendEmail(CONSTANTS.mail.project_status, CONSTANTS.mailTemplates.project_status, "Project status has been changed", emailData, CONSTANTS.language.en, emails).then((info)=>{
+      emails = myFreshProject.members[0].email;
+      MailUtil.sendEmail(CONSTANTS.mail.project_status, CONSTANTS.mailTemplates.project_status, "Project Status is Updated", emailData, CONSTANTS.language.en, emails).then((info)=>{
         let message = new Message(Message.EMAIL_SENT, null, messages.businessMessages.email_sent_success);
         pino.info(message);
       }, (err)=>{
@@ -583,11 +614,13 @@ exports.updateProjectFeedback = function(projectObj){
       return utils.rejectMessage(ErrorMessage.DATABASE_ERROR,  err, funcName, reject);
     }).then((updatedProject)=>{
       let message = new Message(Message.UPDATE_OBJECT, updatedProject, "");
-      let emailData = {"project" : myFreshProject};
+      let emailData = {"project" : myFreshProject,"user":myFreshProject.members[0]};
       //Notify superadmin
       const superadmins = cache.get(CONSTANTS.groups.super_admin);
       let emails;
-      emails = ObjectUtil.getArrayValuesFromJsons(superadmins, 'email').toString();
+      emails = myFreshProject.members[0].email
+      
+      console.log(myFreshProject);
       MailUtil.sendEmail(CONSTANTS.mail.feedback_score, CONSTANTS.mailTemplates.feedback_score, "Feedback and score is added to project " + myFreshProject.startupName, emailData, CONSTANTS.language.en, emails).then((info)=>{
         let message = new Message(Message.EMAIL_SENT, null, messages.businessMessages.email_sent_success);
         pino.info(message);
@@ -690,8 +723,6 @@ function attachProjectToMembers(members, projectObj, projectFounder, cycle){
             role : members[i].role,
             cycle: cycle._id
           }];
-        console.log("editing");
-        console.log(members[i].role);
         if(members[i].role == CONSTANTS.projects.roles.member)
         	{
         		members[i].groups = [{"id" : 9, "name" :members[i].role}];

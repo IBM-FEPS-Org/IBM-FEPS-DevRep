@@ -1,30 +1,40 @@
 {
-  "app_url" : "http://localhost:3000/fepsIncubator/resetPassword",
+  "app_url" : "http://fepsbi.cairouniv.net/fepsIncubator/resetPassword",
   "mail" : {
     "contact" : "contact",
     "forget_password" : "forget_password",
     "assign_mentor" : "assign_mentor",
     "assign_mentor_email" : "assign_mentor_email",
+    "welcome_email" : "welcome_email",
     "project_status" : "project_status",
     "feedback_score" : "feedback_score",
     "change_role" : "change_role",
+    "change_role_email" : "change_role_email",
     "cycle_created" : "cycle_created",
-    "cycle_changed" : "cycle_changed",
+    "cycle_changed_revision" : "cycle_changed_revision",
+    "cycle_changed_incubation" : "cycle_changed_incubation",
+    "cycle_changed_closure" : "cycle_changed_closure",
     "clinic_issue" : "clinic_issue",
-    "event_status" : "event_status"
+    "event_status" : "event_status",
+    "new_event": "new_event"
   },
   "mailTemplates" : {
     "contact" : "contact",
     "forget_password" : "forget_password",
     "assign_mentor" : "assign_mentor",
     "assign_mentor_email" : "assign_mentor_email",
+    "welcome_email" : "welcome_email",
     "project_status" : "project_status",
     "feedback_score" : "feedback_score",
     "change_role" : "change_role",
+    "change_role_email" : "change_role_email",
     "cycle_created" : "cycle_created",
-    "cycle_changed" : "cycle_changed",
+    "cycle_changed_revision" : "cycle_changed_revision",
+    "cycle_changed_incubation" : "cycle_changed_incubation",
+    "cycle_changed_closure" : "cycle_changed_closure",
     "clinic_issue" : "clinic_issue",
-    "event_status" : "event_status"
+    "event_status" : "event_status",
+    "new_event": "new_event"
   },
   "language" : {
     "ar" : "ar",

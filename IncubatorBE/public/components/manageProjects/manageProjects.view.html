@@ -11,13 +11,37 @@
         {{ 'noProjectsMsg' | translate  }}
     </div>
     <div ng-show="!noProjects" class="contentConatainer col-xs-9 col-sm-9 col-md-9 col-lg-9 col-xl-9 pull-right">
+    <uib-tabset active="activeTab">
+    	<uib-tab index="0">
+	    	<uib-tab-heading>
+		             {{ 'projectsDataTable' | translate }}
+	        </uib-tab-heading>
         <div ng-if="!registeredUser" grid-data id='test' grid-options="gridOptions" grid-actions="gridActions" class="tableContainer">
-            <div class="row" ng-show="isReviewed">
-                <div ng-show="showAssignMentor" class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="createNewsBtn" ng-click="openAssignMentor()">{{ 'manageProjectsAssignMentor' | translate }}</div>
-                </div>
-            </div>
-            <table class="">
+            
+            <table class="tableRow">
+	            <thead>
+			        <tr class="tableRow" style="width:30%">
+			            <td colspan="2">
+			                <label class="pull-right">{{ 'manageProjectsProjectName' | translate }}:</label>
+			            </td>
+			            <td colspan="4">
+			                <input  type="text" class="form-control order-search-box"
+			                       placeholder="{{ 'manageUsersSearch' | translate }}"
+			                       ng-change="gridActions.filter()"
+			                       ng-model="startupName"
+			                       id = "startupName"
+			                       filter-by="startupName"
+			                       filter-type="text">
+			            </td>
+			            <td colspan="2">
+			            	<div class="row" ng-show="isReviewed">
+				                <div ng-show="showAssignMentor" class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12">
+				                    <div class="createNewsBtn" ng-click="openAssignMentor()">{{ 'manageProjectsAssignMentor' | translate }}</div>
+				                </div>
+				            </div>
+			            </td>
+			        </tr>
+			    </thead>
                 <thead>
                 <tr class="tableRow MainRow">
                     <!--<th sortable="_id" class="sortable">
@@ -26,7 +50,7 @@
                     <th ng-show="showSelect" class="tableCell">
                         <input type="checkbox" ng-checked="false" ng-model="selectedAll" ng-change="checkAll()"/>
                     </th>
-                    <th class="tableCell sortable" sortable="username">
+                    <th class="tableCell sortable" sortable="startupName">
                         {{ 'manageProjectsProjectName' | translate }}
                     </th>
                     <th class="tableCell sortable" sortable='email'>
@@ -95,9 +119,43 @@
                         <option>20</option>
                         <option>30</option>
                     </select>
+                    
+                    <label id="totalNoOfProjects"></label>
                 </div>
             </form>
         </div>
+        </uib-tab>
+        <uib-tab index="1">
+	    	<uib-tab-heading>
+		             {{ 'projectsDataChart' | translate }}
+	        </uib-tab-heading>
+	        <div ng-show="!isSuperAdmin" class="marginTop50 alert alert-danger text-center col-xs-9 col-sm-9 col-md-9 col-lg-9 col-xl-9 pull-right">
+		        {{ 'notAuthorized' | translate  }}
+		    </div>
+	        <div class="tableContainer" ng-show="isSuperAdmin">
+	        	<table class="">
+	        		<thead>
+		                <tr class="tableRow">
+		                    <td>
+		                        <label class="pull-right">{{ 'filterProjectsBy' | translate }}: </label>
+		                    </td>
+		                    <td>
+		                        <select ng-init="selectedFilter = filterList[0].id"
+		                                ng-options="filterType.id as filterType.name for filterType in filterList"
+		                                ng-model="selectedFilter" ng-change="updateFilterBy(selectedFilter)"></select>
+		                    </td>
+		                </tr>
+	        		</thead>
+	        	</table>
+	        	<div class="responsive-plot" id="chart">
+	        	
+	        	</div>
+	        	<br/>
+	        	<button class="downloadBtn" ng-click="download()">Download CSV</button> 
+	        
+	        </div>
+	    </uib-tab>
+        </uib-tabset> 
         <div ng-if="registeredUser" class="alert alert-danger SuccessMsgPopup text-center">{{currentErrorMessage}}</div>
     </div>
 </div>

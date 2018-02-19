@@ -3,6 +3,7 @@ fepsApp.controller('jobsController', function ($scope,$translate,usSpinnerServic
 
     $scope.init = function () {
 
+    	$scope.jobsList = [];
 
         $scope.getJobs();
         $scope.currentUser = $localStorage.currentUser;

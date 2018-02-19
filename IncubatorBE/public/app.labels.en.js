@@ -25,6 +25,7 @@ var appLabelsEn = {
 		menuItem6:"Advisory Board",
 		menuItem7:"Council of Elders",
 		menuItem8:"Terms and Conditions",
+		menuItem9:"Our Activities",
 		login:" Login ",
 		menuItemAdmin:"Manage Website",
 
@@ -44,6 +45,12 @@ var appLabelsEn = {
 		footerSectionIBMTitle:'Our technology partner',
 		footerRights:'© 2017 FEPS. ALL RIGHTS RESERVED',
 		acceptedProjectsText:'Navigate to Accepted Projects Page',
+		admissionText1: "To all Egyptian innovative youth! If you have an innovative startup idea, aged between 18 and 35 and have a team of 2-6 persons, now you can apply with your innovative startup idea to our incubation program!",
+		admissionText2: "We will provide you with the needed support, training and mentorship, in addition to a seed-funding grant of 50,000 L.E. provided by EG Bank, and we won't take any percentage of your profits or company equity,",
+		admissionText3: "Submission deadline: 16 December 2017",
+		admissionText4: " What are you waiting for? #Start_NOW",
+		admissionImg: "img/admissionBannerEn.png",
+		//news and events
 
 	 //news and events
 
@@ -77,21 +84,22 @@ var appLabelsEn = {
 		aboutusMemeberRole1:"Founder and CEO",
 		aboutusMember2:"Dr. Nesma Ali Saleh",
 		aboutusMemeberRole2:"Vice Director, FEPS Business Incubator",
-		aboutusMember3:"Ms. Maha Khalil",
+		aboutusMember3:"Maha Khalil",
 		aboutusMemeberRole3:"Awareness Program Manager",
 		aboutusMember4:"Mr. Hani Hussein Elzoumor",
 		aboutusMemeberRole4:"Academic Coordinator, Business Clinic",
 		aboutusMember5:"Ibrahim Mahgoub",
 		aboutusMemeberRole5:"Incubation Program Manager",
-		aboutusMember6:"Ms. Menna Khaled",
+		aboutusMember6:"Menna Khaled",
 		aboutusMemeberRole6:"Office Manager",
 		aboutusMember7:"Ms. Noha A. Nagui",
 		aboutusMemeberRole7:"Communication Officer",
 		aboutusMember8:"Noran Adly",
 		aboutusMemeberRole8:"Incubation Program Specialist",
 		aboutusMember9:"Aiad Faris",
-		aboutusMemeberRole9:"Administrative officer",
-
+		aboutusMemeberRole9:"Administrative Officer",
+		aboutusMember10:"Nada Emad",
+		aboutusMemeberRole10:"Web Master officer",
 
 		
      //news and events listView Mfarag
@@ -121,7 +129,7 @@ var appLabelsEn = {
 	
      //SignIn
 
-		ForgetPassword:" Forget Password?",
+		ForgetPassword:" Forgot Password?",
 		NewUser:"New User",
 		loginFailed_SystemDown:"login failed,please contact customer support",
 		loginFailed_Unauthorized:"wrong user name or password",
@@ -129,13 +137,16 @@ var appLabelsEn = {
 		newPassword:"New Password",
 		emailSuccessCode:"Email is sent",
 		emailErrorCode:"There is an error",
+		passwordChanged:" Password Changed Successfully",
 		pleaseLogin:"Please Login",
 
 	 //SignUp
 
 		SignUp:"SignUp",
-		firstName:"First name",
-		lastName:"Last name",
+		firstName:"First name in English",
+		lastName:"Last name in English",
+		firstNameArabic: "First name in Arabic",
+		Sur_NameArabic: "Last name in Arabic",
 		Email:"Email",
 		Profile_Picture:"Profile Picture",
 		Username:"Username",
@@ -148,20 +159,21 @@ var appLabelsEn = {
 		University:"University",
 		Major:"Major",
 		Graduation_Year:"Graduation Date",
+		Graduation_Year_Desc: "* Expected Graduation Year (For Students)",
 		user_already_exists :"a user with this user name already exists,please choose another user name",
 		First_Name: "First name",
 		Second_Name: "Middle name",
-		Sur_Name: "Last name",
+		Sur_Name: "Last name in English",
 		Sector: "Sector",
 		SuccessMsg:"User Successfully Registered",
 		Male:"Male",
 		Female:"Female ",
-    	Linked_In:"LinkedIn",
-    	Last_name: "Last Name",
-    	Faculty:"Faculty",
-    	editProfileImage:"Edit profile image",
+	    	Linked_In:"LinkedIn",
+	    	Last_name: "Last Name",
+	    	Faculty:"Faculty",
+	    	editProfileImage:"Edit profile image",
 		imageSizeLabel:"File max size 500KB",
-		proofofAffiliationInfo:"Copy of your Cairo University ID/Certificate.",
+		proofofAffiliationInfo:"Copy of your University ID/Certificate.",
 		imageFileMaxSizeError:"File too large ,max 500KB",
 		imageFileErrorVal:"Only image files are allowed",
 
@@ -183,14 +195,15 @@ var appLabelsEn = {
 		Phone_Error_Msg: "phone number is required",
 		Phone_Error_Validate_Msg: "Invalid phone number - min 11 max 16 only + allowed",
 		Birht_Error_Msg: "Birth date is required",
-		Gender_Error_Msg: "gender is required",
-		Profession_Error_Msg: "profession is required",
-		Major_Error_Msg: "major is required",
-		Sector_Error_Msg: "sector is required",
-		Graduation_Error_Msg: "graduation Year is required",
-		University_Error_Msg:"university is required",
-    	LinkedIn_Error_Msg:"add valid linkedin link",
-    	areaOfExp_Error_Msg:"area of expertise required",
+		Gender_Error_Msg: "Gender is required",
+		Profession_Error_Msg: "Profession is required",
+		Major_Error_Msg: "Major is required",
+		Sector_Error_Msg: "Sector is required",
+		Graduation_Error_Msg: "Graduation Year is required",
+		University_Error_Msg:"University is required",
+		Faculty_Error_Msg:"Faculty is required",
+    	LinkedIn_Error_Msg:"Add valid linkedin link",
+    	areaOfExp_Error_Msg:"Area of expertise required",
     	areaOfExp_ValidationError_Msg:"area of expertise invalid it must be from 10 to 1000 characters and can contain special characters and numbers ",
     	bio_Error_Msg:"biography is required",
     	areaOfExpInvalid_Error_Msg:"Invalid Area of expertise, it must be from 10 to 1000 characters and can contain special characters and numbers",
@@ -204,7 +217,142 @@ var appLabelsEn = {
 		resetـpassword_success:"Password has been changed successfully",
 		wrong_old_password:"Wrong old password",
 		password_confirmpassword_match:"password and confirm password  must match",
+		
+	//Advisory Board
+		advisoryBoardMember1: "Prof. Dr. Mahmoud El Said",
+ 		advisoryBoardMember2: "Prof. Dr. Samiha Fawzy",
+ 		advisoryBoardMember3: "Prof. Dr. Mona Mostafa El Baradei",
+ 		advisoryBoardMember4: "Prof. Dr. Sherifa Sherif",
+ 		advisoryBoardMember5: "Dr. Heba Medhat Zaki",
+ 		advisoryBoardMember6: "Dr. Eng. Amr S. Talaat",
+ 		advisoryBoardMember7: "Ms. Nelly Mahmoud",
+ 		advisoryBoardMember8: "Ms. Suzanne Wardani",
+ 		advisoryBoardMember9: "Ms. Neveen El Tahri",
+ 		advisoryBoardMember10: "Mr. Tarek Mansour",
+ 		advisoryBoardMember11: "Dr. Iman Bibars",
+ 		
+ 		advisoryBoardMemberRole1: "Dean of the Faculty",
+ 		advisoryBoardMemberRole2: "Professor of Economics at Cairo University & Former Minister of Trade and Industry",
+ 		advisoryBoardMemberRole3: "Professor of Economics at Cairo University & Executive Director of the Egyptian Banking Institute, Central Bank of Egypt",
+ 		advisoryBoardMemberRole4: "Professor, Department of Public Administration, Faculty of. Economics and Political Science, Cairo University",
+ 		advisoryBoardMemberRole5: "Founder & CEO of FEPS Business Incubator",
+ 		advisoryBoardMemberRole6: "Country General Manager at IBM Egypt",
+ 		advisoryBoardMemberRole7: "Head of Communication at EGBank",
+ 		advisoryBoardMemberRole8: "Head of Youth Banking at EGBank",
+ 		advisoryBoardMemberRole9: "Chairwoman & Managing Director at Delta Shield for Investment",
+ 		advisoryBoardMemberRole10: "Partner at PricewaterhouseCoopers Egypt",
+ 		advisoryBoardMemberRole11: "Vice President of Ashoka Global and Regional Director of Ashoka Arab World",
+		
+ 		
+ 		advisoryBoardMember2Bio:"•	Dr. Samiha Fawzy was appointed Minister of Trade and Industry in the Arab Republic of Egypt on January 30, 2011, building on her extensive career in both civil service and academia. \n\n"
+							   +"•	Prior to her selection as Minister of Trade and Industry, Dr. Fawzy held multiple positions across diverse fields, including First Assistant to the Minister"
+							   +"of Trade and Industry since July 2004, as well as board member of multiple institutions and committees, including the Egyptian Telecommunication Regulatory Authority (ETRA),"
+							   +"the Egyptian Institute of Directors (EIoD), the Egyptian Competition Authority (ECA), the Egyptian Bank for Exports Development ,the National Council for Women, and the General Authority For Investment. \n\n"
+							   +"•	A Professor of Economics at Cairo University as well as Deputy Director of the Egyptian Center for Economic Studies (ECES), a leading public policy think tank. Dr. Fawzy is an active contributor to the field"
+							   +"of economic research within Egypt and the Middle East and North Africa region as a whole.\n\n"
+							   +"•	She has published extensively on various topics, including; trade, industrial economics, investment theories, multi-national corporations and corporate governance. \n\n",	
 
+	   advisoryBoardMember3Bio:	"•	Prof. Dr. Mona El-Baradei is a prominent Egyptian Economist.  \n\n"
+							   +"•	She is The Executive Director of the Egyptian Banking Institute, Central Bank of Egypt and has served in this position since December 2011.  \n\n"
+							   +"•	She is also a professor of Economics and the Former Dean of the Faculty of Economics and Political Science, Cairo University (from 2005 through 2008)"
+							   +"as the first woman to be appointed in the capacity of dean of the Faculty. She was also the Former Executive Director of the Egyptian National Competitiveness Council, ENCC (from 2008 through 2011).\n\n"
+							   +"•	Professor El Baradei has authored and co-authored a vast number of publications and research papers in different fields such as Economic Development,"
+							   +"Human Resources Development, Energy Economics and the Economics of Education. \n\n"
+							   +"•	Professor El Baradei has been a consultant for a number of organizations including: UNDP, UNICEF, UNESCO, the Population Council, the Social Fund for Development,"
+							   +"the Ministry of Economic Development, the Ministry of Education and the Ministry of Higher Education. \n\n"
+							   +"•	She is a board member of a number of private and public institutions such as: The Egyptian Society for Political Economy, Statistics and Legislation; the General "
+							   +"Committee of The Holding Company of Misr Electricity, (since 2001); the Board of Trustees of the General Authority for Investment and Free Zones, (2004-2007); the Permanent"
+							   +"Committee for Economic and Public Finance for promoting professors (2004 - 2008); Board member of Consumer Protection Agency (2006-2009); Specialized National Councils for Economic and "
+							   +"Financial Policies (since 2006); Member of the Supreme Committee for Developing the Higher Education Fund (2006-2009); Member of the Labor Advisory Council, (2008- 2011); the Centre for "
+							   +"Research and Technological Planning, Cairo University since 2008; Board member of the Centre for Economic and Fiscal Research and Studies, Cairo University (since 2008); the General Assembly "
+							   +"of Egypt Import and Export Company, (2009-2013); member of the National Council for Women \"NCW\", (2008-2011), board member of the National Telecommunication Regulatory Agency \"NTRA\" (2011-2013), "
+							   +"board member of the Dean's Strategic Advisory Board, School of Business, AUC, board member of the board of Directors in Credit Agricole Bank since March 2013 and member of the board in the Canadian University since 2013. \n\n",
+		
+	   advisoryBoardMember4Bio:	"•	Dr. Sherifa Fouad Sherif is a Professor of Public Administration at the Faculty of Economics and Political Science, Cairo University. Currently on sabbatical " +
+	   						   +"as the Vice Dean for Environment and Community Services and Chairperson of the Public Administration Department at Future University in Egypt (FUE). She earned a " +
+	   						   +"Bachelor of Arts Degree in Business Administration and Master’s Degree in Public Administration both from The American University in Cairo and was granted a Degree "
+	   						   +"of Doctor of Philosophy from the University of Sussex, Brighton, United Kingdom.  \n\n"
+	   						   
+							   +"•	She headed The Public Administration Research and Consultation Center (PARC) at the Faculty of Economics and Political Science, Cairo University for three consecutive"
+							   +" years (2015-2017), during which she launched the first project of its kind in an Egyptian Public University (Cairo University) focusing on enhancing the skills and career "
+							   +"development for People with Disabilities (PwD’s). She was also the team leader for the Capacity Building Workshops for the civil servants responsible for the Parliamentary "
+							   +"Affairs Unit’s (PAU) in the Ministry of Planning and Ministry of Local Development in Egypt. The above projects were in collaboration with USAID, World Bank and the Hanns Seidel Foundation. \n\n"
+							   
+							   +"•	Dr. Sherif is currently the Advisor to the Minister of Planning, Monitoring and Administrative Reform in Egypt as well as the Head of the Governance Center situated in the Ministry of Planning. \n\n"
+							   
+							   +"•	She has been teaching for more than fifteen years in the areas Public Administration, Management, Corporate Social Responsibility (CSR), Sustainable Development, Social Entrepreneurship, Environmental "
+							   +"Management, Gender and Governance. She has published more than twenty research papers and articles in both national and international journals in her areas of specialization and was granted \"Best Paper Award\" for "
+							   +"several of her publications. She was also an active member in several university partnership programs with George Washington University USA, George Mason University USA and the University of Sussex, UK. \n\n",
+					 
+							   
+ 		advisoryBoardMember5Bio: "•	Dr. Heba M. Zaki has earned her B.SC. Major economics and minor in social science computing with honor.\n\n"
+ 								+"•	She earned her M.Sc. in economics with excellent degree in 2004, by submitting a thesis entitled \"Testing the Purchasing Power Parity for the Egyptian Pound Exchange Rate from 1991-1999: Co-integration and Artificial Neural Networks.\" \n\n" 
+ 								+"•	Dr. Zaki earned her Ph.D. in Social Science Computing in 2012 with excellent degree, for the thesis entitled The Theoretical and Applied frameworks for the transition Conditions to Knowledge Society.\n\n"  
+ 								+"•	Dr. Zaki is currently teaching for undergraduate and post graduate students, many subjects some of which are: information Infra structure, Social network Analysis, Application of sociocomputing in modern information societies.\n\n"
+ 								+"•	Dr. Zaki founded FEPS Business Incubator in December 2016- the first Business incubator in Cairo university- and she is currently its executive Director since February 2017. She also Advisory board member of Micro Small, Medium enterprise agency- Ministry of trade since June 2017. She   used to be the head of Communication unit of the faculty of Economics & Political Science from Jan 2015 till April 2017, as well as The head of ALUMNI and Recruitment unit, since July 2015 till April 2017.\n\n"
+ 								+"•	Her Research Interests vary between different disciplines reflecting her interdisciplinary background. Some of her main research interests are:Knowledge Society & Innovation, Knowledge Economies, Entrepreneurship, & micro finance, Socio Cybernetics, Internet Studies, &Social Network Analysis. \n\n"
+ 								+"•	Dr. Zaki has received a variety of specialized training courses and workshops in Incubator management ( USAID), Pre- Incubation Entrepreneurship program ( Babson College Executive Program), Technology commercialization( UN ESCWA), Governmental and Institutional  Decision Support Systems: Economic Track ( EU TEMPUS project), Project Mangement( DAAD).",
+ 		
+		advisoryBoardMember6Bio: "•	Dr. Amr Talaat has been the General Manager of IBM Egypt Since 2010. \n\n"
+								   +"•	He earned his Doctorate of Business Administration at University of Paris – Paris School of Business. \n\n"
+								   +"•	He also holds a Master’s of Science in Information Technology from Illinois Institute of Technology & a MBA from ESLSCA University, France.  \n\n"
+								   +"•	He has graduated from Faculty of Engineering, Electrical Engineering at Cairo University. \n\n"
+								   +"•	He is a visiting professor at Cairo University, an honorary member at the Board of Information Technology at Cairo University & a member of the ICT Board of the Academy of Scientific Research & Technology. \n\n"
+								   +"•	He is the chairman of the ICT Committee of the American Chamber of Commerce in Egypt.   \n\n"
+								   +"•	He recently published a book on the 1919 Egyptian Revolution.  \n\n",						
+ 		
+	    advisoryBoardMember7Bio: "•	Nelly Mahmoud is currently heading Marketing Communication at EGBANK. During the past two years since she has joined EGBANK, "
+	    							+"she has worked on completely transforming the image of the bank by launching its new identity and brand which proved success in "
+	    							+"the Egyptian market by receiving the Banking Brand of the year in 2017. With more than 20 years of experience under her belt in marketing "
+	    							+"communication, Nelly led major marketing campaigns in renowned global and regional banks across the financial industry. She is graduated from "
+	    							+"Cairo University, Bachelor of Arts, Mass Communication. \n\n",	 
+		
+		advisoryBoardMember8Bio: "•	Susanne Wardani is responsible for the introduction of MINT – Youth Banking at EGBANK proceeding her involvement in the restructuring "
+								+"of EGBANK in the capacity of strategic planning head. She spent most of her professional career in the field of investment / reserve management "
+								+"at the Central Bank of Egypt as part of a team introducing global standards to the reserve management process. She is a Certified Financial Analyst "
+								+"and has earned a degree in Economics from the American University in Cairo. \n\n",	
+	    							
+		advisoryBoardMember9Bio:"•	33 years of financial and business experience. Graduating in 1980 from Cairo University Faculty of Economics & Political Science and today an alumni of both the"
+							   +"Harvard Business School and London Business School. \n\n"
+							   +"•	Commenced her career with Chase National Bank of Egypt \"CIB\", headed the Petroleum, Tourism and Electronic corporate banking divisions."
+							   +"In 1994, with the revival of the Egyptian Capital Market, endeavored into the entrepreneurial world, establishing one of the first Brokerage firms \"Delta Securities Egypt\" (due to different"
+							   +"partnerships later became Delta EAB Securities, then ABN AMRO Delta Securities, Delta Egypt and finally Delta Rasmala Securities), also founded EAB Delta Asset"
+							   +"Management (later becoming ABN AMRO Delta Asset Management and Delta Rasmala Asset Management), Delta Capital Investments, Delta Financial Solutions, Delta"
+							   +"Holding for Investments, Upper Egypt Leasing Company \"UELease\" & Nuun Fund Services. \n\n"
+							   +"•	In 2007 sold majority stakes in most of her founded companies, to focus on SME private equity & venture capital; aiming to develop and incubate SME’s and"
+							   +"entrepreneurs. With the rise in young entrepreneurial talent after the 2011 revolution,"
+							   +"established \"Delta Shield for Investment\". Focusing on start-ups & early stage start"
+							   +"ups, by providing seed capital, space, mentorship and other needed services, to"
+							   +"incubated companies that have a scalable model, socially impactful and those that can"
+							   +"provide growing employment opportunities. Delta Shield now focuses on advising"
+							   +"Family Businesses that are in growth mode and transitioning to the next generation,"
+							   +"whilst newly established \"Delta Inspire\" is the specialized incubation/acceleration arm,"
+							   +"managing \"138 Pyramids\" the funding arm to partner & seed the process.  \n\n"
+							   +"•	Having played an early role on the Egyptian Capital Market and becoming the first"
+							   +"woman elected to sit on the board of the Egyptian Stock Exchange for 2 consecutive"
+							   +"terms 1997-2003, was privileged to also sit on many public and private sector boards."
+							   +"Past boards She sat on other her own founded companies: Banque Misr, Telecom"
+							   +"Egypt, General Authority for Investments \"GAFI\", Egyptian Arab Land Bank, Egypt"
+							   +"Information Dissemination Company \"EGID\", Misr Capital Investments, Egyptian"
+							   +"Railway Projects & Transport Co. \"ERJET\", Cairo Oil & Soap, Egypt Mortgage"
+							   +"Finance Support & Guarantee Fund, Cairo for Investment & Development \"CID"
+							   +"Group\". Continue to-date to sit on the boards of: Egyptian Financial Services"
+							   +"Authority \"EFSA\"; Egyptian American Enterprise Fund; Egyptian Company for Mobile"
+							   +"Services \"MobiNil\"; Arab Moltaqa Investments; Regina for Pasta & Food Products"
+							   +"as well as non-profit organizations e.g. INJAZ Egypt and foreign entities e.g. OECD"
+							   +"MENA Women’s Business Forum (Co-Chair), 8 Miles, YPO-WPO, CEO and Cartier"
+							   +"Women Initiative. \n\n"
+							   +"•	Won various local & International awards, e.g.; named by FT as one of the \"Leading"
+							   +"Businesswomen in the Arab World\" and locally one of the 10 awards presented by the"
+							   +"Egyptian Ministry of Investment in March 2007 on the Global Women Day for having"
+							   +"positively contributed to the investment enviroment of Egypt.  \n\n",
+							   
+		   advisoryBoardMember10: "•	 ",
+
+ 		advisoryBoardPresident: "(President)",
+ 		advisoryBoardMember: "(Member)",
+		
+		
 
      //advisory-board listView Mfarag
         advisoryBoardListMainTitle:"Advisory Board",
@@ -234,7 +382,7 @@ var appLabelsEn = {
 		uploadFile:"Upload File",
 		addprojectFileLarge:"File too large ,max 500KB",
 		editAttachment:"Edit attachment",
-		addprojectUploadAttachment:"please upload the selected file",
+		addprojectUploadAttachment:"Please upload the selected file",
 		addprojectAttachmentValid:"Images,pdf,rar,zip Files are allowed",
 		addprojectAttachmentNameValid:"File name can only be in English letters,numbers,underscores(_) and dashes(-)",
 		addprojectAttachmentRequired:"Affiliation file is required",
@@ -260,31 +408,33 @@ var appLabelsEn = {
 		question5:"Walk us through the progress you have made so far in terms of sales, partnerships, product development or team building",
 		question6:"What are your growth plans?",
 		question7:"What are the challenges you currently face?",
-		questionMustbeAnswered:"you must answer this question",
-		showcase:"Provide a link to a 3 minutes’  video/attach a document showcasing your prototype (attachment)",
-		showcaseRequired:"you must include a show case",
-		showcasevalidate:"show case must be a url",
+		questionMustbeAnswered:"You must answer this question",
+		showcase:"Provide a link to a 3 minutes’ video summarizing the main points you want to highlight in your startup.",
+		showcaseRequired:"You must include a show case",
+		showcasevalidate:"Show case must be a url",
 		add:"Add",
 		edit:"Edit",
-		saveFeedBack:"save project FeedBack",
+		saveFeedBack:"Save project Feedback",
 		saveAttachments:"save projects Attachments",
 		yes:"Yes",
 		no:"No",
 		deleteMemebrConfirmationMsg :"Are you sure that you want to remove this member?",
-		projectAddedSuccessMsg:"your project has been added successfully" ,
-		projectFeedBackAddedSuccessMsg:"project feedBack has been added successfully" ,
+		projectAddedSuccessMsg:"Your project has been added successfully" ,
+		projectFeedBackAddedSuccessMsg:"Project feedback has been added successfully" ,
 		projectAttchamentsSavedSuccessMsg:"project attchaments has been saved successfully" ,
-		projectUpdatedSuccessMsg:"your project has been updated successfully",
-		removeProjectSuccessMsg : "are you sure that you want to remove this project?",
-		addProjectFeedback:"FeedBack",
+		projectUpdatedSuccessMsg:"Your project has been updated successfully",
+		removeProjectSuccessMsg : "Are you sure that you want to remove this project?",
+		addProjectFeedback:"Feedback",
 		addProjectfeedbackRequired:"project feedback is required",
 		addProjectScore:"Score",
 		addProjectComment:"Comments",
 		addProjectScoreValidate:"project score can be a value from 1 to 100",
 		addProjectScoreRequired:"project score is required",
-		addProjectFeedback_score:"FeedBack & score",
-		addProjectPrototype:"provide a prototype document",
-		addProjectsProjectLegall:"you must mention if your project is legally registered or not",
+		addProjectFeedback_score:"Feedback & Score",
+		addProjectPrototype:"Provide a prototype",
+		addProjectPrototypeDescription:"A prototype is a test or preliminary model of an idea, design, process, interface, technology, product, service or creative work. You could upload a document, visual design, application, storyboard, Business Model Canvas ** Allowed files: Images,pdf,rar,zip",
+		addProjectPrototypeRequired: "You must include a protoype",
+		addProjectsProjectLegall:"You must mention if your project is legally registered or not",
 		addProjectMaxAttachment:"*(maximum size for all attachments is 10 mb)",
         projectIncubationAllAttachmentMaxSize:"Maximum size for all attachments is 10 mb",
 		
@@ -413,6 +563,9 @@ var appLabelsEn = {
 			manageProjectsProjectActionAccept:"Accept",
 			manageProjectsProjectActionReject:"Reject",
 			manageProjectsProjectSubmissionDate: "Submission Date",
+			projectsDataTable: "Data Table",
+			projectsDataChart: "Data Chart",
+			filterProjectsBy: "Filter By",
 			ProjectsListMainTitle:"Accepted Projects",
     		noActiveCycle:"No Active cycle !!",
 			noProjects:"No projects are available.",
@@ -452,13 +605,21 @@ var appLabelsEn = {
 			venue:"Venue",
 			guestSpeaker :"Speaker",
 			deleteEventSuccessMsg : "Are you sure that you want to delete this Event?",
+			deleteSpeakerSuccessMsg : "Are you sure that you want to delete this Speaker?",
 			manageEventsTableLableviewEnrollmentRequests : "View Enrollments Requests",
 			eventEnrollments : "Manage Event Enrollments",
 			enrollmentsSize:"Enrollments",
 			enrollmentRequestsSize:"Enrollments Req.",
-			manageEventsAddEventsBtn:"add Event",
+			manageEventsAddEventsBtn:"Add Event",
 			enrollmentDate:"Enrollments Date",
 			enrollmentStatus:"Enrollments Status",
+			manageEventsNoData:"No events to be displayed",
+			eventSpeakers: "Event's Speakers",
+			addEventSpeakersValidation: "Speakers must be at minimum 1",
+		//add & edit Speaker
+			addSpeaker: "Add Speaker",
+			editSpeaker: "Edit Speaker",
+			
 			
 		//User Profile
 			viewProfile:"View Profile",
@@ -509,6 +670,7 @@ var appLabelsEn = {
 		//jobs
 			jobsTitle:"Jobs",
 			signUptoViewJobsMsg:"You need to sign up to view the jobs",
+			noJobsToShow: "Currently there are no jobs to view",
 
 		//assign role
 			assignRole:"Assign Role",
@@ -525,17 +687,36 @@ var appLabelsEn = {
 			noProjectsMsg:"No Projects Found",
 
 		// addEvent
+			
 			addEditEventsTitle:"Add / Edit Event",
+			addEventAgenda: "Event's Agenda",
+			addAgendaFileLarge:"File too large ,max 500KB",
+			addAgendaUploadAttachment:"Please upload the selected file",
+			addAgendaAttachmentValid:"Images,pdf,rar,zip Files are allowed",
+			addAgendaAttachmentNameValid:"File name can only be in English letters,numbers,underscores(_) and dashes(-)",
 			eventImg:"Event Image",
 			eventTopic:"Event Topic",
 			eventStartDate:"Event Start Date",
+			startDate:"Start Date",
 			eventEndDate:"Event End Date",
-			eventDateTime:"Event Time",
+			eventStartTime:"Start Time",
+			eventEndTime:"End Time",
+			eventEnrollmentDeadlineDate: "Enrollment Deadline Date",
+			eventEnrollmentDeadlineTime: "Enrollment Deadline Time",
+			eventPaymentDeadlineDate: "Payment Deadline Date",
+			eventPaymentDeadlineTime: "Payment Deadline Time",
 			eventDescription:"Event Description",
-			eventSpeakerName:"Event Speaker Name",
-			eventSpeakerBio:"Event Speaker Bio",
+			eventSpeakerName:"Speaker Name",
+			eventSpeakerBio:"Speaker Bio",
 			eventSpeakerProfilePic:"Event Speaker ProfilePic",
 			eventVenue:"Event Venue",
+			eventNoOfPlaces: "No. Of Places",
+			eventFee: "Event's Fees",
+			eventCertificate: "Provides Certificate",
+			eventCertificateYes: "Yes",
+			eventCertificateNo: "No",
+			eventProvideCertificate: "Attendees will get a credited certificate from Cairo Univeristy",
+			eventLink: "Event's Link",
 			editEventImage:"Edit Event Image",
 			Speaker:"Speaker",
 			SpeakerBio:"Speaker Bio",
@@ -552,37 +733,66 @@ var appLabelsEn = {
 			eventDescription_Error_Msg:"Event Description is required",
 			eventDescriptionInvalid_Error_Msg:"Invalid Event Description, it must be from 5 to 3000 characters and can contain special characters and numbers",
 
-			eventDate_Error_Msg:"Invalid Event Date",
-			eventDateRequired_Error_Msg:"Event Date is required",
+			eventStartDate_Error_Msg:"Invalid Event Start Date",
+			eventStartDateRequired_Error_Msg:"Event Start Date is required",
 			
-			eventTime_Error_Msg:"Invalid Event Time",
-			eventTimeRequired_Error_Msg:"Event Time is required",
+			eventStartTime_Error_Msg:"Invalid Event Start Time",
+			eventStartTimeRequired_Error_Msg:"Event Start Time is required",
+			
+			eventEndDate_Error_Msg:"Invalid Event End Date",
+			eventEndDateRequired_Error_Msg:"Event End Date is required",
+			
+			eventEndTime_Error_Msg:"Invalid Event End Time",
+			eventEndTimeRequired_Error_Msg:"Event End Time is required",
+			
+			eventDeadlineDate_Error_Msg:"Invalid Event Deadline Date",
+			eventDeadlineDateRequired_Error_Msg:"Event Deadline Date is required",
+			
+			eventDeadlineTime_Error_Msg:"Invalid Event Deadline Time",
+			eventDeadlineTimeRequired_Error_Msg:"Event Deadline Time is required",
 
 			eventSpeakerName_Error_Msg:"Event Speaker Name is required",
 			eventSpeakerNameInvalid_Error_Msg:"Invalid Event Speaker Name, it must be from 5 to 100 characters and can contain special characters and numbers",
 
+			eventNoOfPlacesInvalid_Error_Msg:"Invalid Number of places, it must be numbers",
+			
+			
+			eventFees_Error_Msg:"Invalid Event's Fees, it must be numbers",
+			
 			eventSpeakerBio_Error_Msg:"Event Speaker Bio is required",
-			eventSpeakerBioInvalid_Error_Msg:"Invalid Event Speaker Bio, it must be from 5 to 100 characters and can contain special characters and numbers",
+			eventSpeakerBioInvalid_Error_Msg:"Invalid Event Speaker Bio, it must be from 5 to 1000 characters and can contain special characters and numbers",
 
 			eventVenue_Error_Msg:"Event Venue is required",
 			eventVenueInvalid_Error_Msg:"Invalid Event Venue, it must be from 5 to 100 characters and can contain special characters and numbers",
 
 			eventImageFileRequired:"Event Image Required",
 			noEventssMsg:"No Events Found",
+			noEnrollmentsMsg:"You aren't enrolled in any events",
 			signUptoEnrollMsg:"you need to sign up to enroll to this event",
 			signUptoEnrollbtn:"Sign Up",
 			
 			//business clinic
-			IssueHeader: "business issue",
+			IssueHeader: "Business issue",
 			addIssue: "Add new business issue",
-			resolveIssue:"Resolve",
+			administerIssue:"Administer",
 			theIssue : "the issue",
 			issueStatus:"Status",
-			saveResponse : "save Response",
+			saveResponse : "Save Response",
+			companyName: "Company Name",
+			submitterPosition:"Submitter Position",
 			submitterName : "Submitter Name",
 			submitterDate : "Submitter Date",
-			addIssueTitleRequired:"issue title is required",
+			addIssueTitleRequired:"Issue title is required",
 			issueTitleInvalid_Error_Msg:"Invalid Issue title, it must be from 5 to 100 characters and can contain special characters and numbers",
+			addIssueTitleRequired:"Issue title is required",
+			issueTitleInvalid_Error_Msg:"Invalid Issue title, it must be from 5 to 100 characters and can contain special characters and numbers",
+			
+			addIssueCompanyNameRequired:"Company Name is required",
+			issueCompanyNameInvalid_Error_Msg:"Invalid Company Name, it must be from 5 to 100 characters and can contain special characters and numbers",
+			
+			addIssueSubmitterPositionRequired:"Submitter Position is required",
+			issueSubmitterPositionInvalid_Error_Msg:"Invalid Submitter Position, it must be from 5 to 100 characters and can contain special characters and numbers",
+			
 			
 			addIssueSummaryRequired:"issue summary is required",
 			issueSummaryInvalid_Error_Msg:"Invalid Issue Summary, it must be from 5 to 300 characters and can contain special characters and numbers",
@@ -599,7 +809,7 @@ var appLabelsEn = {
 			Submitter:"Submitter",
 			issueAddedSuccessMsg: "Your issue is submitted sucessfully",
 			issueEditedSuccessMsg: "Your issue is editted sucessfully",
-			issueResolvedSuccessMsg: "Issue is submitted sucessfully",
+			issueResolvedSuccessMsg: "Issue is administered sucessfully",
 			addIssueResponseRequired: "Issue response is required",
 			deleteIssueMsg : "Are you sure that you want to delete this Issue?",
 			issue_response:"Issue Response",
@@ -618,7 +828,7 @@ var appLabelsEn = {
 			deleteJobMsg:"Are you sure you want to delete this Job?",
 			noIssuesMsg:"No Issues Found",
 			openIssues : "Open Issues",
-			resolved : "Resolved Issues",
+			administered : "Administered Issues",
 			jobsTitle_Error_Msg:"Job Title Required",
 			jobOwner_Error_Msg:"Job Owner Required",
 			jobPostingDate_Error_Msg:"Posting Date Required",

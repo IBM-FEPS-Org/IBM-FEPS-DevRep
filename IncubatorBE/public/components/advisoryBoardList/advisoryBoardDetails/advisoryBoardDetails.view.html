@@ -1,11 +1,14 @@
-<div class="advisory-board-details-container container" ng-controller="advisoryBoardDetailsController">
-   <h2 class="mainTitle">{{ 'advisoryBoardListMainTitle' | translate }}</h2>
-    <div class="memberPhotoContainer col-xs-12 col-sm-12 col-md-2 col-lg-2 col-xl-2">
-        <img src="../../../img/portraitHolder.png" class="memberPhoto"/>
+<div class="advisory-board-details-container container">
+   
+   
+   <div>
+   		<h2 id="memberName" class="mainTitle"></h2>
+   </div>
+   
+    <div class="memberPhotoContainerDetails col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+        <img id="memberPhoto" src="../../../img/portraitHolder.png" class="memberPhoto"/>
     </div>
     <div class="adviserBoardMemberDtails col-xs-12 col-sm-12 col-md-10 col-lg-10 col-xl-10">
-       <h4 class="memberName">{{ 'advisoryBoardListMemberNAme' | translate }}</h4>
-       <p class="memberBio">{{ 'advisoryBoardListMemberBioDetails' | translate }}</p>
-       <p class="memberBio">{{ 'advisoryBoardListMemberBioDetails' | translate }}</p>
+       <p id="memberBio" class="memberBio"></p>
     </div>
 </div>

@@ -1,4 +1,4 @@
-fepsApp.controller('homeController', function ($scope,$translate,$filter,$window,$localStorage,manageNewsService,sharedDataService,$location) {
+fepsApp.controller('homeController', function ($scope,$translate,$filter,$window,$localStorage,manageNewsService,sharedDataService,manageEventsService,$location) {
 
     $scope.currentUser = $localStorage.currentUser;
 
@@ -29,13 +29,22 @@ fepsApp.controller('homeController', function ($scope,$translate,$filter,$window
                  
              },function (error) {
                  $log.error(JSON.stringify(error));
-                 console.log("hiii");
              });
              
          }else{
              $scope.user = null;
          }
          
+         $scope.applyNow = function ()
+         {
+        	 	if($localStorage.currentUser)
+    	 		{
+        	 		$location.path("/fepsIncubator/briefCaseLanding");
+    	 		}
+        	 	else{
+        	 		$location.path("fepsIncubator/signup");
+        	 	}
+         };
         
         
         manageNewsService.getNewsList().then(function (result) {
@@ -53,14 +62,38 @@ fepsApp.controller('homeController', function ($scope,$translate,$filter,$window
                 console.log("getting news list failed");
             }
         });
-
+        manageEventsService.getAllEvents().then(function (result) 
+        {
+        	
+			$scope.eventList = result.data.data;
+			$scope.eventsList = [];
+			for(var i=0;i<$scope.eventList.length;i++)
+			{
+				
+				
+				if( new Date($scope.eventList[i].value.eventStartDate) >= new Date())
+				{
+					$scope.eventList[i].storyDate = new Date($scope.eventList[i].value.eventStartDate);
+					$scope.eventList[i].month = monthNames[$scope.eventList[i].storyDate.getMonth()];
+	                $scope.eventList[i].date = $scope.eventList[i].storyDate.getDate();
+	                
+	                $scope.eventsList.push($scope.eventList[i]);
+				}
+			}
+		},function (error) {
+			if(response.statusText != "ok"){
+				console.log("getting events list failed");
+			}
+		});
+        
     }
 
     
-    $scope.viewNewsDetails = function(news){
+    $scope.viewNewsDetails = function(news)
+    {
 		$localStorage.newsInView = news;
 		console.log($localStorage.newsInView);
-		$location.path( 'fepsIncubator/newsDetails');
+		$location.path( 'fepsIncubator/eventsDetails').search({eventId: news.id});
 	}
     
     $scope.$on("checkCurrentUser", function() {

@@ -23,12 +23,14 @@
 							<li><a href="fepsIncubator/services" ng-click="isNavCollapsed = !isNavCollapsed">{{'menuItem3' | translate}}</a><span>|</span></li>
 							<li><a href="fepsIncubator/jobs" ng-click="isNavCollapsed = !isNavCollapsed">{{'menuItem4' | translate}}</a><span>|</span></li>
 							<li><a href="fepsIncubator/mentorsList" ng-click="isNavCollapsed = !isNavCollapsed">{{'menuItem5' | translate}}</a><span>|</span></li>
-							<li class="last"><a href="fepsIncubator/advisoryBoardList" ng-click="isNavCollapsed = !isNavCollapsed"  >{{'menuItem6' | translate}}</a><span>|</span></li>
+							<li><a href="fepsIncubator/advisoryBoardList" ng-click="isNavCollapsed = !isNavCollapsed"  >{{'menuItem6' | translate}}</a><span>|</span></li>
+							<li class="last"><a href="fepsIncubator/advisoryBoardList" ng-click="isNavCollapsed = !isNavCollapsed"  >{{'menuItem9' | translate}}</a><span>|</span></li>
+							
 							<!--<li><a href="#">{{'menuItem7' | translate}}</a><span>|</span></li>-->
 							<!--<li><a href="#">{{'menuItem8' | translate}}</a></li>-->
-							<li ng-show="!user" class="hidden-lg hidden-md">
+							<!-- <li ng-show="!user" class="hidden-lg hidden-md">
 								<a href="#" ng-click="openLoginModal()">{{'login' | translate}}</a>
-							</li>
+							</li> -->
 							<li ng-show="user" class="hidden-lg hidden-md">
 								<a href="#" ng-click="signOut()">{{'signOut' | translate}}</a>
 							</li>
@@ -42,7 +44,7 @@
 					</div>
 					<div class="login pull-left ">
 						<div ng-show="!user">
-							<button class="btn hidden-xs hidden-sm pull-left" ng-click="openLoginModal()">{{'login' | translate}}</button>
+							<button class="btn pull-left" ng-click="openLoginModal()">{{'login' | translate}}</button>
 							<!-- temp link  -->
 							<!--<a href="fepsIncubator/adminPage">temp link Go Admin</a>-->
 						</div>

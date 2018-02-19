@@ -3,9 +3,14 @@ fepsApp.controller('eventsDetailsController', function ($uibModal,$scope,$transl
 	var eventID = -1;
 
 	var param = $location.search();
-
+	$scope.agendaAttachment = {};
+	$scope.agendaUploaded = false;
+	$scope.hasFees = false;
+	$scope.providesCertificate = false;
 
 	$scope.init = function () {
+		$scope.agendaAttachment = {};
+		$scope.agendaUploaded = false;
 
 		if (param.eventId) {
 
@@ -22,17 +27,36 @@ fepsApp.controller('eventsDetailsController', function ($uibModal,$scope,$transl
 					$scope.eventImageSource = "/attachements?id=" + $scope.currentEvent.eventPhotoAttach.id
 						+ "&key=" + $scope.currentEvent.eventPhotoAttach.key;
 
-					$scope.eventSpeakerPicSource = "/attachements?id=" + $scope.currentEvent.speakers[0].profilePic.id
-						+ "&key=" + $scope.currentEvent.speakers[0].profilePic.key;
 					
 					$scope.loggedIn = $localStorage.currentUser ? true : false;
 
 					$scope.isEnrolled  = $scope.checkIFEnrolled($scope.currentEvent);
 					
+					
 					var now = new Date();
 					
-					$scope.isEventDatePassed  = $scope.currentEvent.eventDate < now.getTime();
-				
+					$scope.isEventDatePassed  = $scope.currentEvent.eventEnrollDeadline < now.getTime();
+					if($scope.currentEvent.agendaAttachment && $scope.currentEvent.agendaAttachment.id)
+					{
+            			$scope.agendaUploaded = true;
+						$scope.agendaAttachment = 
+						{
+								key : $scope.currentEvent.agendaAttachment.key,
+								id: $scope.currentEvent.agendaAttachment.id,
+								rev:$scope.currentEvent.agendaAttachment.rev
+						};
+            		}
+					
+					if($scope.currentEvent.fees && $scope.currentEvent.fees != "")
+					{
+						$scope.hasFees = true;
+					}
+					
+					if($scope.currentEvent.certificate == "true")
+					{
+						$scope.providesCertificate = true;
+					}
+					
 					usSpinnerService.stop('spinner');
 
 
@@ -41,9 +65,6 @@ fepsApp.controller('eventsDetailsController', function ($uibModal,$scope,$transl
 						console.log("get event by id failed");
 					}
 				});
-
-		}
-		else {
 
 		}
 	}

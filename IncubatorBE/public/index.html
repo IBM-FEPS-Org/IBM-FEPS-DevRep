@@ -5,19 +5,21 @@
 	<link rel="icon" href="/img/browserTab.png">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!-- adding  css files -->
+	<script src="/bower_components/jquery-3.2.1.js"></script>
 	<link rel="stylesheet" type="text/css" href="/bower_components/bootstrap/css/bootstrap.css">
 	<link rel="stylesheet" type="text/css" href="/bower_components/angular-datepicker/dist/angular-datepicker.css">
 	<link rel="stylesheet" type="text/css" href="/css/style.css">
+	<script src="/bower_components/bootstrap/js/bootstrap.js"></script>
 	
 	<title>FEPS</title>
 </head>
 <body ng-class="currentPageDirection" >
-	<div class="alert alert-danger hidden-lg hidden-md no-marginBot text-center">
-		{{ 'mobileDevicesNotSupported' | translate }}
-	</div>
+
 	<ng-include src="'components/header/header.view.html'" ng-controller="headerController"></ng-include>
 	<div ng-view autoscroll="true"></div>
 	<ng-include src="'components/footer/footer.view.html'" ng-controller="footerController"></ng-include>
+	
+	<script src="/bower_components/plotly-latest.min.js"></script>
 	<script src="/bower_components/angular/angular.js"></script>
 	<script src="/bower_components/angular-route/angular-route.js" type="text/javascript"></script>
 	<script src="/bower_components/angular-translate/angular-translate.js"></script>
@@ -53,9 +55,7 @@
 	<script src="/components/NewsEvents/NewsEventsDetails/NewsEventsDetails.controller.js" type="text/javascript"></script>
 	<script src="/components/NewsEvents/NewsEventsList/NewsEventsList.controller.js" type="text/javascript"></script>
 	<script src="/components/NewsEvents/eventsDetails/eventsDetails.controller.js" type="text/javascript"></script>
-    <script src="/components/advisoryBoardList/advisoryBoardDetails/advisoryBoardDetails.controller.js" type="text/javascript"></script>
-	<script src="/components/advisoryBoardList/advisoryBoardList/advisoryBoardList.controller.js" type="text/javascript"></script>
-	<script src="/components/mentorsList/mentorsList.controller.js" type="text/javascript"></script>
+    <script src="/components/mentorsList/mentorsList.controller.js" type="text/javascript"></script>
 	<script src="/components/mentorsList/mentorListService.js" type="application/javascript"></script>
 	<script src="/components/login/signin/Signin.controller.js" type="application/javascript"></script>
 	<script src="/components/login/signinPage/SigninPage.controller.js" type="application/javascript"></script>
@@ -70,6 +70,7 @@
 	<script src="/components/adminSideMenu/adminSideMenu.controller.js" type="application/javascript"></script>
 	<script src="/components/manageNews/manageNewsLandingPage/manageNewsLandingPage.controller.js" type="application/javascript"></script>
 	<script src="/components/manageNews/editNews/editNews.controller.js" type="application/javascript"></script>
+	<script src="/components/manageUsers/manageUsersService.js" type="application/javascript"></script>
 	<script src="/components/manageNews/manageNewsService.js" type="application/javascript"></script>
 	<script src="/components/addProject/projectService.js" type="application/javascript"></script>
 	
@@ -86,6 +87,11 @@
 	<script src="/components/manageEvents/manageEvents.controller.js" type="application/javascript"></script>
 	<script src="/components/manageEvents/manageEventsService.js" type="application/javascript"></script>
 	<script src="/components/manageEvents/manageEnrollments/manageEnrollments.controller.js" type="application/javascript"></script>
+	<script src="/components/manageEvents/editEvents/addSpeaker/addSpeaker.controller.js" type="application/javascript"></script>
+	<script src="/components/manageEvents/editEvents/editSpeaker/editSpeaker.controller.js" type="application/javascript"></script>
+    
+    <script src="/components/advisoryBoardList/advisoryBoardDetails/advisoryBoardDetails.controller.js" type="text/javascript"></script>
+	<script src="/components/advisoryBoardList/advisoryBoardList/advisoryBoardList.controller.js" type="text/javascript"></script>
 	
 	
 	<script src="/components/businessClinic/addIssue/addIssueController.js" type="application/javascript"></script>

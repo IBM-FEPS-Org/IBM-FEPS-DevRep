@@ -1,8 +1,9 @@
-fepsApp.controller('ForgetPasswordController', function ($log, $scope, $location, $routeParams, loginService) {
+fepsApp.controller('ForgetPasswordController', function ($log, $scope,$rootScope, $location, $routeParams, loginService) {
 
     $scope.forgetPasswordUser = {};
     $scope.errorMessage = false;
     $scope.successMessage = false;
+    $scope.changeSuccessMessage = false;
     $scope.isResetPassword = $routeParams.isResetPassword;
 
     $scope.doResetPassword = function () {
@@ -14,7 +15,7 @@ fepsApp.controller('ForgetPasswordController', function ($log, $scope, $location
         //case request change password link
 
         if ($scope.forgetPassword.$valid && !$scope.isResetPassword) {
-            loginService.forgetPassword($scope.forgetPasswordUser.email)
+            loginService.forgetPassword($scope.forgetPasswordUser.email,$rootScope.currentLanguage)
                 .then(function (result) {
                     if (result.data.type == 'Error') {
                         $scope.errorMessage = true;
@@ -45,7 +46,7 @@ fepsApp.controller('ForgetPasswordController', function ($log, $scope, $location
                         $scope.successMessage = false;
                         $scope.errorCode = result.data.code;
                     } else {
-                        $scope.successMessage = true;
+                    		$scope.changeSuccessMessage = true;
                         $scope.errorMessage = false;
                         $scope.successCode = result.data.message.en;
                     }

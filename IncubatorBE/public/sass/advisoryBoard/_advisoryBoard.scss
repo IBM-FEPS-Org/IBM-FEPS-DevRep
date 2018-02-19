@@ -3,12 +3,14 @@
     text-align: center;
     font-family: $ff;
     .adviserBoardMember{
+    	display: inline;
         min-height: 150px;
         height: auto;
         margin-bottom: 50px;
         img.memberPhoto{
         max-width: 146px;
         max-height: 146px;
+        min-height: 146px;
         width: 100%;
         border-radius: 50%;
         border: 8px solid $themeColor1;
@@ -40,21 +42,38 @@
 
 /*advisory-board details Mfarag En Styles*/
 .advisory-board-details-container{
-    padding:35px 20px;
+//     padding:35px 20px;
+	width:100%;
     .memberPhotoContainer{
+    	
         img.memberPhoto{
             max-width: 146px;
-            max-height: 146px;
+	        max-height: 146px;
+	        min-height: 146px;
+            width:100%;
+            border-radius: 50%;
+            border: 8px solid $themeColor1;
+            }
+    }
+   .memberPhotoContainerDetails{
+    	text-align: center;
+        img.memberPhoto{
+           	max-width: 146px;
+	        max-height: 146px;
+	        min-height: 146px;
             width:100%;
             border-radius: 50%;
             border: 8px solid $themeColor1;
             }
     }
     .adviserBoardMemberDtails{
+    	white-space: pre-wrap;
         text-align:left;
         color: $gryLightColor;
         display: flow-root;
         .memberBio{
+        	
+        	white-space: pre-wrap;
             font-family: $ffLight;
             display: block;
         }
