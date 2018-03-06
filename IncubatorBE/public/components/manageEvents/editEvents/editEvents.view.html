@@ -248,7 +248,7 @@
 					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 pull-right">
 						<div class="uploader pull-right" ng-show="!eventImageUploaded">
 							<input type="file" class="pull-right" ngf-select="eventImageSelected = false" ng-model="eventPhoto" name="eventImage" ngf-pattern="image/png,image/jpg,image/jpeg"
-								   accept="image/png,image/jpg,image/jpeg" ngf-max-size="500KB" ngf-min-height="100" required
+								   accept="image/png,image/jpg,image/jpeg" ngf-max-size="1000KB" ngf-min-height="100" required
 								   ngf-resize="{width: 200, height: 200}" >
 
 							<button class="btn btn-success" ng-disabled="eventImageSelected || addEvent.eventImage.$invalid" type="button" ng-click="uploadEventImage()">{{ 'uploadFile' | translate }}</button>

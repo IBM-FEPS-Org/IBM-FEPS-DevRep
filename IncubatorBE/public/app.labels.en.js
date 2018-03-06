@@ -278,7 +278,7 @@ var appLabelsEn = {
 							   +"development for People with Disabilities (PwD’s). She was also the team leader for the Capacity Building Workshops for the civil servants responsible for the Parliamentary "
 							   +"Affairs Unit’s (PAU) in the Ministry of Planning and Ministry of Local Development in Egypt. The above projects were in collaboration with USAID, World Bank and the Hanns Seidel Foundation. \n\n"
 							   
-							   +"•	Dr. Sherif is currently the Advisor to the Minister of Planning, Monitoring and Administrative Reform in Egypt as well as the Head of the Governance Center situated in the Ministry of Planning. \n\n"
+							   +"•	Dr. Sherifش is currently the Advisor to the Minister of Planning, Monitoring and Administrative Reform in Egypt as well as the Head of the Governance Center situated in the Ministry of Planning. \n\n"
 							   
 							   +"•	She has been teaching for more than fifteen years in the areas Public Administration, Management, Corporate Social Responsibility (CSR), Sustainable Development, Social Entrepreneurship, Environmental "
 							   +"Management, Gender and Governance. She has published more than twenty research papers and articles in both national and international journals in her areas of specialization and was granted \"Best Paper Award\" for "
@@ -301,9 +301,9 @@ var appLabelsEn = {
 								   +"•	He is the chairman of the ICT Committee of the American Chamber of Commerce in Egypt.   \n\n"
 								   +"•	He recently published a book on the 1919 Egyptian Revolution.  \n\n",						
  		
-	    advisoryBoardMember7Bio: "•	Nelly Mahmoud is currently heading Marketing Communication at EGBANK. During the past two years since she has joined EGBANK, "
+	    advisoryBoardMember7Bio: "•	Nelly Mahmoud is currently heading Marketing Communication at EGBANK. \n\n •	During the past two years since she has joined EGBANK, "
 	    							+"she has worked on completely transforming the image of the bank by launching its new identity and brand which proved success in "
-	    							+"the Egyptian market by receiving the Banking Brand of the year in 2017. With more than 20 years of experience under her belt in marketing "
+	    							+"the Egyptian market by receiving the Banking Brand of the year in 2017. \n\n •	With more than 20 years of experience under her belt in marketing "
 	    							+"communication, Nelly led major marketing campaigns in renowned global and regional banks across the financial industry. She is graduated from "
 	    							+"Cairo University, Bachelor of Arts, Mass Communication. \n\n",	 
 		
@@ -347,7 +347,25 @@ var appLabelsEn = {
 							   +"Egyptian Ministry of Investment in March 2007 on the Global Women Day for having"
 							   +"positively contributed to the investment enviroment of Egypt.  \n\n",
 							   
-		   advisoryBoardMember10: "•	 ",
+	   advisoryBoardMember11Bio:"•	A visionary for social entrepreneurship and an advocate for women's empowerment for more than 30 years, "
+		   						+"Dr. Iman Bibars is Vice President of Ashoka Global and Regional Director of Ashoka Arab World. Bibars has collaborated with activists, politicians, community leaders and"
+		   						+"journalists to promote and impart these values, participating in the Obama Presidential Summit on Leadership, and serving as a member of the "
+		   						+"Clinton Global Initiative. She is also the co-founder and current chairperson of the Association for the Development and Enhancement of Women (ADEW),"
+		   						+" Egypt’s very first microfinance organization, ADEW is both an influential grassroots organization and a leading advocate for women's rights.\n\n"
+		   						
+							   +"•	With an international career spanning from UNICEF to Catholic Relief Services (CRS) and the World Bank, Bibars is a globally revered social development expert. "
+							   +"Bibars has offered her expertise in women’s development issues to the World Bank, UNDP, European Commission and the International Development and Research Center. \n\n"
+							   
+							   +"•	Bibars was a Peace Fellow at Georgetown & Parvin Fellow at Princeton University. She received a Bachelor of Arts and a Master of Arts in Political Science from "
+							   +"The American University in Cairo; Bibars completed her PhD in Development Studies and Anthropology from Sussex"
+							   +" University. Bibars is the author of several books on gender issues including Victims and Heroines: Women, Welfare and the Egyptian State, "
+							   +"and The Women of Tahrir, which details the most recent experiences of women during the Egyptian uprising. Bibars also published one of the first books written in Arabic on US President Barack Obama– Dreams of a Good Fellow.  \n\n"
+							   
+							   +"•	Blog links: http://daughterofthenilea.blogspot.com/ (Arabic)"
+							   +"\n"
+							   +"http://daughterofthenilee.blogspot.com/ (English)",
+
+						
 
  		advisoryBoardPresident: "(President)",
  		advisoryBoardMember: "(Member)",
@@ -813,15 +831,17 @@ var appLabelsEn = {
 			addIssueResponseRequired: "Issue response is required",
 			deleteIssueMsg : "Are you sure that you want to delete this Issue?",
 			issue_response:"Issue Response",
+			
+			
 			//jobs section
-			manageJobsAddBtn:"add job",
+			manageJobsAddBtn:"Add job",
 			noJobsMsg:"No Jobs Found",
 			jobTitle:"Job Title",
 			jobOwner:"To Apply, Please Contact:",
 			jobOwnerMail:"Job Owner Email",
 			jobisLinked:'job connected to project',
 			jobPostingDate:"Posting Date",
-			jobSkills:"Skills",
+			jobSkills:"Job Description",
 			jobProjectSearch:'Search',
 			jobProject:"Project",
 			AddJobsBtn:"Add Job",
@@ -832,16 +852,33 @@ var appLabelsEn = {
 			jobsTitle_Error_Msg:"Job Title Required",
 			jobOwner_Error_Msg:"Job Owner Required",
 			jobPostingDate_Error_Msg:"Posting Date Required",
-			jobSkills_Error_Msg:"Skills Required",
+			jobSkills_Error_Msg:"Job Description Required",
 			jobProject_Error_Msg:"Project Required",
 
 			jobsTitleInvalid_Error_Msg:"Job Title invalid",
 			jobOwnerInvalid_Error_Msg:"Job Owner invalid",
 			jobPostingDateInvalid_Error_Msg:"Posting Date invalid",
-			jobSkillsInvalid_Error_Msg:"Skills invalid",
+			jobSkillsInvalid_Error_Msg:"Job Description invalid",
 			jobProjectInvalid_Error_Msg:"Project invalid",
 
 			noProjectFound:"No Project with this name",
+			
+			//Activities Section
+			manageActivityMainTitle:"Manage Activities",
+			manageActivitiesAddBtn:"Add Activity",
+			noActivitiesMsg:"No Activities Found",
+			activityTitle: "Activity Title",
+			activityDate: "Activity Date",
+			activityBrief: "Short Brief",
+			activityStatus: "Status",
+			activityPhotos: "Activity Photos",
+			activityPhoto: "Activity Photo",
+			activitysTitle_Error_Msg:"Activity Title Required",
+			activitysTitleInvalid_Error_Msg:"Invalid Activity Title, it must be from 5 to 100 characters and can contain special characters and numbers",
+			activityAddedSuccessMsg:"Your activity has been added successfully",
+			activityUpdatedSuccessMsg:"Your activity has been updated successfully",
+			deleteActivitySuccessMsg:"Are you sure that you want to delete this Activity?"
+
 };
 
 

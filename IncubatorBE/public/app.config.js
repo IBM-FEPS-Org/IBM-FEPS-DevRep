@@ -109,6 +109,10 @@ fepsApp.config(function($routeProvider,$locationProvider,$translateProvider,appL
 		templateUrl : 'components/advisoryBoardList/advisoryBoardDetails/advisoryBoardDetails.view.html',
 		controller  : 'NewsEventsDetailsController',
 	})
+	.when(rootContext+'/ourActivities', {
+		templateUrl : 'components/ourActivities/ourActivities.view.html',
+		controller  : 'ourActivitiesController',
+	})
 	.when(rootContext+'/mentorsList', {
 		templateUrl : 'components/mentorsList/mentorsList.view.html',
 		controller  : 'MentorsListController',
@@ -235,6 +239,15 @@ fepsApp.config(function($routeProvider,$locationProvider,$translateProvider,appL
 			}
 		}
 	})
+	.when(rootContext+'/addEditActivities', {
+		templateUrl : 'components/manageActivities/editActivities/editActivities.view.html',
+		controller  : 'EditActivitiesController',
+		resolve: {
+			checkUserprivilages: function(loginService, $location,sharedDataService,$localStorage){
+				checkprivilages(loginService, $location,sharedDataService,$localStorage,"addEditActivities","admin");
+			}
+		}
+	})
 	.when(rootContext+'/addEditJobs', {
 		templateUrl : 'components/manageJobs/addEditJobs/addEditJobs.view.html',
 		controller  : 'addEditJobsController',
@@ -277,6 +290,15 @@ fepsApp.config(function($routeProvider,$locationProvider,$translateProvider,appL
 		resolve: {
 			checkUserprivilages: function(loginService, $location,sharedDataService,$localStorage){
 				checkprivilages(loginService, $location,sharedDataService,$localStorage,"manageEvents","admin");
+			}
+		}
+	})
+	.when(rootContext+'/manageActivities', {
+		templateUrl : 'components/manageActivities/manageActivities.view.html',
+		controller  : 'manageActivitiesController',
+		resolve: {
+			checkUserprivilages: function(loginService, $location,sharedDataService,$localStorage){
+				checkprivilages(loginService, $location,sharedDataService,$localStorage,"manageActivities","admin");
 			}
 		}
 	})

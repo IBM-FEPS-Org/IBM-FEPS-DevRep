@@ -60,7 +60,7 @@ fepsApp.controller('manageEnrollmentsController', function ($scope, $rootScope, 
 
 	        result = '';
 	        result += 'sep=,' + '\r\n';
-	        result += 'Name,Email,Phone,Faculty,University,Graduation Date' + '\r\n'
+	        result += 'Name (Arabic), Name(English), Email,Phone,Faculty,University,Graduation Date' + '\r\n'
 	        
 	        
 	        data.forEach(function(item) 
@@ -93,7 +93,8 @@ fepsApp.controller('manageEnrollmentsController', function ($scope, $rootScope, 
 				{
 					if($scope.event.value.acceptedEnrollments[i].arabicFirstName)
 					{
-						$scope.enrollmentsToBeDownloaded.push({"Name":$scope.event.value.acceptedEnrollments[i].arabicFirstName+" "+$scope.event.value.acceptedEnrollments[i].arabicSurName,
+						$scope.enrollmentsToBeDownloaded.push({"Name(Arabic)":$scope.event.value.acceptedEnrollments[i].arabicFirstName+" "+$scope.event.value.acceptedEnrollments[i].arabicSurName,
+						"Name(English)":$scope.event.value.acceptedEnrollments[i].firstName+" "+$scope.event.value.acceptedEnrollments[i].surname,
 						"Email": $scope.event.value.acceptedEnrollments[i].email,
 						"Phone": $scope.event.value.acceptedEnrollments[i].phone,
 						"Faculty": $scope.event.value.acceptedEnrollments[i].faculty,
@@ -104,7 +105,8 @@ fepsApp.controller('manageEnrollmentsController', function ($scope, $rootScope, 
 					}
 					else
 					{
-						$scope.enrollmentsToBeDownloaded.push({"Name":$scope.event.value.acceptedEnrollments[i].firstName+" "+$scope.event.value.acceptedEnrollments[i].surname,
+						$scope.enrollmentsToBeDownloaded.push({"Name(Arabic)":$scope.event.value.acceptedEnrollments[i].firstName+" "+$scope.event.value.acceptedEnrollments[i].surname,
+							"Name(English)":$scope.event.value.acceptedEnrollments[i].firstName+" "+$scope.event.value.acceptedEnrollments[i].surname,
 							"Email": $scope.event.value.acceptedEnrollments[i].email,
 							"Phone": $scope.event.value.acceptedEnrollments[i].phone,
 							"Faculty": $scope.event.value.acceptedEnrollments[i].faculty,

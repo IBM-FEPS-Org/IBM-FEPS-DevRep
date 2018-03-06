@@ -188,16 +188,18 @@
                 </div>
                 <div class="col-lg-5 col-md-5 col-sm-12 col-sm-12 pull-right">
                     <p class="input-group pull-right width100">
-                        <input type="text" class="form-control pull-right" ng-disabled="viewMode == 3"
-                               uib-datepicker-popup="{{format}}" placeholder="DD-MMMM-YYYY" name="birthDate" ng-model="newUser.birthdate"
+                        <input type="text" class="form-control pull-right" ng-disabled="viewMode == 3"=
+                               uib-datepicker-popup="{{format}}" placeholder="DD-MM-YYYY" name="birthDate" ng-model="newUser.birthdate"
                                ng-required="true" is-open="DatePickerPopup.opened" datepicker-options="dateOptions"
-                               close-text="Close" alt-input-formats="altInputFormats"/>
+                               close-text="Close" alt-input-formats="altInputFormats" />
+                        
                         <span class="input-group-btn pull-right">
                             <button type="button" class="btn btn-default" ng-click="openDatePicker()"><i
                                     class="glyphicon glyphicon-calendar"></i></button>
                         </span>
                     </p>
                 </div>
+                
                 <div class="col-lg-4 col-md-4 col-sm-12 col-sm-12 pull-right"
                      ng-show="signUp.birthDate.$dirty && signUp.birthDate.$invalid">
                     <div class="alert alert-danger">
@@ -303,7 +305,7 @@
                 <div class="col-lg-5 col-md-5 col-sm-12 col-sm-12 pull-right">
                     <p class="input-group pull-right width100">
                         <input type="text" class="form-control pull-right" ng-disabled="viewMode == 3"
-                               uib-datepicker-popup="{{format}}" name="graduationDate" placeholder="DD-MMMM-YYYY" ng-model="newUser.graduationYear"
+                               uib-datepicker-popup="{{format2}}" name="graduationDate" placeholder="MM-YYYY" ng-model="newUser.graduationYear"
                                ng-required="true" is-open="DatePickerPopup2.opened" datepicker-options="dateOptions2"
                                close-text="Close" alt-input-formats="altInputFormats"/>
                         <span class="input-group-btn pull-right">

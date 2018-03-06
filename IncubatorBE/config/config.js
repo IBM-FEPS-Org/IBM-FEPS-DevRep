@@ -1,13 +1,13 @@
 module.exports = {
   "cloudantNoSQLDB": {
-	  "dbName" : "my_sample_db",
+	  "dbName" : "feps-db",
 	  "credentials":
 	  {
-		  "username": "b1b9fe3e-73c7-4d89-98fe-cae3ee8a0e14-bluemix",
-		  "password": "9a169df71b71d5181f8209d85ad886889ce0b3fdef3250aa141725956705ea1b",
-		  "host": "b1b9fe3e-73c7-4d89-98fe-cae3ee8a0e14-bluemix.cloudant.com",
+		  "username": "31013944-c6ff-4bde-9b43-1e0b8b6245cf-bluemix",
+		  "password": "ea3e062a981db4f88e46b9f2951b938b3c217ada11de7d96e4dcdf9a64ff84c4",
+		  "host": "31013944-c6ff-4bde-9b43-1e0b8b6245cf-bluemix.cloudant.com",
 		  "port": 443,
-		  "url": "https://b1b9fe3e-73c7-4d89-98fe-cae3ee8a0e14-bluemix:9a169df71b71d5181f8209d85ad886889ce0b3fdef3250aa141725956705ea1b@b1b9fe3e-73c7-4d89-98fe-cae3ee8a0e14-bluemix.cloudant.com"
+		  "url": "https://31013944-c6ff-4bde-9b43-1e0b8b6245cf-bluemix:ea3e062a981db4f88e46b9f2951b938b3c217ada11de7d96e4dcdf9a64ff84c4@31013944-c6ff-4bde-9b43-1e0b8b6245cf-bluemix.cloudant.com"
 	  },
     "syslog_drain_url": null,
     "volume_mounts": [],
@@ -24,7 +24,7 @@ module.exports = {
   },
   "mails" : {
     "support" : {
-    	 "email" : "incubator@feps.edu.eg",
+    	 "email" : "incubator.no-reply@feps.edu.eg",
          "password" : "FEPS.BI-team18",
 	    "host" : "smtp.gmail.com",
 	    "port" : "465"

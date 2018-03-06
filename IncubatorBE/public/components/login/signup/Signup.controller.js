@@ -105,9 +105,9 @@ fepsApp.controller('signupController', function ($scope, $rootScope, $location, 
     }
 
 
-    $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+    $scope.formats = ['dd-MM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate','MM-yyyy'];
     $scope.format = $scope.formats[0];
-    //$scope.format2 = $scope.formats[4];
+    $scope.format2 = $scope.formats[4];
     $scope.altInputFormats = ['M!/d!/yyyy'];
     //$scope.altInputFormats2 = ['yyyy'];
 
@@ -119,10 +119,13 @@ fepsApp.controller('signupController', function ($scope, $rootScope, $location, 
     };
 
     $scope.dateOptions = {
-        maxDate: moment()
+        maxDate: moment(),
+        minMode: 'day',
+        datepickerMode: 'year'
     }
     $scope.dateOptions2 = {
-        //maxDate: moment()
+        minMode: 'month',
+        datepickerMode: 'year'
     }
 
     $scope.DatePickerPopup = {

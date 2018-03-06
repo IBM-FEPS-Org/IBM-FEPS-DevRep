@@ -53,7 +53,8 @@
       "project_status" : "project_status",
       "events" : "events",
       "recruitments" : "recruitments",
-      "clinicIssue" : "clinicIssue"
+      "clinicIssue" : "clinicIssue",
+      "activities":"activities"
     }
   },
   "groups" : {

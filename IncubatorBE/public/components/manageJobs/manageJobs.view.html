@@ -26,9 +26,6 @@
                     <th class="tableCell sortable" sortable="value.venue">
                         <label class="pull-right">{{ 'jobPostingDate' | translate }}</label>
                     </th>
-                    <th class="tableCell sortable" sortable='value.acceptedEnrollments.length'>
-                        <label class="pull-right">{{ 'jobSkills' | translate }}</label>
-                    </th>
                     <th class="tableCell sortable" sortable='value.pendingEnrollments.length'>
                         <label class="pull-right">{{ 'jobProject' | translate }}</label>
                     </th>
@@ -44,9 +41,6 @@
                     </td>
                     <td class="tableCell"><a href="#" ng-click="openJobDetails(item._id)" >{{item.jobOwnerMail}}</a></td>
                     <td class="tableCell">{{item.createDate| date:'dd/MM/yyyy'}}</td>
-                    <td class="tableCell">
-                        {{item.skills}}
-                    </td>
                     <td class="tableCell">
                         {{item.projectName}}
                     </td>

@@ -62,7 +62,7 @@
 				   </div>
 				   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 pull-right">
 					   <input type="text" class="editNewsTitle width100" placeholder="{{ 'jobOwnerMail' | translate }}"
-							  value="{{newJob.jobOwnerMail}}" ng-disabled="!jobOwnerMailDisable" ng-model="newJob.jobOwnerMail" name ='jobOwnerMail' required ng-pattern="/^(\w[-._\w]*\w@\w[-._\w]*\w\.\w{2,3})/" ng-trim="false" ng-maxlength="50">
+							  value="{{newJob.jobOwnerMail}}" ng-disabled="!jobOwnerMailDisable" ng-model="newJob.jobOwnerMail" name ='jobOwnerMail' required ng-pattern="/^(\w[-._\w]*\w@\w[-._\w]*\w\.\w{2,3})/" ng-trim="false" ng-maxlength="100">
 				   </div>
 				   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 pull-right">
 					   <div class="alert alert-danger" ng-show="addJob.jobOwnerMail.$dirty && addJob.jobOwnerMail.$invalid">
@@ -95,9 +95,13 @@
 					   <label> {{'jobSkills' | translate}}* </label>
 				   </div>
 				   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 pull-right">
-					   <input type="text" class="editNewsTitle width100" placeholder="{{ 'jobSkills' | translate }}"
-							  value="{{newJob.skills}}" ng-model="newJob.skills" name ='skills' required ng-trim="false"
-							  ng-pattern="/^(?=.*[0-9])*(?=.*[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z]|[0-9]+[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z]+|[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z]+[0-9]+)[0-9\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z!@#${}=\-\\//?:><%*,.'\s()_+^&\[\]]{5,100}$/">
+					   
+			   			<textarea class="editNewsBody col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12" placeholder="{{ 'jobSkills' | translate }}"
+								 data-gramm="false" ng-model="newJob.skills" name='skills' required
+								 ng-pattern="/^(?=.*[0-9])*(?=.*[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z]|[0-9]+[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z]+|[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z]+[0-9]+)[0-9\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z!@#$&quot;{}=\-\\//?:;><%*,.'\s()_+^&\[\]]{5,3000}$/">
+							{{newJob.skills}}</textarea>
+				   
+				   
 				   </div>
 				   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 pull-right">
 					   <div class="alert alert-danger" ng-show="addJob.skills.$dirty && addJob.skills.$invalid">

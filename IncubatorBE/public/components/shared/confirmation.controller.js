@@ -96,6 +96,10 @@ fepsApp.controller('confirmationController', function($scope,$rootScope,$localSt
 		else if (modal=="deleteEvent"){
 			sharedDataService.broadcastEvent("deleteEvent", []);	
 		}
+		else if (modal=="deleteActivity"){
+			console.log("Broadcating");
+			sharedDataService.broadcastEvent("deleteActivity", []);	
+		}
 		else if (modal=="deleteSpeaker"){
 			sharedDataService.broadcastEvent("deleteSpeaker", []);	
 		}

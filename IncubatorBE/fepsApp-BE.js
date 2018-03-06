@@ -94,6 +94,7 @@ const authRoute = require('./auth/authentication');
 const  usersRoute = require('./users/users.route.js');
 const newsRoute = require('./news/news-route.js');
 const eventsRoute = require('./events/events-route.js');
+const activitiesRoute = require('./activities/activities-route.js');
 const projectsRoute = require('./projects/project-route');
 const cycleRoute= require('./cycles/cycle-route.js');
 const recruitmentsRoute= require('./recruitments/recruitment-route');
@@ -113,6 +114,7 @@ app.use('/lookups', lookups);
 app.use('/cycles', cycleRoute);
 app.use('/attachements', attachementsRoute);
 app.use('/events', eventsRoute);
+app.use('/activities', activitiesRoute);
 app.use('/recruitments', recruitmentsRoute);
 app.use('/clinicissues', clinicIssuesRoute);
 

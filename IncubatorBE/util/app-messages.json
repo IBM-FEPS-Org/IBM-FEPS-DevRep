@@ -1,134 +1,150 @@
 {
 	"businessMessages":{
-		"user_register_success":{"en":"user has been registered successfully","ar":"تمت أضافة  المستخدم بنجاح"},
-		"user_register_fail_already_exists":{"en":"this user name already Exists","ar":"اسم المستخدم موجود مسبقا"},
-		"support_mail_subject" : {"en" : "We are glad to help you", "ar" : "نحن سعداء لمساعدتك"},
-		"user_removed" : {"en" : "User is removed successfully", "ar" : "تم حذف المستخدم بنجاح"},
+		"user_register_success":{"en":"user has been registered successfully","ar":"ØªÙ…Øª Ø£Ø¶Ø§Ù�Ø©  Ø§Ù„Ù…Ø³ØªØ®Ø¯Ù… Ø¨Ù†Ø¬Ø§Ø­"},
+		"user_register_fail_already_exists":{"en":"this user name already Exists","ar":"Ø§Ø³Ù… Ø§Ù„Ù…Ø³ØªØ®Ø¯Ù… Ù…ÙˆØ¬ÙˆØ¯ Ù…Ø³Ø¨Ù‚Ø§"},
+		"support_mail_subject" : {"en" : "We are glad to help you", "ar" : "Ù†Ø­Ù† Ø³Ø¹Ø¯Ø§Ø¡ Ù„Ù…Ø³Ø§Ø¹Ø¯ØªÙƒ"},
+		"user_removed" : {"en" : "User is removed successfully", "ar" : "ØªÙ… Ø­Ø°Ù� Ø§Ù„Ù…Ø³ØªØ®Ø¯Ù… Ø¨Ù†Ø¬Ø§Ø­"},
 		"user_update_success" : {
 			"en" : "User updated successfully",
-			"ar" : "تم تحديث البيانات بنجاح"
+			"ar" : "ØªÙ… ØªØ­Ø¯ÙŠØ« Ø§Ù„Ø¨ÙŠØ§Ù†Ø§Øª Ø¨Ù†Ø¬Ø§Ø­"
 		},
 		"news_updated_success" : {
 			"en" : "News updated successfully",
-			"ar" : "تم تحديث الخبر بنجاح"
+			"ar" : "ØªÙ… ØªØ­Ø¯ÙŠØ« Ø§Ù„Ø®Ø¨Ø± Ø¨Ù†Ø¬Ø§Ø­"
 		},
 		"news_creation_success" : {
 			"en" : "news is created successfully",
-			"ar" : "تم انشاء خبر بنجاح"
+			"ar" : "ØªÙ… Ø§Ù†Ø´Ø§Ø¡ Ø®Ø¨Ø± Ø¨Ù†Ø¬Ø§Ø­"
 		},
 		"news_removed_success" : {
 			"en" : "News is removed successfully",
-			"ar" : "تم حذف الخبر بنجاح"
+			"ar" : "ØªÙ… Ø­Ø°Ù� Ø§Ù„Ø®Ø¨Ø± Ø¨Ù†Ø¬Ø§Ø­"
 		},
 		"project_creation_success" : {
 					"en" : "project is created successfully",
-					"ar" : "تم انشاء مشروع بنجاح"
+					"ar" : "ØªÙ… Ø§Ù†Ø´Ø§Ø¡ Ù…Ø´Ø±ÙˆØ¹ Ø¨Ù†Ø¬Ø§Ø­"
 				},
 		"project_updated_success" : {
 			"en" : "project updated successfully",
-			"ar" : "تم تحديث المشروع بنجاح"
+			"ar" : "ØªÙ… ØªØ­Ø¯ÙŠØ« Ø§Ù„Ù…Ø´Ø±ÙˆØ¹ Ø¨Ù†Ø¬Ø§Ø­"
 		},
 		"project_removed_success" : {
 			"en" : "project removed successfully",
-			"ar" : "تم حذف المشروع بنجاح"
+			"ar" : "ØªÙ… Ø­Ø°Ù� Ø§Ù„Ù…Ø´Ø±ÙˆØ¹ Ø¨Ù†Ø¬Ø§Ø­"
 		},
 		"email_sent_success" : {
 			"en" : "Email sent successfully, please check your inbox",
-			"ar" : "تم ارسال ايميل تفقد ميلك"
+			"ar" : "ØªÙ… Ø§Ø±Ø³Ø§Ù„ Ø§ÙŠÙ…ÙŠÙ„ ØªÙ�Ù‚Ø¯ Ù…ÙŠÙ„Ùƒ"
 		},
-		"resetـpassword_success" : {
-			"code" : "resetـpassword_success",
+		"resetÙ€password_success" : {
+			"code" : "resetÙ€password_success",
 			"en" : "Password has been reset successfully",
-			"ar" : "تم تغيير كلمة السر بنجاح"
+			"ar" : "ØªÙ… ØªØºÙŠÙŠØ± ÙƒÙ„Ù…Ø© Ø§Ù„Ø³Ø± Ø¨Ù†Ø¬Ø§Ø­"
 		},
-		"changeـpassword_success" : {
-			"code" : "changeـpassword_success",
+		"changeÙ€password_success" : {
+			"code" : "changeÙ€password_success",
 			"en" : "Password has been changed successfully",
-			"ar" : "تم تغيير كلمة السر بنجاح"
+			"ar" : "ØªÙ… ØªØºÙŠÙŠØ± ÙƒÙ„Ù…Ø© Ø§Ù„Ø³Ø± Ø¨Ù†Ø¬Ø§Ø­"
 		},
 		"cycle_creation_success":{
 			"en" : "Cycle createded successfully",
-			"ar" : "تم إنشاء دورة المشروع بنجاح"
+			"ar" : "ØªÙ… Ø¥Ù†Ø´Ø§Ø¡ Ø¯ÙˆØ±Ø© Ø§Ù„Ù…Ø´Ø±ÙˆØ¹ Ø¨Ù†Ø¬Ø§Ø­"
 		},
 		"cycle_updated_success":{
 			"en" : "Cycle updated successfully",
-			"ar" : "تم تحديث دورة المشروع بنجاح"
+			"ar" : "ØªÙ… ØªØ­Ø¯ÙŠØ« Ø¯ÙˆØ±Ø© Ø§Ù„Ù…Ø´Ø±ÙˆØ¹ Ø¨Ù†Ø¬Ø§Ø­"
 		},
 		"cycle_removed_success":{
 			"en" : "Cycle removed successfully",
-			"ar" : "تم حذف دورة المشروع بنجاح"
+			"ar" : "ØªÙ… Ø­Ø°Ù� Ø¯ÙˆØ±Ø© Ø§Ù„Ù…Ø´Ø±ÙˆØ¹ Ø¨Ù†Ø¬Ø§Ø­"
 		},
 		"event_created_succes" : {
 			"code" : "event_created_succes",
-			"ar" : "تم انشاء حدث بنجاح",
+			"ar" : "ØªÙ… Ø§Ù†Ø´Ø§Ø¡ Ø­Ø¯Ø« Ø¨Ù†Ø¬Ø§Ø­",
 			"en" : "Event is created successfully"
 		},
+		
 		"event_removed_success" : {
 			"code" : "event_removed_success",
-			"ar" : "تم حذف الحدث بنجاح",
-			"en" : "Event is created successfully"
+			"ar" : "ØªÙ… Ø­Ø°Ù� Ø§Ù„Ø­Ø¯Ø« Ø¨Ù†Ø¬Ø§Ø­",
+			"en" : "Event is removed successfully"
 		},
 		"event_updated_success" : {
 			"code" : "event_updated_success",
-			"ar" : "تم تعديل الخبر بنجاح",
+			"ar" : "ØªÙ… ØªØ¹Ø¯ÙŠÙ„ Ø§Ù„Ø®Ø¨Ø± Ø¨Ù†Ø¬Ø§Ø­",
 			"en" : "Event is updated successfully"
+		},
+		"activity_created_success" : {
+			"code" : "activity_created_succes",
+			"ar" : "تم انشاء النشاط بنجاح",
+			"en" : "Activity is created successfully"
+		},
+		"activity_removed_succes" : {
+			"code" : "activity_removed_succes",
+			"ar" : "تم  حذف النشاط بنجاح",
+			"en" : "Activity is removed successfully"
+		},
+		"activity_updated_success" : {
+			"code" : "activity_updated_success",
+			"ar" : "تم  تعديل النشاط بنجاح",
+			"en" : "Activity is updated successfully"
 		},
 		"enrollment_success" : {
 			"code" : "enrollment_success",
 			"en" : "You are enrolled now",
-			"ar" : "تم تسجيلك بالفعل في الحدث"
+			"ar" : "ØªÙ… ØªØ³Ø¬ÙŠÙ„Ùƒ Ø¨Ø§Ù„Ù�Ø¹Ù„ Ù�ÙŠ Ø§Ù„Ø­Ø¯Ø«"
 		},
 		"recruitment_create_success": {
 			"code" : "recruitment_create_success",
 			"en" : "Recruitment ad is created successfully",
-			"ar" : "تم اضافة اعلان توظيف بنجاح"
+			"ar" : "ØªÙ… Ø§Ø¶Ø§Ù�Ø© Ø§Ø¹Ù„Ø§Ù† ØªÙˆØ¸ÙŠÙ� Ø¨Ù†Ø¬Ø§Ø­"
 		},
 		"recruitment_remove_success" : {
 			"code" : "recruitment_remove_success",
 			"en" : "Recruitment ad is deleted successfully",
-			"ar" : "تم حذف اعلان التوظيف بنجاح"
+			"ar" : "ØªÙ… Ø­Ø°Ù� Ø§Ø¹Ù„Ø§Ù† Ø§Ù„ØªÙˆØ¸ÙŠÙ� Ø¨Ù†Ø¬Ø§Ø­"
 		},
 		"recruitment_updated_success" : {
 			"code" : "recruitment_updated_success",
 			"en" : "Recruitment is updated successfully",
-			"ar" : "تم تعديل اعلان التوظيف بنجاح"
+			"ar" : "ØªÙ… ØªØ¹Ø¯ÙŠÙ„ Ø§Ø¹Ù„Ø§Ù† Ø§Ù„ØªÙˆØ¸ÙŠÙ� Ø¨Ù†Ø¬Ø§Ø­"
 		},
 		"clinic_issue_create_success": {
 			"code" : "clinic_create_success",
 			"en" : "clinic issue is created successfully",
-			"ar" : "تم اضافة استشارة بنجاح"
+			"ar" : "ØªÙ… Ø§Ø¶Ø§Ù�Ø© Ø§Ø³ØªØ´Ø§Ø±Ø© Ø¨Ù†Ø¬Ø§Ø­"
 		},
 		"clinic_issue_remove_success" : {
 			"code" : "clinic_issue_remove_success",
 			"en" : "clinic_issue ad is deleted successfully",
-			"ar" : "تم حذف اعلان التوظيف بنجاح"
+			"ar" : "ØªÙ… Ø­Ø°Ù� Ø§Ø¹Ù„Ø§Ù† Ø§Ù„ØªÙˆØ¸ÙŠÙ� Ø¨Ù†Ø¬Ø§Ø­"
 		},
 		"clinic_issue_updated_success" : {
 			"code" : "clinic_issue_updated_success",
 			"en" : "clinic_issue is updated successfully",
-			"ar" : "تم تعديل الاستشارة بنجاح"
+			"ar" : "ØªÙ… ØªØ¹Ø¯ÙŠÙ„ Ø§Ù„Ø§Ø³ØªØ´Ø§Ø±Ø© Ø¨Ù†Ø¬Ø§Ø­"
 		}
 	},
 	"errorMessages":{
 		"user_not_found" : {
 			"en" : "User not found",
-			"ar" : "اسم المستخدم غير موجود"
+			"ar" : "Ø§Ø³Ù… Ø§Ù„Ù…Ø³ØªØ®Ø¯Ù… ØºÙŠØ± Ù…ÙˆØ¬ÙˆØ¯"
 		},
 		"wrong_password" : {
 			"en" : "Wrong password",
-			"ar" : "خطأ في كلمة السر"
+			"ar" : "Ø®Ø·Ø£ Ù�ÙŠ ÙƒÙ„Ù…Ø© Ø§Ù„Ø³Ø±"
 		},
 		"username_already_exist" : {
 			"en" : "Username is already exist",
-			"ar" : "اسم المستخدم موجود بالفعل"
+			"ar" : "Ø§Ø³Ù… Ø§Ù„Ù…Ø³ØªØ®Ø¯Ù… Ù…ÙˆØ¬ÙˆØ¯ Ø¨Ø§Ù„Ù�Ø¹Ù„"
 		},
 		"phone_already_exist" : {
 			"en" : "Phone is already exist",
-			"ar" : "رقم التليفون موجود بالفعل"
+			"ar" : "Ø±Ù‚Ù… Ø§Ù„ØªÙ„ÙŠÙ�ÙˆÙ† Ù…ÙˆØ¬ÙˆØ¯ Ø¨Ø§Ù„Ù�Ø¹Ù„"
 		},
 		"email_already_exist" : {
 			"en" : "email is already exist",
-			"ar" : "هذا الايميل موجود بالفعل"
+			"ar" : "Ù‡Ø°Ø§ Ø§Ù„Ø§ÙŠÙ…ÙŠÙ„ Ù…ÙˆØ¬ÙˆØ¯ Ø¨Ø§Ù„Ù�Ø¹Ù„"
 		},
 
 		"field_is_mandatory" : {
@@ -136,75 +152,75 @@
 		},
 		"match_confirm_password_error" : {
 			"en" : "Password and conform password does not match",
-			"ar" : "كلمة السر و اعادة كلمة السر غير متطابقتين"
+			"ar" : "ÙƒÙ„Ù…Ø© Ø§Ù„Ø³Ø± Ùˆ Ø§Ø¹Ø§Ø¯Ø© ÙƒÙ„Ù…Ø© Ø§Ù„Ø³Ø± ØºÙŠØ± Ù…ØªØ·Ø§Ø¨Ù‚ØªÙŠÙ†"
 		},
 		"unauthorization_error" : {
 			"en" : "You are not authorized for this action",
-			"ar" : "ليس لديك الحق في هذا الحدث"
+			"ar" : "Ù„ÙŠØ³ Ù„Ø¯ÙŠÙƒ Ø§Ù„Ø­Ù‚ Ù�ÙŠ Ù‡Ø°Ø§ Ø§Ù„Ø­Ø¯Ø«"
 		},
 		"already_created_cycle" : {
 			"en" : "There is already created cycle",
-			"ar" : "يوجد دورة موجودة بالفعل"
+			"ar" : "ÙŠÙˆØ¬Ø¯ Ø¯ÙˆØ±Ø© Ù…ÙˆØ¬ÙˆØ¯Ø© Ø¨Ø§Ù„Ù�Ø¹Ù„"
 		},
 		"over_project_member" : {
 			"en" : "Every project must have 5 members mximum",
-			"ar" : "عدد أعضاء المشروع لا يزيد عن خمس أعضاء"
+			"ar" : "Ø¹Ø¯Ø¯ Ø£Ø¹Ø¶Ø§Ø¡ Ø§Ù„Ù…Ø´Ø±ÙˆØ¹ Ù„Ø§ ÙŠØ²ÙŠØ¯ Ø¹Ù† Ø®Ù…Ø³ Ø£Ø¹Ø¶Ø§Ø¡"
 		},
 		"no_current_cycle" : {
 			"en" : "No current cycle",
-			"ar" : "لا يوجد استلام مشروعات الان"
+			"ar" : "Ù„Ø§ ÙŠÙˆØ¬Ø¯ Ø§Ø³ØªÙ„Ø§Ù… Ù…Ø´Ø±ÙˆØ¹Ø§Øª Ø§Ù„Ø§Ù†"
 		},
 		"no_update_project" : {
 			"en" : "You can't update project, cycle is not in admission phase",
-			"ar" : "لا تستطيع تحديث المشروع الان ، الدورة ليست في مرحلة استلام المشروعات"
+			"ar" : "Ù„Ø§ ØªØ³ØªØ·ÙŠØ¹ ØªØ­Ø¯ÙŠØ« Ø§Ù„Ù…Ø´Ø±ÙˆØ¹ Ø§Ù„Ø§Ù† ØŒ Ø§Ù„Ø¯ÙˆØ±Ø© Ù„ÙŠØ³Øª Ù�ÙŠ Ù…Ø±Ø­Ù„Ø© Ø§Ø³ØªÙ„Ø§Ù… Ø§Ù„Ù…Ø´Ø±ÙˆØ¹Ø§Øª"
 		},
 		"no_active_cycle" : {
 			"en" : "Curreny cycle is not active",
-			"ar" : "الدورة الحالية غير مفعلة"
+			"ar" : "Ø§Ù„Ø¯ÙˆØ±Ø© Ø§Ù„Ø­Ø§Ù„ÙŠØ© ØºÙŠØ± Ù…Ù�Ø¹Ù„Ø©"
 		},
-		"cycleـnotـincuabtion" : {
-			"code" : "cycleـnotـincuabtion",
+		"cycleÙ€notÙ€incuabtion" : {
+			"code" : "cycleÙ€notÙ€incuabtion",
 			"en" : "Accepted projects in incubation phase only",
-			"ar" : "المشاريع المقبولة تظهر في مرحلة الحضانة فقط"
+			"ar" : "Ø§Ù„Ù…Ø´Ø§Ø±ÙŠØ¹ Ø§Ù„Ù…Ù‚Ø¨ÙˆÙ„Ø© ØªØ¸Ù‡Ø± Ù�ÙŠ Ù…Ø±Ø­Ù„Ø© Ø§Ù„Ø­Ø¶Ø§Ù†Ø© Ù�Ù‚Ø·"
 		},
 		"no_admission_cycle" : {
 			"en" : "Current cycle is done with admission phase",
-			"ar" : "تم انتهاء فترة التقديم"
+			"ar" : "ØªÙ… Ø§Ù†ØªÙ‡Ø§Ø¡ Ù�ØªØ±Ø© Ø§Ù„ØªÙ‚Ø¯ÙŠÙ…"
 		},
 		"member_has_project" : {
 			"en" : "some members involved in another project",
-			"ar" : "العضو مشارك في مشروع اخر"
+			"ar" : "Ø§Ù„Ø¹Ø¶Ùˆ Ù…Ø´Ø§Ø±Ùƒ Ù�ÙŠ Ù…Ø´Ø±ÙˆØ¹ Ø§Ø®Ø±"
 		},
 		"update_project_after_admission" : {
 			"en" : "You have no rights delete to update this, it's not yours or cycle is not admission",
-			"ar" : "ليس لديك الحق في تحديث المشروع"
+			"ar" : "Ù„ÙŠØ³ Ù„Ø¯ÙŠÙƒ Ø§Ù„Ø­Ù‚ Ù�ÙŠ ØªØ­Ø¯ÙŠØ« Ø§Ù„Ù…Ø´Ø±ÙˆØ¹"
 		},
 		"user_must_be_mentor" : {
 			"en" : "User must be mentor",
-			"ar" : "هذا المستخدم يجب ان يكون موجه"
+			"ar" : "Ù‡Ø°Ø§ Ø§Ù„Ù…Ø³ØªØ®Ø¯Ù… ÙŠØ¬Ø¨ Ø§Ù† ÙŠÙƒÙˆÙ† Ù…ÙˆØ¬Ù‡"
 		},
 		"unsupported_operation" : {
 			"en" : "Unsupported operation",
-			"ar" : "هذه العملية غير مدعمة"
+			"ar" : "Ù‡Ø°Ù‡ Ø§Ù„Ø¹Ù…Ù„ÙŠØ© ØºÙŠØ± Ù…Ø¯Ø¹Ù…Ø©"
 		},
 		"cant_assign_project" : {
 			"en" : "You only can assign project in Revision phase",
-			"ar" : "لا تستطيع ان تلحق مشاريع الا في مرحلة المراجعة"
+			"ar" : "Ù„Ø§ ØªØ³ØªØ·ÙŠØ¹ Ø§Ù† ØªÙ„Ø­Ù‚ Ù…Ø´Ø§Ø±ÙŠØ¹ Ø§Ù„Ø§ Ù�ÙŠ Ù…Ø±Ø­Ù„Ø© Ø§Ù„Ù…Ø±Ø§Ø¬Ø¹Ø©"
 		},
 		"password_confirmpassword_match" : {
 			"code" : "password_confirmpassword_match",
 			"en" : "password and confirm password  must match",
-			"ar" : "كلمة المرور و تأكيد كلمة المرور لابد ان يتطابقا"
+			"ar" : "ÙƒÙ„Ù…Ø© Ø§Ù„Ù…Ø±ÙˆØ± Ùˆ ØªØ£ÙƒÙŠØ¯ ÙƒÙ„Ù…Ø© Ø§Ù„Ù…Ø±ÙˆØ± Ù„Ø§Ø¨Ø¯ Ø§Ù† ÙŠØªØ·Ø§Ø¨Ù‚Ø§"
 		},
 		"wrong_old_password" : {
 			"code" : "wrong_old_password",
 			"en" : "Wrong old password",
-			"ar" : "كلمة المرور السابقة خطأ"
+			"ar" : "ÙƒÙ„Ù…Ø© Ø§Ù„Ù…Ø±ÙˆØ± Ø§Ù„Ø³Ø§Ø¨Ù‚Ø© Ø®Ø·Ø£"
 		},
 		"already_enrolled" : {
 			"code" : "already_enrolled",
 			"en" : "You're already enrolled in this event",
-			"ar" : "أنت مضاف بالفعل الي هذا الحدث"
+			"ar" : "Ø£Ù†Øª Ù…Ø¶Ø§Ù� Ø¨Ø§Ù„Ù�Ø¹Ù„ Ø§Ù„ÙŠ Ù‡Ø°Ø§ Ø§Ù„Ø­Ø¯Ø«"
 		},
 		"wrong_status_value" : {
 			"code" : "wrong_status_value",
