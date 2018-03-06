@@ -1,0 +1,87 @@
+<div style="background-color:#171547; height:1000px; position: relative; display : flex; align-items : center; border: 2px solid #171547;
+    border-radius: 25px;">
+	<div style="background-color:#ffffff; height:90%; width:80%;  margin: auto; vertical-align: middle; align:center; position: absolute; z-index:100;border: 2px solid #ffffff; border-radius: 25px;">
+    	<img src="https://lh3.googleusercontent.com/bDVcdWP54OXymI4AN3icYY7fKPJDkmDc9f4yF1oC9lCQiIrx8jN6MksOlbCDCdM9TLzr-bkLLemE-X9vueOXtmHf43-LQVDoKazS-bq3VPWJ0EDNtuUaLKnDG9T6JKSA-Ssp2RnKLw=w2400" alt="Logo" 
+    	style="display: block; margin: auto;">
+    	
+    	
+		<img src="https://lh3.googleusercontent.com/S0S2uC10za_uo0hSQ1RwMGYomyStfD0cJf8inPb-zjkvguJqMLFZa5Ze7Noxqg0tsZIu2N96Dgrdb_Tbac2sa-29hzDcc8Rggwh5HeganpuVV_ohkpWL6viB10DEih_H159K4pmd6g=w2400" alt="divider" style="display: block; margin: auto; margin-bottom:15px ;margin-top:20px;max-width: 50%;position: relative"/>
+		<br/>
+    	
+    	
+    	<div style="margin-bottom:10px">
+    		<strong>
+    			<span style="line-height:150%;font-size:20px;color:#171547">Dear Users,</span>
+			</strong>
+    	</div>
+    	
+    	<div>
+    		<span style="line-height:150%;font-size:16px;color:#171547">
+				FEPS BI proudly announces holding a/an "<span style="line-height:150%;font-size:16px;color:#171547;font-weight:800;"> <%= event.topic %> </span>", 
+				<br/>
+				<%if(event.speakers && event.speakers.length == 1)
+				{%>
+					which will be delivered by Mr./Ms. "<span style="line-height:150%;font-size:16px;color:#171547;font-weight:800;"> <%= event.speakers[0].name %> </span>".
+				<%}%>
+				<br/>
+				"<span style="line-height:150%;font-size:16px;color:#171547;font-weight:800;"><%= event.topic %></span>" will take place on
+				<span style="line-height:150%;font-size:16px;color:#171547;font-weight:700;"> <%= new Date(event.eventStartDate).toString().split(' ').slice(0, 5).join(' ') %></span> at
+				<span style="line-height:150%;font-size:16px;color:#171547;font-weight:700;"> <%= event.venue %></span>.
+				<br/>
+				<br/>
+				
+				Please check "<a href="<%="http://fepsbi.cairouniv.net/fepsIncubator/"+"eventsDetails?eventId=" + id%>">Event's Page</a>" for further information & for enrollment
+				
+				
+				
+			</span>
+    	</div>
+    	
+    	<br/>
+    	<br/>
+    	<br/>
+    	
+    	<div dir="rtl">
+    		<span style="line-height:150%;font-size:16px;font-weight: 500;color:#171547">
+				ØªØªØ´Ø±Ù� Ø­Ø§Ø¶Ù†Ø© Ø£Ø¹Ù…Ø§Ù„ ÙƒÙ„ÙŠØ© Ø§Ù„Ø§Ù‚ØªØµØ§Ø¯ Ùˆ Ø§Ù„Ø¹Ù„ÙˆÙ… Ø§Ù„Ø³ÙŠØ§Ø³ÙŠØ© Ø¨Ø§Ù„Ø¥Ø¹Ù„Ø§Ù† Ø¹Ù†
+				"<span style="line-height:150%;font-size:16px;color:#171547;font-weight:800;"> <%= event.topic %> </span>"
+				<br/>
+				<%if(event.speakers && event.speakers.length == 1)
+				{%>
+					ØŒ Ùˆ Ø³ÙˆÙ� ÙŠØ¯ÙŠØ±Ù‡/Ù‡Ø§ 
+					Ø§Ù„Ø£Ø³ØªØ§Ø°/ Ø§Ù„Ø£Ø³ØªØ§Ø°Ø©
+					"<span style="line-height:150%;font-size:16px;color:#171547;font-weight:800;"> <%= event.speakers[0].name %> </span>".
+				<%}%>
+				<br/>
+				Ø³ÙŠ/ØªÙ‚Ø¹Ø¯ 
+				"<span style="line-height:150%;font-size:16px;color:#171547;font-weight:800;"> <%= event.topic %> </span>"
+				Ù�ÙŠ <span style="line-height:150%;font-size:16px;color:#171547;font-weight:700;"> <%= new Date(event.eventStartDate).toString().split(' ').slice(0, 5).join(' ') %></span>
+				ØŒ Ø¨ÙƒÙ„ÙŠØ© Ø§Ù„Ø§Ù‚ØªØµØ§Ø¯ Ùˆ Ø§Ù„Ø¹Ù„ÙˆÙ… Ø§Ù„Ø³ÙŠØ§Ø³ÙŠØ© - Ø¬Ø§Ù…Ø¹Ø© Ø§Ù„Ù‚Ø§Ù‡Ø±Ø© 
+				<span style="line-height:150%;font-size:16px;color:#171547;font-weight:700;">" <%= event.venue %>"</span>.
+				<br/>
+				<br/>
+				Ù†Ø±Ø¬Ùˆ Ù…Ù† Ø³ÙŠØ§Ø¯ØªÙƒÙ… Ø²ÙŠØ§Ø±Ø© "
+				<a href="<%="http://fepsbi.cairouniv.net/fepsIncubator/"+"eventsDetails?eventId=" + id%>">Ù…ÙˆÙ‚Ø¹Ù†Ø§ Ø§Ù„Ø¥Ù„ÙƒØªØ±ÙˆÙ†ÙŠ </a>
+				" Ù„Ù„Ù…Ø²ÙŠØ¯ Ù…Ù† Ø§Ù„ØªÙ�Ø§ØµÙŠÙ„ Ùˆ Ù„Ù„ØªØ³Ø¬ÙŠÙ„ .
+				
+				
+				<br/>
+
+			</span>
+    	</div>
+    	
+    	<br/>
+    	
+		<div style="margin-top:10px">
+    		<strong>
+				<span style="line-height:150%;font-size:20px;color:#171547">
+					Best regards,
+					<br/>
+					FEPS Business Incubator Team
+				</span>
+			</strong>
+    	</div>
+	
+	</div>
+
+</div>

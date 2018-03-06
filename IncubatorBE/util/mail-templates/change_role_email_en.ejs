@@ -1,0 +1,57 @@
+<div style="background-color:#171547; height:650px; position: relative; display : flex; align-items : center; border: 2px solid #171547;
+    border-radius: 25px;">
+	<div style="background-color:#ffffff; height:80%; width:80%;  margin: auto; vertical-align: middle; align:center; position: absolute; z-index:100;border: 2px solid #ffffff; border-radius: 25px;">
+    	<img src="https://lh3.googleusercontent.com/bDVcdWP54OXymI4AN3icYY7fKPJDkmDc9f4yF1oC9lCQiIrx8jN6MksOlbCDCdM9TLzr-bkLLemE-X9vueOXtmHf43-LQVDoKazS-bq3VPWJ0EDNtuUaLKnDG9T6JKSA-Ssp2RnKLw=w2400" alt="Logo" 
+    	style="display: block; margin: auto;">
+    	
+    	
+		<img src="https://lh3.googleusercontent.com/S0S2uC10za_uo0hSQ1RwMGYomyStfD0cJf8inPb-zjkvguJqMLFZa5Ze7Noxqg0tsZIu2N96Dgrdb_Tbac2sa-29hzDcc8Rggwh5HeganpuVV_ohkpWL6viB10DEih_H159K4pmd6g=w2400" alt="divider" style="display: block; margin: auto; margin-bottom:15px ;margin-top:20px;max-width: 50%;position: relative"/>
+		<br/>
+    	
+    	
+    	<div style="margin-bottom:10px">
+    		<strong>
+    			<span style="line-height:150%;font-size:20px;color:#171547">Dear <%=user.firstName +" "+user.surname%>,</span>
+			</strong>
+    	</div>
+    	
+    	<div>
+    		<span style="line-height:150%;font-size:16px;color:#171547">
+				Your role has been changed to <%=user.groups[0].name%>.
+				<br/>
+				You can login to "<a href="http://fepsbi.cairouniv.net/fepsIncubator/home">FEPS BI Website</a>" to continue.
+
+			</span>
+    	</div>
+    	
+    	<br/>
+    	<br/>
+    	
+    	<div dir="rtl">
+    		<span style="line-height:150%;font-size:16px;font-weight: 500;color:#171547">
+				نود أن نشكر سيادتكم لاهتمامكم بحاضنة أعمال كلية الاقتصاد و العلوم السياسية.
+				لقد تم تغيير دورك علي موقعنا الإلكتروني  إلي <%=user.groups[0].name%>. 
+				نرجو من سيادتكم زيارة 
+				<a href="http://fepsbi.cairouniv.net/fepsIncubator/home">موقعنا</a>  
+				.الإلكتروني للمتابعة
+				
+
+				
+			 </span>
+    	</div>
+    	
+    	<br/>
+    	
+		<div style="margin-top:10px">
+    		<strong>
+				<span style="line-height:150%;font-size:20px;color:#171547">
+					Best regards,
+					<br/>
+					FEPS Business Incubator Team
+				</span>
+			</strong>
+    	</div>
+	
+	</div>
+
+</div>
