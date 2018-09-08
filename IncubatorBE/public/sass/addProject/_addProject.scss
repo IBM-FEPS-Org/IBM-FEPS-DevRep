@@ -7,7 +7,12 @@
 }
 
 #addProject{
+    h3{
 
+        font-weight: bold;
+        color: #5aa700;
+
+    }
     .sectionRow{
         margin:10px 0;
         div input {
@@ -18,8 +23,12 @@
             margin: 10px 0;
 
         }
-        div input[type="text"]{
+        .textInput{
             width:150px;
+        }
+
+        .longTextInput{
+            width:350px;
         }
         div input[type="file"]{
             width:250px;
@@ -30,7 +39,9 @@
         div label{
 
             color: $themeColor3;
-            font-size:16px
+            font-size:16px;
+            font-weight: 800;
+
         }
         div textarea{
             margin: 10px 0;
@@ -44,6 +55,7 @@
             font-weight: bold;
 
         }
+
         a{
             color: #5aa700;
         }

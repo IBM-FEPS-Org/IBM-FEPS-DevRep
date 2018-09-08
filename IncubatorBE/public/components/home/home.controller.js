@@ -130,7 +130,7 @@ fepsApp.controller('homeController', function ($scope,$translate,$filter,$window
     var slides = $scope.slides = [
         {image:'../../img/top-section-bg.png',id:'0',title:'aboutusVision', text:'aboutusVisionText',href:'fepsIncubator/aboutus#visionSection'},
         {image:'../../img/top-section-bg2.png',id:'1',title:'aboutusMission',text:'aboutusMissionText',href:'fepsIncubator/aboutus#missionSection'},
-        {image:'../../img/top-section-bg4.png',id:'2',title:'aboutusTeam',text:'aboutusTeamText',href:'fepsIncubator/aboutus#teamSection'}];
+        {image:'../../img/top-section-bg4.jpeg',id:'2',title:'aboutusTeam',text:'aboutusTeamText',href:'fepsIncubator/aboutus#teamSection'}];
 
 
     $scope.newsInterval = 3000;

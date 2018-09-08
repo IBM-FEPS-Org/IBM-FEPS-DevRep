@@ -1,21 +1,59 @@
-fepsApp.controller('addProjectController', function ($scope,$translate,$uibModal,$location,usSpinnerService, $localStorage,$window,sharedDataService,$timeout,projectService,$routeParams) {
+fepsApp.controller('addProjectController', function ($rootScope,$scope,$translate,$uibModal,$location,usSpinnerService, $localStorage,$window,sharedDataService,$timeout,projectService,$routeParams,userProfileService) {
 
 	$scope.project = {};
 
-	$scope.afiliationFile = '';
-	$scope.afiliationAttachment = {};
-	$scope.afiliationUploaded = false;
-	$scope.noAfiliationSelected = true;
-
+	
 
 	$scope.prototypeFile = '';
 	$scope.prototypeAttachment = {};
 	$scope.prototypeUploaded = false;
 	$scope.noPrototypeSelected = true;
 	$scope.prototypeFileNameNotValid = false;
-	$scope.affiliationRequired = true;
-	$scope.afiliationFileNameNotValid = false;
-
+	
+	
+	$scope.developmentStageArray = [
+        {
+            "id": 1,
+            "name": 
+            {
+            	"en":"Still an idea",
+            	"ar":"فكرة"
+            }
+        },
+        {
+            "id": 2,
+        	"name": 
+        	{
+            	"en":"Prototype/Pre launch",
+            	"ar":"نموذج أولي/مرحلة ما قبل الإنطلاق"
+            }
+        },
+        {
+            "id": 3,
+        	"name": 
+        	{
+            	"en":"Launched",
+            	"ar":"إنطلاق"
+            }
+           
+        },
+        {
+            "id": 4,
+        	"name": 
+        	{
+            	"en":"Growth",
+            	"ar":"نمو"
+            }
+        },
+        {
+            "id": 5,
+        	"name": 
+        	{
+            	"en":"Expansion",
+            	"ar":"توسع"
+            }
+        }
+    ];
 
 	$scope.incubationFile = '';
     $scope.incubationAttachments = [];
@@ -27,7 +65,6 @@ fepsApp.controller('addProjectController', function ($scope,$translate,$uibModal
 	$scope.rowB ="rowB";
 	$scope.maxSizeforallAttach = 0;
 	$scope.projIncubAllAttachMaxSizeRest = '10000KB';
-
 	$scope.attchementArrayNames = [];
 
 	$scope.cycle = {};
@@ -49,7 +86,7 @@ fepsApp.controller('addProjectController', function ($scope,$translate,$uibModal
 	
 
 	$scope.showIncubationAttchaments = false;
-	$scope.allowIncubationAttchaments = false;
+	$scope.allowDocumentationAttchaments = true;
 
 	$scope.founderUser = {};
 
@@ -73,24 +110,18 @@ fepsApp.controller('addProjectController', function ($scope,$translate,$uibModal
     };
 
     $scope.init = function () {
-
+    	
+    	$scope.language = $translate.use();
         $scope.deletedMembers = [];
-
-    	$scope.afiliationFile = '';
-    	$scope.afiliationAttachment = {};
-    	$scope.afiliationUploaded = false;
-    	$scope.noAfiliationSelected = true;
+        
     	$scope.prototypeFile = '';
     	$scope.prototypeAttachment = {};
     	$scope.prototypeUploaded = false;
     	$scope.noPrototypeSelected = true;
-
-    	$scope.affiliationRequired = true;
-    	
     	$scope.prototypeFileNameNotValid = false;
-        $scope.afiliationFileNameNotValid = false;
 
-    	sharedDataService.getCurrentCycle().then(function (response) {
+    	sharedDataService.getCurrentCycle().then(function (response) 
+    	{
     		$scope.cycle = response.data.data[0];
     		var projectId = -1;
 
@@ -98,7 +129,6 @@ fepsApp.controller('addProjectController', function ($scope,$translate,$uibModal
     		if (param.projectId) {
     			projectId = $routeParams.projectId;
     			$scope.viewMode = 3;
-    			$scope.affiliationRequired = false;
     		}else if($localStorage.currentUser.projects && $localStorage.currentUser.projects[0].cycle == $scope.cycle._id){
     		        projectId = $localStorage.currentUser.projects[0]._id;
                     $scope.viewMode = 1;
@@ -111,28 +141,48 @@ fepsApp.controller('addProjectController', function ($scope,$translate,$uibModal
 					$location.path( 'fepsIncubator/adminPage');
 				}
 			}
-        	if(projectId != -1){
+        	if(projectId != -1)
+        	{
+        		
         		projectService.getProject(projectId)
             	.then(function (result) {
             		$scope.project = result.data.data;
-            		//console.log($scope.project);
-					if($scope.project.incubationAttachments.length == 0){
+            		userProfileService.getUserByUsername($scope.project.members[0].username).then(function(result)
+            		{
+            			$scope.founder = result.data.data;
+            			$scope.founder.age = $scope.calculateUserAge($scope.founder.birthdate);
+            			if($scope.founder.gender == 'f')
+        				{
+            				$scope.founder.gender  = "female"
+        				}
+            			else if($scope.founder.gender == 'm')
+        				{
+            				$scope.founder.gender  = "male"
+        				}
+            			
+            		},function (response) {
+                		if(response.statusText == ""){
+                			$scope.errorMessage = "systemDown";
+                		}
+                	});
+            		
+            		
+            		
+            		
+					if(!$scope.project.incubationAttachments)
+					{
 						$scope.maxSizeforallAttach = 0;
 					}
-					else{
+					else
+					{
 						for(i=0;i<$scope.project.incubationAttachments.length ;i++ ){
 							$scope.maxSizeforallAttach = $scope.maxSizeforallAttach + $scope.project.incubationAttachments[i].size/1000;
 						}
 					}
+					
+					
 					//console.log($scope.maxSizeforallAttach);
-            		if($scope.project.afiliationAttachment && $scope.project.afiliationAttachment.id){
-            			$scope.afiliationUploaded = true;
-						$scope.afiliationAttachment = {
-								key : $scope.project.afiliationAttachment.key,
-								id:$scope.project.afiliationAttachment.id,
-								rev:$scope.project.afiliationAttachment.rev
-						};
-            		}
+            	
             		if($scope.project.prototypeAttachment && $scope.project.prototypeAttachment.id)
             		{
             			$scope.prototypeUploaded = true;
@@ -143,27 +193,32 @@ fepsApp.controller('addProjectController', function ($scope,$translate,$uibModal
 						};
 						$scope.prototypeFile = $scope.project.prototypeAttachment.key;
             		}
-            		if($scope.project.incubationAttachments && $scope.project.incubationAttachments.length>0){
+            		
+            		
+            		if($scope.project.incubationAttachments && $scope.project.incubationAttachments.length>0)
+            		{
+            			
             		    $scope.incubationAttachments = $scope.project.incubationAttachments;
             		}
+            		
             		$scope.project.foundingDate = new Date($scope.project.foundingDate);
             		if($scope.viewMode == 1){
             			if($scope.cycle.currentPhase == "Admission" && $localStorage.currentUser.projects[0].role == "Founder"){
                 			$scope.viewMode = 2;
-                			$scope.affiliationRequired = false;
                 		}
             			else
                 		{
                 			$scope.viewMode = 3;
-                			$scope.affiliationRequired = false;
                 		}
             		}
                 	$scope.members = angular.copy($scope.project.members);
                 	$scope.memebrsGridOptions.data = $scope.members;
                     $scope.paginationOptions.totalItems = $scope.members.length;
 
-                	for(var i=0;i<$scope.members.length;i++){
-                		if($scope.members[i].role == "Founder"){
+                	for(var i=0;i<$scope.members.length;i++)
+                	{
+                		if($scope.members[i].role == "Founder")
+                		{
                 			$scope.founderUser = $scope.members[i];
                 		}
                 	}
@@ -230,11 +285,14 @@ fepsApp.controller('addProjectController', function ($scope,$translate,$uibModal
 //            		console.log(response);
             		if(response.statusText == ""){
             			$scope.errorMessage = "systemDown";
-                		console.log("get project failed");
             		}
             	});
 
-        	}else{
+        	}
+        	else
+        	{
+       
+				$scope.founder = $localStorage.currentUser
         		$scope.founderUser = {
         				firstName : $localStorage.currentUser.firstName,
         				surName: $localStorage.currentUser.surname,
@@ -243,9 +301,17 @@ fepsApp.controller('addProjectController', function ($scope,$translate,$uibModal
             			email : $localStorage.currentUser.email,
             			role : "Founder"
             	}
+				$scope.founder.age = $scope.calculateUserAge($scope.founder.birthdate);
+				if($scope.founder.gender == 'f')
+				{
+    				$scope.founder.gender  = "female"
+				}
+    			else if($scope.founder.gender == 'm')
+				{
+    				$scope.founder.gender  = "male"
+				}
         		$scope.viewMode = 1;
             	$scope.members.push($scope.founderUser);
-
             	$scope.memebrsGridOptions.data = $scope.members;
                 $scope.paginationOptions.totalItems = $scope.members.length;
         	}
@@ -315,8 +381,11 @@ fepsApp.controller('addProjectController', function ($scope,$translate,$uibModal
             }); 
         }
 	}
+    
+    
 
-    $scope.uploadIncubationFile = function(){
+    $scope.uploadIncubationFile = function()
+    {
         
         var english = /^[A-Za-z0-9-\s_\.]*$/;
         if (english.test($scope.incubationFile.name)){
@@ -409,6 +478,9 @@ fepsApp.controller('addProjectController', function ($scope,$translate,$uibModal
         $scope.incubationAttachments.splice(index,1);
 
     }
+    
+    
+    
 
     $scope.openAddMember = function () {
         var modalInstance = $uibModal.open(
@@ -434,11 +506,6 @@ fepsApp.controller('addProjectController', function ($scope,$translate,$uibModal
         }
     }
 
-    $scope.$watch('project.legallyRegistered', function(newValue, oldValue) {
-    	if(newValue == 'yes'){
-    		$scope.project.unregisterationReason = "";
-    	  }
-    });
 
     $scope.$on('addMembertoProject', function(event, data)
     {
@@ -482,10 +549,16 @@ fepsApp.controller('addProjectController', function ($scope,$translate,$uibModal
     	}else{
     		$scope.membersNumbersValid = true;
     	}
-		if($scope.addProjectForm.$valid && $scope.membersNumbersValid) {
-			if($scope.showFeedBack){
+    	
+		if($scope.addProjectForm.$valid && $scope.membersNumbersValid) 
+		{
+			if($scope.showFeedBack)
+			{
 			    $scope.addFeedBack();
-			}else if($scope.showIncubationAttchaments){
+			}
+			else if($scope.showIncubationAttchaments && $scope.incubationAttachments != [])
+			{
+				
 				$scope.saveIncubationAttchaments();
 			}else{
 			    if($scope.viewMode == 1 ){  //&& $scope.afiliationUploaded
@@ -501,7 +574,8 @@ fepsApp.controller('addProjectController', function ($scope,$translate,$uibModal
 		}
     }
 
-    $scope.saveIncubationAttchaments = function(){
+    $scope.saveIncubationAttchaments = function()
+    {
         var incubationAttachmentsObject = {
                 "_id": $scope.project._id,
                 "incubationAttachments" : $scope.incubationAttachments,
@@ -529,6 +603,7 @@ fepsApp.controller('addProjectController', function ($scope,$translate,$uibModal
         });
 
     };
+
 
     $scope.addFeedBack = function(){
         var feedBackObject = {
@@ -562,13 +637,14 @@ fepsApp.controller('addProjectController', function ($scope,$translate,$uibModal
     }
 
     $scope.addProject = function(){
+    	console.log($scope.project);
 		$scope.project.members = $scope.members;
 		$scope.project.score = 0;
 		$scope.project.feedback ="";
 		$scope.project.submissionDate = new Date(moment());
-		$scope.project.afiliationAttachment = $scope.afiliationAttachment;
 		$scope.project.prototypeAttachment = $scope.prototypeAttachment;
 		$scope.project.incubationAttachments = $scope.incubationAttachments;
+		
 		projectService.addProject($scope.project)
     	.then(function (result) {
     	    $localStorage.currentUser.token = result.headers('authorization');
@@ -607,6 +683,7 @@ fepsApp.controller('addProjectController', function ($scope,$translate,$uibModal
 		    	$scope.project.afiliationAttachment = $scope.afiliationAttachment;
 		    	$scope.project.prototypeAttachment = $scope.prototypeAttachment;
 		    	$scope.project.incubationAttachments = $scope.incubationAttachments;
+		    	
 				projectService.updateProject($scope.project)
 		    	.then(function (result) {
 		        	$localStorage.currentUser.token = result.headers('authorization');
@@ -647,10 +724,21 @@ fepsApp.controller('addProjectController', function ($scope,$translate,$uibModal
 	$scope.openDatePicker = function() {
 		$scope.DatePickerPopup.opened = true;
 	};
-
+	
+	$scope.calculateUserAge = function (birthday) 
+	{ 
+	    var ageDifMs = Date.now() - new Date(birthday);
+	    var ageDate = new Date(ageDifMs); 
+	    return Math.abs(ageDate.getUTCFullYear() - 1970);
+	}
+	
 	$scope.DatePickerPopup = {
 		opened: false
 	};
-
+	
+	$rootScope.$on('$translateChangeSuccess', function(event, current, previous) 
+	{
+		$scope.language = $translate.use();
+    });
 
 });

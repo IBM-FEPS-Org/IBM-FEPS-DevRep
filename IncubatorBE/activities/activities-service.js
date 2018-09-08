@@ -145,7 +145,7 @@ exports.getAllActivities = function(){
     //create activities-view,activitiesDoc
     ModelUtil.findByview("activitiesDoc","activities-view").then((activitiesDocs)=>{
       let message = new Message(Message.GETTING_DATA, activitiesDocs.rows, null);
-      resolve(message)
+      resolve(message);
     }, (err)=>{
       return utils.rejectMessage(ErrorMessage.DATABASE_ERROR,  err, funcName, reject);
     });

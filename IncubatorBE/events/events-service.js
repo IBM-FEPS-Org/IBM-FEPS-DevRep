@@ -12,82 +12,122 @@ const attachementService = require('../attachments/attachment-service');
 const utils = require('../fepsApp-BE').utils;
 const userService = require('../users/users-service');
 
-exports.createEvent = function(event){
-  return new Promise((resolve, reject)=>{
-    const funcName = "createEvent";
-    pino.debug({fnction : __filename+ ">" + funcName}, "creating events.");
-    event.type = CONSTANTS.documents.type.events;
-    ModelUtil.insertDoc(event).then((result)=>{
-      let message = new Message(Message.OBJECT_CREATED, result, messages.businessMessages.event_created_succes);
-      pino.debug({fnction : __filename+ ">" + funcName, result :result}, "get all accepted projects");
-      let attachIds = [];
-      if(event.eventPhotoAttach){
-        attachIds.push(event.eventPhotoAttach.id);
-      }
-      if(event.agendaAttachment){
-          attachIds.push(event.agendaAttachment.id);
-        }
-      if(event.speakers)
-      {
-        for (var i = 0; i < event.speakers.length; i++) 
-        {
-        	if (event.speakers[i].profilePic.id  && event.speakers[i].profilePic) 
-	      	{
-        		attachIds.push(event.speakers[i].profilePic.id);
-	      	}
-        }
-      }
-
-      attachementService.attachAttachments(attachIds, false).then((attachResult)=>{
-        pino.debug({fnction : __filename+ ">" + funcName, result :result}, "Attachment is attached");
-      }, (err)=>{
-        return utils.rejectMessage(ErrorMessage.DATABASE_ERROR,  err, funcName, reject);
-      });
-      
-      let emails;
-      let emailData = {"event":event,"id":result.id};
-      console.log(result);
-      userService.getAllUsers().then((users)=>
-      {
-    	  emails = ObjectUtil.getArrayValuesFromJsons(users.data, 'email');
-          var emailChunks = [];
-          
-          while(emails.length)
-    	  {
-        	  emailChunks.push(emails.splice(0,90));
-    	  }
-          
-          
-          for (var i = 0; i < emailChunks.length; i++)
-          {
-		    	  
-		    	  MailUtil.sendEmail(CONSTANTS.mail.new_event, CONSTANTS.mailTemplates.new_event, "New Event:"+event.topic +"Posted On Our Website", emailData, CONSTANTS.language.en, emailChunks[i].toString()).then((info)=>
+exports.createEvent = function(event)
+{
+  return new Promise((resolve, reject)=>
+	  {
+	    const funcName = "createEvent";
+	    pino.debug({fnction : __filename+ ">" + funcName}, "creating events.");
+	    event.type = CONSTANTS.documents.type.events;
+	    ModelUtil.insertDoc(event).then((result)=>{
+	      let message = new Message(Message.OBJECT_CREATED, result, messages.businessMessages.event_created_succes);
+	      pino.debug({fnction : __filename+ ">" + funcName, result :result}, "get all accepted projects");
+	      let attachIds = [];
+	      if(event.eventPhotoAttach){
+	        attachIds.push(event.eventPhotoAttach.id);
+	      }
+	      if(event.agendaAttachment){
+	          attachIds.push(event.agendaAttachment.id);
+	        }
+	      if(event.speakers)
+	      {
+	        for (var i = 0; i < event.speakers.length; i++) 
+	        {
+	        	if (event.speakers[i].profilePic.id  && event.speakers[i].profilePic) 
+		      	{
+	        		attachIds.push(event.speakers[i].profilePic.id);
+		      	}
+	        }
+	      }
+	
+	      attachementService.attachAttachments(attachIds, false).then((attachResult)=>{
+	        pino.debug({fnction : __filename+ ">" + funcName, result :result}, "Attachment is attached");
+	      }, (err)=>{
+	        return utils.rejectMessage(ErrorMessage.DATABASE_ERROR,  err, funcName, reject);
+	      });
+	      console.log(event.emailRecipients);
+	      let emails;
+	      let graduationDates;
+	      
+	      var tempDate = new Date(event.eventStartDate);
+	      tempDate.setHours(tempDate.getHours() + 2);
+	      var time = tempDate.toString().split(' ').slice(0, 5).join(' ');
+	      let emailData = {"event":event,"id":result.id,"time":time};
+	      
+	      userService.getSubscribedUsers().then((users)=>
+	      {
+	    	  emails = ObjectUtil.getArrayValuesFromJsons(users.data, 'email');
+	    	  graduationDates = ObjectUtil.getArrayValuesFromJsons(users.data, 'graduationYear');
+	          console.log(graduationDates);
+	    	  var emailChunks = [];
+	          var currentDate = new Date();
+	          var tempChunk = [];
+	          
+	          if(event.emailRecipients == "students" || event.emailRecipients == "graduates")
 	          {
-	            let message = new Message(Message.EMAIL_SENT, null, messages.businessMessages.email_sent_success);
-	            pino.info(message);
-	            
-	          }, (err)=>{
-	            let errorMessage = new ErrorMessage(ErrorMessage.EMAIL_ERROR, err);
-	            pino.error(errorMessage);
-	          });
-          }
-    	  
-          resolve();
-
-    	  
-      }, (err)=>
-      {
-          let errorMessage = new ErrorMessage(ErrorMessage.EMAIL_ERROR, err);
-          pino.error(errorMessage);
-      });
-      
-      
-      
-      resolve(message);
-    }, (err)=>{
-      return utils.rejectMessage(ErrorMessage.DATABASE_ERROR,  err, funcName, reject);
-    });
-  });
+	        	  for (var i = 0; i < emails.length; i++)
+		          {	
+		        	  var tempDate = new Date(graduationDates[i]);
+		        	  if (tempDate > currentDate && event.emailRecipients == "students")
+	        		  {
+		        		 tempChunk.push(emails[i]);
+	        		  }
+		        	  else if (tempDate < currentDate && event.emailRecipients == "graduates")
+	        		  {
+		        		  console.log("here");
+			        	 tempChunk.push(emails[i]);
+	        		  }
+		        	  if(tempChunk.length == 90)
+		        	  {
+		        		  emailChunks.push(tempChunk);
+		        		  tempChunk = [];
+		        	  }
+		          }
+	        	  emailChunks.push(tempChunk);
+        		  tempChunk = [];
+	        	  
+	          }
+	          else
+        	  {
+	        	  while(emails.length)
+	        	  {
+	            	  emailChunks.push(emails.splice(0,90));
+	        	  }
+        	  }
+	         
+	          
+	          
+	          
+	          for (var i = 0; i < emailChunks.length; i++)
+	          {
+	        	  
+				    MailUtil.sendEmail(CONSTANTS.mail.new_event, CONSTANTS.mailTemplates.new_event, "New Event:"+event.topic +"Posted On Our Website", emailData, CONSTANTS.language.en, emailChunks[i].toString()).then((info)=>
+			          {
+			            let message = new Message(Message.EMAIL_SENT, null, messages.businessMessages.email_sent_success);
+			            pino.info(message);
+			            
+			          }, (err)=>{
+			            let errorMessage = new ErrorMessage(ErrorMessage.EMAIL_ERROR, err);
+			            pino.error(errorMessage);
+			          });
+	          }
+	    	  
+	          resolve();
+	
+	    	  
+	      }, (err)=>
+	      {
+	          let errorMessage = new ErrorMessage(ErrorMessage.EMAIL_ERROR, err);
+	          pino.error(errorMessage);
+	      });
+	      
+	      
+	      
+	      resolve(message);
+	    }, (err)=>{
+	      return utils.rejectMessage(ErrorMessage.DATABASE_ERROR,  err, funcName, reject);
+	    });
+	  });
 };
 
 exports.deleteEvent = function(id, rev){

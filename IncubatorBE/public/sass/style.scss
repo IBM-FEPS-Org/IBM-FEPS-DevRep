@@ -14,7 +14,8 @@
   url('../fonts/CairoBold/cairo-v1-arabic-600.svg#Cairo') format('svg'); /* Legacy iOS */
 }
 /* cairo-light - arabic */
-@font-face {
+@font-face
+{
   font-family: 'CairoLight';
   font-style: normal;
   src: url('../fonts/CairoLight/Cairo-Light.eot'); /* IE9 Compat Modes */
@@ -92,26 +93,34 @@ white-space: normal;
 .admissionBanner
 {
 	width: 100%;
-	z-index: 100;
 	text-align: center;
-	.admissionBannerLink
+	img
 	{
-		width: 100%;
-		text-align: center;
-		margin: 0;
-    		padding-bottom: 2%;
-    		button{
-    			background-color: #e94136;
-			color: white;
-			border: 5px solid;
-			border-color: #e94136;
-			border-radius: 5px;
-			font: bold 18px $ff;
-			
-		}
+		width:100%;
+	}
+	
+}
+.admissionBannerLink
+{
+	position: absolute;
+	z-index: 100;
+	width: 100%;
+	text-align: center;
+	bottom: 20%;
+	button
+	{
+		background-color: #e94136;
+		color: white;
+		border: 5px solid;
+		border-color: #e94136;
+		border-radius: 5px;
+		font: bold 18px $ff;
+		
 
 	}
+
 }
+
 .banner-top-section-inner{
   width: 94%;
   //height: 224px;
@@ -128,11 +137,7 @@ white-space: normal;
   }
 
 }
-.admissionBanner img
-{
-	width: 100%;
-	height: 50%;
-}
+
 
 
 .header-lg{
@@ -162,6 +167,8 @@ white-space: normal;
     border:0;
     border-radius: 0;
   }
+
+
   .manageWebsiteBtn{
     position: absolute;
     top:0px;
@@ -294,6 +301,36 @@ white-space: normal;
   span{
     color: $themeColor3;
   }
+ 	.buttons
+ 	{
+ 		text-align:center;
+ 	}
+ 	.FbBtn
+	{
+	    position: relative;
+	    font:normal 14px $ff;
+	    border:0;
+	    padding-top:0;
+	    border-radius: 0;
+  	}
+
+  	.InstaBtn
+	{
+	    position: relative;
+	    font:normal 14px $ff;
+	    border:0;
+	    padding-top:0;
+	    border-radius: 0;
+  	}
+
+  	.YoutubeBtn
+	{
+	    position: relative;
+	    font:normal 14px $ff;
+	    border:0;
+	    padding-top:0;
+	    border-radius: 0;
+  	}
   a{
     color: $themeColor3;
     margin: 0 5px;
@@ -587,6 +624,7 @@ input.searchInput {
 @import "Login/SignIn";
 @import "Login/SignUp";
 @import "mentorsList/mentorsList";
+@import "activityList/activityList";
 @import "addProject/addProject";
 @import "addMember/addMember";
 @import "briefCase/briefCase";
@@ -651,10 +689,40 @@ input.searchInput {
 
 /* mobile styles */
 
-@media (max-width: 992px) {
+@media (max-width: 1400px) {
 
+	.admissionBanner
+	{
+	position: relative;
+		width: 100%;
+		text-align: center;
+		img
+		{
+			width:100%;
+			height: 100%;
+		}
+		
+	}
+	.admissionBannerLink
+	{
+		position: absolute;
+		z-index: 100;
+		text-align: center;
+		bottom:10%;
+		button
+		{
+			background-color: #e94136;
+			color: white;
+			border: 5px solid;
+			border-color: #e94136;
+			border-radius: 5px;
+			font: bold 10px $ff;
+	
+		}
+	
+	}
   .navbar li ,.ltr .navbar li{
-    float:none!important;
+    float:none;
   }
 
   .navbar-nav{
@@ -684,18 +752,34 @@ input.searchInput {
       min-height: 60px;
       .navbar-header{
         min-height: 60px;
+        .navbar-toggle
+    	{
+        	display: block;
+    	}
+
       }
     }
+  }
+  .btn-responsive {
+    padding:3px 6px;
+    font-size:80%;
+    line-height: 1.2;
   }
   .navbar-collapse{
     margin-top: 0;
   }
+ 	.navbar-collapse.collapse.in {
+        display: block!important;
+    }
+    .collapsing {
+        overflow: hidden!important;
+    }
   .login{
   	.btn
   	{
   		margin-top: 0;
   	}
-    
+
   }
   .footer1 img{
     width: 100%;

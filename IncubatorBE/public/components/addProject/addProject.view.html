@@ -1,18 +1,168 @@
 <div id="addProject" ng-controller="addProjectController" data-ng-init="init()">
 	<div class="addProjectContainer container">
         <h2 class="mainTitle text-center">{{ 'addProject' | translate }}</h2>
+        
+        <h3> {{ 'paragraph1Header' | translate }} </h3>
+        	<ul style="padding-left: 60px;">
+        		<li> {{ 'paragraph1a' | translate }} </li>
+        		<li> {{ 'paragraph1b' | translate }}  </li>
+        		<li> {{ 'paragraph1c' | translate }}  </li>
+        		<li> {{ 'paragraph1d' | translate }}  </li>
+        		<li> {{ 'paragraph1e' | translate }}  </li>
+        	</ul>
+        
+        <h3> {{ 'paragraph2Header' | translate }} </h3>
+        	<ul style="padding-left: 60px;">
+        		<li> {{ 'paragraph2a' | translate }} </li>
+        		<li> {{ 'paragraph2b' | translate }}  </li>
+        		<li> {{ 'paragraph2c' | translate }}  </li>
+        		<li> {{ 'paragraph2d' | translate }}  </li>
+        		<li> {{ 'paragraph2e' | translate }}  </li>
+        		<li> {{ 'paragraph2f' | translate }}  </li>
+        		<li> {{ 'paragraph2g' | translate }}  </li>
+        	</ul>
+        
+        
+        
         <form name="addProjectForm">
             <h4 class="sectionTitle">
-               {{ 'theProject' | translate }}
+               {{ 'theTeam' | translate }}
             </h4>
             <div class="row sectionRow">
                 <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 pull-right">
                     <label>{{ 'founderName' | translate }}</label>
                 </div>
                 <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 pull-right">
-                    {{founderUser.firstName}} {{" "}} {{founderUser.surName}}
+                    {{founder.firstName}} {{" "}} {{founder.surname}}
                 </div>
             </div>
+            <div class="row sectionRow">
+                <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 pull-right">
+                    <label>{{ 'founderAge' | translate }}</label>
+                </div>
+                <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 pull-right">
+                    {{founder.age}}
+                </div>
+            </div>
+            <div class="row sectionRow">
+                <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 pull-right">
+                    <label>{{ 'founderEmail' | translate }}</label>
+                </div>
+                <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 pull-right">
+                    {{founder.email}}
+                </div>
+            </div>
+            <div class="row sectionRow">
+                <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 pull-right">
+                    <label>{{ 'founderPhone' | translate }}</label>
+                </div>
+                <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 pull-right">
+                    {{founder.phone}}
+                </div>
+            </div>
+            
+            <div class="row sectionRow">
+                <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 pull-right">
+                    <label>{{ 'founderGender' | translate }}</label>
+                </div>
+                <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 pull-right">
+                    {{founder.gender}}
+                </div>
+            </div>
+            
+            <div class="row sectionRow">
+                <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 pull-right">
+                    <label>{{ 'founderLinkedin' | translate }}*</label>
+                </div>
+                <div style="margin-top:-5px;" class="col-lg-9 col-md-9 col-sm-12 col-xs-12 pull-right">
+                    <input class="longTextInput" type="url" name="linkedin" ng-model="founderUser.linkedin" ng-disabled="viewMode == 3" required/>
+                    <div class="alert alert-danger pull-left" ng-show="addProjectForm.linkedin.$dirty && addProjectForm.linkedin.$invalid">
+	                   <span ng-show="addProjectForm.linkedin.$error.required">{{ 'founderLinkedinRequired' | translate }}</span>
+	                   <span ng-show="addProjectForm.linkedin.$error.url">{{ 'showcasevalidate' | translate }}</span>
+	                 </div>
+                </div>
+                
+            </div>
+            
+            
+            <div class="row sectionRow">
+                <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 pull-right">
+                    <label>{{ 'founderLocation' | translate }}*</label>
+                </div>
+                <div style="margin-top:-5px;" class="col-lg-9 col-md-9 col-sm-12 col-xs-12 pull-right">
+                    <input class="longTextInput" type="text" name="location" ng-model="founderUser.location"
+                    ng-pattern="/^[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z]+[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z-\s_\.]{1,50}$/"
+                    ng-disabled="viewMode == 3" required/>
+                    <div class="alert alert-danger pull-left" ng-show="addProjectForm.location.$dirty && addProjectForm.location.$invalid">
+                        <span ng-show="addProjectForm.location.$error.required">{{ 'founderLocationRequired' | translate }}</span>
+                        <span ng-show="addProjectForm.location.$error.pattern">{{'Name_Error_Msg' | translate}}</span>
+                    </div>
+                </div>
+            </div>
+            
+           <div class="row sectionRow">
+                <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 pull-right">
+                    <label>{{ 'founderQuestion1' | translate }}*</label>
+                </div>
+                <div style="margin-top:-5px;width: 200px;" class="col-lg-9 col-md-9 col-sm-12 col-xs-12 pull-right">
+                    <input class="longTextInput" type="text" name="founderQuestion1" ng-model="founderUser.question1"
+                    ng-pattern="/^[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z]+[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z-\s_\.]{1,100}$/"
+                    ng-disabled="viewMode == 3" required/>
+                    <div class="alert alert-danger pull-left" ng-show="addProjectForm.founderQuestion1.$dirty && addProjectForm.founderQuestion1.$invalid">
+                        <span ng-show="addProjectForm.founderQuestion1.$error.required">{{ 'questionMustbeAnswered' | translate }}</span>
+                        <span ng-show="addProjectForm.founderQuestion1.$error.pattern">{{'Name_Error_Msg' | translate}}</span>
+                    </div>
+                </div>
+            </div>
+            
+           <div class="row sectionRow">
+                <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 pull-right">
+                    <label>{{ 'founderQuestion2' | translate }}*</label>
+                </div>
+                <div style="margin-top:-5px;" class="col-lg-9 col-md-9 col-sm-12 col-xs-12 pull-right">
+                    <input class="longTextInput" type="text" name="founderQuestion2" ng-model="founderUser.question2"
+                    ng-pattern="/^[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z]+[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z-\s_\.]{1,100}$/"
+                    ng-disabled="viewMode == 3" required/>
+                    <div class="alert alert-danger pull-left" ng-show="addProjectForm.founderQuestion2.$dirty && addProjectForm.founderQuestion2.$invalid">
+                        <span ng-show="addProjectForm.founderQuestion2.$error.required">{{ 'questionMustbeAnswered' | translate }}</span>
+                        <span ng-show="addProjectForm.founderQuestion2.$error.pattern">{{'Name_Error_Msg' | translate}}</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row sectionRow">
+                <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 pull-right">
+                    <label>{{ 'founderQuestion3' | translate }}*</label>
+                </div>
+                <div style="margin-top:-5px;" class="col-lg-9 col-md-9 col-sm-12 col-xs-12 pull-right">
+                      <textarea rows="4" cols="50" name="founderQuestion3"
+                        ng-pattern="/^(?=.*[0-9])*(?=.*[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z]|[0-9]+[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z]+|[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z]+[0-9]+)[0-9\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z!@#$&quot;{}=\-\\//?:;><%*,.\s()'_+^&\[\]]{2,4000}$/"
+                        ng-model="founderUser.question3" ng-disabled="viewMode == 3" required>
+
+                      </textarea>
+                    <div class="alert alert-danger pull-left" ng-show="addProjectForm.founderQuestion3.$dirty && addProjectForm.founderQuestion3.$invalid">
+                        <span ng-show="addProjectForm.founderQuestion3.$error.required">{{ 'questionMustbeAnswered' | translate }}</span>
+                        <span ng-show="addProjectForm.founderQuestion3.$error.pattern">{{'Name_Error_Msg' | translate}}</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row sectionRow">
+                <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 pull-right">
+                    <label>{{ 'founderQuestion4' | translate }}*</label>
+                </div>
+                <div style="margin-top:-5px;" class="col-lg-9 col-md-9 col-sm-12 col-xs-12 pull-right">
+                    <input class="longTextInput" type="text" name="founderQuestion4" ng-model="founderUser.question4"
+                    ng-pattern="/^[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z]+[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z-\s_\.]{1,100}$/"
+                    ng-disabled="viewMode == 3" required/>
+                    <div class="alert alert-danger pull-left" ng-show="addProjectForm.founderQuestion4.$dirty && addProjectForm.founderQuestion4.$invalid">
+                        <span ng-show="addProjectForm.founderQuestion4.$error.required">{{ 'questionMustbeAnswered' | translate }}</span>
+                        <span ng-show="addProjectForm.founderQuestion4.$error.pattern">{{'Name_Error_Msg' | translate}}</span>
+                    </div>
+                </div>
+            </div>
+            
+            
             <div class="row sectionRow">
                 <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 pull-right">
                     <label>{{ 'roleinProject' | translate }}</label>
@@ -21,44 +171,13 @@
                     {{ 'projectFounder' | translate }}
                 </div>
             </div>
-            <div class="row sectionRow">
-                <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 pull-right">
-                    <label>{{ 'proofofAffiliation' | translate }}</label>
-                    <div class="clearfix"></div>
-					<span class="smallLabel">( {{ 'imageSizeLabel' | translate }} ) </span><br/>
-					<span class="smallLabel">( {{ 'proofofAffiliationInfo' | translate }} ) </span>
-                </div>
-                <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 pull-right">
-                    <div class="uploader pull-right" ng-show="!afiliationUploaded">
-	                    <input type="file" class="pull-right" ngf-select="noAfiliationSelected = false; afiliationFileNameNotValid = false; "  ng-model="afiliationFile" name="afiliationFile" ngf-pattern="'image/*,.zip,.rar,application/pdf'"
-	             				accept="image/*,application/pdf,.zip,.rar," ngf-max-size="500KB" ngf-min-height="100"
-							    ngf-resize="{quality: 0.8}" ng-disabled="viewMode == 3" >
-
-	                    <button class="btn btn-success" ng-disabled="noAfiliationSelected" type="button" ng-click="uploadAfiliationFile()">{{ 'uploadFile' | translate }}</button>
-	                    <button class="btn btn-success" ng-show = "afiliationAttachment.id" type="button" ng-click="afiliationUploaded = true">{{ 'cancelBtn' | translate }}</button>
-                    </div>
-                    <div ng-show="afiliationUploaded">
-                    	<a target="_self" href= "/attachements?id={{afiliationAttachment.id}}&key={{afiliationAttachment.key}}" download>{{afiliationAttachment.key}}</a>
-                    	<button  class="btn btn-success" type="button" ng-hide="viewMode == 3" ng-click="afiliationUploaded = false" ng-disabled="viewMode == 3" >{{ 'editAttachment' | translate }}</button>
-                    </div>
-                    <div class="alert alert-danger pull-left" ng-show="addProjectForm.afiliationFile.$dirty && !addProjectForm.afiliationFile.$invalid && !afiliationUploaded">
-                        <span>{{ 'addprojectUploadAttachment' | translate }}</span><br>
-                    </div>
-                    <div class="alert alert-danger pull-left" ng-show="addProjectForm.afiliationFile.$dirty && addProjectForm.afiliationFile.$invalid">
-                        <span ng-show="addProjectForm.afiliationFile.$error.pattern">{{ 'addprojectAttachmentValid' | translate }}</span>
-                        <!--<span ng-show="addProjectForm.afiliationFile.$error.required">{{ 'addprojectAttachmentRequired' | translate }}</span>-->
-                        <span ng-show="addProjectForm.afiliationFile.$error.maxSize">{{ 'addprojectFileLarge' | translate }}</span>
-                    </div>
-                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pull-right" ng-show="afiliationFileNameNotValid">
-		                <div class="alert alert-danger text-center">
-		                    <span>{{'addprojectAttachmentNameValid' | translate}}</span>
-		                </div>
-	            	</div>
-                </div>
-            </div>
-            <div class="row sectionRow">
+            
+             <div class="row sectionRow">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <h5>{{ 'teamMembers' | translate }} </h5>
+                    <h5>{{ 'teamMembers' | translate }} <span class="smallLabel">{{ 'teamNo' | translate }}</span></h5>
+                    
+                    <div class="clearfix"></div>
+                    <span class="smallLabel">{{ 'teamLabel' | translate }}</span>
                     <div class="clearfix"></div>
                     <a href="#" ng-click="openAddMember()" ng-hide="viewMode == 3" >{{ 'addMember' | translate }}</a>
                 </div>
@@ -109,10 +228,50 @@
                     <span>{{ 'addProjectMemberValidation' | translate }}</span>
                 </div>
             </div>
+            
+            
+            <!-- <div class="row sectionRow">
+                <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 pull-right">
+                    <label>{{ 'proofofAffiliation' | translate }}</label>
+                    <div class="clearfix"></div>
+					<span class="smallLabel">( {{ 'imageSizeLabel' | translate }} ) </span><br/>
+					<span class="smallLabel">( {{ 'proofofAffiliationInfo' | translate }} ) </span>
+                </div>
+                <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 pull-right">
+                    <div class="uploader pull-right" ng-show="!afiliationUploaded">
+	                    <input type="file" class="pull-right" ngf-select="noAfiliationSelected = false; afiliationFileNameNotValid = false; "  ng-model="afiliationFile" name="afiliationFile" ngf-pattern="'image/*,.zip,.rar,application/pdf'"
+	             				accept="image/*,application/pdf,.zip,.rar," ngf-max-size="500KB" ngf-min-height="100"
+							    ngf-resize="{quality: 0.8}" ng-disabled="viewMode == 3" >
+
+	                    <button class="btn btn-success" ng-disabled="noAfiliationSelected" type="button" ng-click="uploadAfiliationFile()">{{ 'uploadFile' | translate }}</button>
+	                    <button class="btn btn-success" ng-show = "afiliationAttachment.id" type="button" ng-click="afiliationUploaded = true">{{ 'cancelBtn' | translate }}</button>
+                    </div>
+                    <div ng-show="afiliationUploaded">
+                    	<a target="_self" href= "/attachements?id={{afiliationAttachment.id}}&key={{afiliationAttachment.key}}" download>{{afiliationAttachment.key}}</a>
+                    	<button  class="btn btn-success" type="button" ng-hide="viewMode == 3" ng-click="afiliationUploaded = false" ng-disabled="viewMode == 3" >{{ 'editAttachment' | translate }}</button>
+                    </div>
+                    <div class="alert alert-danger pull-left" ng-show="addProjectForm.afiliationFile.$dirty && !addProjectForm.afiliationFile.$invalid && !afiliationUploaded">
+                        <span>{{ 'addprojectUploadAttachment' | translate }}</span><br>
+                    </div>
+                    <div class="alert alert-danger pull-left" ng-show="addProjectForm.afiliationFile.$dirty && addProjectForm.afiliationFile.$invalid">
+                        <span ng-show="addProjectForm.afiliationFile.$error.pattern">{{ 'addprojectAttachmentValid' | translate }}</span>
+                        <span ng-show="addProjectForm.afiliationFile.$error.required">{{ 'addprojectAttachmentRequired' | translate }}</span>
+                        <span ng-show="addProjectForm.afiliationFile.$error.maxSize">{{ 'addprojectFileLarge' | translate }}</span>
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pull-right" ng-show="afiliationFileNameNotValid">
+		                <div class="alert alert-danger text-center">
+		                    <span>{{'addprojectAttachmentNameValid' | translate}}</span>
+		                </div>
+	            	</div>
+                </div>
+            </div> -->
+             <h4 class="sectionTitle">
+                    {{ 'theProject' | translate }}
+             </h4>
+           
+            
             <section>
-                <h4 class="sectionTitle">
-                    {{ 'theTeam' | translate }}
-                </h4>
+               
                 <div class="row sectionRow">
                     <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 pull-right">
                         <label>{{ 'startupName' | translate }}*</label>
@@ -127,6 +286,7 @@
                         </div>
                     </div>
                 </div>
+                
                 <div class="row sectionRow">
                     <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 pull-right">
                         <label>{{ 'foundingDate' | translate }}*</label>
@@ -143,6 +303,7 @@
                         </div>
                     </div>
                 </div>
+                
                 <div class="row sectionRow">
                     <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 pull-right">
                         <label> {{'Sector' | translate}}*</label>
@@ -166,6 +327,43 @@
 
                     </div>
                 </div>
+                
+                <div class="row sectionRow2" >
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pull-right">
+                        <label>{{ 'question8a' | translate }}</label>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 pull-right">
+                        <input  type="url" name="website" ng-disabled="viewMode == 3" ng-model="project.website">
+                    </div>
+                    <div class="alert alert-danger col-lg-6 col-md-6 col-sm-12 col-xs-12 pull-right" ng-show="addProjectForm.website.$dirty && addProjectForm.website.$invalid">
+                      <span ng-show="addProjectForm.website.$error.url">{{ 'showcasevalidate' | translate }}</span>
+                    </div>
+                    
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pull-right">
+                        <label>{{ 'question8b' | translate }}</label>
+                         <div class="clearfix"></div>
+                        <span  style="text-indent: 10px;"class="col-lg-9 col-md-9 col-sm-12 col-xs-12 pull-right smallLabel">{{ 'question8bLabel' | translate }}</span>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 pull-right">
+                        <input  type="url" name="mobileApp" ng-disabled="viewMode == 3" ng-model="project.mobileApp">
+                    </div>
+                    <div class="alert alert-danger col-lg-6 col-md-6 col-sm-12 col-xs-12 pull-right" ng-show="addProjectForm.mobileApp.$dirty && addProjectForm.mobileApp.$invalid">
+                      <span ng-show="addProjectForm.mobileApp.$error.url">{{ 'showcasevalidate' | translate }}</span>
+                    </div>
+                    
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pull-right">
+                        <label>{{ 'question8c' | translate }}</label></div>
+                    <div  class="col-lg-6 col-md-6 col-sm-12 col-xs-12 pull-right">
+                        <input  type="url" name="socialMedia" ng-disabled="viewMode == 3" ng-model="project.socialMedia">
+                    </div>
+                    <div class="alert alert-danger col-lg-6 col-md-6 col-sm-12 col-xs-12 pull-right" ng-show="addProjectForm.socialMedia.$dirty && addProjectForm.socialMedia.$invalid">
+                      <span ng-show="addProjectForm.socialMedia.$error.url">{{ 'showcasevalidate' | translate }}</span>
+                    </div>
+                    
+                </div>
+                
+                
+                
                 <div class="row sectionRow">
                     <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 pull-right">
                         <label>{{ 'question1' | translate }}*</label>
@@ -184,15 +382,37 @@
                         </div>
                     </div>
                 </div>
+                
+                <div class="row sectionRow">
+                    <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 pull-right">
+                        <label> {{'developmentStage' | translate}}*</label>
+                    </div>
+
+                    <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 pull-right">
+                        <select name="developmentStage" ng-model="project.developmentStage" ng-disabled="viewMode == 3" required>
+                            <option ng-repeat="item in developmentStageArray track by $index" value="{{item.id}}">{{item.name[language]}}</option>
+                        </select>
+
+                        <input type="text" name="developmentStage" ng-disabled="viewMode == 3"
+                        ng-model="project.developmentStage" ng-show="project.developmentStage == 6"  required/>
+                        <div class="alert alert-danger pull-left" ng-show="addProjectForm.developmentStage.$dirty && addProjectForm.developmentStage.$invalid">
+                            <span ng-show="addProjectForm.developmentStage.$error.required">{{'developmentStage_Error_Msg' | translate}}</span>
+                        </div>
+                    </div>
+                    <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 pull-right" >
+
+                    </div>
+                </div>
+                
+                
                 <div class="row sectionRow" >
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pull-right">
                         <label>{{ 'question2' | translate }}*</label>
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 pull-right">
                         <textarea name="question2"
-                        ng-pattern="/^(?=.*[0-9])*(?=.*[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z]|[0-9]+[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z]+|[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z]+[0-9]+)[0-9\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z!@#$&quot;{}=\-\\//?:;><%*,.\s()'_+^&\[\]]{2,4000}$/"
-                        ng-model="project.unregisterationReason" rows="4" cols="50"  ng-disabled="project.legallyRegistered == 'yes' || viewMode == 3" ng-required="project.legallyRegistered == 'no'">
-
+                        ng-pattern="/^(?=.*[0-9])*(?=.*[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z]|[0-9]+[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z]+|[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z]+[0-9]+)[0-9\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z!@#$&quot;{}=\-\\//?:;><%*,.\s()'_+^&\[\]]{2,220}$/"
+                        ng-model="project.description" ng-disabled="viewMode == 3" rows="4" cols="50"  required>
                         </textarea>
                     </div>
                     <div class="alert alert-danger col-lg-6 col-md-6 col-sm-12 col-xs-12 pull-right" ng-show="addProjectForm.question2.$dirty && addProjectForm.question2.$invalid">
@@ -200,14 +420,16 @@
                             <span ng-show="addProjectForm.question2.$error.pattern">{{'Error_Msg_Max_length' | translate}}</span>
                     </div>
                 </div>
-                <div class="row sectionRow2" >
+                
+                
+                <div class="row sectionRow" >
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pull-right">
                         <label>{{ 'question3' | translate }}*</label>
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 pull-right">
                         <textarea rows="4" cols="50" name="question3"
                         ng-pattern="/^(?=.*[0-9])*(?=.*[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z]|[0-9]+[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z]+|[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z]+[0-9]+)[0-9\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z!@#$&quot;{}=\-\\//?:;><%*,.\s()'_+^&\[\]]{2,4000}$/"
-                        ng-model="project.businessGoals" ng-disabled="viewMode == 3" required>
+                        ng-model="project.serviceDescription" ng-disabled="viewMode == 3" required>
 
                         </textarea>
                     </div>
@@ -216,14 +438,16 @@
                             <span ng-show="addProjectForm.question3.$error.pattern">{{'Error_Msg_Max_length' | translate}}</span>
                     </div>
                 </div>
-                <div class="row sectionRow2" >
+                
+                
+                <div class="row sectionRow" >
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pull-right">
                         <label>{{ 'question4' | translate }}*</label>
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 pull-right">
                         <textarea rows="4" cols="50" name="question4"
                         ng-pattern="/^(?=.*[0-9])*(?=.*[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z]|[0-9]+[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z]+|[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z]+[0-9]+)[0-9\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z!@#$&quot;{}=\-\\//?:;><%*,.\s()'_+^&\[\]]{2,4000}$/"
-                        ng-model="project.productService" ng-disabled="viewMode == 3" required>
+                        ng-model="project.reasonToPickTheIdea" ng-disabled="viewMode == 3" required>
 
                         </textarea>
                     </div>
@@ -232,15 +456,16 @@
                             <span ng-show="addProjectForm.question4.$error.pattern">{{'Error_Msg_Max_length' | translate}}</span>
                     </div>
                 </div>
-                <div class="row sectionRow2" >
+                
+                
+                <div class="row sectionRow" >
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pull-right">
                         <label>{{ 'question5' | translate }}*</label>
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 pull-right">
                         <textarea rows="4" cols="50" name="question5"
                         ng-pattern="/^(?=.*[0-9])*(?=.*[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z]|[0-9]+[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z]+|[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z]+[0-9]+)[0-9\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z!@#$&quot;{}=\-\\//?:;><%*,.\s()'_+^&\[\]]{2,4000}$/"
-                        ng-model="project.currentProgress" ng-disabled="viewMode == 3" required>
-
+                        ng-model="project.achievements" ng-disabled="viewMode == 3" required>
                         </textarea>
                     </div>
                     <div class="alert alert-danger col-lg-6 col-md-6 col-sm-12 col-xs-12 pull-right" ng-show="addProjectForm.question5.$dirty && addProjectForm.question5.$invalid">
@@ -248,14 +473,16 @@
                             <span ng-show="addProjectForm.question5.$error.pattern">{{'Error_Msg_Max_length' | translate}}</span>
                     </div>
                 </div>
-                <div class="row sectionRow2" >
+                
+                
+                <div class="row sectionRow" >
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pull-right">
                         <label>{{ 'question6' | translate }}*</label>
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 pull-right">
                         <textarea rows="4" cols="50" name="question6" ng-disabled="viewMode == 3"
                         ng-pattern="/^(?=.*[0-9])*(?=.*[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z]|[0-9]+[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z]+|[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z]+[0-9]+)[0-9\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z!@#$&quot;{}=\-\\//?:;><%*,.\s()'_+^&\[\]]{2,4000}$/"
-                        ng-model="project.growthPlans" required>
+                        ng-model="project.customersAndMarket" required>
 
                         </textarea>
                     </div>
@@ -264,14 +491,16 @@
                             <span ng-show="addProjectForm.question6.$error.pattern">{{'Error_Msg_Max_length' | translate}}</span>
                     </div>
                 </div>
-                <div class="row sectionRow2" >
+                
+                
+                <div class="row sectionRow" >
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pull-right">
                         <label>{{ 'question7' | translate }}*</label>
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 pull-right">
                         <textarea rows="4" cols="50" name="question7" ng-disabled="viewMode == 3"
                         ng-pattern="/^(?=.*[0-9])*(?=.*[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z]|[0-9]+[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z]+|[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z]+[0-9]+)[0-9\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z!@#$&quot;{}=\-\\//?:;><%*,.\s()'_+^&\[\]]{2,4000}$/"
-                        ng-model="project.currentChallenge" required>
+                        ng-model="project.existingClients" required>
 
                         </textarea>
                     </div>
@@ -280,20 +509,157 @@
                         <span ng-show="addProjectForm.question7.$error.pattern">{{'Error_Msg_Max_length' | translate}}</span>
                     </div>
                 </div>
-                <div class="row sectionRow2" >
+                
+                
+                
+                <div class="row sectionRow" >
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pull-right">
-                        <label>{{ 'showcase' | translate }}</label>
+                        <label>{{ 'question9' | translate }}*</label>
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 pull-right">
-                        <input type="url" name="showcase" ng-disabled="viewMode == 3" ng-model="project.showcase">
+                        <textarea rows="4" cols="50" name="question9"
+                        ng-pattern="/^(?=.*[0-9])*(?=.*[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z]|[0-9]+[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z]+|[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z]+[0-9]+)[0-9\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z!@#$&quot;{}=\-\\//?:;><%*,.\s()'_+^&\[\]]{2,4000}$/"
+                        ng-model="project.revenue" ng-disabled="viewMode == 3" required>
+
+                        </textarea>
+                    </div>
+                    <div class="alert alert-danger col-lg-6 col-md-6 col-sm-12 col-xs-12 pull-right" ng-show="addProjectForm.question9.$dirty && addProjectForm.question9.$invalid">
+                            <span ng-show="addProjectForm.question9.$error.required">{{ 'questionMustbeAnswered' | translate }}</span>
+                            <span ng-show="addProjectForm.question9.$error.pattern">{{'Error_Msg_Max_length' | translate}}</span>
+                    </div>
+                </div>
+                
+                
+                <div class="row sectionRow" >
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pull-right">
+                        <label>{{ 'question10' | translate }}*</label>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 pull-right">
+                        <textarea rows="4" cols="50" name="question10" ng-disabled="viewMode == 3"
+                        ng-pattern="/^(?=.*[0-9])*(?=.*[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z]|[0-9]+[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z]+|[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z]+[0-9]+)[0-9\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z!@#$&quot;{}=\-\\//?:;><%*,.\s()'_+^&\[\]]{2,4000}$/"
+                        ng-model="project.competitors" required>
+
+                        </textarea>
+                    </div>
+                    <div class="alert alert-danger col-lg-6 col-md-6 col-sm-12 col-xs-12 pull-right" ng-show="addProjectForm.question10.$dirty && addProjectForm.question10.$invalid">
+                        <span ng-show="addProjectForm.question10.$error.required">{{ 'questionMustbeAnswered' | translate }}</span>
+                        <span ng-show="addProjectForm.question10.$error.pattern">{{'Error_Msg_Max_length' | translate}}</span>
+                    </div>
+                </div>
+                
+                
+                
+                <div class="row sectionRow" >
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pull-right">
+                        <label>{{ 'question11' | translate }}*</label>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 pull-right">
+                        <textarea rows="4" cols="50" name="question11" ng-disabled="viewMode == 3"
+                        ng-pattern="/^(?=.*[0-9])*(?=.*[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z]|[0-9]+[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z]+|[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z]+[0-9]+)[0-9\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z!@#$&quot;{}=\-\\//?:;><%*,.\s()'_+^&\[\]]{2,4000}$/"
+                        ng-model="project.expertise" required>
+
+                        </textarea>
+                    </div>
+                    <div class="alert alert-danger col-lg-6 col-md-6 col-sm-12 col-xs-12 pull-right" ng-show="addProjectForm.question11.$dirty && addProjectForm.question11.$invalid">
+                        <span ng-show="addProjectForm.question11.$error.required">{{ 'questionMustbeAnswered' | translate }}</span>
+                        <span ng-show="addProjectForm.question11.$error.pattern">{{'Error_Msg_Max_length' | translate}}</span>
+                    </div>
+                </div>
+                 
+                
+                
+                <div class="row sectionRow" >
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pull-right">
+                        <label>{{ 'question12' | translate }}*</label>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 pull-right">
+                        <textarea rows="4" cols="50" name="question12" ng-disabled="viewMode == 3"
+                        ng-pattern="/^(?=.*[0-9])*(?=.*[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z]|[0-9]+[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z]+|[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z]+[0-9]+)[0-9\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z!@#$&quot;{}=\-\\//?:;><%*,.\s()'_+^&\[\]]{2,4000}$/"
+                        ng-model="project.growthPlans" required>
+
+                        </textarea>
+                    </div>
+                    <div class="alert alert-danger col-lg-6 col-md-6 col-sm-12 col-xs-12 pull-right" ng-show="addProjectForm.question12.$dirty && addProjectForm.question12.$invalid">
+                        <span ng-show="addProjectForm.question12.$error.required">{{ 'questionMustbeAnswered' | translate }}</span>
+                        <span ng-show="addProjectForm.question12.$error.pattern">{{'Error_Msg_Max_length' | translate}}</span>
+                    </div>
+                </div>
+                
+                
+                <div class="row sectionRow" >
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pull-right">
+                        <label>{{ 'question13' | translate }}*</label>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 pull-right">
+                        <textarea name="question13"
+                        ng-pattern="/^(?=.*[0-9])*(?=.*[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z]|[0-9]+[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z]+|[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z]+[0-9]+)[0-9\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z!@#$&quot;{}=\-\\//?:;><%*,.\s()'_+^&\[\]]{2,4000}$/"
+                        ng-model="project.challenges" ng-disabled="viewMode == 3" rows="4" cols="50"  required>
+                        </textarea>
+                    </div>
+                    <div class="alert alert-danger col-lg-6 col-md-6 col-sm-12 col-xs-12 pull-right" ng-show="addProjectForm.question13.$dirty && addProjectForm.question13.$invalid">
+                            <span ng-show="addProjectForm.question13.$error.required">{{ 'questionMustbeAnswered' | translate }}</span>
+                            <span ng-show="addProjectForm.question13.$error.pattern">{{'Error_Msg_Max_length' | translate}}</span>
+                    </div>
+                </div>
+               
+               
+               <div class="row sectionRow" >
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pull-right">
+                        <label>{{ 'question14' | translate }}*</label>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 pull-right">
+                        <textarea name="question14"
+                        ng-pattern="/^(?=.*[0-9])*(?=.*[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z]|[0-9]+[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z]+|[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z]+[0-9]+)[0-9\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z!@#$&quot;{}=\-\\//?:;><%*,.\s()'_+^&\[\]]{2,4000}$/"
+                        ng-model="project.valuableInnotvative" ng-disabled="viewMode == 3" rows="4" cols="50"  required>
+                        </textarea>
+                    </div>
+                    <div class="alert alert-danger col-lg-6 col-md-6 col-sm-12 col-xs-12 pull-right" ng-show="addProjectForm.question14.$dirty && addProjectForm.question14.$invalid">
+                            <span ng-show="addProjectForm.question14.$error.required">{{ 'questionMustbeAnswered' | translate }}</span>
+                            <span ng-show="addProjectForm.question14.$error.pattern">{{'Error_Msg_Max_length' | translate}}</span>
+                    </div>
+                </div>
+               
+               
+                <div class="row sectionRow" >
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pull-right">
+                        <label>{{ 'showcase' | translate }}*</label>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 pull-right">
+                        <input type="url" name="showcase" ng-disabled="viewMode == 3" ng-model="project.showcase" required>
                     </div>
                     <div class="alert alert-danger col-lg-6 col-md-6 col-sm-12 col-xs-12 pull-right" ng-show="addProjectForm.showcase.$dirty && addProjectForm.showcase.$invalid">
                       <span ng-show="addProjectForm.showcase.$error.url">{{ 'showcasevalidate' | translate }}</span>
+                      <span ng-show="addProjectForm.showcase.$error.required">{{ 'showcaseRequired' | translate }}</span>
                     </div>
                 </div>
+                
+                
+                
+               
+               <div class="row sectionRow" >
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pull-right">
+                        <label>{{ 'question15' | translate }}*</label>
+                         <div class="clearfix"></div>
+                        <span class="col-lg-9 col-md-9 col-sm-12 col-xs-12 pull-right smallLabel">{{ 'question15Labela' | translate }}</span>
+                 		<span class="col-lg-9 col-md-9 col-sm-12 col-xs-12 pull-right smallLabel">{{ 'question15Labelb' | translate }}</span>
+                 		
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 pull-right">
+                        <textarea name="question15"
+                        ng-pattern="/^(?=.*[0-9])*(?=.*[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z]|[0-9]+[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z]+|[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z]+[0-9]+)[0-9\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z!@#$&quot;{}=\-\\//?:;><%*,.\s()'_+^&\[\]]{2,4000}$/"
+                        ng-model="project.competitions" rows="4" cols="50"  ng-disabled="viewMode == 3" required>
+                        </textarea>
+                    </div>
+                    <div class="alert alert-danger col-lg-6 col-md-6 col-sm-12 col-xs-12 pull-right" ng-show="addProjectForm.question15.$dirty && addProjectForm.question15.$invalid">
+                            <span ng-show="addProjectForm.question15.$error.required">{{ 'questionMustbeAnswered' | translate }}</span>
+                            <span ng-show="addProjectForm.question15.$error.pattern">{{'Error_Msg_Max_length' | translate}}</span>
+                    </div>
+                </div>
+                
+                
                 <div class="row sectionRow">
                     <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 pull-right">
-                        <label>{{ 'addProjectPrototype' | translate }}*</label>
+                        <label>{{ 'addProjectPrototype' | translate }}</label>
                         <div class="clearfix"></div>
 						<span class="smallLabel">( {{ 'imageSizeLabel' | translate }} ) </span>
 						<br/>
@@ -301,9 +667,9 @@
                     </div>
                     <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 pull-right">
 	                    <div class="uploader" ng-show="!prototypeUploaded">
-		                    <input type="file" class="pull-right" ngf-select="noPrototypeSelected = false" ng-model="prototypeFile" name="prototypeFile" ngf-pattern="'image/*,application/pdf,.zip,.rar'"
-		             				accept="image/*,application/pdf,.zip,.rar" ngf-max-size="500KB" ngf-min-height="100"
-								    ngf-resize="{quality: 0.8}" ng-disabled="viewMode == 3" required>
+		                    <input type="file" class="pull-right" ngf-select="noPrototypeSelected = false" ng-model="prototypeFile" name="prototypeFile" ngf-pattern="'application/msword, application/vnd.ms-excel, application/vnd.ms-powerpoint,text/plain,image/*,application/pdf,.zip,.rar'"
+		             				accept="application/msword, application/vnd.ms-excel, application/vnd.ms-powerpoint,text/plain, application/pdf, image/*,.zip,.rar" ngf-max-size="5000KB" ngf-min-height="100"
+								    ngf-resize="{quality: 0.8}" ng-disabled="viewMode == 3" >
 		                    <button class="btn btn-success"  ng-disabled="noPrototypeSelected" type="button" ng-click="uploadPrototypeFile()">{{ 'uploadFile' | translate }}</button>
 		                    <button class="btn btn-success" ng-show = "prototypeAttachment.id" type="button" ng-click="prototypeUploaded = true">{{ 'cancelBtn' | translate }}</button>
                             <div class="alert alert-danger pull-left" ng-show="addProjectForm.prototypeFile.$dirty && !addProjectForm.prototypeFile.$invalid && !prototypeUploaded">
@@ -312,7 +678,6 @@
                             <div class="alert alert-danger pull-left" ng-show="addProjectForm.prototypeFile.$dirty && addProjectForm.prototypeFile.$invalid">
                                 <span ng-show="addProjectForm.prototypeFile.$error.pattern">{{ 'addprojectAttachmentValid' | translate }}</span>
                                 <span ng-show="addProjectForm.prototypeFile.$error.maxSize">{{ 'addprojectFileLarge' | translate }}</span>
-                            	   <span ng-show="addProjectForm.prototypeFile.$error.required">{{ 'addProjectPrototypeRequired' | translate }}</span>
                             </div>
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pull-right" ng-show="prototypeFileNameNotValid">
 				                <div class="alert alert-danger text-center">
@@ -326,6 +691,9 @@
 	                    </div>
                 	</div>
                 </div>
+               
+                
+                
             </section>
             <section ng-show="showIncubationAttchaments">
            	    <h4 class="sectionTitle">

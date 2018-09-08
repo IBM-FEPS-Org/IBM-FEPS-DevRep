@@ -27,7 +27,7 @@ fepsApp.controller('changePasswordController', function ($log, $scope, $location
                             var modalInstance = $uibModal.open(
                             {
                                 ariaDescribedBy: 'changePassword',
-                                template: '<p class="alert alert-success SuccessMsgPopup text-center">{{ "resetـpassword_success" | translate}}</p>',
+                                template: '<p class="alert alert-success SuccessMsgPopup text-center">{{ "unsubscribedSuccessfullyMsg" | translate}}</p>',
                                 controller: function ($uibModalInstance) {
                                     $timeout(function () {
                                         $location.path('fepsIncubator/home');

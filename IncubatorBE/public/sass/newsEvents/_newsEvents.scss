@@ -15,6 +15,27 @@
 }
 .news-events-container{
     font-family: $ff; 
+	.button
+	{
+		position: relative;
+		text-align: center;
+		button
+		{
+    		color: #fff;
+    		background-color: #972064;
+    		font: bold 16px $ff;
+    		&:hover
+			{
+     			color: #fff;
+     			background-color: #972064;
+    		}
+    		&:focus
+			{
+      			color: #fff;
+      			background-color: #972064;
+    		}
+  		}
+	}
     .newsDtails {
         text-align: left;
          p {
@@ -48,14 +69,18 @@
     }
 }
 /*news and events Details screen styles Mfarag*/
-.news-events-details-container{
+.news-events-details-container
+{
     padding: 0;
-    .bannerMainContainer{
+    .bannerMainContainer
+	{
         height: 20vh;
         position: relative;
         padding: 0;
-        .bannerContainer {
-            .eventBannerBgContainer {
+        .bannerContainer 
+    	{
+            .eventBannerBgContainer 
+        	{
                 position: fixed;
                 top: 50%;
                 left: 50%;
@@ -65,7 +90,8 @@
                 transform: translateX(-50%) translateY(-50%);
                 background-size: cover;
             }
-            .mask {
+            .mask 
+        	{
                 position: absolute;
                 top: 50%;
                 left: 0;
@@ -81,7 +107,8 @@
             }
         }
     }
-    .eventNewsDetailsContainer{
+    .eventNewsDetailsContainer
+	{
         top: auto;
         bottom: 0;
         position: absolute;
@@ -89,9 +116,11 @@
         color: $bg;
         padding: 0 30px;
         text-shadow: rgba(0, 0, 0, 0.65) 0px 0 2px;
-        .eventDetails {
+        .eventDetails 
+    	{
             margin: 20px 0;
-            h5 {
+            h5 
+        	{
                 display: inline;
                 padding: 0px 8px;
             }
@@ -144,7 +173,8 @@
                     font-weight: bold;
                     font-size: 18px;
                 }
-                label{
+                label
+            	{
                     line-height: 60px;
                 }
                span
@@ -152,30 +182,36 @@
                		display: block;
                		margin-top: 20px;
                	}
-                img{
+                img
+            	{
                     width:60px;
                     height:60px;
                     border:3px #333 solid;
                     border-radius: 10px;
                     margin: 0 15px 0 0;
                 }
-                .SpeakerName{
+                .SpeakerName
+            	{
                     line-height: 60px;
                 }
             }
-            .venueInfo{
-                label{
+            .venueInfo
+        	{
+                label
+            	{
                     color:#000;
                     font-weight: bold;
                     font-size: 18px;
                 }
-                label,span{
+                label,span
+            	{
                     line-height: 60px;
                 }
             }
 
         }
-        .enroleBtn {
+        .enroleBtn 
+    	{
 
             width:100%;
             margin: 20px 0 ;
@@ -183,15 +219,19 @@
 
 
     }
-    .responsePopup {
+    .responsePopup 
+	{
          text-align: center;
-        .modal-content {
+        .modal-content 
+    	{
             padding: 45px;
         }
-        .modal-body{
+        .modal-body
+    	{
             color: $gryLightColor;
         }
-        .btn-default {
+        .btn-default 
+    	{
             background: $themeColor4;
             border-radius: 16px;
             padding: 10px 40px;
@@ -255,6 +295,7 @@
     }
 
 }
+
 
 
 

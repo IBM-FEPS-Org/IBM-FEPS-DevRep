@@ -383,9 +383,11 @@ exports.updateProjectByFounder = function(projectObj, projectFounder){
                   return reject(errorMessage);
                 }
               }
-
+              console.log(projectObj);
               let projectUpdated;
-              ModelUtil.updateDoc(projectObj).then((updatedProject)=>{
+              ModelUtil.updateDoc(projectObj).then((updatedProject)=>
+              {
+            	console.log("here");
                 projectUpdated = updatedProject;
                 removeProjectAttachments(projectObj, freshProject).then((result)=>{
                   pino.debug({fnction : __filename+ ">" + funcName}, "project attachments removed successfully");
@@ -438,15 +440,7 @@ function removeProjectAttachments(projectObj, freshProject){
   return new Promise((resolve, reject)=>{
     const funcName = "removeProjectAttachments";
     let promises = [];
-    //remove old attachments
-    // in case remove old attachments without adding
-    if( (!projectObj) && (freshProject.afiliationAttachment && freshProject.afiliationAttachment.id)){
-      promises.push(attachementService.removeAttachement(freshProject.afiliationAttachment.id, freshProject.afiliationAttachment.rev));
-    }
-    //replace old attachments, checking projectObj to avoid null pointer
-    else if( (!projectObj) && projectObj.afiliationAttachment && freshProject.afiliationAttachment && projectObj.afiliationAttachment.id !== freshProject.afiliationAttachment.id){
-      promises.push(attachementService.removeAttachement(freshProject.afiliationAttachment.id, freshProject.afiliationAttachment.rev));
-    }
+    
 
     // in case remove old attachments without adding
     if( (!projectObj) && (freshProject.prototypeAttachment && freshProject.prototypeAttachment.id)){
@@ -456,6 +450,14 @@ function removeProjectAttachments(projectObj, freshProject){
     else if(projectObj && projectObj.prototypeAttachment && freshProject && freshProject.prototypeAttachment && projectObj.prototypeAttachment.id !== freshProject.prototypeAttachment.id){
       promises.push(attachementService.removeAttachement(freshProject.prototypeAttachment.id, freshProject.prototypeAttachment.rev));
     }
+    if( (!projectObj) && (freshProject.businessModelAttachment && freshProject.businessModelAttachment.id)){
+        promises.push(attachementService.removeAttachement(freshProject.businessModelAttachment.id, freshProject.businessModelAttachment.rev));
+      }
+      //replace old attachments, checking projectObj to avoid null pointer
+      else if(projectObj && projectObj.businessModelAttachment && freshProject && freshProject.businessModelAttachment && projectObj.businessModelAttachment.id !== freshProject.businessModelAttachment.id){
+        promises.push(attachementService.removeAttachement(freshProject.businessModelAttachment.id, freshProject.businessModelAttachment.rev));
+      }
+    
 
     Promise.all(promises).then((results)=>{
       resolve(results);
@@ -671,6 +673,44 @@ exports.updateIncubationAttachs = function(projectObj, user){
 }
 
 
+
+exports.updateDocumentationAttachs = function(projectObj, user){
+  return new Promise((resolve, reject)=>{
+    const funcName = 'updateDocumentationAttachs';
+    ModelUtil.findById(projectObj._id).then((freshProject)=>
+    {
+      for (var i = 0, total = freshProject.members.length; i < total; i++) 
+      {
+        if (freshProject.members[i]._id === user._id && userService.checkUserGroup(user, CONSTANTS.groups.founder)) 
+        {
+          const {newItems, existingItems, excludedItems} = ObjectUtil.getTwoArraysDifferentiation(projectObj.documentationAttachments, freshProject.documentationAttachments, 'id');
+          freshProject.documentationAttachments = projectObj.documentationAttachments;
+          return ModelUtil.insertDoc(freshProject).then((updatedProject)=>{
+
+            let promises = [attachementService.removeAttachements(excludedItems)];
+            promises.push(attachementService.attachAttachments(newItems, true));
+            Promise.all(promises).then((result)=>{
+              let message = new Message(Message.UPDATE_OBJECT, updatedProject, "");
+              resolve(message);
+            }, (err)=>{
+              reject(err);
+            });
+            resolve(message);
+          }, (err)=>{
+            return utils.rejectMessage(ErrorMessage.DATABASE_ERROR,  err, funcName, reject);
+          });
+        }
+      }
+
+      return utils.rejectMessage(ErrorMessage.UNAUTHORIZATION_ERROR,  errorMessage, funcName, reject);
+    }, (err)=>{
+      return utils.rejectMessage(ErrorMessage.DATABASE_ERROR,  err, funcName, reject);
+    })
+  });
+
+}
+
+
 //delete any project data in the specified users
 function removeProjectFromUsers(users){
   return new Promise((resolve, reject)=>{
@@ -748,8 +788,8 @@ function attachProjectToMembers(members, projectObj, projectFounder, cycle){
 function markProjectAttachmentsAttached(projectObj){
   return new Promise((resolve, reject)=>{
     let attachments = [];
-    if( projectObj.afiliationAttachment){
-      attachments.push(projectObj.afiliationAttachment);
+    if( projectObj.businessModelAttachment){
+      attachments.push(projectObj.businessModelAttachment);
     }
 
     if( projectObj.prototypeAttachment){

@@ -174,19 +174,45 @@
 	
 	                    <div class="pull-right radioDiv" style="margin-right: 40px">
 	                        <input type="radio" name="certificate" class="pull-right" ng-model="newEvent.certificate" value="true"
-	                               >
+	                               style="margin-right: 10px">
 	                        <div class="radioText pull-right">{{'eventCertificateYes' | translate}}</div>
 	                    </div>
 	                    <div class="pull-right radioDiv">
 	                        <input type="radio" name="certificate" class="pull-right" ng-model="newEvent.certificate" value="false"
-	                               checked>
+	                               checked style="margin-right: 10px">
 	                        <div class="radioText pull-right">{{'eventCertificateNo' | translate}}</div>
 	                    </div>
 	                </div>
 	            </div>
 				
 				<br />
-
+				
+				<div class="row sectionRow">
+	                <div class="col-lg-4 col-md-4 col-sm-12 col-sm-12 pull-right">
+	                    <label> {{'eventEmailRecipients' | translate}}*</label>
+	                </div>
+	                <div class="col-lg-8 col-md-8 col-sm-12 col-sm-12 pull-right">
+	
+	                    <div class="pull-right radioDiv" style="margin-right: 40px">
+	                        <input type="radio" name="emailRecipients" class="pull-right" ng-model="newEvent.emailRecipients" ng-value="emailRecipients[0]"
+	                               style="margin-right: 10px">
+	                        <div class="radioText pull-right"> {{ 'eventEmailRecipients1' | translate}}</div>
+	                    </div>
+	                    <div class="pull-right radioDiv" style="margin-right: 40px">
+	                        <input type="radio" name="emailRecipients" class="pull-right" ng-model="newEvent.emailRecipients" ng-value="emailRecipients[1]"
+	                               style="margin-right: 10px">
+	                        <div class="radioText pull-right"> {{ 'eventEmailRecipients2' | translate}}</div>
+	                    </div>
+	                    <div class="pull-right radioDiv" style="margin-right: 40px">
+	                        <input type="radio" name="emailRecipients" class="pull-right" ng-model="newEvent.emailRecipients" ng-value="emailRecipients[2]"
+	                               checked style="margin-right: 10px">
+	                        <div class="radioText pull-right"> {{ 'eventEmailRecipients3' | translate}}</div>
+	                    </div>
+	                </div>
+	            </div>
+				
+				<br />
+				
 				<div class="row sectionRow">
 					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 pull-right">
 						<label> {{'eventTopic' | translate}}* </label>
@@ -280,7 +306,7 @@
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 pull-right">
 	                    <div class="uploader" ng-show="!agendaUploaded">
 		                    <input type="file" class="pull-right" ngf-select="noAgendaSelected = false" ng-model="agendaFile" name="agendaFile" ngf-pattern="'image/*,application/pdf,.zip,.rar'"
-		             				accept="image/*,application/pdf,.zip,.rar" ngf-max-size="500KB" ngf-min-height="100"
+		             				accept="image/*,application/pdf,.zip,.rar" ngf-max-size="2000KB" ngf-min-height="100"
 								    ngf-resize="{quality: 0.8}" ng-disabled="viewMode == 3" >
 		                    <button class="btn btn-success"  ng-disabled="noAgendaSelected" type="button" ng-click="uploadAgendaFile()">{{ 'uploadFile' | translate }}</button>
 		                    <button class="btn btn-success" ng-show = "agendaAttachment.id" type="button" ng-click="agendaUploaded = true">{{ 'cancelBtn' | translate }}</button>

@@ -63,13 +63,13 @@ router.post('/forget-password', (req, res)=>{
       if(users){
         const token = securtiyUtil.generateJWTBasedOnTime({email : email, hash : users[0].hash}, process.env.FORGET_PASSWORD_LINK);
         let url = CONSTANTS.app_url + '/?token=' + token;
-        /*MailUtil.sendEmail(CONSTANTS.mail.forget_password, CONSTANTS.mailTemplates.forget_password, "Forget password link",{"user" : users[0], "url" : url},req.body.language, email).then((info)=>{
+        MailUtil.sendEmail(CONSTANTS.mail.forget_password, CONSTANTS.mailTemplates.forget_password, "Forgot password link",{"user" : users[0], "url" : url},req.body.language, email).then((info)=>{
           let message = new Message(Message.EMAIL_SENT, null, messages.businessMessages.email_sent_success);
           res.send(message);
         }, (err)=>{
           let errorMessage = new ErrorMessage(ErrorMessage.EMAIL_ERROR, err);
           res.send(err);
-        });*/
+        });
       }else{
         let errorMessage = new ErrorMessage(ErrorMessage.OBJECT_NOT_FOUND, null);
         res.json(errorMessage);

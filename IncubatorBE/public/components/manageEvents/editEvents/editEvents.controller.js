@@ -17,6 +17,8 @@ fepsApp.controller('EditEventsController', function ($compile,$scope,$translate,
 	$scope.noAgendaSelected = true;
 	$scope.agendaFileNameNotValid = false;
 	
+	$scope.emailRecipients = ["students","graduates","both"];
+	
 	$scope.init = function () 
 	{
 
@@ -120,7 +122,10 @@ fepsApp.controller('EditEventsController', function ($compile,$scope,$translate,
 				venue : "",
 				NoOfPlaces:"",
 				certificate:"false",
-				type:"event"
+				type:"event",
+				emailRecipients:""
+				
+				
 
 			}
 		}

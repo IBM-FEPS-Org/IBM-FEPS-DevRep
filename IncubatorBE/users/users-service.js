@@ -351,7 +351,7 @@ exports.deleteUser = function (id,rev,user)
 			    	          });
 		    		  }
 		    	  }
-		    	  if(document.projects)
+		    	  if(document.projects && document.projects[0])
 		    	  {
 		    		  
 		    		  ModelUtil.findById(document.projects[0]._id).then((project)=>
@@ -432,7 +432,7 @@ exports.deleteUserr = function (id,rev,user)
 		    		  {
 		    			  
 		    			  
-		    			  if(document.projects)
+		    			  if(document.projects && document.projects[0])
 				    	  {
 				    		  
 				    		  ModelUtil.findById(document.projects[0]._id).then((project)=>
@@ -706,7 +706,7 @@ exports.deleteUserr = function (id,rev,user)
 		              reject(err);
 		          });
 	    		  }
-		    	  else if(document.projects)
+		    	  else if(document.projects && document.projects[0])
 		    	  {
 		    		  
 		    		  ModelUtil.findById(document.projects[0]._id).then((project)=>
@@ -1136,6 +1136,29 @@ exports.getAllUsers = function(){
     });
 };
 
+exports.getSubscribedUsers = function(){
+    return new Promise((resolve,reject)=>{
+        const funcName = "getSubscribedUsers";
+        const query = {type : CONSTANTS.documents.type.users};
+        pino.debug({fnction : __filename+ ">" + funcName}, "Getting all users");
+
+        ModelUtil.findByview("subscribedUsersDoc","subscribedUsers-view").then((users)=>{
+
+        let minUsers = [];
+        let time = new Date().getTime();
+        for(let i = 0; i < users.rows.length; i++){
+        	minUsers.push(users.rows[i].value);
+        }
+
+        let message = new Message(Message.GETTING_DATA, minUsers, null);
+        resolve(message);
+    },(err)=>{
+        return utils.rejectMessage(ErrorMessage.DATABASE_ERROR,  err, funcName, reject);
+        });
+    });
+};
+
+
 exports.assignProjectsToMentor = function(userObj){
   return new Promise((resolve, reject)=>{
     const funcName = 'assignProjectsToMentor';
@@ -1326,6 +1349,43 @@ exports.assignRole = function(userObj){
     });
   });
 }
+
+exports.unsubscribeUser = function(id)
+{
+	  return new Promise((resolve, reject)=>
+	  {
+
+	      const funcName = "unsubscribeUser";
+	      ModelUtil.findById(id).then((freshUser)=>
+	      {
+		        freshUser.unsubscribed = true;
+		        ModelUtil.insertDoc(freshUser).then((updatedUser)=>
+		        {
+		          
+		        		
+			          let message = new Message(Message.UPDATE_OBJECT, updatedUser, messages.businessMessages.user_update_success);
+			          pino.debug({fnction : __filename+ ">" + funcName, user : updatedUser}, "User updated successfully");
+			          resolve(message);
+		
+		        }, (err)=>
+		        {
+		          reject(err);
+		        }).then(()=>
+		        {
+		          let message = new Message(Message.UPDATE_OBJECT, updateUser, messages.businessMessages.user_update_success);
+		          resolve(message);
+		          
+		          
+		        });
+	      }, (err)=>
+	      {
+	      	reject(err);
+	      });
+	  
+  });
+};
+
+
 
 function removeProjectsFromUser(userId, projectIds){
   return new Promise((resolve, reject)=>{

@@ -7,12 +7,14 @@ fepsApp.controller('eventsDetailsController', function ($uibModal,$scope,$transl
 	$scope.agendaUploaded = false;
 	$scope.hasFees = false;
 	$scope.providesCertificate = false;
-
-	$scope.init = function () {
+	
+	$scope.init = function () 
+	{
 		$scope.agendaAttachment = {};
 		$scope.agendaUploaded = false;
-
-		if (param.eventId) {
+		$scope.enableEnrollment = true;
+		if (param.eventId) 
+		{
 
 			usSpinnerService.spin('spinner');
 
@@ -36,6 +38,23 @@ fepsApp.controller('eventsDetailsController', function ($uibModal,$scope,$transl
 					var now = new Date();
 					
 					$scope.isEventDatePassed  = $scope.currentEvent.eventEnrollDeadline < now.getTime();
+					
+					if($scope.currentEvent.emailRecipients && $scope.currentEvent.emailRecipients == "students" )
+					{
+						if($localStorage.currentUser && new Date($localStorage.currentUser.graduationYear) < new Date(now.getTime()))
+						{
+							$scope.enableEnrollment = false;
+						}
+						
+					}
+					else if($scope.currentEvent.emailRecipients  && $scope.currentEvent.emailRecipients == "graduates" )
+					{
+						if($localStorage.currentUser && new Date($localStorage.currentUser.graduationYear) > new Date(now.getTime()))
+						{
+							$scope.enableEnrollment = false;
+						}
+					}
+					
 					if($scope.currentEvent.agendaAttachment && $scope.currentEvent.agendaAttachment.id)
 					{
             			$scope.agendaUploaded = true;

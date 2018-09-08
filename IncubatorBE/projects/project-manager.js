@@ -126,3 +126,13 @@ exports.updateIncubationAttachs = function(projectObj, user){
     });
   });
 }
+
+exports.updateDocumentationAttachs = function(projectObj, user){
+	  return new Promise((resolve, reject)=>{
+	    projectService.updateDocumentationAttachs(projectObj, user).then((projectMsg)=>{
+	      resolve(projectMsg);
+	    }, (err)=>{
+	      reject(err);
+	    });
+	  });
+	}

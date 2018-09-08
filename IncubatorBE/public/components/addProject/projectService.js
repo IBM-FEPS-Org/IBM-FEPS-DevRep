@@ -21,6 +21,14 @@ fepsApp.factory('projectService', function ($http, envService, $localStorage) {
         });
     }
     
+    projectService.saveProjectDocuments = function(documentationAttachments){
+    	return $http({
+            method: 'PATCH',
+            url: apiUrl + '/projects?operType=incubation_attachs',
+            data: documentationAttachments,
+            headers: {"Authorization":"Bearer "+$localStorage.currentUser.token}
+        });
+    }
     
     projectService.addProject = function (project) {
         return $http({

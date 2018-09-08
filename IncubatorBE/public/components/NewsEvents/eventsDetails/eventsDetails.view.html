@@ -29,9 +29,9 @@
                     <div ng-show="!isEventDatePassed">
                     	<button ng-show="!loggedIn" class="enroleBtn btn btn-success" ng-click="signUptoEnroll()">{{ 'newsEventsViewEnrollNowBtn' | translate }}</button>
                     
-                    	<button ng-show="loggedIn && !isEnrolled" class="enroleBtn btn btn-success" ng-click="enroll()">{{ 'newsEventsViewEnrollNowBtn' | translate }}</button>
+                    	<button ng-show="loggedIn && !isEnrolled && enableEnrollment" class="enroleBtn btn btn-success" ng-click="enroll()">{{ 'newsEventsViewEnrollNowBtn' | translate }}</button>
                     
-                    	<button ng-show="loggedIn && isEnrolled" class="enroleBtn btn btn-success" ng-click="cancelEnrollment()">{{ 'newsEventsViewCancelEnrollNowBtn' | translate }}</button>
+                    	<button ng-show="loggedIn && isEnrolled && enableEnrollment" class="enroleBtn btn btn-success" ng-click="cancelEnrollment()">{{ 'newsEventsViewCancelEnrollNowBtn' | translate }}</button>
                 	</div>
                 </div>
                 <div class="col-xl-10 col-lg-10 col-md-10 col-sm-12 col-xs-12 pull-right">

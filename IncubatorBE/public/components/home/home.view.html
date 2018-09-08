@@ -1,48 +1,18 @@
 <div id="home" ng-controller="homeController" ng-init="init()">
-	
-<!-- 	<div class="admissionBanner" ng-show="isAdmission">
+	<!-- ng-src="{{ 'admissionImg' | translate }}" --> 
+	<div class="admissionBanner" ng-show="isAdmission">
 		
 			<div class="admissionBannerImage image-circle">
 				<img ng-src="{{ 'admissionImg' | translate }}" style="padding-bottom:0;"/>
-				<div class="container">
-					<div class="row">
-						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 hidden-xs hidden-sm">
-							<div class="banner-top-section-inner text-right">
-								<p>
-								  {{ 'admissionText1' | translate }}
-								  <br/>
-								  <br/>
-								  {{ 'admissionText2' | translate }}
-								  <br/>
-								  <br/>
-								  {{ 'admissionText3' | translate }}
-								  <br/>
-								  <br/>
-								  {{ 'admissionText4' | translate }}
-								</p>
-								<div  class="admissionBannerLink">
-									<button ng-click="applyNow()">{{ 'ideaTitle' | translate }}</button>
-								</div>
-							
-							</div>
-						</div>
-						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 hidden-lg hidden-md">
-							<div class="top-section-inner-sm">
-								<button ng-click="applyNow()">{{ 'ideaTitle' | translate }}</button>
-							</div>
-						</div>
-					</div>
-				</div>
+				
+			</div>
+			<div  class=" admissionBannerLink">
+				<button class="" ng-click="applyNow()">{{ 'ideaTitle' | translate }}</button>
 			</div>
 			
-			<div  class="admissionBannerLink">
-				<button ng-click="applyNow()">{{ 'ideaTitle' | translate }}</button>
-			</div>
+			
 		
 	</div>
-	 -->
-	
-	
 	
 	<div class="carousel" uib-carousel active="active" interval="myInterval" no-wrap="noWrapSlides">
 		<div uib-slide ng-repeat="slide in slides track by $index" index="$index" >
@@ -66,6 +36,8 @@
 			</div>
 		</div>
 	</div>
+	
+	
 	<div class="middle-section-header">
  		<div class="container">
 			<div class="row">
@@ -251,11 +223,9 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 text-center">
-				<img src="img/logo-usaid.png" alt="USAID logo" />
+				<p></p>
 			</div>
-			<div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 text-center">
-				<img src="img/logo-ministry.png" alt="Ministry logo" />
-			</div>
+			
 			<div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 text-center">
 				<img src="img/logo-injaz.png" alt="INJAZ logo" />
 			</div>
@@ -264,6 +234,9 @@
 			</div>
 			<div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 text-center">
 				<img src="img/logo-university.png" alt="University logo" />
+			</div>
+			<div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 text-center">
+				<p></p>
 			</div>
 		</div>
 	</div>
@@ -279,11 +252,10 @@
 	</div>
 </div>
 <style>
-	.header-lg{
-		background-color: rgba(255,255,255,.6);
+	.header-lg
+	{
+	
+		background-color: rgba(255,255,255,.8);
 		position: absolute;
-	}
-	@media (max-width: 992px) {
-		
 	}
 </style>

@@ -23,52 +23,13 @@ module.exports = function(mailConfigs){
       let name = "sendEmail";
       return new Promise((resolve, reject)=>{
         let path;
-        if(language === CONSTANTS.language.ar){
+        if(language == CONSTANTS.language.ar){
           path =   __dirname + "/mail-templates/" + mailTemplate + "_ar.ejs";
-        }else{
+        }
+        else if(language == CONSTANTS.language.en)
+        {
           path =   __dirname + "/mail-templates/" + mailTemplate + "_en.ejs";
         }
-        // switch (mailType) {
-        //   case CONSTANTS.mail.contact:
-        //
-        //     if(language === CONSTANTS.language.ar){
-        //       path =   __dirname + "/mail-templates/" + mailTemplate + "_ar.ejs";
-        //     }else{
-        //       path =   __dirname + "/mail-templates/" + mailTemplate + "_en.ejs";
-        //     }
-        //
-        //     break;
-        //   case CONSTANTS.mail.forget_password:
-        //     // let path
-        //     if(language === CONSTANTS.language.ar){
-        //       path =   __dirname + "/mail-templates/" + mailTemplate + "_ar.ejs";
-        //     }else{
-        //       path =   __dirname + "/mail-templates/" + mailTemplate + "_en.ejs";
-        //     }
-        //
-        //     break;
-        //
-        //   case CONSTANTS.mail.assign_mentor:
-        //     // let path
-        //     if(language === CONSTANTS.language.ar){
-        //       path =   __dirname + "/mail-templates/" + mailTemplate + "_ar.ejs";
-        //     }else{
-        //       path =   __dirname + "/mail-templates/" + mailTemplate + "_en.ejs";
-        //     }
-        //     break;
-        //
-        //   case CONSTANTS.mail.project_status:
-        //     // let path
-        //     if(language === CONSTANTS.language.ar){
-        //       path =   __dirname + "/mail-templates/" + mailTemplate + "_ar.ejs";
-        //     }else{
-        //       path =   __dirname + "/mail-templates/" + mailTemplate + "_en.ejs";
-        //     }
-        //     break;
-        //
-        //   default:
-        //     path =   __dirname + "/mail-templates/" + mailTemplate + "_en.ejs";
-        // }
         pino.info({fnction : __filename+ ">" + name}, "Sending Email," + mailType);
         send(supportTransporter,mailConfigs.support.email, receivers, subject, path, sentInfo, resolve);
 

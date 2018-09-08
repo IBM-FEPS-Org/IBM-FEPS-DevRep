@@ -8,7 +8,7 @@ module.exports = {
 		  "host": "31013944-c6ff-4bde-9b43-1e0b8b6245cf-bluemix.cloudant.com",
 		  "port": 443,
 		  "url": "https://31013944-c6ff-4bde-9b43-1e0b8b6245cf-bluemix:ea3e062a981db4f88e46b9f2951b938b3c217ada11de7d96e4dcdf9a64ff84c4@31013944-c6ff-4bde-9b43-1e0b8b6245cf-bluemix.cloudant.com"
-	  },
+	},
     "syslog_drain_url": null,
     "volume_mounts": [],
     "label": "cloudantNoSQLDB",

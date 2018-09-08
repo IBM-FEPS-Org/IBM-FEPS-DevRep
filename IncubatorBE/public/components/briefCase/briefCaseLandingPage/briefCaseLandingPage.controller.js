@@ -35,6 +35,7 @@ fepsApp.controller('BriefCaseLandingPageController', function ($scope,$translate
 		        		usSpinnerService.spin('spinner');
 		        		projectService.getProject($localStorage.currentUser.projects[0]._id)
 		            	.then(function (result) {
+		            		
 		            		usSpinnerService.stop('spinner');
 		            		$scope.project = result.data.data;
 		            		$scope.project.foundingDate = new Date($scope.project.foundingDate);

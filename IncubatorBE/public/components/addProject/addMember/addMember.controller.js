@@ -11,7 +11,8 @@ fepsApp.controller('addMemberController', function ($scope,$translate,$uibModalI
     
     $scope.addedUser = {};
     
-    $scope.roles = [
+    $scope.roles = 
+	[
         {
             "id": 1,
             "Role": "Co-Founder"
@@ -21,14 +22,13 @@ fepsApp.controller('addMemberController', function ($scope,$translate,$uibModalI
             "Role": "Member"
         }
     ];
-    
     $scope.projectMembers = $uibModalInstance.projectMembers;
     $scope.deletedMembers = $uibModalInstance.deletedMembers;
     $scope.$watch('searchInput', function(newValue, oldValue) {
     	$scope.noUsersFound = false;
     });
     $scope.selectedRole = "";
-    $scope.addedUser.role = $scope.roles[1].Role;
+    
     $scope.updateRole = function (selected) 
     {
         $scope.selectedRole = $scope.roles[selected-1].Role;
@@ -72,7 +72,8 @@ fepsApp.controller('addMemberController', function ($scope,$translate,$uibModalI
     			$scope.deletedMembers.splice(i,1);
     			return;
     		}
-    		if($scope.searchInput != $localStorage.currentUser.username){
+    		if($scope.searchInput != $localStorage.currentUser.username)
+    		{
     			sharedDataService.getCurrentCycle().then(function (response) {
     	    		$scope.cycle = response.data.data[0];
     				loginService.getUserByUsername($scope.searchInput)
@@ -82,7 +83,9 @@ fepsApp.controller('addMemberController', function ($scope,$translate,$uibModalI
                 				$scope.noUsersFound = true;
                 			}else if(result.data.data.groups[0].id == 1){
                 				$scope.noUsersFound = true;
-                			}else{
+                			}else
+                			{
+                				$scope.searchresult = result.data.data;
                 				$scope.userDuplicate = $scope.checkMemberDuplication(result.data.data._id);
                 				if(!$scope.userDuplicate){
                 					$scope.addedUser = {
@@ -108,7 +111,9 @@ fepsApp.controller('addMemberController', function ($scope,$translate,$uibModalI
     			}, function (error) {
     	            $log.error(JSON.stringify(error));
     	        })		
-    		}else{
+    		}
+    		else
+    		{
     			$scope.noUsersFound = true;
     		}
     	}
@@ -122,11 +127,13 @@ fepsApp.controller('addMemberController', function ($scope,$translate,$uibModalI
     	}
     }
     
-    $scope.addMemebrtoProject= function(){
-	    	
+    $scope.addMemebrtoProject= function()
+    {
+    		$scope.addedUser.role = $scope.roles[1].Role;
 	    	sharedDataService.broadcastEvent("addMembertoProject", {addedMemebr: $scope.addedUser});
 	    	$scope.addedUser = null;
 	    	$scope.searchInput = null;
+	    	$scope.searchresult = null;
 	    	$scope.addMemebrForm.$setPristine();
     }
     

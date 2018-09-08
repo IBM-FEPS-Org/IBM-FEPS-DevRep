@@ -76,6 +76,13 @@
     "incubation" : "Incubation",
     "closure" : "Closure"
   },
+  
+  "cyclesTypes":{
+	"generalCycle" : "general",
+    "herCycle" : "her"
+  },
+  
+  
   "projects" : {
     "roles" : {
       "member" : "Member",

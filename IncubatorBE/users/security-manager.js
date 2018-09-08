@@ -36,6 +36,20 @@ exports.updateUser = function(userObj){
   });
 };
 
+exports.unsubscribeUser = function(_id)
+{
+	  return new Promise((resolve, reject)=>
+	  {
+		  
+	    usersService.unsubscribeUser(_id).then((user)=>
+	    {
+	    	console.log("here");
+	    	resolve(user);
+	    },(err)=>{
+	      reject(err);
+	    });
+	  });
+};
 
 
 exports.deleteUser = function(_id, _rev,user){

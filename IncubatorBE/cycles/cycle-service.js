@@ -13,7 +13,8 @@ const validationRules = require('../fepsApp-BE').validationRules;
 const cycles_validations = validationRules.cycles_validations;
 const userService = require('../users/users-service');
 
-exports.createCycle = function(cycleObj){
+exports.createCycle = function(cycleObj)
+{
   return new Promise((resolve, reject)=>{
 	   const funcName = "createCycle";
       pino.debug({fnction : __filename+ ">" + funcName}, "creating cycle");
@@ -37,33 +38,6 @@ exports.createCycle = function(cycleObj){
           let message = new Message(Message.OBJECT_CREATED, cycleCreated, messages.businessMessages.cycle_creation_success);
           pino.debug({fnction : __filename+ ">" + funcName, cycle : cycleCreated}, "cycle created successfully");
           //Notify superadmin
-          
-          userService.getUsersByGroups([6,9,10]).then((users)=>
-          {
-        	  
-        	 for (var i = 0; i < users.length; i++)
-        	 {
-				users[i].groups = [
-				    {
-				        "id": 8,
-				        "name": "Registered user"
-				      }
-				    ];
-				userService.assignRoleNewCycle(users[i]).then((result)=>
-		        {
-		        	let message =  new Message(Message.UPDATE_OBJECT, result, messages.businessMessages.user_update_success);
-			        resolve(message);
-		        }, (err)=>
-		        {
-			        return utils.rejectMessage(ErrorMessage.DATABASE_ERROR,  err, funcName, reject);
-			    });
-        	 } 
-        	  
-          }, (err)=>
-          {
-              let errorMessage = new ErrorMessage(ErrorMessage.EMAIL_ERROR, err);
-              pino.error(errorMessage);
-          });
           
           
           const superadmins = cache.get(CONSTANTS.groups.super_admin);
@@ -117,6 +91,85 @@ exports.createCycle = function(cycleObj){
   });
 };
 
+exports.createHerCycle = function(cycleObj){
+  return new Promise((resolve, reject)=>{
+	   const funcName = "createHerCycle";
+      pino.debug({fnction : __filename+ ">" + funcName}, "creating her cycle");
+      pino.debug({fnction : __filename+ ">" + funcName, cycle : cycleObj});
+      cycleObj.type = CONSTANTS.documents.type.cycles;
+      //Set default values
+      // cycle is not active by default unless the super admin make it active.
+      cycleObj.active = true;
+      cycleObj.currentPhase = CONSTANTS.cycles.admission;
+      cycleObj.cycleType = CONSTANTS.cyclesTypes.herCycle;
+      //validate only one cycle is created per date range.
+
+      exports.getHerCycleByActive(true).then((cycleResult)=>{
+        if(cycleResult.data && cycleResult.data.length > 0){
+          let errorMessage = new ErrorMessage(ErrorMessage.ALREADY_CREATED, messages.errorMessages.already_created_cycle);
+          return reject(errorMessage);
+        }
+        else
+        {
+          return ModelUtil.insertDoc(cycleObj).then((cycleCreated)=>{
+
+          let message = new Message(Message.OBJECT_CREATED, cycleCreated, messages.businessMessages.cycle_creation_success);
+          pino.debug({fnction : __filename+ ">" + funcName, cycle : cycleCreated}, "cycle created successfully");
+          //Notify superadmin
+          
+          const superadmins = cache.get(CONSTANTS.groups.super_admin);
+          let emails;
+          let emailData = {};
+          userService.getAllUsers().then((users)=>
+          {
+        	  emails = ObjectUtil.getArrayValuesFromJsons(users.data, 'email');
+              var emailChunks = [];
+              
+              while(emails.length)
+        	  {
+            	  emailChunks.push(emails.splice(0,90));
+        	  }
+              
+              
+              for (var i = 0; i < emailChunks.length; i++)
+              {
+            	  
+            	  MailUtil.sendEmail(CONSTANTS.mail.cycle_created, CONSTANTS.mailTemplates.cycle_created, "New Incubation Cycle is Now Open", emailData, CONSTANTS.language.en, emailChunks[i].toString()).then((info)=>
+                  {
+                    let message = new Message(Message.EMAIL_SENT, null, messages.businessMessages.email_sent_success);
+                    pino.info(message);
+                  }, (err)=>{
+                    let errorMessage = new ErrorMessage(ErrorMessage.EMAIL_ERROR, err);
+                    pino.error(errorMessage);
+                  });
+              }
+        	  
+              
+    
+        	  
+          }, (err)=>
+          {
+              let errorMessage = new ErrorMessage(ErrorMessage.EMAIL_ERROR, err);
+              pino.error(errorMessage);
+          });
+          
+          resolve(message);
+
+          }, (err)=>{
+            let errorMessage = new ErrorMessage(ErrorMessage.DATABASE_ERROR, err);
+            pino.error({fnction : __filename+ ">" + funcName, err : err});
+            return reject(err);
+          });
+        }
+      },(err)=>{
+        let errorMessage = new ErrorMessage(ErrorMessage.DATABASE_ERROR, err);
+        return reject(errorMessage);
+      })
+  });
+};
+
+
+
 exports.updateCycle = function(cycleObj){
   const funcName = "updateCycle";
   return new Promise((resolve, reject)=>{
@@ -143,9 +196,40 @@ exports.updateCycle = function(cycleObj){
           const superadmins = cache.get(CONSTANTS.groups.super_admin);
           let emails;
           let emailData = {};
-          
           if(cycleObj.currentPhase == 'Closure')
     	  {
+        	  userService.getUsersByGroups([6,9,10]).then((users)=>
+              {
+            	  
+            	 for (var i = 0; i < users.length; i++)
+            	 {
+            		 if(users[i].projects[0].cycle == cycleObj._id)
+        			 {
+            			 users[i].groups = [
+         				    {
+         				        "id": 8,
+         				        "name": "Registered user"
+         				      }
+         				    ];
+            			 
+            			 users[i].projects = [];
+         				userService.assignRoleNewCycle(users[i]).then((result)=>
+         		        {
+         		        	let message =  new Message(Message.UPDATE_OBJECT, result, messages.businessMessages.user_update_success);
+         			        resolve(message);
+         		        }, (err)=>
+         		        {
+         			        return utils.rejectMessage(ErrorMessage.DATABASE_ERROR,  err, funcName, reject);
+         			    });
+        			 }
+            	 } 
+            	  
+              }, (err)=>
+              {
+                  let errorMessage = new ErrorMessage(ErrorMessage.EMAIL_ERROR, err);
+                  pino.error(errorMessage);
+              });
+        	  
         	  userService.getAllUsers().then((users)=>
               {
             	  emails = ObjectUtil.getArrayValuesFromJsons(users.data, 'email');

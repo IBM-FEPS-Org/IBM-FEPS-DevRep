@@ -146,6 +146,14 @@ router.patch('/', auth, (req, res)=>{
       });
       break;
 
+    case 'documentation_attachs':
+        projectManager.updateDocumentationAttachs(project, req.user).then((projectMessage)=>{
+          renderResponseUtil.sendResponse(req, res, projectMessage);
+        }, (errorMessage)=>{
+          renderResponseUtil.sendResponse(req, res, errorMessage);
+        });
+        break;  
+    
     default:
       let errorMessage = new ErrorMessage(ErrorMessage.UNSUPPORTED_OPERATION, messages.errorMessages.unsupported_operation);
       res.send(errorMessage);

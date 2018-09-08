@@ -93,6 +93,10 @@ fepsApp.config(function($routeProvider,$locationProvider,$translateProvider,appL
 		templateUrl : 'components/NewsEvents/eventsDetails/eventsDetails.view.html',
 		controller  : 'eventsDetailsController',
 	})
+	.when(rootContext+'/unsubscribeEmails', {
+		templateUrl : 'components/NewsEvents/unsubscribeEmails/unsubscribeEmails.view.html',
+		controller  : 'unsubscribeEmailsController',
+	})
 	.when(rootContext+'/signin', {
 		templateUrl : 'components/login/signinPage/SignInPage.view.html',
 		controller  : 'signinPageController',
@@ -112,6 +116,10 @@ fepsApp.config(function($routeProvider,$locationProvider,$translateProvider,appL
 	.when(rootContext+'/ourActivities', {
 		templateUrl : 'components/ourActivities/ourActivities.view.html',
 		controller  : 'ourActivitiesController',
+	})
+	.when(rootContext+'/activityDetails', {
+		templateUrl : 'components/ourActivities/activityDetails/activityDetails.view.html',
+		controller  : 'activityDetailsController',
 	})
 	.when(rootContext+'/mentorsList', {
 		templateUrl : 'components/mentorsList/mentorsList.view.html',

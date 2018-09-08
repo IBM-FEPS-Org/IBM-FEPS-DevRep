@@ -13,6 +13,7 @@ const ErrorMessage = require('../fepsApp-BE').ErrorMessage;
 const usersUpdateSchema = require('./usersUpdate-schema');
 const Message = require('../fepsApp-BE').Message;
 const utils = require('../fepsApp-BE').utils;
+
 router.get('/', (req, res, next)=>{
   const username = req.query.username;
   let groups = req.query.groups;
@@ -130,7 +131,8 @@ router.delete('/', auth, (req, res)=>{
 	  });
 	});
 
-router.put('/', auth,(req, res, next)=>{
+router.put('/', auth,(req, res, next)=>
+{
 
 	//Validate update
 	  req.checkBody(usersUpdateSchema);
@@ -151,6 +153,27 @@ router.put('/', auth,(req, res, next)=>{
 	    });
 	// });
 });
+
+router.put('/:id', auth,(req, res, next)=>
+{
+
+	//Validate update
+	 
+	  let userId = req.user._id;
+	  console.log(req.user._id);
+	    pino.debug({requestMin : req}, "Unsubscribing user");
+	    securityManager.unsubscribeUser(userId).then((message)=>
+	    {
+	      pino.info({requestMin : req, user : message}, "Unsubscribing user");
+	      res.send(message);
+	    },(err)=>
+	    {
+	      pino.error({requestMin : req, err : err}, "Unsubscribing user");
+	      res.send(err);
+	    });
+	
+});
+
 
 router.patch('/',auth, (req, res, next)=>{
   const userObj = req.body;

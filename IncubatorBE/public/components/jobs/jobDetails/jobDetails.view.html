@@ -20,11 +20,11 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 pull-right">
+            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 pull-right ">
                 {{'jobSkills'| translate}}
             </div>
-            <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9 col-xl-9 pull-right" style="white-space: pre-line;">
-                {{job.skills}}
+            <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9 col-xl-9 pull-right" style="white-space: pre-wrap;">
+                <p style=" ::first-line:margin-left:-5px; margin-top:-35px">{{job.skills}}</p>
             </div>
         </div>
         <div class="row" ng-show="$scope.job.isLinked">

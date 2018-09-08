@@ -21,12 +21,21 @@ fepsApp.controller('signinController', function($scope,$rootScope,$uibModalInsta
             		$localStorage.currentUser.token = result.data.token;
             		sharedDataService.broadcastEvent("checkCurrentUser", []);
                 	$uibModalInstance.close('close');
+                	var lastPath = window.location.href.substr(window.location.href.lastIndexOf('/') + 1);
                 	
-                	if($localStorage.currentUser.groups[0].id == 10 || $localStorage.currentUser.groups[0].id == 8 || $localStorage.currentUser.groups[0].id == 6||$localStorage.currentUser.groups[0].id == 9 ){
+                	if(($localStorage.currentUser.groups[0].id == 10 || $localStorage.currentUser.groups[0].id == 8 || $localStorage.currentUser.groups[0].id == 6||$localStorage.currentUser.groups[0].id == 9) && lastPath == "home"){
                 		$location.path( 'fepsIncubator/briefCaseLanding');
                 		$localStorage.isAdminstrator = false;
 
-                	}else{
+                	}
+                	
+                	else if(($localStorage.currentUser.groups[0].id == 10 || $localStorage.currentUser.groups[0].id == 8 || $localStorage.currentUser.groups[0].id == 6||$localStorage.currentUser.groups[0].id == 9) && lastPath == "unsubscribeEmails"){
+                		$location.path( 'fepsIncubator/unsubscribeEmails');
+                		$localStorage.isAdminstrator = false;
+
+                	}
+                	else
+                	{
                 		$location.path( 'fepsIncubator/adminPage');
 						$localStorage.isAdminstrator = true;
 						$rootScope.isAdminstrator = $localStorage.isAdminstrator;
